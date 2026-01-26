@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
+    [SerializeField] float moveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
 
@@ -44,7 +45,16 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
-        playerRB.linearVelocityX = walkInput.x * walkSpeed;
+        playerRB.linearVelocityX = walkInput.x * moveSpeed;
+
+        if (runPressed == true)
+        {
+            moveSpeed = runSpeed;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+        }
     }
     void HandleJump()
     {
