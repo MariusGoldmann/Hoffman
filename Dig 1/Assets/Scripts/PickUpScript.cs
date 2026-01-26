@@ -9,7 +9,7 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] Image bomerangImage;
 
 
-    bool hasLeg;
+    [SerializeField] bool hasLeg;
     bool hasEye;
     bool hasBoomerang;
 

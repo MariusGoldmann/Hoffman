@@ -23,10 +23,12 @@ public class PlayerController : MonoBehaviour
 
     Vector2 walkInput;
 
-    PickUpScript pickUpScript;
+    [SerializeField] PickUpScript pickUpScript;
     void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+
+        pickUpScript = GetComponent<PickUpScript>();
     }
 
     void Update()
@@ -78,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     void OnRun(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && pickUpScript.GetHasLeg())
         {
             runPressed = true;
         }
