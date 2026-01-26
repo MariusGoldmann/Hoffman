@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float walkSpeed;
+    [SerializeField] float runSpeed;
 
     [SerializeField] float jumpForce = 35f;
     [SerializeField] float jumpCutMultiplier = 0.5f;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float coyoteTime;
     [SerializeField] float coyoteTimeCounter;
 
+    [SerializeField] bool runPressed;
     [SerializeField] bool jumpPressed;// Serialized for debugging
     [SerializeField] bool jumpRelesed;
 
@@ -19,7 +21,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Rigidbody2D playerRB;
 
-    Vector2 moveInput;
+    Vector2 walkInput;
+
+    PickUpScript pickUpScript;
     void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -32,13 +36,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleMove();
+        HandleMovement();
         HandleJump();
     }
 
-    void HandleMove()
+    void HandleMovement()
     {
-        playerRB.linearVelocityX = moveInput.x * walkSpeed;
+        playerRB.linearVelocityX = walkInput.x * walkSpeed;
     }
     void HandleJump()
     {
@@ -67,9 +71,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnMove(InputValue value)
+    void OnWalk(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        walkInput = value.Get<Vector2>();
+    }
+
+    void OnRun(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            runPressed = true;
+        }
+        else
+        {
+            runPressed = false;
+        }
     }
 
     void OnJump(InputValue value)
