@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,23 +10,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
 
-    [SerializeField] float jumpForce = 35f;
+    [Header("Jumping")]
+    [SerializeField] float jumpForce;
     [SerializeField] float jumpCutMultiplier = 0.5f;
 
     [SerializeField] float coyoteTime;
     [SerializeField] float coyoteTimeCounter;
 
-    [SerializeField] bool runPressed;
+    [Header("Bools")] // private bools
+    [SerializeField] bool runPressed;// Serialized for debugging
     [SerializeField] bool jumpPressed;// Serialized for debugging
-    [SerializeField] bool jumpRelesed;
+    [SerializeField] bool jumpRelesed;// Serialized for debugging
+
+    [SerializeField] int facingDirection = 1;
+
+    [SerializeField] Rigidbody2D playerRB;// Serialized for debugging
+
+    [Header("Inputs")]
+    Vector2 moveInput;
 
 
-
-    [SerializeField] Rigidbody2D playerRB;
-
-    Vector2 walkInput;
-
-    [SerializeField] PickUpScript pickUpScript;
+    [Header("Script References")]
+    [SerializeField] PickUpScript pickUpScript;// Serialized for debugging
     void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -35,6 +42,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleCoyoteTime();
+        Flip();
     }
 
     void FixedUpdate()
@@ -45,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
-        playerRB.linearVelocityX = walkInput.x * moveSpeed;
+        playerRB.linearVelocityX = moveInput.x * moveSpeed;
 
         if (runPressed == true)
         {
@@ -83,14 +91,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnWalk(InputValue value)
+    void OnMove(InputValue value)
     {
-        walkInput = value.Get<Vector2>();
+        moveInput = value.Get<Vector2>();
     }
 
     void OnRun(InputValue value)
     {
-        if (value.isPressed && pickUpScript.GetHasLeg())
+        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0 && pickUpScript.GetHasLeg())
         {
             runPressed = true;
         }
@@ -117,12 +125,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Flip()
+    {
+        if (moveInput.x > 0) // Facing right
+        {
+            facingDirection = 1;
+        }
+        else if (moveInput.x < 0) // Facing left
+        {
+            facingDirection = -1;
+        }
+
+        transform.localScale = new Vector3(facingDirection, 1, 1);
+    }
+
     bool IsGrounded()
     {
         return Physics2D.Raycast(transform.position, Vector2.down, 0.8f, LayerMask.GetMask("Ground"));
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmos() // For debugging IsGrounded
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 0.8f);
