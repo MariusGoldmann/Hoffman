@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PickUpScript : MonoBehaviour
 {
@@ -7,7 +7,6 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] Image legImage;
     [SerializeField] Image eyeImage;
     [SerializeField] Image bomerangImage;
-
 
     [SerializeField] bool hasLeg;
     bool hasEye;
@@ -31,17 +30,20 @@ public class PickUpScript : MonoBehaviour
     {
         collision.gameObject.CompareTag("PlayerLeg");
         {
-            hasLeg = true; 
+            hasLeg = true;
+            legImage.IsActive();
             Destroy(collision.gameObject);
         }
         collision.gameObject.CompareTag("PlayerEye");
         {
             hasEye = true; 
+            eyeImage.IsActive();
             Destroy(collision.gameObject);
         }
         collision.gameObject.CompareTag("Boomerang");
         {
             hasBoomerang = true; 
+            bomerangImage.IsActive();
             Destroy(collision.gameObject);
         }
     }
