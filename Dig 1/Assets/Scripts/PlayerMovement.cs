@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Rigidbody2D playerRB;
 
-    private
-
     Vector2 moveInput;
     void Awake()
     {
@@ -29,14 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (IsGrounded())
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
+        HandleCoyoteTime();
     }
 
     void FixedUpdate()
@@ -61,6 +52,18 @@ public class PlayerController : MonoBehaviour
             playerRB.linearVelocityY = (playerRB.linearVelocity.y * jumpCutMultiplier);
 
             coyoteTimeCounter = 0;
+        }
+    }
+
+    void HandleCoyoteTime()
+    {
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
         }
     }
 
