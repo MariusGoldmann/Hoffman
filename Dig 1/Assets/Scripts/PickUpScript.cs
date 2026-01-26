@@ -1,27 +1,64 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PickUpScript : MonoBehaviour
 {
 
-    [SerializeField] GameObject leg;
-    [SerializeField] GameObject Eye;
-    [SerializeField] GameObject Bomerang;
+    [SerializeField] Image legImage;
+    [SerializeField] Image eyeImage;
+    [SerializeField] Image bomerangImage;
 
-    public bool hasLeg;
-    public bool hasEye;
-    public bool hasBomerang;
+
+    bool hasLeg;
+    bool hasEye;
+    bool hasBoomerang;
 
     void Start()
     {
         hasLeg = false;
         hasEye = false;
-        hasBomerang = false;
+        hasBoomerang = false;
     }
 
     void Update()
     {
-
+          
     }
 
     
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.gameObject.CompareTag("PlayerLeg");
+        {
+            hasLeg = true; 
+            Destroy(collision.gameObject);
+        }
+        collision.gameObject.CompareTag("PlayerEye");
+        {
+            hasEye = true; 
+            Destroy(collision.gameObject);
+        }
+        collision.gameObject.CompareTag("Boomerang");
+        {
+            hasBoomerang = true; 
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public bool GetHasLeg()
+    {
+        return hasLeg;
+    }
+
+    public bool GetHasEye()
+    {
+        return hasEye;
+    }
+
+    public bool GetHasBoomerang()
+    {
+        return hasBoomerang;
+    }
+
 }
