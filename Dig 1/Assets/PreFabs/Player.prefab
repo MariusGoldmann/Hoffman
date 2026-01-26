@@ -153,13 +153,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   walkSpeed: 20
+  runSpeed: 0
   jumpForce: 35
   jumpCutMultiplier: 0.5
   coyoteTime: 0.1
   coyoteTimeCounter: 0
+  runPressed: 0
   jumpPressed: 0
   jumpRelesed: 0
   playerRB: {fileID: 8518420260251036096}
+  pickUpScript: {fileID: 315493221406685201}
 --- !u!114 &315493221406685201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   hasLeg: 0
-  hasEye: 0
-  hasBomerang: 0
 --- !u!1 &6583201870522590849
 GameObject:
   m_ObjectHideFlags: 0
