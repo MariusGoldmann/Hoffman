@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.UI; 
 
 public class PickUpScript : MonoBehaviour
 {
@@ -9,34 +11,53 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] bool hasEye;
     [SerializeField] bool hasBoomerang;
 
+    [SerializeField] bool isInteracting;
+
+    InputAction interactAction; 
+
     void Start()
     {
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
         bomerangImage.SetActive(false);
+
+        interactAction = InputSystem.actions.FindAction("Interact");
     }
 
-    void Update()
+    private void Update()
     {
-          
+
     }
 
-    
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnInteract(InputValue value)
     {
-        if (collision.gameObject.CompareTag("PlayerLeg"))
+        if (value.isPressed)
+        {
+            Debug.Log("Interacted");
+            isInteracting = true;
+        }
+        else
+        {
+            isInteracting = false;
+        }
+    }
+
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true) 
         {
             hasLeg = true;
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("PlayerEye"))
+        if (collision.gameObject.CompareTag("PlayerEye") && interactAction.WasPerformedThisFrame())
         {
             hasEye = true; 
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("Boomerang"))
+        if (collision.gameObject.CompareTag("Boomerang") && interactAction.WasPerformedThisFrame())
         {
             hasBoomerang = true;
             bomerangImage.SetActive(true); 
