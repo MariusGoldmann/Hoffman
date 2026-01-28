@@ -4,13 +4,15 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float idleMoveSpeed = 1f;
     [SerializeField] float combatDistance = 0f;
+    [SerializeField] float waypointDistance = 0.2f;
     
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform[] waypoints;
 
+    [Header ("Debug")]
     [SerializeField] float distanceToPlayer;
-    int waypointIndex;
-    bool inCombat;
+    [SerializeField] int waypointIndex;
+    [SerializeField] bool inCombat;
 
     Rigidbody2D rigidBody;
     Animator animator;
@@ -58,20 +60,20 @@ public class EnemyMovement : MonoBehaviour
     }
     void IdleMovement()
     {
-        if (waypointIndex <= waypoints.Length)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].position, idleMoveSpeed);
-        }
-        else
+        if (waypointIndex==waypoints.Length)
         {
             waypointIndex = 0;
         }
-
-        if (transform.position == waypoints[waypointIndex].position)
+        else if (Vector2.Distance(transform.position, waypoints[waypointIndex].position) < waypointDistance)
         {
             waypointIndex++;
         }
+        else 
+        {
+            transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].position, idleMoveSpeed);
+        }
     }
+
     void TrackPlayer()
     {
 
