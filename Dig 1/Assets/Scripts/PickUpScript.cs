@@ -1,49 +1,61 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.UI; 
 
 public class PickUpScript : MonoBehaviour
 {
-
-    [SerializeField] Image legImage;
-    [SerializeField] Image eyeImage;
-    [SerializeField] Image bomerangImage;
+    [SerializeField] GameObject bomerangImage;
 
     [SerializeField] bool hasLeg;
-    bool hasEye;
-    bool hasBoomerang;
+    [SerializeField] bool hasEye;
+    [SerializeField] bool hasBoomerang;
+
+    [SerializeField] bool isInteracting;
+
+    InputAction interactAction; 
 
     void Start()
     {
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
+        bomerangImage.SetActive(false);
+
+        interactAction = InputSystem.actions.FindAction("Interact");
     }
 
-    void Update()
+    void OnInteract(InputValue value)
     {
-          
+        if (value.isPressed)
+        {
+            Debug.Log("Interacted");
+            isInteracting = true;
+        }
+        else
+        {
+            isInteracting = false;
+        }
     }
 
-    
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        collision.gameObject.CompareTag("PlayerLeg");
+        if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true) 
         {
             hasLeg = true;
-            legImage.IsActive();
             Destroy(collision.gameObject);
         }
-        collision.gameObject.CompareTag("PlayerEye");
+        if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)  
         {
             hasEye = true; 
-            eyeImage.IsActive();
             Destroy(collision.gameObject);
         }
-        collision.gameObject.CompareTag("Boomerang");
+        if (collision.gameObject.CompareTag("Boomerang") && isInteracting == true)
         {
-            hasBoomerang = true; 
-            bomerangImage.IsActive();
+            hasBoomerang = true;
+            bomerangImage.SetActive(true); 
             Destroy(collision.gameObject);
         }
     }

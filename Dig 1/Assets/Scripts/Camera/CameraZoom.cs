@@ -18,10 +18,14 @@ public class CameraZoom : MonoBehaviour
     Rigidbody2D playerRb;
     Transform playerTransform;
 
+    PickUpScript pickUpScript;
+
     private void Awake()
     {
         playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        pickUpScript = playerTransform.GetComponent<PickUpScript>();
     }
 
     private void Start()
@@ -33,7 +37,7 @@ public class CameraZoom : MonoBehaviour
     {
         playerIsMoving = playerRb.linearVelocity.sqrMagnitude > 0.01f;
 
-        if (Keyboard.current.zKey.wasPressedThisFrame && !playerIsMoving)
+        if (Keyboard.current.zKey.wasPressedThisFrame && !playerIsMoving && pickUpScript.GetHasEye())
         {
             isZoomedOut = !isZoomedOut;
         }
