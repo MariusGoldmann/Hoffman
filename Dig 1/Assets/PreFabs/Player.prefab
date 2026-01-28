@@ -144,8 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 0
-  walkSpeed: 15
+  walkSpeed: 10
   runSpeed: 20
+  crouchSpeed: 5
   jumpForce: 35
   jumpCutMultiplier: 0.5
   coyoteTime: 0.1
@@ -153,8 +154,10 @@ MonoBehaviour:
   runPressed: 0
   jumpPressed: 0
   jumpRelesed: 0
+  crouchPressed: 0
   facingDirection: 1
   playerRB: {fileID: 8518420260251036096}
+  playerCollider: {fileID: 0}
   pickUpScript: {fileID: 315493221406685201}
 --- !u!114 &315493221406685201
 MonoBehaviour:

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
+    [SerializeField] float crouchSpeed;
 
     [Header("Jumping")]
     [SerializeField] float jumpForce;
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour
             playerCollider.offset = new Vector2(0, -0.5f);
             playerCollider.size = new Vector2(1, 1);
 
+            moveSpeed = crouchSpeed;
         }
         else
         {
