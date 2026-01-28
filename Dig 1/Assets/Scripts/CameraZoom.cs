@@ -33,7 +33,7 @@ public class CameraZoom : MonoBehaviour
     {
         playerIsMoving = playerRb.linearVelocity.sqrMagnitude > 0.01f;
 
-        if (Keyboard.current.eKey.wasPressedThisFrame && !playerIsMoving)
+        if (Keyboard.current.zKey.wasPressedThisFrame && !playerIsMoving)
         {
             isZoomedOut = !isZoomedOut;
         }
