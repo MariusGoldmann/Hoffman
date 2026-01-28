@@ -3,20 +3,18 @@ using UnityEngine.UI;
 
 public class PickUpScript : MonoBehaviour
 {
-
-    [SerializeField] Image legImage;
-    [SerializeField] Image eyeImage;
-    [SerializeField] Image bomerangImage;
+    [SerializeField] GameObject bomerangImage;
 
     [SerializeField] bool hasLeg;
-    bool hasEye;
-    bool hasBoomerang;
+    [SerializeField] bool hasEye;
+    [SerializeField] bool hasBoomerang;
 
     void Start()
     {
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
+        bomerangImage.SetActive(false);
     }
 
     void Update()
@@ -28,22 +26,20 @@ public class PickUpScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.CompareTag("PlayerLeg");
+        if (collision.gameObject.CompareTag("PlayerLeg"))
         {
             hasLeg = true;
-            legImage.IsActive();
             Destroy(collision.gameObject);
         }
-        collision.gameObject.CompareTag("PlayerEye");
+        if (collision.gameObject.CompareTag("PlayerEye"))
         {
             hasEye = true; 
-            eyeImage.IsActive();
             Destroy(collision.gameObject);
         }
-        collision.gameObject.CompareTag("Boomerang");
+        if (collision.gameObject.CompareTag("Boomerang"))
         {
-            hasBoomerang = true; 
-            bomerangImage.IsActive();
+            hasBoomerang = true;
+            bomerangImage.SetActive(true); 
             Destroy(collision.gameObject);
         }
     }
