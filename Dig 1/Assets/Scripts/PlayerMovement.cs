@@ -1,53 +1,68 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
+    [SerializeField] float moveSpeed;
     [SerializeField] float walkSpeed;
+    [SerializeField] float runSpeed;
 
-    [SerializeField] float jumpForce = 35f;
+    [Header("Jumping")]
+    [SerializeField] float jumpForce;
     [SerializeField] float jumpCutMultiplier = 0.5f;
 
     [SerializeField] float coyoteTime;
     [SerializeField] float coyoteTimeCounter;
 
+    [Header("Bools")] // private bools
+    [SerializeField] bool runPressed;// Serialized for debugging
     [SerializeField] bool jumpPressed;// Serialized for debugging
-    [SerializeField] bool jumpRelesed;
+    [SerializeField] bool jumpRelesed;// Serialized for debugging
 
+    [SerializeField] int facingDirection = 1;
 
+    [SerializeField] Rigidbody2D playerRB;// Serialized for debugging
 
-    [SerializeField] Rigidbody2D playerRB;
-
-    private
-
+    [Header("Inputs")]
     Vector2 moveInput;
+
+
+    [Header("Script References")]
+    [SerializeField] PickUpScript pickUpScript;// Serialized for debugging
     void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+
+        pickUpScript = GetComponent<PickUpScript>();
     }
 
     void Update()
     {
-        if (IsGrounded())
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
+        HandleCoyoteTime();
+        Flip();
     }
 
     void FixedUpdate()
     {
-        HandleMove();
+        HandleMovement();
         HandleJump();
     }
 
-    void HandleMove()
+    void HandleMovement()
     {
-        playerRB.linearVelocityX = moveInput.x * walkSpeed;
+        playerRB.linearVelocityX = moveInput.x * moveSpeed;
+
+        if (runPressed == true)
+        {
+            moveSpeed = runSpeed;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+        }
     }
     void HandleJump()
     {
@@ -64,9 +79,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void HandleCoyoteTime()
+    {
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
+
     void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+    }
+
+    void OnRun(InputValue value)
+    {
+        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0 && pickUpScript.GetHasLeg())
+        {
+            runPressed = true;
+        }
+        else
+        {
+            runPressed = false;
+        }
     }
 
     void OnJump(InputValue value)
@@ -86,12 +125,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Flip()
+    {
+        if (moveInput.x > 0) // Facing right
+        {
+            facingDirection = 1;
+        }
+        else if (moveInput.x < 0) // Facing left
+        {
+            facingDirection = -1;
+        }
+
+        transform.localScale = new Vector3(facingDirection, 1, 1);
+    }
+
     bool IsGrounded()
     {
         return Physics2D.Raycast(transform.position, Vector2.down, 0.8f, LayerMask.GetMask("Ground"));
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmos() // For debugging IsGrounded
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 0.8f);
