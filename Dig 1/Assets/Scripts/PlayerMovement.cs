@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
+    [SerializeField] float crouchSpeed;
 
     [Header("Jumping")]
     [SerializeField] float jumpForce;
@@ -19,10 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool runPressed;// Serialized for debugging
     [SerializeField] bool jumpPressed;// Serialized for debugging
     [SerializeField] bool jumpRelesed;// Serialized for debugging
+    [SerializeField] bool crouchPressed;
 
     [SerializeField] int facingDirection = 1;
 
     [SerializeField] Rigidbody2D playerRB;// Serialized for debugging
+    [SerializeField] CapsuleCollider2D playerCollider;
 
     [Header("Inputs")]
     Vector2 moveInput;
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
 
         pickUpScript = GetComponent<PickUpScript>();
     }
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleCoyoteTime();
         Flip();
+        HandleCrouch();
     }
 
     void FixedUpdate()
@@ -74,6 +79,22 @@ public class PlayerController : MonoBehaviour
             playerRB.linearVelocityY = (playerRB.linearVelocity.y * jumpCutMultiplier);
 
             coyoteTimeCounter = 0;
+        }
+    }
+
+    void HandleCrouch()
+    {
+        if (crouchPressed == true)
+        {
+            playerCollider.offset = new Vector2(0, -0.5f);
+            playerCollider.size = new Vector2(1, 1);
+
+            moveSpeed = crouchSpeed;
+        }
+        else
+        {
+            playerCollider.offset = new Vector2(0, 0);
+            playerCollider.size = new Vector2(1, 2);
         }
     }
 
@@ -123,6 +144,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnCrouch(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            if (IsGrounded())
+            {
+                crouchPressed = true;
+            }
+        }
+        else
+        {
+            crouchPressed = false;
+        }
+    }
+
     void Flip()
     {
         if (moveInput.x > 0) // Facing right
@@ -139,12 +175,12 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, 0.8f, LayerMask.GetMask("Ground"));
+        return Physics2D.Raycast(transform.position, Vector2.down, 1.5f, LayerMask.GetMask("Ground"));
     }
 
     void OnDrawGizmos() // For debugging IsGrounded
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 0.8f);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 1.5f);
     }
 }
