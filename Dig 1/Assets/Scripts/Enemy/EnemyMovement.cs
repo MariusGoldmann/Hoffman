@@ -3,40 +3,38 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float idleMoveSpeed = 1f;
-    [SerializeField] float combatDistance = 0f;
     [SerializeField] float waypointDistance = 0.2f;
     
-    [SerializeField] Transform playerTransform;
     [SerializeField] Transform[] waypoints;
 
     [Header ("Debug")]
-    [SerializeField] float distanceToPlayer;
     [SerializeField] int waypointIndex;
-    [SerializeField] bool inCombat;
 
     Rigidbody2D rigidBody;
     Animator animator;
+    EnemyState state;
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        state = GetComponent <EnemyState>();
     }
 
     void Update()
     {
-        ActivateCombat();
         HandleAnimations();
     }
+
     private void FixedUpdate()
     {
-        if (!inCombat)
+        if (!state.GetInCombat())
         {
             IdleMovement();
         }
         else
         {
-
+            ChasePlayer();
         }
     }
 
@@ -44,20 +42,7 @@ public class EnemyMovement : MonoBehaviour
     {
 
     }
-    void ActivateCombat()
-    {
-        distanceToPlayer = Vector2.Distance(transform.position,playerTransform.position);
 
-        if (distanceToPlayer<combatDistance)
-        {
-            inCombat = true;
-        }
-        else
-        {
-            inCombat = false;
-        }
-
-    }
     void IdleMovement()
     {
         if (waypointIndex==waypoints.Length)
@@ -74,7 +59,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void TrackPlayer()
+    void ChasePlayer()
     {
 
     }

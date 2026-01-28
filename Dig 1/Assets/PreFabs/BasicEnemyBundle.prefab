@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5961799842499546217}
   - component: {fileID: 5777172292592139612}
   - component: {fileID: 6065968433149764046}
+  - component: {fileID: 6044439912345808472}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -215,13 +216,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   idleMoveSpeed: 1
-  combatDistance: 0
-  playerTransform: {fileID: 0}
+  waypointDistance: 0.2
+  playerTransform: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
   waypoints:
   - {fileID: 9047902982559336416}
-  distanceToPlayer: 0
   waypointIndex: 0
-  inCombat: 0
+--- !u!114 &6044439912345808472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4350160233524379352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f01d6d66c89a14eb738a1d0ebf7839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyState
+  combatDistance: 0.2
+  playerTransform: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
 --- !u!1 &7173884818302132846
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +278,7 @@ GameObject:
   - component: {fileID: 2267243965396710433}
   m_Layer: 0
   m_Name: BasicEnemyBundle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
