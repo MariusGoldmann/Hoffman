@@ -25,11 +25,6 @@ public class PickUpScript : MonoBehaviour
         interactAction = InputSystem.actions.FindAction("Interact");
     }
 
-    private void Update()
-    {
-
-    }
-
     void OnInteract(InputValue value)
     {
         if (value.isPressed)
@@ -52,12 +47,12 @@ public class PickUpScript : MonoBehaviour
             hasLeg = true;
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("PlayerEye") && interactAction.WasPerformedThisFrame())
+        if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)  
         {
             hasEye = true; 
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("Boomerang") && interactAction.WasPerformedThisFrame())
+        if (collision.gameObject.CompareTag("Boomerang") && isInteracting == true)
         {
             hasBoomerang = true;
             bomerangImage.SetActive(true); 
