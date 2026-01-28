@@ -185,6 +185,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
   m_PrefabInstance: {fileID: 372642231}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1057425657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1609563086435559405, guid: 59e31685d3cb83541ace7c9f9812b042, type: 3}
+  m_PrefabInstance: {fileID: 1696408180554153080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1057425664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057425657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd3b761a431d354a88634acbefa34a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.25
+  playerRb: {fileID: 2006244296}
 --- !u!1001 &1197987101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,6 +282,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f06cb62300376b240a588216161c0827, type: 3}
+--- !u!50 &2006244296 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8518420260251036096, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+  m_PrefabInstance: {fileID: 372642231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1696408180554153080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321,7 +346,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1609563086435559405, guid: 59e31685d3cb83541ace7c9f9812b042, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1057425664}
   m_SourcePrefab: {fileID: 100100000, guid: 59e31685d3cb83541ace7c9f9812b042, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
