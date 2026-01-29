@@ -10,9 +10,15 @@ public class SceneManagerScript : MonoBehaviour
       SceneManager.LoadScene(1);
     }
 
-  //  public void LoadNextScene()
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+        
+    }
+
+    //  public void LoadNextScene()
     //{
-       // int currentSene = SceneManager.GetActiveScene().buildIndex;
-      //  SceneManager.LoadScene(currentScene + 1);
+    // int currentSene = SceneManager.GetActiveScene().buildIndex;
+    //  SceneManager.LoadScene(currentScene + 1);
     //}
 }
