@@ -8,9 +8,10 @@ public class EnemyMovement : MonoBehaviour
     
     [SerializeField] Transform[] waypoints;
 
+    float lastFramePositionX;
+
     [Header ("Debug")]
     [SerializeField] int waypointIndex;
-    bool inRange;
     bool facingRight;
 
     Rigidbody2D rigidBody;
@@ -26,18 +27,38 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
+        HandleDirection();
         HandleAnimations();
+    }
+
+    private void LateUpdate()
+    {
+        lastFramePositionX = transform.position.x;
     }
 
     private void FixedUpdate()
     {
-        if (!state.GetInCombat())
+        if (state.GetInCombat())
         {
-            IdleMovement();
+            ChasePlayer();
         }
         else
         {
-            ChasePlayer();
+            IdleMovement();
+        }
+    }
+
+    public void HandleDirection()
+    {
+        if (transform.position.x > lastFramePositionX && !facingRight)
+        {
+            facingRight = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (transform.position.x<lastFramePositionX && facingRight)
+        {
+            facingRight= false;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
@@ -55,7 +76,6 @@ public class EnemyMovement : MonoBehaviour
         else if (Vector2.Distance(transform.position, waypoints[waypointIndex].position) < waypointDistance)
         {
             waypointIndex++;
-            facingRight = !facingRight;
         }
         else 
         {
@@ -67,11 +87,6 @@ public class EnemyMovement : MonoBehaviour
     {
         rigidBody.linearVelocity = new Vector2(state.GetPlayerDirection().x*chaseMoveSpeed, rigidBody.linearVelocityY);
         Debug.Log("chase");
-    }
-
-    public void TurnAround()
-    {
-
     }
 
     public bool GetFacingRight()
