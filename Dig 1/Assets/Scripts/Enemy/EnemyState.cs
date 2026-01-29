@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnemyState : MonoBehaviour
 {
@@ -15,19 +14,6 @@ public class EnemyState : MonoBehaviour
     private void Update()
     {
         playerDirection = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y).normalized;
-        HandleDirections();
-    }
-
-    void HandleDirections()
-    {
-        if (enemyMovement.GetFacingRight())
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,11 +36,11 @@ public class EnemyState : MonoBehaviour
         }
     }
 
+
     public bool GetInCombat()
     {
         return inCombat;
     }
-
 
 
     public Vector2 GetPlayerDirection()
