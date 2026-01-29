@@ -18,17 +18,10 @@ public class CameraFollow : MonoBehaviour
     {
         FaindTargetPosition();
 
-        transform.position = Vector3.SmoothDamp(
-           transform.position,
-           targetPosition,
-           ref velocity,
-           smoothing);
+        transform.position = Vector3.SmoothDamp(transform.position,targetPosition,ref velocity,smoothing);
     }
     void FaindTargetPosition()
     {
-        targetPosition = new Vector3(
-           targetToFollow.position.x,
-           targetToFollow.position.y,
-           transform.position.z) + offset;
+        targetPosition = new Vector3(targetToFollow.position.x,targetToFollow.position.y,transform.position.z) + offset;
     }
 }
