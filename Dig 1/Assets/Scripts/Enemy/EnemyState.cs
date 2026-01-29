@@ -2,34 +2,49 @@ using UnityEngine;
 
 public class EnemyState : MonoBehaviour
 {
-    [SerializeField] float combatDistance=0.2f;
-    [SerializeField] Transform playerTransform;
+    
+    [SerializeField] UnityEngine.Transform playerTransform;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] EnemyMovement enemyMovement;
 
-    bool inCombat;
+    [Header("Debug")]
+    Vector2 playerDirection;
+    [SerializeField] bool inCombat;
 
     private void Update()
     {
-        CheckForCombat();
+        playerDirection = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y).normalized;
     }
 
-    void CheckForCombat()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        float distanceToPlayer;
-        distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-
-        if (distanceToPlayer < combatDistance)
+       if (collision.CompareTag("Player"))
         {
             inCombat = true;
         }
-        else
+       /*if (collision.CompareTag("Wall"))
+        {
+            enemyMovement.TurnAround();
+        }*/
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
             inCombat = false;
         }
-
     }
+
 
     public bool GetInCombat()
     {
-        return inCombat; 
+        return inCombat;
+    }
+
+
+    public Vector2 GetPlayerDirection()
+    {
+        return playerDirection;
     }
 }

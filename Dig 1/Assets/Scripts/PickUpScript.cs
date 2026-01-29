@@ -20,7 +20,12 @@ public class PickUpScript : MonoBehaviour
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
-        bomerangImage.SetActive(false);
+        
+        if (bomerangImage != null)
+        {
+            bomerangImage.SetActive(false);
+        }
+
 
         interactAction = InputSystem.actions.FindAction("Interact");
     }

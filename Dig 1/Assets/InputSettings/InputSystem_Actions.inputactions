@@ -25,6 +25,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Kick",
+                    "type": "Button",
+                    "id": "89d71ff2-1620-4053-a635-9995ea102a2e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Bomerang",
+                    "type": "Button",
+                    "id": "c3433ef7-e178-4271-98bb-79f7e6df2e85",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
@@ -58,6 +76,15 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "962c20e5-3625-4d56-9015-15f0e97582b5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -356,6 +383,37 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+<<<<<<< HEAD
+                    "id": "7186cf7f-4de6-419b-91e0-4e6081b04c41",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Kick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a06a69f4-feb9-4693-a5c4-e21348ee8e03",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Bomerang",
+=======
+                    "id": "f11ec5b8-a349-4fe3-9291-f1f638aff9ed",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+>>>>>>> 05c402b41c341431049417b2b34e5a7b9f46b41c
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

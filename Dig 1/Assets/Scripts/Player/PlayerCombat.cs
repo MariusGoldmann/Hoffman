@@ -1,40 +1,74 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Melee settings")]
+    [SerializeField] int meleeDamage = 1;
+    [SerializeField] float meleeAttackCooldown = 1f;
+    [SerializeField] float meleeAttackTimer;
 
-    [SerializeField] float meleeAttackTime = 0.2f;
+    [Header("Kick settings")]
+    [SerializeField] int kickDamage = 2;
+    [SerializeField] float kickAttackCooldown = 2f;
+    [SerializeField] float kickAttackTimer;
 
-    [SerializeField]  Collider2D meleeCollider;
-    private void Awake()
+    [Header("Bomerang settings")]
+    [SerializeField] int bomerangDamage = 5;
+    [SerializeField] float bomerangAttackCooldown = 5f;
+    [SerializeField] float bomerangAttackTimer;
+
+
+    void Update()
     {
-        meleeCollider.enabled = false;
+        HandleCooldowns();
     }
 
-    void OnMelee(InputValue value)
+
+    void OnMelee(InputValue meleebutton)
     {
-        if (value.isPressed)
+        if (meleebutton.isPressed && meleeAttackTimer <= 0)
         {
-            StartCoroutine(MeleeAttack());
+            Debug.Log("Melee");
+            meleeAttackTimer = meleeAttackCooldown;
         }
     }
 
-    IEnumerator MeleeAttack()
+    void OnKick(InputValue kickButton)
     {
-        meleeCollider.enabled = true;
-
-        yield return new WaitForSeconds(meleeAttackTime);
-
-        meleeCollider.enabled = false;
+        if (kickButton.isPressed && kickAttackTimer <= 0)
+        {
+            Debug.Log("Kick");
+            kickAttackTimer = kickAttackCooldown;
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnBomerang(InputValue bomerangButton)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (bomerangButton.isPressed && bomerangAttackTimer <= 0)
         {
-            Destroy(collision.gameObject);
+            Debug.Log("Bomerang");
+            bomerangAttackTimer = bomerangAttackCooldown;
+        }
+    }
+
+    void HandleCooldowns()
+    {
+        if (meleeAttackTimer > 0)
+        {
+            meleeAttackTimer -= Time.deltaTime;
+        }
+
+        if (kickAttackTimer > 0)
+        {
+            kickAttackTimer -= Time.deltaTime;
+        }
+
+        if (bomerangAttackTimer > 0)
+        {
+            bomerangAttackTimer -= Time.deltaTime;
         }
     }
 }
