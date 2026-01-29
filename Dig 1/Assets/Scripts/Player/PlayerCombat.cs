@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.CompareTag("Enemy");
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(collision.gameObject);
         }
