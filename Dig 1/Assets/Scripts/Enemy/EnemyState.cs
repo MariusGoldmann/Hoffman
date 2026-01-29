@@ -1,35 +1,64 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnemyState : MonoBehaviour
 {
-    [SerializeField] float combatDistance=0.2f;
-    [SerializeField] Transform playerTransform;
+    
+    [SerializeField] UnityEngine.Transform playerTransform;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] EnemyMovement enemyMovement;
 
-    bool inCombat;
+    [Header("Debug")]
+    Vector2 playerDirection;
+    [SerializeField] bool inCombat;
 
     private void Update()
     {
-        CheckForCombat();
+        playerDirection = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y).normalized;
+        HandleDirections();
     }
 
-    void CheckForCombat()
+    void HandleDirections()
     {
-        float distanceToPlayer;
-        distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-
-        if (distanceToPlayer < combatDistance)
+        if (enemyMovement.GetFacingRight())
         {
-            inCombat = true;
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         else
         {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       if (collision.CompareTag("Player"))
+        {
+            inCombat = true;
+        }
+       /*if (collision.CompareTag("Wall"))
+        {
+            enemyMovement.TurnAround();
+        }*/
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
             inCombat = false;
         }
-
     }
 
     public bool GetInCombat()
     {
-        return inCombat; 
+        return inCombat;
+    }
+
+
+
+    public Vector2 GetPlayerDirection()
+    {
+        return playerDirection;
     }
 }
