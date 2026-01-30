@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1197925086779408942}
   - component: {fileID: 7253600528976546947}
   - component: {fileID: 315493221406685201}
-  - component: {fileID: 2101143443042531877}
+  - component: {fileID: 5082171930118937187}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -159,7 +159,7 @@ MonoBehaviour:
   crouchPressed: 0
   facingDirection: 1
   playerRB: {fileID: 8518420260251036096}
-  playerCollider: {fileID: 0}
+  playerCollider: {fileID: 2364832149000289202}
   pickUpScript: {fileID: 315493221406685201}
 --- !u!114 &315493221406685201
 MonoBehaviour:
@@ -173,11 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459c0416f54f5ae49a4617e8e951d25f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  legImage: {fileID: 0}
-  eyeImage: {fileID: 0}
   bomerangImage: {fileID: 0}
   hasLeg: 0
---- !u!114 &2101143443042531877
+  hasEye: 0
+  hasBoomerang: 0
+  isInteracting: 0
+--- !u!114 &5082171930118937187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab5ade4392ac8e44886a2642388aed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackCollider: {fileID: 0}
+  meleeAttackTime: 0.5
+  meleeCollider: {fileID: 2020109976022101100}
 --- !u!1 &6583201870522590849
 GameObject:
   m_ObjectHideFlags: 0
