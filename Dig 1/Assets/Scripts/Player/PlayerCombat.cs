@@ -5,6 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Basic combat settings")]
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRadius;
+    [SerializeField] LayerMask enemyLayer;
+
     [Header("Melee settings")]
     [SerializeField] int meleeDamage = 1;
     [SerializeField] float meleeAttackCooldown = 1f;
@@ -26,11 +31,31 @@ public class PlayerCombat : MonoBehaviour
         HandleCooldowns();
     }
 
+    void MeleeAttack()
+    {
+        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+
+        if (enemy != null)
+        {
+            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-meleeDamage);
+        }
+    }
+
+    void KickAttack()
+    {
+        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+
+        if (enemy != null)
+        {
+            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-kickDamage);
+        }
+    }
 
     void OnMelee(InputValue meleebutton)
     {
         if (meleebutton.isPressed && meleeAttackTimer <= 0)
         {
+            MeleeAttack();
             Debug.Log("Melee");
             meleeAttackTimer = meleeAttackCooldown;
         }
@@ -40,6 +65,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (kickButton.isPressed && kickAttackTimer <= 0)
         {
+            KickAttack();
             Debug.Log("Kick");
             kickAttackTimer = kickAttackCooldown;
         }
@@ -70,5 +96,11 @@ public class PlayerCombat : MonoBehaviour
         {
             bomerangAttackTimer -= Time.deltaTime;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(attackPoint.position, attackRadius);
     }
 }
