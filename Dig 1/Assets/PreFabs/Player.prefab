@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: ca9d43c4db894a245960f78e9c583c6c, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &7253600528976546947
@@ -203,9 +203,9 @@ MonoBehaviour:
   kickDamage: 2
   kickAttackCooldown: 2
   kickAttackTimer: 0
-  bomerangDamage: 5
-  bomerangAttackCooldown: 5
-  bomerangAttackTimer: 0
+  boomerangDamage: 5
+  boomerangAttackCooldown: 5
+  boomerangAttackTimer: 0
 --- !u!1 &6431615454298918249
 GameObject:
   m_ObjectHideFlags: 0
