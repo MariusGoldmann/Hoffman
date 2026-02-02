@@ -85,15 +85,15 @@ public class PlayerController : MonoBehaviour
     {
         if (crouchPressed == true)
         {
-            playerCollider.offset = new Vector2(0, -0.5f);
-            playerCollider.size = new Vector2(1, 1);
+            playerCollider.offset = new Vector2(0, -0.58f);
+            playerCollider.size = new Vector2(1, 1.86f);
 
             moveSpeed = crouchSpeed;
         }
         else
         {
-            playerCollider.offset = new Vector2(0, 0);
-            playerCollider.size = new Vector2(1, 2);
+            playerCollider.offset = new Vector2(0, -0.15f);
+            playerCollider.size = new Vector2(1, 2.7f);
         }
     }
 
@@ -174,12 +174,12 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, 1.5f, LayerMask.GetMask("Ground"));
+        return Physics2D.Raycast(transform.position, Vector2.down, 1.8f, LayerMask.GetMask("Ground"));
     }
 
     void OnDrawGizmos() // For debugging IsGrounded
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 1.5f);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 1.8f);
     }
 }

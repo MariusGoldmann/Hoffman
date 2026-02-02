@@ -197,15 +197,16 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  meleeDamage: 1
-  meleeAttackCooldown: 1
-  meleeAttackTimer: 0
+  slashDamage: 1
+  slashAttackCooldown: 1
+  slashAttackTimer: 0
   kickDamage: 2
   kickAttackCooldown: 2
   kickAttackTimer: 0
   boomerangDamage: 5
   boomerangAttackCooldown: 5
   boomerangAttackTimer: 0
+  boomerangPrefab: {fileID: 0}
 --- !u!1 &6431615454298918249
 GameObject:
   m_ObjectHideFlags: 0
