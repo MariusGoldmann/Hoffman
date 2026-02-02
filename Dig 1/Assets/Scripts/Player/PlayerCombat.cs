@@ -25,6 +25,12 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangAttackCooldown = 5f;
     [SerializeField] float boomerangAttackTimer;
 
+    void Start()
+    {
+        meleeAttackTimer = meleeAttackCooldown;
+        kickAttackTimer = kickAttackCooldown;
+        boomerangAttackTimer = boomerangAttackCooldown;
+    }
 
     void Update()
     {

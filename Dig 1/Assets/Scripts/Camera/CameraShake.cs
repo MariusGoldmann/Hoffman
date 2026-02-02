@@ -22,7 +22,7 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    private void ShakeCamera(float duration, float severity, bool vertical, bool horizontal)
+    public void ShakeCamera(float duration, float severity, bool vertical, bool horizontal)
     {
         if (isShaking)
         {
