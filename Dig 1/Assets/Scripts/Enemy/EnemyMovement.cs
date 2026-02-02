@@ -4,14 +4,12 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float idleMoveSpeed = 0.5f;
     [SerializeField] float chaseMoveSpeed = 1f;
-    [SerializeField] float waypointDistance = 0.5f;
-    
-    [SerializeField] Transform[] waypoints;
+    [SerializeField] float groundCheckLength = 1f;
+    [SerializeField] Vector2 groundCheckOffset = new Vector2(1, 0);
 
-    [Header ("Debug")]
-    [SerializeField] int waypointIndex;
-    bool inRange;
-    bool facingRight;
+
+    [Header("Debug")]
+    [SerializeField] bool facingRight=true;
 
     Rigidbody2D rigidBody;
     Animator animator;
@@ -26,18 +24,33 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
+        if (state.GetInCombat()) HandleDirection();
         HandleAnimations();
     }
 
     private void FixedUpdate()
     {
-        if (!state.GetInCombat())
+        if (state.GetInCombat())
         {
-            IdleMovement();
+            ChasePlayer();
         }
         else
         {
-            ChasePlayer();
+            IdleMovement();
+        }
+    }
+
+    private void HandleDirection()
+    {
+        if (rigidBody.linearVelocityX > 0)
+        {
+            facingRight = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            facingRight = false;
         }
     }
 
@@ -48,30 +61,38 @@ public class EnemyMovement : MonoBehaviour
 
     void IdleMovement()
     {
-        if (waypointIndex==waypoints.Length)
+        if (facingRight)
         {
-            waypointIndex = 0;
+            if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + groundCheckOffset, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
+            {
+                rigidBody.linearVelocityX = idleMoveSpeed;
+            }
+            else
+            {
+                rigidBody.linearVelocityX = -idleMoveSpeed;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                facingRight = false;
+            }
         }
-        else if (Vector2.Distance(transform.position, waypoints[waypointIndex].position) < waypointDistance)
+        else
         {
-            waypointIndex++;
-            facingRight = !facingRight;
+            if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) - groundCheckOffset, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
+            {
+                rigidBody.linearVelocityX = -idleMoveSpeed;
+            }
+            else
+            {
+                rigidBody.linearVelocityX = idleMoveSpeed;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                facingRight = true;
+            }
         }
-        else 
-        {
-            rigidBody.MovePosition(Vector2.MoveTowards(transform.position, waypoints[waypointIndex].position, idleMoveSpeed));
-        }
+
     }
 
     void ChasePlayer()
     {
-        rigidBody.linearVelocity = new Vector2(state.GetPlayerDirection().x*chaseMoveSpeed, rigidBody.linearVelocityY);
-        Debug.Log("chase");
-    }
-
-    public void TurnAround()
-    {
-
+        rigidBody.linearVelocity = new Vector2(state.GetPlayerDirection().x * chaseMoveSpeed, rigidBody.linearVelocityY);
     }
 
     public bool GetFacingRight()

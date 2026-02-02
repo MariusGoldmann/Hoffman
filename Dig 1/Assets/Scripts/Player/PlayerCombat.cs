@@ -1,40 +1,112 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Basic combat settings")]
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRadius;
+    [SerializeField] LayerMask enemyLayer;
 
-    [SerializeField] float meleeAttackTime = 0.2f;
+    [Header("Melee settings")]
+    [SerializeField] int meleeDamage = 1;
+    [SerializeField] float meleeAttackCooldown = 1f;
+    [SerializeField] float meleeAttackTimer;
 
-    [SerializeField]  Collider2D meleeCollider;
-    private void Awake()
+    [Header("Kick settings")]
+    [SerializeField] int kickDamage = 2;
+    [SerializeField] float kickAttackCooldown = 2f;
+    [SerializeField] float kickAttackTimer;
+
+    [Header("Boomerang settings")]
+    [SerializeField] int boomerangDamage = 5;
+    [SerializeField] float boomerangAttackCooldown = 5f;
+    [SerializeField] float boomerangAttackTimer;
+
+    void Start()
     {
-        meleeCollider.enabled = false;
+        meleeAttackTimer = meleeAttackCooldown;
+        kickAttackTimer = kickAttackCooldown;
+        boomerangAttackTimer = boomerangAttackCooldown;
     }
 
-    void OnMelee(InputValue value)
+    void Update()
     {
-        if (value.isPressed)
+        HandleCooldowns();
+    }
+
+    void MeleeAttack()
+    {
+        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+
+        if (enemy != null)
         {
-            StartCoroutine(MeleeAttack());
+            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-meleeDamage);
         }
     }
 
-    IEnumerator MeleeAttack()
+    void KickAttack()
     {
-        meleeCollider.enabled = true;
+        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
 
-        yield return new WaitForSeconds(meleeAttackTime);
-
-        meleeCollider.enabled = false;
+        if (enemy != null)
+        {
+            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-kickDamage);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnMelee(InputValue meleebutton)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (meleebutton.isPressed && meleeAttackTimer <= 0)
         {
-            Destroy(collision.gameObject);
+            MeleeAttack();
+            Debug.Log("Melee");
+            meleeAttackTimer = meleeAttackCooldown;
         }
+    }
+
+    void OnKick(InputValue kickButton)
+    {
+        if (kickButton.isPressed && kickAttackTimer <= 0)
+        {
+            KickAttack();
+            Debug.Log("Kick");
+            kickAttackTimer = kickAttackCooldown;
+        }
+    }
+
+    void OnBoomerang(InputValue boomerangButton)
+    {
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0)
+        {
+            Debug.Log("Boomerang");
+            boomerangAttackTimer = boomerangAttackCooldown;
+        }
+    }
+
+    void HandleCooldowns()
+    {
+        if (meleeAttackTimer > 0)
+        {
+            meleeAttackTimer -= Time.deltaTime;
+        }
+
+        if (kickAttackTimer > 0)
+        {
+            kickAttackTimer -= Time.deltaTime;
+        }
+
+        if (boomerangAttackTimer > 0)
+        {
+            boomerangAttackTimer -= Time.deltaTime;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(attackPoint.position, attackRadius);
     }
 }

@@ -11,6 +11,9 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] bool hasEye;
     [SerializeField] bool hasBoomerang;
 
+    [SerializeField] GameObject eyeTabCloud;
+    [SerializeField] GameObject boomerangTabCloud;
+
     [SerializeField] bool isInteracting;
 
     InputAction interactAction; 
@@ -20,7 +23,12 @@ public class PickUpScript : MonoBehaviour
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
-        bomerangImage.SetActive(false);
+        
+        if (bomerangImage != null)
+        {
+            bomerangImage.SetActive(false);
+        }
+
 
         interactAction = InputSystem.actions.FindAction("Interact");
     }
@@ -49,13 +57,15 @@ public class PickUpScript : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)  
         {
-            hasEye = true; 
+            hasEye = true;
+            eyeTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("Boomerang") && isInteracting == true)
         {
             hasBoomerang = true;
-            bomerangImage.SetActive(true); 
+            bomerangImage.SetActive(true);
+            boomerangTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
     }
