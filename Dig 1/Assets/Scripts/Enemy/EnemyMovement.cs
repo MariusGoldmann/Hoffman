@@ -7,7 +7,6 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float groundCheckLength = 1f;
     [SerializeField] Vector2 groundCheckOffset = new Vector2(1, 0);
 
-
     [Header("Debug")]
     [SerializeField] bool facingRight=true;
 
@@ -42,10 +41,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void HandleDirection()
     {
-        if (rigidBody.linearVelocityX > 0)
+        if (state.GetPlayerDirection() > 0)
         {
-            facingRight = true;
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            facingRight = true;
         }
         else
         {
@@ -92,7 +91,8 @@ public class EnemyMovement : MonoBehaviour
 
     void ChasePlayer()
     {
-        rigidBody.linearVelocity = new Vector2(state.GetPlayerDirection().x * chaseMoveSpeed, rigidBody.linearVelocityY);
+        rigidBody.linearVelocity = new Vector2(state.GetPlayerDirection() * chaseMoveSpeed, rigidBody.linearVelocityY);
+        
     }
 
     public bool GetFacingRight()
