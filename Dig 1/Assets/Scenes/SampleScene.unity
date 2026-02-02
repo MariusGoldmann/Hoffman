@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: bomerangImage
       value: 
       objectReference: {fileID: 2049959970}
+    - target: {fileID: 2101143443042531877, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+      propertyPath: meleeCollider
+      value: 
+      objectReference: {fileID: 935899949}
     - target: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.2923307
@@ -779,6 +783,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682161216}
   m_CullTransparentMesh: 1
+--- !u!70 &935899949 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2020109976022101100, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+  m_PrefabInstance: {fileID: 28514966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1462362409
 GameObject:
   m_ObjectHideFlags: 0
