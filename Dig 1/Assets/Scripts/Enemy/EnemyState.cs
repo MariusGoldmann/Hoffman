@@ -4,16 +4,25 @@ public class EnemyState : MonoBehaviour
 {
     
     [SerializeField] Transform playerTransform;
-    [SerializeField] Rigidbody2D rb;
+    [SerializeField] Transform enemyPosition;
+    [SerializeField] Rigidbody2D enemyParentRB;
     [SerializeField] EnemyMovement enemyMovement;
 
     [Header("Debug")]
-    Vector2 playerDirection;
+    int playerDirection;
     bool inCombat;
 
     private void Update()
     {
-        playerDirection = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y).normalized;
+        if (enemyPosition.position.x < playerTransform.position.x)
+        {
+            playerDirection = 1;
+            Debug.Log("1");
+        }
+        else
+        {
+            playerDirection = -1;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,7 +42,7 @@ public class EnemyState : MonoBehaviour
     }
 
 
-    public Vector2 GetPlayerDirection()
+    public int GetPlayerDirection()
     {
         return playerDirection;
     }
