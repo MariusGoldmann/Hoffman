@@ -9,12 +9,11 @@ public class EnemyState : MonoBehaviour
 
     [Header("Debug")]
     Vector2 playerDirection;
-    [SerializeField] bool inCombat;
+    bool inCombat;
 
     private void Update()
     {
-        //playerDirection = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y).normalized;
-        playerDirection = playerDirection.normalized;
+        playerDirection = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y).normalized;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
