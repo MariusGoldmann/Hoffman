@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     [Header("Inputs")]
     Vector2 moveInput;
 
-
     [Header("Script References")]
     [SerializeField] PickUpScript pickUpScript;// Serialized for debugging
     void Awake()

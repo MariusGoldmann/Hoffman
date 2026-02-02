@@ -10,10 +10,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float attackRadius;
     [SerializeField] LayerMask enemyLayer;
 
-    [Header("Melee settings")]
-    [SerializeField] int meleeDamage = 1;
-    [SerializeField] float meleeAttackCooldown = 1f;
-    [SerializeField] float meleeAttackTimer;
+    [Header("Slash settings")]
+    [SerializeField] int slashDamage = 1;
+    [SerializeField] float slashAttackCooldown = 1f;
+    [SerializeField] float slashAttackTimer;
 
     [Header("Kick settings")]
     [SerializeField] int kickDamage = 2;
@@ -25,9 +25,11 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangAttackCooldown = 5f;
     [SerializeField] float boomerangAttackTimer;
 
+    [SerializeField] GameObject boomerangPrefab;
+
     void Start()
     {
-        meleeAttackTimer = meleeAttackCooldown;
+        slashAttackTimer = slashAttackCooldown;
         kickAttackTimer = kickAttackCooldown;
         boomerangAttackTimer = boomerangAttackCooldown;
     }
@@ -37,33 +39,45 @@ public class PlayerCombat : MonoBehaviour
         HandleCooldowns();
     }
 
-    void MeleeAttack()
+    void SlashAttack()
     {
-        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
 
-        if (enemy != null)
+        if (enemies != null)
         {
-            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-meleeDamage);
+            foreach (Collider2D enemy in enemies)
+            {
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-slashDamage);
+            }
+           
         }
     }
 
     void KickAttack()
     {
-        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
 
-        if (enemy != null)
+        if (enemies != null)
         {
-            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-kickDamage);
+            foreach (Collider2D enemy in enemies)
+            {
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-kickDamage);
+            }
         }
     }
 
-    void OnMelee(InputValue meleebutton)
+    void BoomerangAttack()
     {
-        if (meleebutton.isPressed && meleeAttackTimer <= 0)
+        Instantiate(boomerangPrefab, transform.position, Quaternion.identity);
+    }
+
+    void OnSlash(InputValue slashbutton)
+    {
+        if (slashbutton.isPressed && slashAttackTimer <= 0)
         {
-            MeleeAttack();
-            Debug.Log("Melee");
-            meleeAttackTimer = meleeAttackCooldown;
+            SlashAttack();
+            Debug.Log("Slash");
+            slashAttackTimer = slashAttackCooldown;
         }
     }
 
@@ -81,16 +95,16 @@ public class PlayerCombat : MonoBehaviour
     {
         if (boomerangButton.isPressed && boomerangAttackTimer <= 0)
         {
+            BoomerangAttack();
             Debug.Log("Boomerang");
             boomerangAttackTimer = boomerangAttackCooldown;
         }
     }
-
     void HandleCooldowns()
     {
-        if (meleeAttackTimer > 0)
+        if (slashAttackTimer > 0)
         {
-            meleeAttackTimer -= Time.deltaTime;
+            slashAttackTimer -= Time.deltaTime;
         }
 
         if (kickAttackTimer > 0)
