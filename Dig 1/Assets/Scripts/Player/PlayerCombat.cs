@@ -20,10 +20,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float kickAttackCooldown = 2f;
     [SerializeField] float kickAttackTimer;
 
-    [Header("Bomerang settings")]
-    [SerializeField] int bomerangDamage = 5;
-    [SerializeField] float bomerangAttackCooldown = 5f;
-    [SerializeField] float bomerangAttackTimer;
+    [Header("Boomerang settings")]
+    [SerializeField] int boomerangDamage = 5;
+    [SerializeField] float boomerangAttackCooldown = 5f;
+    [SerializeField] float boomerangAttackTimer;
 
 
     void Update()
@@ -71,12 +71,12 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    void OnBomerang(InputValue bomerangButton)
+    void OnBoomerang(InputValue boomerangButton)
     {
-        if (bomerangButton.isPressed && bomerangAttackTimer <= 0)
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0)
         {
-            Debug.Log("Bomerang");
-            bomerangAttackTimer = bomerangAttackCooldown;
+            Debug.Log("Boomerang");
+            boomerangAttackTimer = boomerangAttackCooldown;
         }
     }
 
@@ -92,9 +92,9 @@ public class PlayerCombat : MonoBehaviour
             kickAttackTimer -= Time.deltaTime;
         }
 
-        if (bomerangAttackTimer > 0)
+        if (boomerangAttackTimer > 0)
         {
-            bomerangAttackTimer -= Time.deltaTime;
+            boomerangAttackTimer -= Time.deltaTime;
         }
     }
 
