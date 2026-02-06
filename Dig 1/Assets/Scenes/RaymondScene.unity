@@ -176,51 +176,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37abfcc4c0a65ca40a951cfd89043eaf, type: 3}
---- !u!1 &373487976
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 373487978}
-  - component: {fileID: 373487977}
-  m_Layer: 0
-  m_Name: Enums
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &373487977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373487976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9adc0c27e2ce0b14f90e66809eb98aab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dennis
-  state: 0
---- !u!4 &373487978
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373487976}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0477, y: -0.34451, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &793084817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
@@ -290,7 +245,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -380,7 +335,7 @@ MonoBehaviour:
   zoomSize: 2.1
   zoomSpeed: 4
   zoomPosition: {x: 0, y: 0, z: -10}
-  minZoom: 5
+  minZoom: 7
   maxZoom: 14
 --- !u!114 &1687669303
 MonoBehaviour:
@@ -397,6 +352,24 @@ MonoBehaviour:
   targetToFollow: {fileID: 793084817}
   smoothing: 0.6
   offset: {x: 0, y: 0, z: 0}
+--- !u!1 &1845070633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 278727348191356785, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+  m_PrefabInstance: {fileID: 2173745503148300776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1845070640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845070633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9adc0c27e2ce0b14f90e66809eb98aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::playerStateMachine
+  movingState: 0
 --- !u!1001 &1670899103284073785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -553,7 +526,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 278727348191356785, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1845070640}
   m_SourcePrefab: {fileID: 100100000, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
 --- !u!1001 &5840596793932771262
 PrefabInstance:
@@ -621,4 +597,3 @@ SceneRoots:
   - {fileID: 1670899103284073785}
   - {fileID: 5840596793932771262}
   - {fileID: 362576011}
-  - {fileID: 373487978}

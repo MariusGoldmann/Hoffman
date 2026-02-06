@@ -27,16 +27,21 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] GameObject boomerangPrefab;
 
+    PlayerMovement playerMovement;
+
     void Start()
     {
         slashAttackTimer = slashAttackCooldown;
         kickAttackTimer = kickAttackCooldown;
         boomerangAttackTimer = boomerangAttackCooldown;
+
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
         HandleCooldowns();
+       
     }
 
     void SlashAttack()
