@@ -1,7 +1,10 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static playerStateMachine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float moveSpeed;
@@ -32,19 +35,35 @@ public class PlayerController : MonoBehaviour
 
     [Header("Script References")]
     [SerializeField] PickUpScript pickUpScript;// Serialized for debugging
+    [SerializeField] playerStateMachine playerStateMachine;
     void Awake()
-    {
+    { 
         playerRB = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
 
         pickUpScript = GetComponent<PickUpScript>();
+        playerStateMachine = GetComponent<playerStateMachine>();
     }
 
     void Update()
     {
-        HandleCoyoteTime();
+
+
+        switch (playerStateMachine.movingState)
+        {
+            case playerStateMachine.MovingStates.Normal:
+                HandleCrouch();
+                break;
+
+            case playerStateMachine.MovingStates.InAir:
+                break;
+           
+            
+        }
+
         Flip();
-        HandleCrouch();
+        HandleCoyoteTime();
+    
     }
 
     void FixedUpdate()
@@ -101,10 +120,12 @@ public class PlayerController : MonoBehaviour
     {
         if (IsGrounded())
         {
+            playerStateMachine.movingState = MovingStates.Normal;
             coyoteTimeCounter = coyoteTime;
         }
         else
         {
+            playerStateMachine.movingState = MovingStates.InAir;
             coyoteTimeCounter -= Time.deltaTime;
         }
     }
