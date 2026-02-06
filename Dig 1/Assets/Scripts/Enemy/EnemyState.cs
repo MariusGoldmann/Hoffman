@@ -17,7 +17,6 @@ public class EnemyState : MonoBehaviour
         if (enemyPosition.position.x < playerTransform.position.x)
         {
             playerDirection = 1;
-            Debug.Log("1");
         }
         else
         {

@@ -4,11 +4,12 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float idleMoveSpeed = 0.5f;
     [SerializeField] float chaseMoveSpeed = 1f;
-    [SerializeField] float groundCheckLength = 1f;
+    [SerializeField] float groundCheckLength = 1.67f;
     [SerializeField] Vector2 groundCheckOffset = new Vector2(1, 0);
 
     [Header("Debug")]
     [SerializeField] bool facingRight=true;
+    Vector2 groundCheckPos;
 
     Rigidbody2D rigidBody;
     Animator animator;
@@ -60,11 +61,14 @@ public class EnemyMovement : MonoBehaviour
 
     void IdleMovement()
     {
+        
         if (facingRight)
         {
-            if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + groundCheckOffset, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
+            groundCheckPos= new Vector2(transform.position.x+groundCheckOffset.x,transform.position.y+groundCheckOffset.y);
+            if (Physics2D.Raycast(groundCheckPos, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
             {
                 rigidBody.linearVelocityX = idleMoveSpeed;
+               
             }
             else
             {
@@ -75,9 +79,11 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) - groundCheckOffset, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
+            groundCheckPos = new Vector2(transform.position.x - groundCheckOffset.x, transform.position.y - groundCheckOffset.y);
+            if (Physics2D.Raycast(groundCheckPos, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
             {
                 rigidBody.linearVelocityX = -idleMoveSpeed;
+
             }
             else
             {
@@ -86,6 +92,7 @@ public class EnemyMovement : MonoBehaviour
                 facingRight = true;
             }
         }
+        
 
     }
 
