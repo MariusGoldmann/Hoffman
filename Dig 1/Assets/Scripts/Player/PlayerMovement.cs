@@ -36,10 +36,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Script References")]
     [SerializeField] PickUpScript pickUpScript;// Serialized for debugging
     [SerializeField] playerStateMachine playerStateMachine;
+
+    [SerializeField] Animator animator;
     void Awake()
     { 
         playerRB = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
+
+        animator = GetComponentInChildren<Animator>();
 
         pickUpScript = GetComponent<PickUpScript>();
         playerStateMachine = GetComponent<playerStateMachine>();
@@ -51,14 +55,33 @@ public class PlayerMovement : MonoBehaviour
 
         switch (playerStateMachine.movingState)
         {
-            case playerStateMachine.MovingStates.Normal:
+            case playerStateMachine.MovingStates.Idle:
                 HandleCrouch();
                 break;
 
-            case playerStateMachine.MovingStates.InAir:
+            case playerStateMachine.MovingStates.Walking:
+                HandleCrouch();
+                // animator.SetBool("IsWalking", true);
                 break;
-           
-            
+
+            case playerStateMachine.MovingStates.Running:
+                HandleCrouch();
+                // animator.SetBool("IsRunning", true);
+                break;
+
+            case playerStateMachine.MovingStates.Jumping:
+
+                // animator.SetBool("Jump", true);
+                break;
+
+            case playerStateMachine.MovingStates.Falling:
+
+                break;
+
+            case playerStateMachine.MovingStates.Crouching:
+                HandleCrouch();
+                // animator.SetBool("IsCrouching", true);
+                break;
         }
 
         Flip();
@@ -76,27 +99,49 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRB.linearVelocityX = moveInput.x * moveSpeed;
 
+        if (MathF.Abs(moveInput.x) > 0)
+        {
+            playerStateMachine.movingState = MovingStates.Walking;
+
+            playerRB.linearVelocityX = moveInput.x * moveSpeed;
+        }
+        else if (IsGrounded())
+        {
+            playerStateMachine.movingState = MovingStates.Idle;
+        }
+
         if (runPressed == true)
         {
+            playerStateMachine.movingState = MovingStates.Running;
+
             moveSpeed = runSpeed;
         }
         else
         {
             moveSpeed = walkSpeed;
         }
+
     }
     void HandleJump()
     {
         if (jumpPressed == true && coyoteTimeCounter > 0)
         {
+            playerStateMachine.movingState = MovingStates.Jumping;
+
             playerRB.linearVelocityY = jumpForce;
             jumpPressed = false;
         }
         else if (jumpRelesed == true && playerRB.linearVelocityY > 0)
         {
+
             playerRB.linearVelocityY = (playerRB.linearVelocity.y * jumpCutMultiplier);
 
             coyoteTimeCounter = 0;
+        }
+
+        if (playerRB.linearVelocityY < 0)
+        {
+            playerStateMachine.movingState = MovingStates.Falling;
         }
     }
 
@@ -104,6 +149,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (crouchPressed == true)
         {
+            playerStateMachine.movingState = MovingStates.Crouching;
+
             playerCollider.offset = new Vector2(0, -0.58f);
             playerCollider.size = new Vector2(1, 1.86f);
 
@@ -120,12 +167,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsGrounded())
         {
-            playerStateMachine.movingState = MovingStates.Normal;
             coyoteTimeCounter = coyoteTime;
         }
         else
         {
-            playerStateMachine.movingState = MovingStates.InAir;
             coyoteTimeCounter -= Time.deltaTime;
         }
     }

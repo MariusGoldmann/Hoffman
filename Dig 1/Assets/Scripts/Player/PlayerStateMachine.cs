@@ -8,7 +8,7 @@ public class playerStateMachine : MonoBehaviour
 
     void Start()
     {
-        movingState = MovingStates.Normal;
+        movingState = MovingStates.Idle;
 
         playerMovement = GetComponent<PlayerMovement>();
     }
@@ -18,9 +18,14 @@ public class playerStateMachine : MonoBehaviour
 
     public enum MovingStates
     {
-        Normal,
-        InAir,
-        
+        Idle,
+        OneLegIdle,
+        Walking,
+        OneLegWalking,
+        Running,
+        Jumping,
+        Falling,
+        Crouching,
     }
 
 }
