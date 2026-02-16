@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7253600528976546947}
   - component: {fileID: 315493221406685201}
   - component: {fileID: 5082171930118937187}
+  - component: {fileID: 2556309466808190208}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -100,8 +101,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.15}
+  m_Size: {x: 1, y: 2.7}
   m_Direction: 0
 --- !u!114 &1197925086779408942
 MonoBehaviour:
@@ -161,6 +162,8 @@ MonoBehaviour:
   playerRB: {fileID: 8518420260251036096}
   playerCollider: {fileID: 2364832149000289202}
   pickUpScript: {fileID: 315493221406685201}
+  playerStateMachine: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &315493221406685201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
   attackPoint: {fileID: 6432162865010492417}
-  attackRadius: 1
+  attackRadius: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -206,7 +209,20 @@ MonoBehaviour:
   boomerangDamage: 5
   boomerangAttackCooldown: 5
   boomerangAttackTimer: 0
-  boomerangPrefab: {fileID: 0}
+  boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
+--- !u!114 &2556309466808190208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278727348191356785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9adc0c27e2ce0b14f90e66809eb98aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::playerStateMachine
+  movingState: 0
 --- !u!1 &6431615454298918249
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,11 +264,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4038870928498198261, guid: 939ca60f363a91f4bb77f00371b0d803, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.19
+      value: 0.899
       objectReference: {fileID: 0}
     - target: {fileID: 4038870928498198261, guid: 939ca60f363a91f4bb77f00371b0d803, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.37
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4038870928498198261, guid: 939ca60f363a91f4bb77f00371b0d803, type: 3}
       propertyPath: m_LocalPosition.z
@@ -264,15 +280,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038870928498198261, guid: 939ca60f363a91f4bb77f00371b0d803, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038870928498198261, guid: 939ca60f363a91f4bb77f00371b0d803, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038870928498198261, guid: 939ca60f363a91f4bb77f00371b0d803, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038870928498198261, guid: 939ca60f363a91f4bb77f00371b0d803, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
