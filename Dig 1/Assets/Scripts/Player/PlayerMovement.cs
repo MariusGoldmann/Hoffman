@@ -2,7 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static playerStateMachine;
+using static PlayerMovement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -35,9 +35,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Script References")]
     [SerializeField] PickUpScript pickUpScript;// Serialized for debugging
-    [SerializeField] playerStateMachine playerStateMachine;
 
     [SerializeField] Animator animator;
+
+    [SerializeField] MovingStates movingState;
     void Awake()
     { 
         playerRB = GetComponent<Rigidbody2D>();
@@ -46,46 +47,51 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         pickUpScript = GetComponent<PickUpScript>();
-        playerStateMachine = GetComponent<playerStateMachine>();
+    }
+
+    void Start()
+    {
+        movingState = MovingStates.Idle;
     }
 
     void Update()
     {
 
-
-        switch (playerStateMachine.movingState)
+        switch (movingState)
         {
-            case playerStateMachine.MovingStates.Idle:
+            case MovingStates.Idle:
                 HandleCrouch();
                 break;
 
-            case playerStateMachine.MovingStates.Walking:
+            case MovingStates.OneLegIdle:
+                break;
+
+            case MovingStates.Walking:
                 HandleCrouch();
-                // animator.SetBool("IsWalking", true);
                 break;
 
-            case playerStateMachine.MovingStates.Running:
+            case MovingStates.OneLegWalking:
+                break;
+
+            case MovingStates.Running:
                 HandleCrouch();
-                // animator.SetBool("IsRunning", true);
                 break;
 
-            case playerStateMachine.MovingStates.Jumping:
-
-                // animator.SetBool("Jump", true);
+            case MovingStates.Jumping:
                 break;
 
-            case playerStateMachine.MovingStates.Falling:
-
+            case MovingStates.Falling:
                 break;
 
-            case playerStateMachine.MovingStates.Crouching:
+            case MovingStates.Crouching:
                 HandleCrouch();
-                // animator.SetBool("IsCrouching", true);
                 break;
         }
 
         Flip();
         HandleCoyoteTime();
+        HandleAnimations();
+        HandleStates();
     
     }
 
@@ -99,20 +105,8 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRB.linearVelocityX = moveInput.x * moveSpeed;
 
-        if (MathF.Abs(moveInput.x) > 0)
-        {
-            playerStateMachine.movingState = MovingStates.Walking;
-
-            playerRB.linearVelocityX = moveInput.x * moveSpeed;
-        }
-        else if (IsGrounded())
-        {
-            playerStateMachine.movingState = MovingStates.Idle;
-        }
-
         if (runPressed == true)
         {
-            playerStateMachine.movingState = MovingStates.Running;
 
             moveSpeed = runSpeed;
         }
@@ -126,10 +120,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jumpPressed == true && coyoteTimeCounter > 0)
         {
-            playerStateMachine.movingState = MovingStates.Jumping;
 
             playerRB.linearVelocityY = jumpForce;
             jumpPressed = false;
+            animator.SetTrigger("IsJumping");
+          
         }
         else if (jumpRelesed == true && playerRB.linearVelocityY > 0)
         {
@@ -138,18 +133,12 @@ public class PlayerMovement : MonoBehaviour
 
             coyoteTimeCounter = 0;
         }
-
-        if (playerRB.linearVelocityY < 0)
-        {
-            playerStateMachine.movingState = MovingStates.Falling;
-        }
     }
 
     void HandleCrouch()
     {
         if (crouchPressed == true)
         {
-            playerStateMachine.movingState = MovingStates.Crouching;
 
             playerCollider.offset = new Vector2(0, -0.58f);
             playerCollider.size = new Vector2(1, 1.86f);
@@ -173,6 +162,72 @@ public class PlayerMovement : MonoBehaviour
         {
             coyoteTimeCounter -= Time.deltaTime;
         }
+    }
+
+    void HandleStates()
+    {
+        if(IsGrounded())
+        {
+            animator.SetBool("IsGrounded", true);
+        } else
+        {
+            animator.SetBool("IsGrounded", false);
+        }
+
+
+        if (IsGrounded() && moveInput.x == 0)
+        {
+            movingState = MovingStates.Idle;
+        }
+
+        if (IsGrounded() && moveInput.x == 0 && !pickUpScript.GetHasLeg())
+        {
+            movingState = MovingStates.OneLegIdle;
+        }
+
+        if (Mathf.Abs(moveInput.x) > 0)
+        {
+            movingState = MovingStates.Walking;
+        }
+
+        if (Mathf.Abs(moveInput.x) > 0 && !pickUpScript.GetHasLeg())
+        {
+            movingState = MovingStates.OneLegWalking;
+        }
+
+        if (runPressed == true)
+        {
+            movingState = MovingStates.Running;
+        }
+
+        if (playerRB.linearVelocityY > 0)
+        {
+            movingState = MovingStates.Jumping;
+        }
+
+        if (playerRB.linearVelocityY < 0)
+        {
+            movingState = MovingStates.Falling;
+        }
+
+        if (crouchPressed == true)
+        {
+            movingState = MovingStates.Crouching;
+        }
+
+    }
+    void HandleAnimations()
+    {
+        animator.SetBool("IsWalking", movingState == MovingStates.Walking);
+
+        animator.SetBool("IsRunning", movingState == MovingStates.Running);
+
+       animator.SetBool("IsJumping", movingState == MovingStates.Jumping);
+
+        animator.SetBool("IsFalling", movingState == MovingStates.Falling);
+
+        animator.SetBool("IsCrouching", movingState == MovingStates.Crouching);
+
     }
 
     void OnMove(InputValue value)
@@ -241,6 +296,18 @@ public class PlayerMovement : MonoBehaviour
     bool IsGrounded()
     {
         return Physics2D.Raycast(transform.position, Vector2.down, 1.8f, LayerMask.GetMask("Ground"));
+    }
+
+    public enum MovingStates
+    {
+        Idle,
+        OneLegIdle,
+        Walking,
+        OneLegWalking,
+        Running,
+        Jumping,
+        Falling,
+        Crouching,
     }
 
     void OnDrawGizmos() // For debugging IsGrounded
