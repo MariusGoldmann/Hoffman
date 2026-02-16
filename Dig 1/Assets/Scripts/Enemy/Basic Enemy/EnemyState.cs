@@ -24,14 +24,14 @@ public class EnemyState : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-       if (collision.CompareTag("Player")) inCombat = true;
+       if (other.CompareTag("Player")) inCombat = true;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.CompareTag("Player")) inCombat = false;
+        if (other.CompareTag("Player")) inCombat = false;
     }
 
 

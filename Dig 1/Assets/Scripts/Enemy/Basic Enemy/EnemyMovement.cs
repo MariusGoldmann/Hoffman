@@ -11,13 +11,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] bool facingRight=true;
     Vector2 groundCheckPos;
 
-    Rigidbody2D rigidBody;
+    Rigidbody2D enemyRB;
     Animator animator;
     EnemyState state;
 
     private void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        enemyRB = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         state = GetComponentInChildren<EnemyState>();
     }
@@ -67,12 +67,12 @@ public class EnemyMovement : MonoBehaviour
             groundCheckPos= new Vector2(transform.position.x+groundCheckOffset.x,transform.position.y+groundCheckOffset.y);
             if (Physics2D.Raycast(groundCheckPos, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
             {
-                rigidBody.linearVelocityX = idleMoveSpeed;
+                enemyRB.linearVelocityX = idleMoveSpeed;
                
             }
             else
             {
-                rigidBody.linearVelocityX = -idleMoveSpeed;
+                enemyRB.linearVelocityX = -idleMoveSpeed;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 facingRight = false;
             }
@@ -82,12 +82,12 @@ public class EnemyMovement : MonoBehaviour
             groundCheckPos = new Vector2(transform.position.x - groundCheckOffset.x, transform.position.y - groundCheckOffset.y);
             if (Physics2D.Raycast(groundCheckPos, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
             {
-                rigidBody.linearVelocityX = -idleMoveSpeed;
+                enemyRB.linearVelocityX = -idleMoveSpeed;
 
             }
             else
             {
-                rigidBody.linearVelocityX = idleMoveSpeed;
+                enemyRB.linearVelocityX = idleMoveSpeed;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 facingRight = true;
             }
@@ -98,7 +98,7 @@ public class EnemyMovement : MonoBehaviour
 
     void ChasePlayer()
     {
-        rigidBody.linearVelocity = new Vector2(state.GetPlayerDirection() * chaseMoveSpeed, rigidBody.linearVelocityY);
+        enemyRB.linearVelocity = new Vector2(state.GetPlayerDirection() * chaseMoveSpeed, enemyRB.linearVelocityY);
         
     }
 

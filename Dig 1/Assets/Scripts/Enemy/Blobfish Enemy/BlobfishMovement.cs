@@ -21,14 +21,13 @@ public class BlobfishMovement : MonoBehaviour
     private void FixedUpdate()
     {   
         Move();
-        Debug.Log(blobfishRB.linearvelocity); //Gör på fredag
     }  
 
     void Move()
     {
         targetPosition = waypoints[waypointIndex].position;
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed);
-        
+
         if (Vector2.Distance(transform.position, targetPosition) < waypointDistance) waypointIndex++;
         if (waypointIndex==waypoints.Length) waypointIndex = 0;
     }
