@@ -86,6 +86,10 @@ public class PlayerMovement : MonoBehaviour
             case MovingStates.Crouching:
                 HandleCrouch();
                 break;
+
+            case MovingStates.CrouchWalk:
+                HandleCrouch();
+                break;
         }
 
         Flip();
@@ -123,7 +127,6 @@ public class PlayerMovement : MonoBehaviour
 
             playerRB.linearVelocityY = jumpForce;
             jumpPressed = false;
-            animator.SetTrigger("IsJumping");
           
         }
         else if (jumpRelesed == true && playerRB.linearVelocityY > 0)
@@ -210,9 +213,14 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Falling;
         }
 
-        if (crouchPressed == true)
+        if (crouchPressed == true && IsGrounded())
         {
             movingState = MovingStates.Crouching;
+        }
+
+        if (crouchPressed == true && IsGrounded() && Mathf.Abs(moveInput.x) > 0)
+        {
+            movingState = MovingStates.CrouchWalk;
         }
 
     }
@@ -222,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("IsRunning", movingState == MovingStates.Running);
 
-       animator.SetBool("IsJumping", movingState == MovingStates.Jumping);
+        animator.SetBool("IsJumping", movingState == MovingStates.Jumping);
 
         animator.SetBool("IsFalling", movingState == MovingStates.Falling);
 
@@ -237,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnRun(InputValue value)
     {
-        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0 && pickUpScript.GetHasLeg())
+        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0)
         {
             runPressed = true;
         }
@@ -254,6 +262,7 @@ public class PlayerMovement : MonoBehaviour
             if (coyoteTimeCounter > 0)
             {
                 jumpPressed = true;
+                crouchPressed = false;
             }
 
             jumpRelesed = false;
@@ -308,6 +317,7 @@ public class PlayerMovement : MonoBehaviour
         Jumping,
         Falling,
         Crouching,
+        CrouchWalk,
     }
 
     void OnDrawGizmos() // For debugging IsGrounded
