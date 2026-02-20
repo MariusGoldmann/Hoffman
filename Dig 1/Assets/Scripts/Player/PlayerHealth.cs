@@ -1,15 +1,14 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.Processors;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] int maxPlayerHealth = 20;
-    /*[SerializeField] float playerHealTickSpeed = 0.5f;
-    [SerializeField] int playerHealTickAmount = 1;
-    [HideInInspector] public bool healOverTime;*/
+    [SerializeField] float playerHealTickSpeed = 0.5f;
+    [HideInInspector] public bool healOverTime;
 
-    [SerializeField] int currentPlayerHealth;
+    int currentPlayerHealth;
 
 
     private void Start()
@@ -30,18 +29,15 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-/*    private void Update()
+    public IEnumerator HealOverTime(int tickAmount, int healPerTick)
     {
-        if (healOverTime) StartCoroutine(HealOverTime());
-    }
-
-
-    IEnumerator HealOverTime()
-    {
-        while (healOverTime && currentPlayerHealth < maxPlayerHealth)
+        for (int i=0; i<tickAmount; i++)
         {
-            currentPlayerHealth += playerHealTickAmount;
-            yield return new WaitForSeconds(playerHealTickSpeed);
+            if (currentPlayerHealth>maxPlayerHealth)
+            {
+                currentPlayerHealth += healPerTick;
+                yield return new WaitForSeconds(playerHealTickSpeed);
+            }
         }
-    }*/
+    }
 }
