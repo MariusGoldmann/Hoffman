@@ -259,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (value.isPressed)
         {
-            if (coyoteTimeCounter > 0)
+            if (coyoteTimeCounter > 0 && !crouchPressed)
             {
                 jumpPressed = true;
                 crouchPressed = false;
