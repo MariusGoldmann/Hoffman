@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.OneLegWalking;
         }
 
-        if (runPressed == true)
+        if (Mathf.Abs(moveInput.x) > 0 && runPressed)
         {
             movingState = MovingStates.Running;
         }
@@ -208,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Jumping;
         }
 
-        if (playerRB.linearVelocityY < 0)
+        if (playerRB.linearVelocityY < 0 && !IsGrounded())
         {
             movingState = MovingStates.Falling;
         }

@@ -5,6 +5,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int currentEnemyHealth;
     [SerializeField] int maxEnemyHealth = 5;
 
+    [SerializeField] int facingDirection;
+
     void Start()
     {
         currentEnemyHealth = maxEnemyHealth; 
