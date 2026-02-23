@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
     {
         for (int i=0; i<tickAmount; i++)
         {
-            if (currentPlayerHealth>maxPlayerHealth)
+            if (currentPlayerHealth<maxPlayerHealth)
             {
                 currentPlayerHealth += healPerTick;
                 yield return new WaitForSeconds(playerHealTickSpeed);
