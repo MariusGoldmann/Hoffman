@@ -1,8 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.VersionControl.Message;
 
 public class CameraShake : MonoBehaviour
 {
