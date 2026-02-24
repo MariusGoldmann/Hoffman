@@ -24,10 +24,13 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] int boomerangDamage = 5;
     [SerializeField] float boomerangAttackCooldown = 5f;
     [SerializeField] float boomerangAttackTimer;
+    [SerializeField] float boomerangAttackLengh;
+    [SerializeField] float boomerangAttackForce;
+    [SerializeField] float boomerangSmoothing;
 
     [SerializeField] GameObject boomerangPrefab;
 
-    PlayerMovement playerMovement;
+    [SerializeField] PlayerMovement playerMovement;
 
     void Start()
     {
@@ -73,7 +76,24 @@ public class PlayerCombat : MonoBehaviour
 
     void BoomerangAttack()
     {
-        Instantiate(boomerangPrefab, transform.position, Quaternion.identity);
+        StartCoroutine(BoomerangSpawner());
+    }
+
+    IEnumerator BoomerangSpawner()
+    {
+        Vector3 spawnPosition = new Vector3(transform.position.x + 1 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
+        GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
+
+        Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+
+        Vector2 direction = new Vector2(playerMovement.GetFacingDirection(), 0f);
+        boomerangRB.AddForce(direction * boomerangAttackForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(boomerangAttackLengh);
+
+        boomerangRB.linearVelocity *= -1;
+
+
     }
 
     void OnSlash(InputValue slashbutton)
