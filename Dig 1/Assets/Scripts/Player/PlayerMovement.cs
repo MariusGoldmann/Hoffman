@@ -19,31 +19,31 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float coyoteTime;
     [SerializeField] float coyoteTimeCounter;
 
-    [Header("Bools")] // private bools
+    [Header("Bools")]
     [SerializeField] bool runPressed;// Serialized for debugging
     [SerializeField] bool jumpPressed;// Serialized for debugging
     [SerializeField] bool jumpRelesed;// Serialized for debugging
-    [SerializeField] bool crouchPressed;
+    [SerializeField] bool crouchPressed;// Serialized for debugging
 
     [SerializeField] int facingDirection = 1;
 
-    [SerializeField] Rigidbody2D playerRB;// Serialized for debugging
-    [SerializeField] CapsuleCollider2D playerCollider;
+    [Header("State")]
+    [SerializeField] MovingStates movingState;
 
-    [Header("Inputs")]
+    // Inputs
     Vector2 moveInput;
 
-    [Header("Script References")]
-    [SerializeField] PickUpScript pickUpScript;// Serialized for debugging
+    //Script references
+    PickUpScript pickUpScript;
 
-    [SerializeField] Animator animator;
-
-    [SerializeField] MovingStates movingState;
+    //Component references
+    Rigidbody2D playerRB;
+    CapsuleCollider2D playerCollider;
+    Animator animator;
     void Awake()
     { 
         playerRB = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
-
         animator = GetComponentInChildren<Animator>();
 
         pickUpScript = GetComponent<PickUpScript>();
@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         switch (movingState)
         {
             case MovingStates.Idle:
@@ -96,7 +95,6 @@ public class PlayerMovement : MonoBehaviour
         HandleCoyoteTime();
         HandleAnimations();
         HandleStates();
-    
     }
 
     void FixedUpdate()
@@ -111,7 +109,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (runPressed == true)
         {
-
             moveSpeed = runSpeed;
         }
         else
@@ -124,14 +121,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jumpPressed == true && coyoteTimeCounter > 0)
         {
-
             playerRB.linearVelocityY = jumpForce;
+
             jumpPressed = false;
-          
         }
         else if (jumpRelesed == true && playerRB.linearVelocityY > 0)
         {
-
             playerRB.linearVelocityY = (playerRB.linearVelocity.y * jumpCutMultiplier);
 
             coyoteTimeCounter = 0;
@@ -142,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (crouchPressed == true)
         {
-
             playerCollider.offset = new Vector2(0, -0.58f);
             playerCollider.size = new Vector2(1, 1.86f);
 
@@ -176,7 +170,6 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsGrounded", false);
         }
-
 
         if (IsGrounded() && moveInput.x == 0)
         {
@@ -222,7 +215,6 @@ public class PlayerMovement : MonoBehaviour
         {
             movingState = MovingStates.CrouchWalk;
         }
-
     }
     void HandleAnimations()
     {
@@ -235,7 +227,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsFalling", movingState == MovingStates.Falling);
 
         animator.SetBool("IsCrouching", movingState == MovingStates.Crouching);
-
     }
 
     void OnMove(InputValue value)
@@ -320,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
         CrouchWalk,
     }
 
-    public float GetFacingDirection()
+    public float GetFacingDirection() // Getter
     {
         return facingDirection;
     }

@@ -26,27 +26,30 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangAttackTimer;
     [SerializeField] float boomerangAttackLengh;
     [SerializeField] float boomerangAttackForce;
+    [SerializeField] float boomerangReturnAttackForce;
 
-    [SerializeField] float boomerangSpawned;
-    [SerializeField] bool boomerangActive;
+    Coroutine boomerangSpawnerCoroutine;
 
+    // GameObjects
     [SerializeField] GameObject boomerangPrefab;
 
+    // Script references
     [SerializeField] PlayerMovement playerMovement;
 
+    void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
     void Start()
     {
         slashAttackTimer = slashAttackCooldown;
         kickAttackTimer = kickAttackCooldown;
         boomerangAttackTimer = boomerangAttackCooldown;
-
-        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
         HandleCooldowns();
-        BoomerangAttack();
     }
 
     void SlashAttack()
@@ -76,11 +79,12 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    void BoomerangAttack()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (boomerangActive)
+        if (collision.gameObject.CompareTag("Boomerang"))
         {
-            StartCoroutine(BoomerangSpawner());
+            Debug.Log("Hit booma");
+            collision.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-boomerangDamage);
         }
     }
 
@@ -88,20 +92,25 @@ public class PlayerCombat : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(transform.position.x + 1 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
 
-        if (boomerangSpawned < 1)
+
+        GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
+        
+        Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+        
+        boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() * boomerangAttackForce, 0);
+        
+        yield return new WaitForSeconds(boomerangAttackLengh);
+        
+        while (boomerangRB != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f)
         {
-            GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
-            boomerangSpawned = 1;
+            Vector2 direction = (transform.position - boomerang.transform.position).normalized;
 
-            Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+            boomerangRB.linearVelocity = Vector2.Lerp(boomerangRB.linearVelocity, direction * boomerangReturnAttackForce, 10f * Time.deltaTime);
 
-            boomerangRB.linearVelocityX = playerMovement.GetFacingDirection() * boomerangAttackForce;
+            yield return null;
+        }
 
-            yield return new WaitForSeconds(boomerangAttackLengh);
-
-            boomerangRB.linearVelocityX = 0;
-            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, 10 * Time.deltaTime);
-        }  
+        boomerangSpawnerCoroutine = null;
     }
 
     void OnSlash(InputValue slashbutton)
@@ -126,9 +135,9 @@ public class PlayerCombat : MonoBehaviour
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && !boomerangActive)
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && boomerangSpawnerCoroutine == null)
         {
-            boomerangActive = true;
+            boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }
     }
     void HandleCooldowns()
