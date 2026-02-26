@@ -320,6 +320,11 @@ public class PlayerMovement : MonoBehaviour
         CrouchWalk,
     }
 
+    public float GetFacingDirection()
+    {
+        return facingDirection;
+    }
+
     void OnDrawGizmos() // For debugging IsGrounded
     {
         Gizmos.color = Color.yellow;
