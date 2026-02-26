@@ -26,7 +26,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangAttackTimer;
     [SerializeField] float boomerangAttackLengh;
     [SerializeField] float boomerangAttackForce;
-    [SerializeField] float boomerangSmoothing;
+
+    [SerializeField] float boomerangSpawned;
+    [SerializeField] bool boomerangActive;
 
     [SerializeField] GameObject boomerangPrefab;
 
@@ -44,7 +46,7 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
         HandleCooldowns();
-       
+        BoomerangAttack();
     }
 
     void SlashAttack()
@@ -76,24 +78,30 @@ public class PlayerCombat : MonoBehaviour
 
     void BoomerangAttack()
     {
-        StartCoroutine(BoomerangSpawner());
+        if (boomerangActive)
+        {
+            StartCoroutine(BoomerangSpawner());
+        }
     }
 
     IEnumerator BoomerangSpawner()
     {
         Vector3 spawnPosition = new Vector3(transform.position.x + 1 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
-        GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
 
-        Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+        if (boomerangSpawned < 1)
+        {
+            GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
+            boomerangSpawned = 1;
 
-        Vector2 direction = new Vector2(playerMovement.GetFacingDirection(), 0f);
-        boomerangRB.AddForce(direction * boomerangAttackForce, ForceMode2D.Impulse);
+            Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
 
-        yield return new WaitForSeconds(boomerangAttackLengh);
+            boomerangRB.linearVelocityX = playerMovement.GetFacingDirection() * boomerangAttackForce;
 
-        boomerangRB.linearVelocity *= -1;
+            yield return new WaitForSeconds(boomerangAttackLengh);
 
-
+            boomerangRB.linearVelocityX = 0;
+            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, 10 * Time.deltaTime);
+        }  
     }
 
     void OnSlash(InputValue slashbutton)
@@ -118,11 +126,9 @@ public class PlayerCombat : MonoBehaviour
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangAttackTimer <= 0)
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && !boomerangActive)
         {
-            BoomerangAttack();
-            Debug.Log("Boomerang");
-            boomerangAttackTimer = boomerangAttackCooldown;
+            boomerangActive = true;
         }
     }
     void HandleCooldowns()
