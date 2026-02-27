@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,7 @@ public class CameraZoom : MonoBehaviour
     bool playerIsMoving;
     bool isZoomedOut;
 
-
+    [SerializeField] CinemachineVirtualCamera vcam;
     Camera cam;
     Rigidbody2D playerRb;
     Transform playerTransform;
@@ -61,14 +62,13 @@ public class CameraZoom : MonoBehaviour
     }
     void ZoomIn()
     {
-        float targetZoom = Mathf.Lerp(cam.orthographicSize, maxZoom, zoomSpeed * Time.deltaTime);
-        cam.orthographicSize = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+        float targetZoom = Mathf.Lerp(vcam.m_Lens.OrthographicSize, maxZoom, zoomSpeed * Time.deltaTime);
+        vcam.m_Lens.OrthographicSize = Mathf.Clamp(targetZoom, minZoom, maxZoom);
     }
 
     void ZoomOut()
     {
-        float targetZoom = Mathf.Lerp(cam.orthographicSize, zoomSize, zoomSpeed * Time.deltaTime);
-        cam.orthographicSize = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+        float targetZoom = Mathf.Lerp(vcam.m_Lens.OrthographicSize, zoomSize, zoomSpeed * Time.deltaTime);
+        vcam.m_Lens.OrthographicSize = Mathf.Clamp(targetZoom, minZoom, maxZoom);
     }
-
 }
