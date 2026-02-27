@@ -1786,6 +1786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 2023028721749886639, guid: 59e31685d3cb83541ace7c9f9812b042, type: 3}
+      propertyPath: minZoom
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3052248691297638060, guid: 59e31685d3cb83541ace7c9f9812b042, type: 3}
       propertyPath: targetToFollow
       value: 

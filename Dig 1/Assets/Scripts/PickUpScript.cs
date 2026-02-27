@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ public class PickUpScript : MonoBehaviour
 
     [SerializeField] bool hasLeg;
     [SerializeField] bool hasEye;
+    [SerializeField] bool hasEar; 
     [SerializeField] bool hasBoomerang;
 
     [SerializeField] GameObject eyeTabCloud;
@@ -16,14 +18,27 @@ public class PickUpScript : MonoBehaviour
 
     [SerializeField] bool isInteracting;
 
-    InputAction interactAction; 
+    InputAction interactAction;
+
+    [SerializeField] GameObject newLegRig;
+    [SerializeField] GameObject oldLegRig;
+    [SerializeField] GameObject newEarRig;
+    [SerializeField] GameObject newEyeRig;
+
+    [SerializeField] Animator animator;
 
     void Start()
     {
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
-        
+        newLegRig.transform.localScale = new Vector3(0, 0, 0);  
+        newEyeRig.transform.localScale = new Vector3(0, 0, 0);
+        newEarRig.transform.localScale = new Vector3(0, 0, 0);
+
+       animator = GetComponent<Animator>();
+
+
         if (bomerangImage != null)
         {
             bomerangImage.SetActive(false);
@@ -53,11 +68,18 @@ public class PickUpScript : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true) 
         {
             hasLeg = true;
+           
+            animator.SetBool("HasLeg", true);
+            newLegRig.transform.localScale = new Vector3(1, 1, 1);
+            oldLegRig.transform.localScale = new Vector3(0, 0, 0);
+
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)  
         {
             hasEye = true;
+            newEyeRig.transform.localScale = new Vector3(1, 1, 1);
+
             eyeTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
@@ -68,7 +90,17 @@ public class PickUpScript : MonoBehaviour
             boomerangTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
+
+        if(collision.gameObject.CompareTag("PlayerEar") && isInteracting == true)
+        {
+            hasEar = true;
+            newEarRig.transform.localScale = new Vector3(1, 1, 1);
+            Destroy(collision.gameObject);
+        }
     }
+
+    // Leg Rig 
+
 
     public bool GetHasLeg()
     {

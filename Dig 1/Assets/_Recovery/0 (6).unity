@@ -347,7 +347,6 @@ MonoBehaviour:
   zoomPosition: {x: 0, y: 0, z: -10}
   minZoom: 7
   maxZoom: 14
-  vcam: {fileID: 0}
 --- !u!114 &1687669303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 793084824}
     - target: {fileID: 5082171930118937187, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: boomerangAttackForce
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5082171930118937187, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: boomerangAttackLengh
@@ -514,7 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5082171930118937187, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: boomerangReturnAttackForce
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5676416523015530182, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: m_LocalRotation.w
@@ -543,10 +542,6 @@ PrefabInstance:
     - target: {fileID: 7253600528976546947, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: jumpForce
       value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7253600528976546947, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
-      propertyPath: jumpCutMultiplier
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7253600528976546947, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: playerStateMachine
