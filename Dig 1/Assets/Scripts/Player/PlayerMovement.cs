@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
                 HandleCrouch();
                 break;
 
-            case MovingStates.CrouchWalk:
+            case MovingStates.CrouchWalking:
                 HandleCrouch();
                 break;
         }
@@ -213,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (crouchPressed == true && IsGrounded() && Mathf.Abs(moveInput.x) > 0)
         {
-            movingState = MovingStates.CrouchWalk;
+            movingState = MovingStates.CrouchWalking;
         }
     }
     void HandleAnimations()
@@ -227,6 +227,8 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsFalling", movingState == MovingStates.Falling);
 
         animator.SetBool("IsCrouching", movingState == MovingStates.Crouching);
+
+        animator.SetBool("IsCrouchWalking", movingState == MovingStates.CrouchWalking);
     }
 
     void OnMove(InputValue value)
@@ -308,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
         Jumping,
         Falling,
         Crouching,
-        CrouchWalk,
+        CrouchWalking,
     }
 
     public float GetFacingDirection() // Getter
