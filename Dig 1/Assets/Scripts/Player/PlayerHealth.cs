@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float playerHealTickSpeed = 0.5f;
     [HideInInspector] public bool healOverTime;
 
-    int currentPlayerHealth;
+    [SerializeField] int currentPlayerHealth;
 
 
     private void Start()

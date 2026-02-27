@@ -39,8 +39,6 @@ public class BlobfishMovement : MonoBehaviour
         {
             movingRight = false;
         }
-        Debug.Log(waypointIndex);
-        Debug.Log(movingRight);
         if (Vector2.Distance(transform.position, targetPosition) < waypointDistance)
         {
             if (movingRight)
