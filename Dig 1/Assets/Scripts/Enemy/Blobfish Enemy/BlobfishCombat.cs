@@ -4,8 +4,10 @@ using UnityEngine;
 public class BlobfishCombat : MonoBehaviour
 {
     [Header("Expansion")]
-    [SerializeField] Collider2D bodyCollider;
+    [SerializeField] CircleCollider2D bodyCollider;
+    [SerializeField] float expandedRadius = 2f;
     [SerializeField] int collisionDamage = 2;
+    [SerializeField] int maxTimeExpanded = 2;
 
     [Header("Poison")]
     [SerializeField] int poisonTickDamage = 1;
@@ -23,12 +25,17 @@ public class BlobfishCombat : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player")) Expand();
-        Debug.Log("Dennis suger 1");
+        if (other.gameObject.CompareTag("Player")) StartCoroutine(Expand());
     }
-    void Expand()
+    IEnumerator Expand()
     {
-
+        //Animation
+        for (float f = 0; f < expandedRadius; f = bodyCollider.radius)
+        {
+            bodyCollider.radius += expandedRadius * Time.deltaTime;
+            Debug.Log(f);
+            yield return new WaitForEndOfFrame();
+        }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class BlobfishMovement : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class BlobfishMovement : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] int waypointIndex;
+    bool movingRight;
+    bool facingRight;
     [SerializeField] Vector2 targetPosition;
 
     Rigidbody2D blobfishRB;
@@ -21,14 +25,38 @@ public class BlobfishMovement : MonoBehaviour
     private void FixedUpdate()
     {   
         Move();
-    }  
-
+    }
     void Move()
     {
         targetPosition = waypoints[waypointIndex].position;
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed);
 
-        if (Vector2.Distance(transform.position, targetPosition) < waypointDistance) waypointIndex++;
-        if (waypointIndex==waypoints.Length) waypointIndex = 0;
+        if (waypointIndex == 0 && !movingRight)
+        {
+            movingRight = true;
+        }
+        else if (waypointIndex == waypoints.Length - 1 && movingRight)
+        {
+            movingRight = false;
+        }
+        Debug.Log(waypointIndex);
+        Debug.Log(movingRight);
+        if (Vector2.Distance(transform.position, targetPosition) < waypointDistance)
+        {
+            if (movingRight)
+            {
+                waypointIndex++;
+                facingRight = true;
+            }
+            else
+            {
+                waypointIndex--;
+                facingRight = false;
+            }
+        }
+    }
+    public bool GetFacingRight()
+    {
+        return facingRight;
     }
 }
