@@ -10,10 +10,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float attackRadius;
     [SerializeField] LayerMask enemyLayer;
 
-    [Header("Melee settings")]
-    [SerializeField] int meleeDamage = 1;
-    [SerializeField] float meleeAttackCooldown = 1f;
-    [SerializeField] float meleeAttackTimer;
+    [Header("Slash settings")]
+    [SerializeField] int slashDamage = 1;
+    [SerializeField] float slashAttackCooldown = 1f;
+    [SerializeField] float slashAttackTimer;
 
     [Header("Kick settings")]
     [SerializeField] int kickDamage = 2;
@@ -24,10 +24,25 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] int boomerangDamage = 5;
     [SerializeField] float boomerangAttackCooldown = 5f;
     [SerializeField] float boomerangAttackTimer;
+    [SerializeField] float boomerangAttackLengh;
+    [SerializeField] float boomerangAttackForce;
+    [SerializeField] float boomerangReturnAttackForce;
 
+    Coroutine boomerangSpawnerCoroutine;
+
+    // GameObjects
+    [SerializeField] GameObject boomerangPrefab;
+
+    // Script references
+    [SerializeField] PlayerMovement playerMovement;
+
+    void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
     void Start()
     {
-        meleeAttackTimer = meleeAttackCooldown;
+        slashAttackTimer = slashAttackCooldown;
         kickAttackTimer = kickAttackCooldown;
         boomerangAttackTimer = boomerangAttackCooldown;
     }
@@ -37,33 +52,74 @@ public class PlayerCombat : MonoBehaviour
         HandleCooldowns();
     }
 
-    void MeleeAttack()
+    void SlashAttack()
     {
-        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
 
-        if (enemy != null)
+        if (enemies != null)
         {
-            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-meleeDamage);
+            foreach (Collider2D enemy in enemies)
+            {
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-slashDamage);
+            }
+           
         }
     }
 
     void KickAttack()
     {
-        Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
 
-        if (enemy != null)
+        if (enemies != null)
         {
-            enemy.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-kickDamage);
+            foreach (Collider2D enemy in enemies)
+            {
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-kickDamage);
+            }
         }
     }
 
-    void OnMelee(InputValue meleebutton)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (meleebutton.isPressed && meleeAttackTimer <= 0)
+        if (collision.gameObject.CompareTag("Boomerang"))
         {
-            MeleeAttack();
-            Debug.Log("Melee");
-            meleeAttackTimer = meleeAttackCooldown;
+            Debug.Log("Hit booma");
+            collision.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-boomerangDamage);
+        }
+    }
+
+    IEnumerator BoomerangSpawner()
+    {
+        Vector3 spawnPosition = new Vector3(transform.position.x + 1 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
+
+
+        GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
+        
+        Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+        
+        boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() * boomerangAttackForce, 0);
+        
+        yield return new WaitForSeconds(boomerangAttackLengh);
+        
+        while (boomerangRB != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f)
+        {
+            Vector2 direction = (transform.position - boomerang.transform.position).normalized;
+
+            boomerangRB.linearVelocity = Vector2.Lerp(boomerangRB.linearVelocity, direction * boomerangReturnAttackForce, 10f * Time.deltaTime);
+
+            yield return null;
+        }
+
+        boomerangSpawnerCoroutine = null;
+    }
+
+    void OnSlash(InputValue slashbutton)
+    {
+        if (slashbutton.isPressed && slashAttackTimer <= 0)
+        {
+            SlashAttack();
+            Debug.Log("Slash");
+            slashAttackTimer = slashAttackCooldown;
         }
     }
 
@@ -79,18 +135,16 @@ public class PlayerCombat : MonoBehaviour
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangAttackTimer <= 0)
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && boomerangSpawnerCoroutine == null)
         {
-            Debug.Log("Boomerang");
-            boomerangAttackTimer = boomerangAttackCooldown;
+            boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }
     }
-
     void HandleCooldowns()
     {
-        if (meleeAttackTimer > 0)
+        if (slashAttackTimer > 0)
         {
-            meleeAttackTimer -= Time.deltaTime;
+            slashAttackTimer -= Time.deltaTime;
         }
 
         if (kickAttackTimer > 0)

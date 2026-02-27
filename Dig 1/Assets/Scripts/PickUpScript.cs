@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,14 +17,20 @@ public class PickUpScript : MonoBehaviour
 
     [SerializeField] bool isInteracting;
 
-    InputAction interactAction; 
+    InputAction interactAction;
+
+    [SerializeField] GameObject newLegRig;
+    [SerializeField] GameObject oldLegRig;
+    [SerializeField] GameObject newEarRig; 
+
 
     void Start()
     {
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
-        
+        newLegRig.SetActive(false);
+
         if (bomerangImage != null)
         {
             bomerangImage.SetActive(false);
@@ -53,6 +60,11 @@ public class PickUpScript : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true) 
         {
             hasLeg = true;
+            newLegRig.SetActive(true); 
+            oldLegRig.SetActive(false);
+            Animator animator = GetComponentInChildren<Animator>(); 
+            animator.SetBool("HasLeg", true);
+            animator.SetTrigger("HasLeg");
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)  
@@ -69,6 +81,9 @@ public class PickUpScript : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    // Leg Rig 
+
 
     public bool GetHasLeg()
     {
