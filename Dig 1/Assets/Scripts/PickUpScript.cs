@@ -23,8 +23,9 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] GameObject newLegRig;
     [SerializeField] GameObject oldLegRig;
     [SerializeField] GameObject newEarRig;
-    [SerializeField] GameObject newEyeRig; 
+    [SerializeField] GameObject newEyeRig;
 
+    [SerializeField] Animator animator;
 
     void Start()
     {
@@ -34,6 +35,8 @@ public class PickUpScript : MonoBehaviour
         newLegRig.transform.localScale = new Vector3(0, 0, 0);  
         newEyeRig.transform.localScale = new Vector3(0, 0, 0);
         newEarRig.transform.localScale = new Vector3(0, 0, 0);
+
+       animator = GetComponent<Animator>();
 
 
         if (bomerangImage != null)
@@ -65,9 +68,8 @@ public class PickUpScript : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true) 
         {
             hasLeg = true;
-            Animator animator = GetComponentInChildren<Animator>(); 
+           
             animator.SetBool("HasLeg", true);
-            animator.SetTrigger("HasLeg");
             newLegRig.transform.localScale = new Vector3(1, 1, 1);
             oldLegRig.transform.localScale = new Vector3(0, 0, 0);
 
