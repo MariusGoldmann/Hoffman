@@ -105,7 +105,7 @@ public class PlayerCombat : MonoBehaviour
         {
             Vector2 direction = (transform.position - boomerang.transform.position).normalized;
 
-            boomerangRB.linearVelocity = Vector2.Lerp(boomerangRB.linearVelocity, direction * boomerangReturnAttackForce, 10f * Time.deltaTime);
+            boomerangRB.linearVelocity = Vector2.Lerp(boomerangRB.linearVelocity, direction * boomerangReturnAttackForce, 8f * Time.deltaTime);
 
             yield return null;
         }

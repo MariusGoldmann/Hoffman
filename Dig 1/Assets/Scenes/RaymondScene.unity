@@ -505,11 +505,15 @@ PrefabInstance:
       objectReference: {fileID: 793084824}
     - target: {fileID: 5082171930118937187, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: boomerangAttackForce
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5082171930118937187, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: boomerangAttackLengh
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5082171930118937187, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+      propertyPath: boomerangReturnAttackForce
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5676416523015530182, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: m_LocalRotation.w
