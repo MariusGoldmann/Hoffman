@@ -83,14 +83,18 @@ public class PlayerCombat : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Boomerang"))
         {
-            Debug.Log("Hit booma");
-            collision.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-boomerangDamage);
+            Debug.Log("Boomerang picked up");
+            GameObject boomerang = collision.gameObject;
+
+            Destroy(boomerang);
+
+            boomerangAttackTimer = boomerangAttackCooldown;
         }
     }
 
     IEnumerator BoomerangSpawner()
     {
-        Vector3 spawnPosition = new Vector3(transform.position.x + 1 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
+        Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
 
 
         GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
