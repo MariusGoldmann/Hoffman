@@ -29,9 +29,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangAttackForce;
     [SerializeField] float boomerangReturnAttackForce;
 
-    [Header("Combat State")]
-    [SerializeField] CombatStates combatState;
-
     Coroutine boomerangSpawnerCoroutine;
 
     // Script references
@@ -55,17 +52,6 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
-        switch (combatState)
-        {
-            case CombatStates.Slash:
-                break;
-
-            case CombatStates.Kick:
-                break;
-
-            case CombatStates.Boomerang:
-                break;
-        }
         HandleCooldowns();
     }
 
@@ -140,8 +126,7 @@ public class PlayerCombat : MonoBehaviour
         {
             SlashAttack();
             Debug.Log("Slash");
-            combatState = CombatStates.Slash;
-            animator.SetBool("Slash", combatState == CombatStates.Slash);
+            animator.SetTrigger("Slash");
             slashAttackTimer = slashAttackCooldown;
         }
     }
@@ -152,8 +137,7 @@ public class PlayerCombat : MonoBehaviour
         {
             KickAttack();
             Debug.Log("Kick");
-            combatState = CombatStates.Kick;
-            animator.SetBool("Kick", combatState == CombatStates.Kick);
+            animator.SetTrigger("Kick");
             kickAttackTimer = kickAttackCooldown;
         }
     }
@@ -181,13 +165,6 @@ public class PlayerCombat : MonoBehaviour
         {
             boomerangAttackTimer -= Time.deltaTime;
         }
-    }
-
-    public enum CombatStates
-    {
-        Slash,
-        Kick,
-        Boomerang,
     }
 
     public int GetBoomerangDamage()
