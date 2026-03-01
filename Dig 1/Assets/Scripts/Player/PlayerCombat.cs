@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerMovement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -28,17 +29,22 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangAttackForce;
     [SerializeField] float boomerangReturnAttackForce;
 
-    Coroutine boomerangSpawnerCoroutine;
+    [Header("Combat State")]
+    [SerializeField] CombatStates combatState;
 
-    // GameObjects
-    [SerializeField] GameObject boomerangPrefab;
+    Coroutine boomerangSpawnerCoroutine;
 
     // Script references
     [SerializeField] PlayerMovement playerMovement;
 
+    // Component references
+    [SerializeField] GameObject boomerangPrefab;
+    Animator animator;
+
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        animator = GetComponentInChildren<Animator>();
     }
     void Start()
     {
@@ -49,6 +55,17 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
+        switch (combatState)
+        {
+            case CombatStates.Slash:
+                break;
+
+            case CombatStates.Kick:
+                break;
+
+            case CombatStates.Boomerang:
+                break;
+        }
         HandleCooldowns();
     }
 
@@ -123,6 +140,8 @@ public class PlayerCombat : MonoBehaviour
         {
             SlashAttack();
             Debug.Log("Slash");
+            combatState = CombatStates.Slash;
+            animator.SetBool("Slash", combatState == CombatStates.Slash);
             slashAttackTimer = slashAttackCooldown;
         }
     }
@@ -133,6 +152,8 @@ public class PlayerCombat : MonoBehaviour
         {
             KickAttack();
             Debug.Log("Kick");
+            combatState = CombatStates.Kick;
+            animator.SetBool("Kick", combatState == CombatStates.Kick);
             kickAttackTimer = kickAttackCooldown;
         }
     }
@@ -160,6 +181,18 @@ public class PlayerCombat : MonoBehaviour
         {
             boomerangAttackTimer -= Time.deltaTime;
         }
+    }
+
+    public enum CombatStates
+    {
+        Slash,
+        Kick,
+        Boomerang,
+    }
+
+    public int GetBoomerangDamage()
+    {
+        return boomerangDamage;
     }
 
     private void OnDrawGizmos()
