@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerMovement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -30,15 +31,17 @@ public class PlayerCombat : MonoBehaviour
 
     Coroutine boomerangSpawnerCoroutine;
 
-    // GameObjects
-    [SerializeField] GameObject boomerangPrefab;
-
     // Script references
     [SerializeField] PlayerMovement playerMovement;
+
+    // Component references
+    [SerializeField] GameObject boomerangPrefab;
+    Animator animator;
 
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        animator = GetComponentInChildren<Animator>();
     }
     void Start()
     {
@@ -83,14 +86,18 @@ public class PlayerCombat : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Boomerang"))
         {
-            Debug.Log("Hit booma");
-            collision.gameObject.GetComponent<EnemyHealth>().ChangeHealth(-boomerangDamage);
+            Debug.Log("Boomerang picked up");
+            GameObject boomerang = collision.gameObject;
+
+            Destroy(boomerang);
+
+            boomerangAttackTimer = boomerangAttackCooldown;
         }
     }
 
     IEnumerator BoomerangSpawner()
     {
-        Vector3 spawnPosition = new Vector3(transform.position.x + 1 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
+        Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
 
 
         GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
@@ -119,6 +126,7 @@ public class PlayerCombat : MonoBehaviour
         {
             SlashAttack();
             Debug.Log("Slash");
+            animator.SetTrigger("Slash");
             slashAttackTimer = slashAttackCooldown;
         }
     }
@@ -129,6 +137,7 @@ public class PlayerCombat : MonoBehaviour
         {
             KickAttack();
             Debug.Log("Kick");
+            animator.SetTrigger("Kick");
             kickAttackTimer = kickAttackCooldown;
         }
     }
@@ -156,6 +165,11 @@ public class PlayerCombat : MonoBehaviour
         {
             boomerangAttackTimer -= Time.deltaTime;
         }
+    }
+
+    public int GetBoomerangDamage()
+    {
+        return boomerangDamage;
     }
 
     private void OnDrawGizmos()
