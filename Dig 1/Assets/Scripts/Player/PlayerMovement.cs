@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Script references
     PickUpScript pickUpScript;
+    KnockbackScript knockbackScript;
 
     //Component references
     Rigidbody2D playerRB;
@@ -47,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         pickUpScript = GetComponent<PickUpScript>();
+        knockbackScript = FindFirstObjectByType<KnockbackScript>();
     }
 
     void Start()
@@ -88,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
 
             case MovingStates.CrouchWalking:
                 HandleCrouch();
+                break;
+
+            case MovingStates.KnockBack:
                 break;
         }
 
@@ -215,6 +220,11 @@ public class PlayerMovement : MonoBehaviour
         {
             movingState = MovingStates.CrouchWalking;
         }
+
+        if (knockbackScript.GetIsKnockback())
+        {
+            movingState = MovingStates.KnockBack;
+        }
     }
     void HandleAnimations()
     {
@@ -313,6 +323,7 @@ public class PlayerMovement : MonoBehaviour
         Falling,
         Crouching,
         CrouchWalking,
+        KnockBack,
     }
 
     public float GetFacingDirection() // Getter
