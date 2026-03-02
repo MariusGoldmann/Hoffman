@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        movingState = MovingStates.Idle;
+        movingState = MovingStates.OneLegIdle;
     }
 
     void Update()
