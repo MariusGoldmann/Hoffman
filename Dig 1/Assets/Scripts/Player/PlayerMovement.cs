@@ -237,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetBool("IsWalking", movingState == MovingStates.Walking);
 
-        animator.SetBool("IsWalking", movingState == MovingStates.OneLegWalking);
+        animator.SetBool("OneLegWalking", movingState == MovingStates.OneLegWalking);
 
         animator.SetBool("IsRunning", movingState == MovingStates.Running);
 
