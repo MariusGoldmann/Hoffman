@@ -100,12 +100,20 @@ public class PlayerMovement : MonoBehaviour
         HandleCoyoteTime();
         HandleAnimations();
         HandleStates();
+        Knockback();
     }
 
     void FixedUpdate()
     {
-        HandleMovement();
-        HandleJump();
+        if (!knockbackScript.GetIsKnockback())
+        {
+
+        }
+        else
+        {
+            HandleMovement();
+            HandleJump();
+        }
     }
 
     void HandleMovement()
@@ -163,6 +171,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
+
+    void Knockback()
+    {
+        if (knockbackScript.GetIsKnockback())
+        {
+
         }
     }
 

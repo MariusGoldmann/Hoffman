@@ -150,7 +150,7 @@ MonoBehaviour:
   walkSpeed: 10
   runSpeed: 20
   crouchSpeed: 5
-  jumpForce: 35
+  jumpForce: 45
   jumpCutMultiplier: 0.5
   coyoteTime: 0.1
   coyoteTimeCounter: 0
@@ -210,11 +210,11 @@ MonoBehaviour:
   boomerangDamage: 5
   boomerangAttackCooldown: 5
   boomerangAttackTimer: 0
-  boomerangAttackLengh: 0
-  boomerangAttackForce: 0
-  boomerangReturnAttackForce: 0
-  boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
+  boomerangAttackLengh: 1
+  boomerangAttackForce: 5
+  boomerangReturnAttackForce: 10
   playerMovement: {fileID: 0}
+  boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
 --- !u!114 &-4973419316017505786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +230,7 @@ MonoBehaviour:
   maxPlayerHealth: 20
   playerHealTickSpeed: 0.5
   healOverTime: 0
+  currentPlayerHealth: 0
 --- !u!1 &6431615454298918249
 GameObject:
   m_ObjectHideFlags: 0
