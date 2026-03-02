@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 315493221406685201}
   - component: {fileID: 5082171930118937187}
   - component: {fileID: -4973419316017505786}
+  - component: {fileID: 6529638970767183344}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -183,6 +184,7 @@ MonoBehaviour:
   oldLegRig: {fileID: 4270162292136251532}
   newEarRig: {fileID: 968941287807734689}
   newEyeRig: {fileID: 1653851881144929444}
+  hasLegAnim: 0
   animator: {fileID: 0}
 --- !u!114 &5082171930118937187
 MonoBehaviour:
@@ -214,6 +216,7 @@ MonoBehaviour:
   boomerangAttackForce: 5
   boomerangReturnAttackForce: 10
   playerMovement: {fileID: 0}
+  pickUpScript: {fileID: 0}
   boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
 --- !u!114 &-4973419316017505786
 MonoBehaviour:
@@ -231,6 +234,22 @@ MonoBehaviour:
   playerHealTickSpeed: 0.5
   healOverTime: 0
   currentPlayerHealth: 0
+--- !u!114 &6529638970767183344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278727348191356785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8eb8f12c5457304f9197a85f67aab7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
+  knockbackLength: 0.2
+  hitDirectionForce: 10
+  additionalDirectionalForce: 5
+  someOtherForce: 7.5
 --- !u!1 &6431615454298918249
 GameObject:
   m_ObjectHideFlags: 0
