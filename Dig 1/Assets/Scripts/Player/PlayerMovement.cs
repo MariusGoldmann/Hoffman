@@ -338,6 +338,11 @@ public class PlayerMovement : MonoBehaviour
         return facingDirection;
     }
 
+    public Vector2 GetMoveInput()
+    {
+        return moveInput;
+    }
+
     void OnDrawGizmos() // For debugging IsGrounded
     {
         Gizmos.color = Color.yellow;
