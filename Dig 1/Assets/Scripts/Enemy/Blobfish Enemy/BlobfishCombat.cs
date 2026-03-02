@@ -19,7 +19,7 @@ public class BlobfishCombat : MonoBehaviour
     bool poison;
     [SerializeField] bool expanding=false;
     [SerializeField] bool shrinking=false;
-   '
+
     LayerMask playerLayer;
     PlayerHealth playerHealth;
     KnockbackScript knockbackScript;
