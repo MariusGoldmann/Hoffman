@@ -33,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
 
     // Script references
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] PickUpScript pickUpScript;
 
     // Component references
     [SerializeField] GameObject boomerangPrefab;
@@ -41,6 +42,8 @@ public class PlayerCombat : MonoBehaviour
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        pickUpScript = GetComponent<PickUpScript>();
+
         animator = GetComponentInChildren<Animator>();
     }
     void Start()
@@ -122,7 +125,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnSlash(InputValue slashbutton)
     {
-        if (slashbutton.isPressed && slashAttackTimer <= 0)
+        if (slashbutton.isPressed && slashAttackTimer <= 0 && pickUpScript.GetHasLeg())
         {
             SlashAttack();
             Debug.Log("Slash");
@@ -133,7 +136,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnKick(InputValue kickButton)
     {
-        if (kickButton.isPressed && kickAttackTimer <= 0)
+        if (kickButton.isPressed && kickAttackTimer <= 0 && pickUpScript.GetHasLeg())
         {
             KickAttack();
             Debug.Log("Kick");
@@ -144,7 +147,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && boomerangSpawnerCoroutine == null)
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasLeg())
         {
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }

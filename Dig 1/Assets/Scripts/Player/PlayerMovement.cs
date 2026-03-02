@@ -100,19 +100,18 @@ public class PlayerMovement : MonoBehaviour
         HandleCoyoteTime();
         HandleAnimations();
         HandleStates();
-        Knockback();
     }
 
     void FixedUpdate()
     {
         if (!knockbackScript.GetIsKnockback())
         {
-
+            HandleMovement();
+            HandleJump();
         }
         else
         {
-            HandleMovement();
-            HandleJump();
+
         }
     }
 
@@ -174,14 +173,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Knockback()
-    {
-        if (knockbackScript.GetIsKnockback())
-        {
-
-        }
-    }
-
     void HandleStates()
     {
         if(IsGrounded())
@@ -192,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsGrounded", false);
         }
 
-        if (IsGrounded() && moveInput.x == 0)
+        if (IsGrounded() && moveInput.x == 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.Idle;
         }
@@ -202,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.OneLegIdle;
         }
 
-        if (Mathf.Abs(moveInput.x) > 0)
+        if (Mathf.Abs(moveInput.x) > 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.Walking;
         }
@@ -212,12 +203,12 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.OneLegWalking;
         }
 
-        if (Mathf.Abs(moveInput.x) > 0 && runPressed)
+        if (Mathf.Abs(moveInput.x) > 0 && runPressed && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.Running;
         }
 
-        if (playerRB.linearVelocityY > 0)
+        if (playerRB.linearVelocityY > 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.Jumping;
         }
@@ -227,12 +218,12 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Falling;
         }
 
-        if (crouchPressed == true && IsGrounded())
+        if (crouchPressed == true && IsGrounded() && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.Crouching;
         }
 
-        if (crouchPressed == true && IsGrounded() && Mathf.Abs(moveInput.x) > 0)
+        if (crouchPressed == true && IsGrounded() && Mathf.Abs(moveInput.x) > 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.CrouchWalking;
         }
