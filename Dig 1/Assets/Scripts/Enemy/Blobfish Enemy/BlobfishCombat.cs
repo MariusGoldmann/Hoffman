@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlobfishCombat : MonoBehaviour
@@ -20,22 +19,23 @@ public class BlobfishCombat : MonoBehaviour
     bool poison;
     [SerializeField] bool expanding=false;
     [SerializeField] bool shrinking=false;
-    [SerializeField] bool isKnockback = false;
+   '
     LayerMask playerLayer;
-
     PlayerHealth playerHealth;
+    KnockbackScript knockbackScript;
 
     private void Start()
     {
         playerLayer = LayerMask.GetMask("Player");
         playerHealth = FindAnyObjectByType<PlayerHealth>();
+        knockbackScript = GetComponent<KnockbackScript>();
 
         normalRadius = bodyCollider.radius;
     }
 
     private void FixedUpdate()
     {
-        if (bodyCollider.IsTouchingLayers(playerLayer) && !isKnockback)
+        if (bodyCollider.IsTouchingLayers(playerLayer) && !knockbackScript.GetIsKnockback())
         {
             playerHealth.ChangeHealth(-collisionDamage);
             if (!poison)
@@ -47,18 +47,12 @@ public class BlobfishCombat : MonoBehaviour
                 StopCoroutine(Poison());
                 StartCoroutine(Poison());
             }
-            StartCoroutine(Knockback());
+            //StartCoroutine(Knockback());
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && !expanding) StartCoroutine(Expand());
-    }    
-    IEnumerator Knockback()
-    {
-        isKnockback=true;
-        yield return new WaitForSeconds(1);
-        isKnockback=false;
     }
     IEnumerator Expand()
     {
