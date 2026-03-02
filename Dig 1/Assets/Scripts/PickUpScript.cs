@@ -68,6 +68,7 @@ public class PickUpScript : MonoBehaviour
             hasLeg = true;
            
             animator.SetBool("HasLeg", true);
+            Debug.Log("Has Leg");
             newLegRig.transform.localScale = new Vector3(1, 1, 1);
             oldLegRig.transform.localScale = new Vector3(0, 0, 0);
 
@@ -78,7 +79,7 @@ public class PickUpScript : MonoBehaviour
             hasEye = true;
             newEyeRig.transform.localScale = new Vector3(1, 1, 1);
 
-            //eyeTabCloud.SetActive(false);
+            eyeTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("Boomerang") && isInteracting == true)
