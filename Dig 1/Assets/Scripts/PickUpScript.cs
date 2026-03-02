@@ -35,7 +35,6 @@ public class PickUpScript : MonoBehaviour
         hasBoomerang = false;
         hasLegAnim = false;
 
-        newLegRig.transform.localScale = new Vector3(0, 0, 0);
         newEyeRig.transform.localScale = new Vector3(0, 0, 0);
         newEarRig.transform.localScale = new Vector3(0, 0, 0);
 
@@ -69,10 +68,16 @@ public class PickUpScript : MonoBehaviour
         if (hasLegAnim == true)
         {
             animator.SetBool("HasLeg", true);
+
+            newLegRig.transform.localScale = new Vector3(1, 1, 1);
+            oldLegRig.transform.localScale = new Vector3(0, 0, 0);
         }
         else
         {
             animator.SetBool("HasLeg", false);
+
+            newLegRig.transform.localScale = new Vector3(0, 0, 0);
+            oldLegRig.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -83,8 +88,6 @@ public class PickUpScript : MonoBehaviour
             hasLeg = true;
             hasLegAnim = true;
 
-            newLegRig.transform.localScale = new Vector3(1, 1, 1);
-            oldLegRig.transform.localScale = new Vector3(0, 0, 0);
 
             Destroy(collision.gameObject);
         }
