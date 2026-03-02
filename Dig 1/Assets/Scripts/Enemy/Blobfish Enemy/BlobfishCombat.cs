@@ -5,6 +5,7 @@ public class BlobfishCombat : MonoBehaviour
 {
     [Header("Expansion")]
     [SerializeField] CircleCollider2D bodyCollider;
+    [SerializeField] Transform playerTransform;
     [SerializeField] float expandedRadius = 2f;
     [SerializeField] int collisionDamage = 2;
     [SerializeField] int maxTimeExpanded = 2;
@@ -23,6 +24,7 @@ public class BlobfishCombat : MonoBehaviour
     LayerMask playerLayer;
     PlayerHealth playerHealth;
     KnockbackScript knockbackScript;
+    
 
     private void Start()
     {
@@ -37,7 +39,8 @@ public class BlobfishCombat : MonoBehaviour
     {
         if (bodyCollider.IsTouchingLayers(playerLayer) && !knockbackScript.GetIsKnockback())
         {
-            playerHealth.ChangeHealth(-collisionDamage);
+            Vector2 playerDirection = playerTransform.position - transform.position;
+            playerHealth.ChangeHealth(-collisionDamage, playerDirection);
             if (!poison)
             {
                 StartCoroutine(Poison());
@@ -47,7 +50,6 @@ public class BlobfishCombat : MonoBehaviour
                 StopCoroutine(Poison());
                 StartCoroutine(Poison());
             }
-            //StartCoroutine(Knockback());
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -86,7 +88,7 @@ public class BlobfishCombat : MonoBehaviour
         for (int i = 0; i < poisonTickAmount; i++)
         {
             yield return new WaitForSeconds(poisionTickSpeed);
-            playerHealth.ChangeHealth(-poisonTickDamage);
+            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero);
         }
         poison = false;
     }

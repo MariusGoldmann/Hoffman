@@ -547,6 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 0
   maxEnemyHealth: 5
+  playerCombat: {fileID: 0}
 --- !u!1001 &1124759312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -837,6 +838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 0
   maxEnemyHealth: 5
+  playerCombat: {fileID: 0}
 --- !u!114 &1240853707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobfishCombat
   bodyCollider: {fileID: 1240853702}
+  playerTransform: {fileID: 0}
   expandedRadius: 2
   collisionDamage: 2
   maxTimeExpanded: 2
@@ -858,7 +861,6 @@ MonoBehaviour:
   poisionTickSpeed: 1.5
   expanding: 0
   shrinking: 0
-  isKnockback: 0
 --- !u!1001 &1390473421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1129,7 +1131,7 @@ PrefabInstance:
     - target: {fileID: 1891334873788177499, guid: 6a07d75ddf6aed744a219771e704ac76, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1014976037}
     - target: {fileID: 3690491964236662844, guid: 6a07d75ddf6aed744a219771e704ac76, type: 3}
       propertyPath: m_Name
       value: BasicEnemy (0)
