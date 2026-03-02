@@ -147,7 +147,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasLeg())
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang())
         {
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }
