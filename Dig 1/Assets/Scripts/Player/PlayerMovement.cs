@@ -203,12 +203,12 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.OneLegWalking;
         }
 
-        if (Mathf.Abs(moveInput.x) > 0 && runPressed && pickUpScript.GetHasLeg())
+        if (Mathf.Abs(moveInput.x) > 0 && runPressed)
         {
             movingState = MovingStates.Running;
         }
 
-        if (playerRB.linearVelocityY > 0 && pickUpScript.GetHasLeg())
+        if (playerRB.linearVelocityY > 0)
         {
             movingState = MovingStates.Jumping;
         }
@@ -218,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Falling;
         }
 
-        if (crouchPressed == true && IsGrounded() && pickUpScript.GetHasLeg())
+        if (crouchPressed == true && IsGrounded())
         {
             movingState = MovingStates.Crouching;
         }
@@ -257,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnRun(InputValue value)
     {
-        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0)
+        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0 && pickUpScript.GetHasLeg())
         {
             runPressed = true;
         }
@@ -269,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && pickUpScript.GetHasLeg())
         {
             if (coyoteTimeCounter > 0 && !crouchPressed)
             {
@@ -287,7 +287,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCrouch(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && pickUpScript.GetHasLeg())
         {
             if (IsGrounded())
             {

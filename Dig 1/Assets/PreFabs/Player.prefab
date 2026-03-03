@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   bomerangImage: {fileID: 0}
-  hasLeg: 0
+  hasLeg: 1
   hasEye: 0
   hasBoomerang: 0
   eyeTabCloud: {fileID: 0}
@@ -213,8 +213,8 @@ MonoBehaviour:
   boomerangAttackCooldown: 5
   boomerangAttackTimer: 0
   boomerangAttackLengh: 1
-  boomerangAttackForce: 5
-  boomerangReturnAttackForce: 10
+  boomerangAttackForce: 7
+  boomerangReturnAttackForce: 13
   playerMovement: {fileID: 0}
   pickUpScript: {fileID: 0}
   boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
