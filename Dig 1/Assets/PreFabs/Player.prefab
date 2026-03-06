@@ -102,8 +102,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.090370655, y: 0.043684244}
-  m_Size: {x: 1.1941023, y: 2.867858}
+  m_Offset: {x: 0.1, y: -0.15}
+  m_Size: {x: 1, y: 2.7}
   m_Direction: 0
 --- !u!114 &1197925086779408942
 MonoBehaviour:
@@ -160,7 +160,7 @@ MonoBehaviour:
   jumpRelesed: 0
   crouchPressed: 0
   facingDirection: 1
-  movingState: 0
+  movingState: 1
 --- !u!114 &315493221406685201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,22 +198,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab5ade4392ac8e44886a2642388aed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackPoint: {fileID: 6432162865010492417}
   attackRadius: 0
+  attackPoint: {fileID: 6432162865010492417}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   slashDamage: 1
-  slashAttackCooldown: 1
-  slashAttackTimer: 0
+  slashCooldown: 1
+  slashTimer: 0
   kickDamage: 2
-  kickAttackCooldown: 2
-  kickAttackTimer: 0
+  kickCooldown: 2
+  kickTimer: 0
   boomerangDamage: 5
-  boomerangAttackCooldown: 5
-  boomerangAttackTimer: 0
-  boomerangAttackLengh: 1
-  boomerangAttackForce: 7
+  boomerangCooldown: 5
+  boomerangTimer: 0
+  boomerangLengh: 0
+  boomerangForce: 0
   boomerangReturnAttackForce: 13
   playerMovement: {fileID: 0}
   pickUpScript: {fileID: 0}

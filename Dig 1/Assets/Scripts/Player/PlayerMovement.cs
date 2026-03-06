@@ -149,14 +149,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (crouchPressed == true)
         {
-            playerCollider.offset = new Vector2(0, -0.58f);
-            playerCollider.size = new Vector2(1, 1.86f);
+            playerCollider.offset = new Vector2(0.1f, -0.15f);
+            playerCollider.size = new Vector2(1, 2.7f);
 
             moveSpeed = crouchSpeed;
         }
         else
         {
-            playerCollider.offset = new Vector2(0, -0.15f);
+            playerCollider.offset = new Vector2(0.1f, -0.15f);
             playerCollider.size = new Vector2(1, 2.7f);
         }
     }
