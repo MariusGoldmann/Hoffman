@@ -81,10 +81,11 @@ public class PlayerCombat : MonoBehaviour
         
         while (boomerangSpeed > 0.1f)
         {
-            boomerangSpeed = Mathf.Lerp(boomerangSpeed, 0, 8 * Time.deltaTime);
+            boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() * boomerangSpeed, boomerangRB.linearVelocityY);
 
-            boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() * boomerangSpeed, 0);
+            boomerangSpeed -= Time.deltaTime * 100;
 
+            Debug.Log(boomerangSpeed);
             yield return null;
         }
 
