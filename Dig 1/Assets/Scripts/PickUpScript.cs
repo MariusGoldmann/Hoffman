@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class PickUpScript : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class PickUpScript : MonoBehaviour
 
     [SerializeField] bool hasLeg;
     [SerializeField] bool hasEye;
-    [SerializeField] bool hasEar; 
+    // [SerializeField] bool hasEar; 
     [SerializeField] bool hasBoomerang;
 
     [SerializeField] GameObject eyeTabCloud;
@@ -24,6 +24,7 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] GameObject oldLegRig;
     [SerializeField] GameObject newEarRig;
     [SerializeField] GameObject newEyeRig;
+    [SerializeField] public bool hasLegAnim;
 
     [SerializeField] Animator animator;
 
@@ -32,11 +33,12 @@ public class PickUpScript : MonoBehaviour
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
-        newLegRig.transform.localScale = new Vector3(0, 0, 0);  
+        hasLegAnim = false;
+
         newEyeRig.transform.localScale = new Vector3(0, 0, 0);
         newEarRig.transform.localScale = new Vector3(0, 0, 0);
 
-       animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
 
         if (bomerangImage != null)
@@ -61,21 +63,35 @@ public class PickUpScript : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (hasLegAnim == true)
+        {
+            animator.SetBool("HasLeg", true);
 
+            newLegRig.transform.localScale = new Vector3(1, 1, 1);
+            oldLegRig.transform.localScale = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            animator.SetBool("HasLeg", false);
+
+            newLegRig.transform.localScale = new Vector3(0, 0, 0);
+            oldLegRig.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true) 
+        if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true)
         {
             hasLeg = true;
-           
-            animator.SetBool("HasLeg", true);
-            newLegRig.transform.localScale = new Vector3(1, 1, 1);
-            oldLegRig.transform.localScale = new Vector3(0, 0, 0);
+            hasLegAnim = true;
+
 
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)  
+        if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)
         {
             hasEye = true;
             newEyeRig.transform.localScale = new Vector3(1, 1, 1);
@@ -91,16 +107,13 @@ public class PickUpScript : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if(collision.gameObject.CompareTag("PlayerEar") && isInteracting == true)
+        if (collision.gameObject.CompareTag("PlayerEar") && isInteracting == true)
         {
-            hasEar = true;
+            // hasEar = true;
             newEarRig.transform.localScale = new Vector3(1, 1, 1);
             Destroy(collision.gameObject);
         }
     }
-
-    // Leg Rig 
-
 
     public bool GetHasLeg()
     {

@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Script references
     PickUpScript pickUpScript;
+    KnockbackScript knockbackScript;
 
     //Component references
     Rigidbody2D playerRB;
@@ -47,11 +48,12 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         pickUpScript = GetComponent<PickUpScript>();
+        knockbackScript = FindFirstObjectByType<KnockbackScript>();
     }
 
     void Start()
     {
-        movingState = MovingStates.Idle;
+        movingState = MovingStates.OneLegIdle;
     }
 
     void Update()
@@ -89,6 +91,9 @@ public class PlayerMovement : MonoBehaviour
             case MovingStates.CrouchWalking:
                 HandleCrouch();
                 break;
+
+            case MovingStates.KnockBack:
+                break;
         }
 
         Flip();
@@ -99,8 +104,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleMovement();
-        HandleJump();
+        if (!knockbackScript.GetIsKnockback())
+        {
+            HandleMovement();
+            HandleJump();
+        }
+        else
+        {
+
+        }
     }
 
     void HandleMovement()
@@ -171,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsGrounded", false);
         }
 
-        if (IsGrounded() && moveInput.x == 0)
+        if (IsGrounded() && moveInput.x == 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.Idle;
         }
@@ -181,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.OneLegIdle;
         }
 
-        if (Mathf.Abs(moveInput.x) > 0)
+        if (Mathf.Abs(moveInput.x) > 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.Walking;
         }
@@ -211,16 +223,21 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Crouching;
         }
 
-        if (crouchPressed == true && IsGrounded() && Mathf.Abs(moveInput.x) > 0)
+        if (crouchPressed == true && IsGrounded() && Mathf.Abs(moveInput.x) > 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.CrouchWalking;
+        }
+
+        if (knockbackScript.GetIsKnockback())
+        {
+            movingState = MovingStates.KnockBack;
         }
     }
     void HandleAnimations()
     {
         animator.SetBool("IsWalking", movingState == MovingStates.Walking);
 
-        animator.SetBool("IsWalking", movingState == MovingStates.OneLegWalking);
+        animator.SetBool("OneLegWalking", movingState == MovingStates.OneLegWalking);
 
         animator.SetBool("IsRunning", movingState == MovingStates.Running);
 
@@ -240,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnRun(InputValue value)
     {
-        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0)
+        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0 && pickUpScript.GetHasLeg())
         {
             runPressed = true;
         }
@@ -252,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && pickUpScript.GetHasLeg())
         {
             if (coyoteTimeCounter > 0 && !crouchPressed)
             {
@@ -270,7 +287,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCrouch(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && pickUpScript.GetHasLeg())
         {
             if (IsGrounded())
             {
@@ -313,11 +330,17 @@ public class PlayerMovement : MonoBehaviour
         Falling,
         Crouching,
         CrouchWalking,
+        KnockBack,
     }
 
-    public float GetFacingDirection() // Getter
+    public float GetFacingDirection()
     {
         return facingDirection;
+    }
+
+    public Vector2 GetMoveInput()
+    {
+        return moveInput;
     }
 
     void OnDrawGizmos() // For debugging IsGrounded
