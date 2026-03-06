@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,7 +27,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangTimer;
     [SerializeField] float boomerangLengh;
     [SerializeField] float boomerangForce;
-    [SerializeField] float boomerangReturnAttackForce;
+    [SerializeField] float boomerangReturnForce;
 
     // Private variables
     Coroutine boomerangSpawnerCoroutine;
@@ -75,16 +76,24 @@ public class PlayerCombat : MonoBehaviour
         GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
         
         Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+
+        float boomerangSpeed = boomerangForce;
         
-        boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() * boomerangForce, 0);
-        
+        while (boomerangSpeed > 0.1f)
+        {
+            boomerangSpeed = Mathf.Lerp(boomerangSpeed, 0, 8 * Time.deltaTime);
+
+            boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() * boomerangSpeed, 0);
+
+            yield return null;
+        }
+
         yield return new WaitForSeconds(boomerangLengh);
         
         while (boomerangRB != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f)
         {
-            Vector2 direction = (transform.position - boomerang.transform.position).normalized;
-
-            boomerangRB.linearVelocity = Vector2.Lerp(boomerangRB.linearVelocity, direction * boomerangReturnAttackForce, 8f * Time.deltaTime);
+            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position , transform.position, boomerangReturnForce * Time.deltaTime);
+            boomerangReturnForce += Time.deltaTime * 40;
 
             yield return null;
         }
