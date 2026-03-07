@@ -78,22 +78,25 @@ public class PlayerCombat : MonoBehaviour
         Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
 
         float boomerangSpeed = boomerangForce;
+        float boomerangReturnSpeed = boomerangReturnForce;
+        int boomerangDirection = playerMovement.GetFacingDirection();
         
-        while (boomerangSpeed > 0.1f)
+        while (boomerangSpeed > 1)
         {
-            boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() *  boomerangSpeed, boomerangRB.linearVelocityY);
-            boomerangSpeed = Mathf.Lerp(boomerangSpeed, 0, 3 * Time.deltaTime);
+            boomerangRB.linearVelocity = new Vector2(boomerangDirection *  boomerangSpeed, boomerangRB.linearVelocityY);
+            boomerangSpeed = Mathf.Lerp(boomerangSpeed, 0, 1 * Time.deltaTime);
 
             Debug.Log(boomerangSpeed);
             yield return null;
         }
 
-        yield return new WaitForSeconds(boomerangLengh);
+       // yield return new WaitForSeconds(boomerangLengh);
         
         while (boomerangRB != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f)
         {
-            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position , transform.position, boomerangReturnForce * Time.deltaTime);
-            boomerangReturnForce += Time.deltaTime * 40;
+            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position , transform.position, boomerangReturnSpeed * Time.deltaTime);
+            boomerangReturnSpeed += 50 * Time.deltaTime;
+
 
             yield return null;
         }

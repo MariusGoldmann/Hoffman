@@ -333,7 +333,7 @@ public class PlayerMovement : MonoBehaviour
         KnockBack,
     }
 
-    public float GetFacingDirection()
+    public int GetFacingDirection()
     {
         return facingDirection;
     }
