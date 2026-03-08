@@ -128,8 +128,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bbdda670385b74f92cf01b22984c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  flashColor: {r: 32, g: 32, b: 32, a: 1}
-  flashTime: 0.25
+  flashColor: {r: 2.9960787, g: 2.9960787, b: 2.9960787, a: 1}
+  flashTime: 0.2
+  flashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -20.530453
+      outSlope: -20.530453
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.035675436
+      value: 0.26756716
+      inSlope: -6.77915
+      outSlope: -6.77915
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.109221354
+    - serializedVersion: 3
+      time: 0.2
+      value: 0
+      inSlope: -1.6282846
+      outSlope: -1.6282846
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   spriteRenderer: {fileID: 0}
   material: {fileID: 0}
 --- !u!1001 &6454199103161335784
