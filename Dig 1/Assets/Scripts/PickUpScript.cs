@@ -68,8 +68,7 @@ public class PickUpScript : MonoBehaviour
         if (hasLegAnim == true)
         {
             animator.SetBool("HasLeg", true);
-            
-            Debug.Log("hasLegAnimTrue");
+
             newLegRig.transform.localScale = new Vector3(1, 1, 1);
             oldLegRig.transform.localScale = new Vector3(0, 0, 0);
         }
@@ -77,7 +76,6 @@ public class PickUpScript : MonoBehaviour
         {
             animator.SetBool("HasLeg", false);
 
-            Debug.Log("hasLegAnimFalse");   
             newLegRig.transform.localScale = new Vector3(0, 0, 0);
             oldLegRig.transform.localScale = new Vector3(1, 1, 1);
         }
