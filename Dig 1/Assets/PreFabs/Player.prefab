@@ -198,23 +198,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab5ade4392ac8e44886a2642388aed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackPoint: {fileID: 6432162865010492417}
   attackRadius: 0
+  attackPoint: {fileID: 6432162865010492417}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   slashDamage: 1
-  slashAttackCooldown: 1
-  slashAttackTimer: 0
+  slashCooldown: 1
+  slashTimer: 0
   kickDamage: 2
-  kickAttackCooldown: 2
-  kickAttackTimer: 0
+  kickCooldown: 2
+  kickTimer: 0
   boomerangDamage: 5
-  boomerangAttackCooldown: 5
-  boomerangAttackTimer: 0
-  boomerangAttackLengh: 1
-  boomerangAttackForce: 5
-  boomerangReturnAttackForce: 10
+  boomerangCooldown: 5
+  boomerangTimer: 0
+  boomerangForce: 26
+  boomerangReturnForce: 0
+  earlyReceiving: 0
+  boomerangAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.3908021
+      outSlope: -2.3908021
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.29581213
+      value: 0.29277167
+      inSlope: -1.40328
+      outSlope: -1.40328
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.4157579
+      outSlope: -0.4157579
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerMovement: {fileID: 0}
   pickUpScript: {fileID: 0}
   boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
