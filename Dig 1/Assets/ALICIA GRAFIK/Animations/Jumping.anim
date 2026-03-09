@@ -208,7 +208,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 26.778}
+        value: {x: 0, y: 0, z: 30.379}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -217,7 +217,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.31666666
-        value: {x: 0, y: 0, z: -4.158}
+        value: {x: 0, y: 0, z: 10.174}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -444,6 +444,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.31666666
         value: {x: 0, y: 0, z: -118.548}
+        inSlope: {x: 0, y: 0, z: 99.47}
+        outSlope: {x: 0, y: 0, z: 99.47}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 0.4
+        value: {x: 0, y: 0, z: -101.788}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -956,7 +965,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.31666666
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1830,7 +1839,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 26.778
+        value: 30.379
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1839,7 +1848,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.31666666
-        value: -4.158
+        value: 10.174
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -3112,6 +3121,15 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -3135,6 +3153,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.31666666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4
         value: 0
         inSlope: 0
         outSlope: 0
@@ -3166,6 +3193,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.31666666
         value: -118.548
+        inSlope: 99.47
+        outSlope: 99.47
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4
+        value: -101.788
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -3408,7 +3444,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/\xD6vre kropp/H\xF6ger Rosett 1"
+    path: "Nedre kropp/\xD6vre kropp"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3420,7 +3456,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/\xD6vre kropp/H\xF6ger Rosett 1"
+    path: "Nedre kropp/\xD6vre kropp"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3432,7 +3468,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/\xD6vre kropp/H\xF6ger Rosett 1"
+    path: "Nedre kropp/\xD6vre kropp"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3444,7 +3480,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1"
+    path: "Nedre kropp/H\xF6ger Ben 1/H\xF6ger Ben 2"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3456,7 +3492,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1"
+    path: "Nedre kropp/H\xF6ger Ben 1/H\xF6ger Ben 2"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3468,7 +3504,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1"
+    path: "Nedre kropp/H\xF6ger Ben 1/H\xF6ger Ben 2"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3480,7 +3516,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2/V\xE4nster Ben 3"
+    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3492,7 +3528,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2/V\xE4nster Ben 3"
+    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3504,7 +3540,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2/V\xE4nster Ben 3"
+    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3588,7 +3624,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/V\xE4nster ben 1"
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17/Kanin \xF6ra 3/Kanin
+      \xF6ra 4"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3600,7 +3637,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/V\xE4nster ben 1"
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17/Kanin \xF6ra 3/Kanin
+      \xF6ra 4"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3612,7 +3650,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/V\xE4nster ben 1"
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17/Kanin \xF6ra 3/Kanin
+      \xF6ra 4"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3624,8 +3663,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17/Kanin \xF6ra 3/Kanin
-      \xF6ra 4"
+    path: "Nedre kropp/V\xE4nster ben 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3637,8 +3675,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17/Kanin \xF6ra 3/Kanin
-      \xF6ra 4"
+    path: "Nedre kropp/V\xE4nster ben 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3650,8 +3687,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17/Kanin \xF6ra 3/Kanin
-      \xF6ra 4"
+    path: "Nedre kropp/V\xE4nster ben 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3738,7 +3774,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/\xD6vre kropp/V\xE4nster Rosett 1"
+    path: "Nedre kropp/\xD6vre kropp/H\xF6ger Rosett 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3750,7 +3786,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/\xD6vre kropp/V\xE4nster Rosett 1"
+    path: "Nedre kropp/\xD6vre kropp/H\xF6ger Rosett 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3762,7 +3798,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/\xD6vre kropp/V\xE4nster Rosett 1"
+    path: "Nedre kropp/\xD6vre kropp/H\xF6ger Rosett 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3774,7 +3810,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/H\xF6ger Ben 1/H\xF6ger Ben 2"
+    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2/V\xE4nster Ben 3"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3786,7 +3822,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/H\xF6ger Ben 1/H\xF6ger Ben 2"
+    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2/V\xE4nster Ben 3"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3798,7 +3834,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/H\xF6ger Ben 1/H\xF6ger Ben 2"
+    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2/V\xE4nster Ben 3"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3882,6 +3918,42 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
+    path: "Nedre kropp/H\xF6ger Ben 1"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: "Nedre kropp/H\xF6ger Ben 1"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: "Nedre kropp/H\xF6ger Ben 1"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
     path: "Nedre kropp/\xD6vre kropp/Huvud"
     classID: 4
     script: {fileID: 0}
@@ -3954,7 +4026,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2"
+    path: "Nedre kropp/\xD6vre kropp/V\xE4nster Rosett 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3966,7 +4038,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2"
+    path: "Nedre kropp/\xD6vre kropp/V\xE4nster Rosett 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3978,43 +4050,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/V\xE4nster ben 1/V\xE4nster Ben 2"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/\xD6vre kropp"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/\xD6vre kropp"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/\xD6vre kropp"
+    path: "Nedre kropp/\xD6vre kropp/V\xE4nster Rosett 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -4062,78 +4098,6 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/H\xF6ger Ben 1"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: "Nedre kropp/H\xF6ger Ben 1"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: "Nedre kropp/H\xF6ger Ben 1"
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
     path: "Nedre kropp/\xD6vre kropp/V\xE4nster arm 1"
     classID: 4
     script: {fileID: 0}
@@ -4146,6 +4110,18 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
+    path: "Nedre kropp/\xD6vre kropp/V\xE4nster arm 1"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
     path: "Nedre kropp/\xD6vre kropp/V\xE4nster arm 1"
     classID: 4
     script: {fileID: 0}
@@ -4158,7 +4134,67 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: "Nedre kropp/\xD6vre kropp/V\xE4nster arm 1"
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1/bone_17"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1"
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: "Nedre kropp/\xD6vre kropp/Huvud/Kanin \xD6ra 1"
     classID: 4
     script: {fileID: 0}
     flags: 0
