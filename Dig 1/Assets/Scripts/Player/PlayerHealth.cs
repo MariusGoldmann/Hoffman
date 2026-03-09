@@ -22,10 +22,11 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void ChangeHealth(int amount, Vector2 hitDirection)
-    { 
+    {
+        Debug.Log("Dennis suger 2");
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
-        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, Vector2.up, playerMovement.GetMoveInput().x));
+        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, Vector2.up));
         if (currentPlayerHealth <= 0) DeathSequence();
     }
 

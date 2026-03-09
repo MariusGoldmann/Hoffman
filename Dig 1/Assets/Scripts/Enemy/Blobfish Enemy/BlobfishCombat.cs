@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class BlobfishCombat : MonoBehaviour
 {
@@ -39,7 +40,8 @@ public class BlobfishCombat : MonoBehaviour
     {
         if (bodyCollider.IsTouchingLayers(playerLayer) && !knockbackScript.GetIsKnockback())
         {
-            Vector2 playerDirection = playerTransform.position - transform.position;
+            Debug.Log("Dennis suger 1");
+            Vector2 playerDirection = (playerTransform.position - transform.position).normalized;
             playerHealth.ChangeHealth(-collisionDamage, playerDirection);
             if (!poison)
             {
