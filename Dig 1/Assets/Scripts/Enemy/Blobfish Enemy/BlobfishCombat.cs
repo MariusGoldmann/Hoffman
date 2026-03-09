@@ -64,7 +64,7 @@ public class BlobfishCombat : MonoBehaviour
         shrinking = false;
         StopCoroutine(Shrink());
         //Animation for visual
-        for (float f = 0; f < expandedRadius; f = bodyCollider.radius)
+        while (bodyCollider.radius<expandedRadius)
         {
             bodyCollider.radius += expandedRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -76,7 +76,7 @@ public class BlobfishCombat : MonoBehaviour
     IEnumerator Shrink()
     {
         shrinking = true;
-        for (float f = bodyCollider.radius; f > normalRadius; f = bodyCollider.radius)
+        while (bodyCollider.radius > normalRadius)
         {
             bodyCollider.radius -= normalRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
