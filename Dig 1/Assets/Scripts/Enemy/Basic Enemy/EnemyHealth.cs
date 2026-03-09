@@ -6,19 +6,25 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int maxEnemyHealth = 5;
 
     [SerializeField] PlayerCombat playerCombat;
-    [SerializeField] DamageFlash damageFlash;
 
     void Awake()
     {
         playerCombat = FindFirstObjectByType<PlayerCombat>();
-
-        damageFlash = GetComponent<DamageFlash>();
     }
     void Start()
     {
         currentEnemyHealth = maxEnemyHealth; 
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Boomerang"))
+        {
+            Debug.Log("Enemy hit");
+            ChangeHealth(-playerCombat.GetBoomerangDamage());
+
+        }
+    }
     public void ChangeHealth(int amount)
     {
         currentEnemyHealth += amount;
@@ -32,7 +38,5 @@ public class EnemyHealth : MonoBehaviour
             Debug.Log("Enemy died");
             Destroy(gameObject);
         }
-
-        damageFlash.GetDamageFlasher();
     }
 }

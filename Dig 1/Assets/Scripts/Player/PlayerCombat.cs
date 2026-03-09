@@ -1,39 +1,34 @@
-using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using static PlayerMovement;
 
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Basic combat settings")]
-    [SerializeField] float attackRadius;
     [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRadius;
     [SerializeField] LayerMask enemyLayer;
 
     [Header("Slash settings")]
     [SerializeField] int slashDamage = 1;
-    [SerializeField] int slashCooldown = 1;
-    [SerializeField] float slashTimer;
+    [SerializeField] float slashAttackCooldown = 1f;
+    [SerializeField] float slashAttackTimer;
 
     [Header("Kick settings")]
     [SerializeField] int kickDamage = 2;
-    [SerializeField] int kickCooldown = 2;
-    [SerializeField] float kickTimer;
+    [SerializeField] float kickAttackCooldown = 2f;
+    [SerializeField] float kickAttackTimer;
 
     [Header("Boomerang settings")]
     [SerializeField] int boomerangDamage = 5;
-    [SerializeField] int boomerangCooldown = 5;
-    [SerializeField] float boomerangTimer;
-    [SerializeField] float boomerangForce;
-    [SerializeField] float boomerangReturnForce;
+    [SerializeField] float boomerangAttackCooldown = 5f;
+    [SerializeField] float boomerangAttackTimer;
+    [SerializeField] float boomerangAttackLengh;
+    [SerializeField] float boomerangAttackForce;
+    [SerializeField] float boomerangReturnAttackForce;
 
-    [SerializeField] bool earlyReceiving;
-
-    [SerializeField] AnimationCurve boomerangAnimationCurve;
-
-    // Private variables
     Coroutine boomerangSpawnerCoroutine;
 
     // Script references
@@ -41,7 +36,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] PickUpScript pickUpScript;
 
     // Component references
-    [SerializeField] GameObject boomerangPrefab; // drag in inspector
+    [SerializeField] GameObject boomerangPrefab;
     Animator animator;
 
     void Awake()
@@ -51,59 +46,42 @@ public class PlayerCombat : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
     }
+    void Start()
+    {
+        slashAttackTimer = slashAttackCooldown;
+        kickAttackTimer = kickAttackCooldown;
+        boomerangAttackTimer = boomerangAttackCooldown;
+    }
 
     void Update()
     {
         HandleCooldowns();
     }
 
-    void MeleeAttack(int damage, string animation)
+    void SlashAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
-
-        animator.SetTrigger(animation);
 
         if (enemies != null)
         {
             foreach (Collider2D enemy in enemies)
             {
-                enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage);
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-slashDamage);
             }
+           
         }
     }
 
-    IEnumerator BoomerangSpawner()
+    void KickAttack()
     {
-        Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
-        GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
-        
-        Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
 
-        earlyReceiving = false;
-
-        float timer = 0;
-        float duration = 1;
-        float boomerangSpeed;
-        float boomerangReturnSpeed = boomerangReturnForce;
-        int boomerangDirection = playerMovement.GetFacingDirection(); //Where the player is facing
-        
-        while (timer < duration && !earlyReceiving)
+        if (enemies != null)
         {
-            timer += Time.deltaTime;
-            boomerangSpeed = boomerangForce * boomerangAnimationCurve.Evaluate(timer / duration);
-
-            boomerangRB.linearVelocity = new Vector2(boomerangDirection * boomerangSpeed, boomerangRB.linearVelocity.y);
-
-            yield return null;
-        }
-        
-        while (boomerang != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f || earlyReceiving)
-        {
-            boomerangReturnSpeed += 50 * Time.deltaTime;
-            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position , transform.position, boomerangReturnSpeed * Time.deltaTime);
-
-            earlyReceiving = true;
-            yield return null;
+            foreach (Collider2D enemy in enemies)
+            {
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-kickDamage);
+            }
         }
     }
 
@@ -113,51 +91,83 @@ public class PlayerCombat : MonoBehaviour
         {
             Debug.Log("Boomerang picked up");
             GameObject boomerang = collision.gameObject;
-            earlyReceiving = false;
 
-            boomerangSpawnerCoroutine = null;
             Destroy(boomerang);
 
-            boomerangTimer = boomerangCooldown;
+            boomerangAttackTimer = boomerangAttackCooldown;
         }
+    }
+
+    IEnumerator BoomerangSpawner()
+    {
+        Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
+
+
+        GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
+        
+        Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+        
+        boomerangRB.linearVelocity = new Vector2(playerMovement.GetFacingDirection() * boomerangAttackForce, 0);
+        
+        yield return new WaitForSeconds(boomerangAttackLengh);
+        
+        while (boomerangRB != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f)
+        {
+            Vector2 direction = (transform.position - boomerang.transform.position).normalized;
+
+            boomerangRB.linearVelocity = Vector2.Lerp(boomerangRB.linearVelocity, direction * boomerangReturnAttackForce, 8f * Time.deltaTime);
+
+            yield return null;
+        }
+
+        boomerangSpawnerCoroutine = null;
     }
 
     void OnSlash(InputValue slashbutton)
     {
-        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg())
+        if (slashbutton.isPressed && slashAttackTimer <= 0 && pickUpScript.GetHasLeg())
         {
-            slashTimer = slashCooldown;
-            MeleeAttack(slashDamage, "Slash");
+            SlashAttack();
             Debug.Log("Slash");
+            animator.SetTrigger("Slash");
+            slashAttackTimer = slashAttackCooldown;
         }
     }
 
     void OnKick(InputValue kickButton)
     {
-        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg())
+        if (kickButton.isPressed && kickAttackTimer <= 0 && pickUpScript.GetHasLeg())
         {
+            KickAttack();
             Debug.Log("Kick");
-            MeleeAttack(kickDamage, "Kick");
-            kickTimer = kickCooldown;
+            animator.SetTrigger("Kick");
+            kickAttackTimer = kickAttackCooldown;
         }
     }
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang())
+        if (boomerangButton.isPressed && boomerangAttackTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang())
         {
-            Debug.Log("Throw");
-            animator.SetTrigger("Throwing");
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }
     }
     void HandleCooldowns()
     {
-        slashTimer -= Time.deltaTime;
+        if (slashAttackTimer > 0)
+        {
+            slashAttackTimer -= Time.deltaTime;
+        }
 
-        kickTimer -= Time.deltaTime;
+        if (kickAttackTimer > 0)
+        {
+            kickAttackTimer -= Time.deltaTime;
+        }
 
-        boomerangTimer -= Time.deltaTime;
+        if (boomerangAttackTimer > 0)
+        {
+            boomerangAttackTimer -= Time.deltaTime;
+        }
     }
 
     public int GetBoomerangDamage()
@@ -165,12 +175,7 @@ public class PlayerCombat : MonoBehaviour
         return boomerangDamage;
     }
 
-    public bool GetEarlyReceiving(bool value)
-    {
-        return earlyReceiving = value;
-    }
-
-    void OnDrawGizmos() // Attack radius debug
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(attackPoint.position, attackRadius);

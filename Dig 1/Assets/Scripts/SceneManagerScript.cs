@@ -16,12 +16,6 @@ public class SceneManagerScript : MonoBehaviour
         
     }
 
-    public void ExitGame()
-    {
-        Debug.Log("Quit");
-        Application.Quit();
-    }
-
     //  public void LoadNextScene()
     //{
     // int currentSene = SceneManager.GetActiveScene().buildIndex;
