@@ -212,8 +212,8 @@ MonoBehaviour:
   boomerangDamage: 5
   boomerangCooldown: 5
   boomerangTimer: 0
-  boomerangForce: 26
-  boomerangReturnForce: 0
+  boomerangForce: 55
+  boomerangReturnForce: 6
   earlyReceiving: 0
   boomerangAnimationCurve:
     serializedVersion: 2
@@ -221,29 +221,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -2.3908021
-      outSlope: -2.3908021
-      tangentMode: 34
-      weightedMode: 0
+      inSlope: -8.301327
+      outSlope: -8.301327
+      tangentMode: 0
+      weightedMode: 3
       inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.29581213
-      value: 0.29277167
-      inSlope: -1.40328
-      outSlope: -1.40328
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.07820514
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -0.4157579
-      outSlope: -0.4157579
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.79615384
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
