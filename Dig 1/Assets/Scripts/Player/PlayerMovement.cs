@@ -15,20 +15,21 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     [SerializeField] float jumpForce;
     [SerializeField] float jumpCutMultiplier = 0.5f;
-
     [SerializeField] float coyoteTime;
     [SerializeField] float coyoteTimeCounter;
-
-    [Header("Bools")]
-    [SerializeField] bool runPressed;// Serialized for debugging
-    [SerializeField] bool jumpPressed;// Serialized for debugging
-    [SerializeField] bool jumpRelesed;// Serialized for debugging
-    [SerializeField] bool crouchPressed;// Serialized for debugging
-
-    [SerializeField] int facingDirection = 1;
+    [SerializeField] float jumpBufferTime;
+    [SerializeField] float jumpBufferCounter;
 
     [Header("State")]
     [SerializeField] MovingStates movingState;
+
+    // Bools
+    bool runPressed;
+    bool jumpRelesed;
+    bool crouchPressed;
+
+    // Ints
+    int facingDirection = 1;
 
     // Inputs
     Vector2 moveInput;
@@ -97,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
-        HandleCoyoteTime();
+        HandleTimers();
         HandleAnimations();
         HandleStates();
     }
@@ -109,17 +110,11 @@ public class PlayerMovement : MonoBehaviour
             HandleMovement();
             HandleJump();
         }
-        else
-        {
-
-        }
     }
 
     void HandleMovement()
     {
-        playerRB.linearVelocityX = moveInput.x * moveSpeed;
-
-        if (runPressed == true)
+        if (runPressed)
         {
             moveSpeed = runSpeed;
         }
@@ -128,31 +123,36 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = walkSpeed;
         }
 
+        if (crouchPressed)
+        {
+            moveSpeed = crouchSpeed;
+        }
+
+        playerRB.linearVelocityX = moveInput.x * moveSpeed;
+
     }
     void HandleJump()
     {
-        if (jumpPressed == true && coyoteTimeCounter > 0)
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && !crouchPressed)
         {
             playerRB.linearVelocityY = jumpForce;
 
-            jumpPressed = false;
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
         }
-        else if (jumpRelesed == true && playerRB.linearVelocityY > 0)
+        else if (jumpRelesed && playerRB.linearVelocityY > 0)
         {
             playerRB.linearVelocityY = (playerRB.linearVelocity.y * jumpCutMultiplier);
-
-            coyoteTimeCounter = 0;
+            jumpRelesed = false;    
         }
     }
 
     void HandleCrouch()
     {
-        if (crouchPressed == true)
+        if (crouchPressed)
         {
             playerCollider.offset = new Vector2(0.1f, -0.15f);
             playerCollider.size = new Vector2(1, 2.7f);
-
-            moveSpeed = crouchSpeed;
         }
         else
         {
@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void HandleCoyoteTime()
+    void HandleTimers()
     {
         if (IsGrounded())
         {
@@ -171,14 +171,20 @@ public class PlayerMovement : MonoBehaviour
         {
             coyoteTimeCounter -= Time.deltaTime;
         }
+
+        if (jumpBufferCounter > 0f)
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
     }
 
     void HandleStates()
     {
-        if(IsGrounded())
+        if (IsGrounded())
         {
             animator.SetBool("IsGrounded", true);
-        } else
+        } 
+        else
         {
             animator.SetBool("IsGrounded", false);
         }
@@ -218,12 +224,12 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Falling;
         }
 
-        if (crouchPressed == true && IsGrounded())
+        if (crouchPressed && IsGrounded())
         {
             movingState = MovingStates.Crouching;
         }
 
-        if (crouchPressed == true && IsGrounded() && Mathf.Abs(moveInput.x) > 0 && pickUpScript.GetHasLeg())
+        if (crouchPressed && IsGrounded() && Mathf.Abs(moveInput.x) > 0 && pickUpScript.GetHasLeg())
         {
             movingState = MovingStates.CrouchWalking;
         }
@@ -257,7 +263,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnRun(InputValue value)
     {
-        if (value.isPressed && Mathf.Abs(playerRB.linearVelocityX) > 0 && pickUpScript.GetHasLeg())
+        if (value.isPressed && pickUpScript.GetHasLeg())
         {
             runPressed = true;
         }
@@ -269,14 +275,10 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
+
         if (value.isPressed && pickUpScript.GetHasLeg())
         {
-            if (coyoteTimeCounter > 0 && !crouchPressed)
-            {
-                jumpPressed = true;
-                crouchPressed = false;
-            }
-
+            jumpBufferCounter = jumpBufferTime;
             jumpRelesed = false;
         }
         else
@@ -341,11 +343,5 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 GetMoveInput()
     {
         return moveInput;
-    }
-
-    void OnDrawGizmos() // For debugging IsGrounded
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 1.8f);
     }
 }
