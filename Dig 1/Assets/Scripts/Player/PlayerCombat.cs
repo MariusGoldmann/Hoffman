@@ -82,7 +82,7 @@ public class PlayerCombat : MonoBehaviour
         earlyReceiving = false;
 
         float timer = 0;
-        float duration = 1;
+        float duration = 0.5f;
         float boomerangSpeed;
         float boomerangReturnSpeed = boomerangReturnForce;
         int boomerangDirection = playerMovement.GetFacingDirection(); //Where the player is facing

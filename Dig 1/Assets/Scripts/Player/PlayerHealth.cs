@@ -1,7 +1,7 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; 
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -11,23 +11,26 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] int currentPlayerHealth;
 
-    [SerializeField] public Slider HealthBar;
+    KnockbackScript knockbackScript;
+    PlayerMovement playerMovement;
 
-    
     private void Start()
     {
-        currentPlayerHealth = maxPlayerHealth;
-        HealthBar.maxValue = maxPlayerHealth;
-        HealthBar.value = currentPlayerHealth;
-    }
+        knockbackScript = GetComponent<KnockbackScript>();
+        playerMovement= GetComponent<PlayerMovement>();
 
-    public void ChangeHealth(int amount)
-    { 
+        currentPlayerHealth = maxPlayerHealth;
+    }
+    private void Update()
+    {
+        Debug.Log(currentPlayerHealth);
+    }
+    public void ChangeHealth(int amount, Vector2 hitDirection)
+    {
+        Debug.Log("Dennis suger 2");
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
-
-        HealthBar.value = currentPlayerHealth;
-
+        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, Vector2.up));
         if (currentPlayerHealth <= 0) DeathSequence();
     }
 
