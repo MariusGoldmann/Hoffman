@@ -295,27 +295,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff5dfc680dd638a49b6819e4f879f6b9, type: 3}
---- !u!1 &320715516 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8433842763178131858, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
-  m_PrefabInstance: {fileID: 3885776480025576977}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &320715522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320715516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8eb8f12c5457304f9197a85f67aab7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
-  knockbackLength: 0.2
-  hitDirectionForce: 10
-  additionalDirectionalForce: 5
-  debugBool: 0
 --- !u!4 &597500124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2089305366585572759, guid: 514b6f0a258c09f4cbe54720626ad1de, type: 3}
@@ -442,10 +421,6 @@ PrefabInstance:
     - target: {fileID: 3313464981271318425, guid: e2cef0dc1b7019948a81ddd98f0845f8, type: 3}
       propertyPath: orthographic size
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634075368651522675, guid: e2cef0dc1b7019948a81ddd98f0845f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7237177266878722551, guid: e2cef0dc1b7019948a81ddd98f0845f8, type: 3}
       propertyPath: m_Name
@@ -814,15 +789,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8552818378700148629, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
       propertyPath: m_GravityScale
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8433842763178131858, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 320715522}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
 --- !u!1001 &6122655885057716706
 PrefabInstance:

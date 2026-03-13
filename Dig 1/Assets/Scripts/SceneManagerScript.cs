@@ -3,17 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerScript : MonoBehaviour
 {
-   
+
 
     public void LoadNewGame()
     {
-      SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
-        
+
     }
 
     public void ExitGame()
