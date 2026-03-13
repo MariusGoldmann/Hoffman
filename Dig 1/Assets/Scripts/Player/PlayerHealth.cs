@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +21,10 @@ public class PlayerHealth : MonoBehaviour
 
         currentPlayerHealth = maxPlayerHealth;
     }
-
+    private void Update()
+    {
+        Debug.Log(currentPlayerHealth);
+    }
     public void ChangeHealth(int amount, Vector2 hitDirection)
     {
         Debug.Log("Dennis suger 2");

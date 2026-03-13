@@ -8,7 +8,7 @@ public class KnockbackScript : MonoBehaviour
     [SerializeField] float additionalDirectionalForce=5f;
     [SerializeField] bool debugBool;
 
-    bool isKnockback;
+    bool isKnockback=false;
 
     Rigidbody2D knockbackRigidbody;
     PlayerMovement playerMovement;
