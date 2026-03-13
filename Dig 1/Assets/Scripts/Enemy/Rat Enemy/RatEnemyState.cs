@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyState : MonoBehaviour
+public class RatEnemyState : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform enemyPosition;
@@ -25,7 +25,7 @@ public class EnemyState : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if (other.CompareTag("Player")) inCombat = true;
+        if (other.CompareTag("Player")) inCombat = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)

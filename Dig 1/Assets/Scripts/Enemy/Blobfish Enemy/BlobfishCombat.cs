@@ -39,7 +39,6 @@ public class BlobfishCombat : MonoBehaviour
     {
         if (bodyCollider.IsTouchingLayers(playerLayer) && !knockbackScript.GetIsKnockback())
         {
-            Debug.Log("Dennis suger 1");
             Vector2 playerDirection = (playerTransform.position - transform.position).normalized;
             playerHealth.ChangeHealth(-collisionDamage, playerDirection, Vector2.up);
             if (!poison)

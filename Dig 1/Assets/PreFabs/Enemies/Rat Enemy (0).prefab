@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4443998666330714368}
-  - component: {fileID: 4455082567385806073}
+  - component: {fileID: 5605187441174547169}
   - component: {fileID: 7884375983571872051}
   m_Layer: 7
   m_Name: PlayerCheck
@@ -124,7 +124,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2250447569052621783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4455082567385806073
+--- !u!114 &5605187441174547169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,13 +133,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5940777404547796528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f01d6d66c89a14eb738a1d0ebf7839, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c0cfbc9d04d9e1429b1d90602ded0a4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyState
+  m_EditorClassIdentifier: Assembly-CSharp::RatEnemyState
   playerTransform: {fileID: 0}
-  enemyPosition: {fileID: 2250447569052621783}
-  enemyParentRB: {fileID: 1977131426898150740}
-  enemyMovement: {fileID: 5165784249430576352}
+  enemyPosition: {fileID: 0}
+  enemyParentRB: {fileID: 0}
+  enemyMovement: {fileID: 0}
 --- !u!61 &7884375983571872051
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 638206651116854555}
   - component: {fileID: 1977131426898150740}
   - component: {fileID: 7269779294525512706}
-  - component: {fileID: 5165784249430576352}
+  - component: {fileID: 2984852375285362780}
   - component: {fileID: 4182727920968109421}
   m_Layer: 7
   m_Name: Rat Enemy (0)
@@ -356,7 +356,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5165784249430576352
+--- !u!114 &2984852375285362780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,12 +365,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6380048116863226706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10c3fc25c4500af4192a88d9a8222e0f, type: 3}
+  m_Script: {fileID: 11500000, guid: b363b4a61a9838d40849b3e8d3df541b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  idleMoveSpeed: 3
-  chaseMoveSpeed: 4
-  groundCheckLength: 1.67
+  m_EditorClassIdentifier: Assembly-CSharp::RatEnemyMovement
+  idleMoveSpeed: 0.5
+  chaseMoveSpeed: 1
+  groundCheckLength: 1
   frontGroundCheckLength: 1.67
   frontGroundCheckOffset: {x: 1, y: 0}
   facingRight: 1
@@ -390,3 +390,4 @@ MonoBehaviour:
   maxEnemyHealth: 5
   playerCombat: {fileID: 0}
   damageFlash: {fileID: 0}
+  knockbackScript: {fileID: 0}
