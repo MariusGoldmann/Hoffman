@@ -7,11 +7,12 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] DamageFlash damageFlash;
+    [SerializeField] KnockbackScript knockbackScript;
 
     void Awake()
     {
         playerCombat = FindFirstObjectByType<PlayerCombat>();
-
+        knockbackScript = GetComponent<KnockbackScript>();
         damageFlash = GetComponent<DamageFlash>();
     }
     void Start()
@@ -19,8 +20,9 @@ public class EnemyHealth : MonoBehaviour
         currentEnemyHealth = maxEnemyHealth; 
     }
 
-    public void ChangeHealth(int amount)
+    public void ChangeHealth(int amount, Vector2 knockbackdirection)
     {
+        StartCoroutine(knockbackScript.KnockbackAction(knockbackdirection, Vector2.up));
         currentEnemyHealth += amount;
 
         if (currentEnemyHealth > maxEnemyHealth)

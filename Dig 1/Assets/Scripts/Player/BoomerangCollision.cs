@@ -16,8 +16,10 @@ public class BoomerangColission : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            GameObject enemy = collision.gameObject;
+            Vector2 direction = (enemy.transform.position - transform.position).normalized;
             Debug.Log("Enemy hit");
-            enemyHealth.ChangeHealth(-playerCombat.GetBoomerangDamage());
+            enemyHealth.ChangeHealth(-playerCombat.GetBoomerangDamage(), direction);
             playerCombat.GetEarlyReceiving(true);
         }
 
