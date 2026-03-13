@@ -2,7 +2,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraZoom : MonoBehaviour
+public class CameraZooming : MonoBehaviour
 {
     [SerializeField] float zoomSize = 2.10f;
     [SerializeField, Range(0.01f, 10f)] float zoomSpeed = 4f;

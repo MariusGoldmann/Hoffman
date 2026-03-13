@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7509450431102027240}
   - component: {fileID: 2832536398586049987}
   - component: {fileID: 294799018414150026}
+  - component: {fileID: 424228128359465119}
   m_Layer: 7
   m_Name: Rat
   m_TagString: Enemy
@@ -51,7 +52,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -116,6 +117,7 @@ MonoBehaviour:
   maxEnemyHealth: 5
   playerCombat: {fileID: 0}
   damageFlash: {fileID: 0}
+  knockbackScript: {fileID: 0}
 --- !u!114 &294799018414150026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,15 +131,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
   flashColor: {r: 4, g: 4, b: 4, a: 1}
-  flashTime: 0.25
+  flashTime: 0.3
   flashSpeedCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -48.007763
+      outSlope: -48.007763
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.062820524
+    - serializedVersion: 3
+      time: 0.3
+      value: 0
+      inSlope: 0.054302596
+      outSlope: 0.054302596
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.48717943
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   spriteRenderer: {fileID: 0}
   material: {fileID: 0}
+--- !u!114 &424228128359465119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8433842763178131858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8eb8f12c5457304f9197a85f67aab7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
+  knockbackLength: 0.2
+  hitDirectionForce: 10
+  additionalDirectionalForce: 5
+  debugBool: 0
 --- !u!1001 &2774498629463284814
 PrefabInstance:
   m_ObjectHideFlags: 0
