@@ -4,12 +4,13 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float idleMoveSpeed = 0.5f;
     [SerializeField] float chaseMoveSpeed = 1f;
-    [SerializeField] float groundCheckLength = 1.67f;
-    [SerializeField] Vector2 groundCheckOffset = new Vector2(1, 0);
+    [SerializeField] float groundCheckLength = 1f;
+    [SerializeField] float frontGroundCheckLength = 1.67f;
+    [SerializeField] Vector2 frontGroundCheckOffset = new Vector2(1, 0);
 
     [Header("Debug")]
     [SerializeField] bool facingRight=true;
-    Vector2 groundCheckPos;
+    Vector2 frontGroundCheckPos;
 
     Rigidbody2D enemyRB;
     Animator animator;
@@ -64,13 +65,13 @@ public class EnemyMovement : MonoBehaviour
         
         if (facingRight)
         {
-            groundCheckPos= new Vector2(transform.position.x+groundCheckOffset.x,transform.position.y+groundCheckOffset.y);
-            if (Physics2D.Raycast(groundCheckPos, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
+            frontGroundCheckPos= new Vector2(transform.position.x+frontGroundCheckOffset.x,transform.position.y+frontGroundCheckOffset.y);
+            if (GetIsGroundInFront(frontGroundCheckPos))
             {
                 enemyRB.linearVelocityX = idleMoveSpeed;
                
             }
-            else
+            else if (GetIsGrounded())
             {
                 enemyRB.linearVelocityX = -idleMoveSpeed;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -79,27 +80,34 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            groundCheckPos = new Vector2(transform.position.x - groundCheckOffset.x, transform.position.y - groundCheckOffset.y);
-            if (Physics2D.Raycast(groundCheckPos, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground")))
+            frontGroundCheckPos = new Vector2(transform.position.x - frontGroundCheckOffset.x, transform.position.y - frontGroundCheckOffset.y);
+            if (GetIsGroundInFront(frontGroundCheckPos))
             {
                 enemyRB.linearVelocityX = -idleMoveSpeed;
 
             }
-            else
+            else if (GetIsGrounded())
             {
                 enemyRB.linearVelocityX = idleMoveSpeed;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 facingRight = true;
             }
         }
-        
-
     }
 
     void ChasePlayer()
     {
         enemyRB.linearVelocity = new Vector2(state.GetPlayerDirection() * chaseMoveSpeed, enemyRB.linearVelocityY);
-        
+    }
+
+    bool GetIsGroundInFront(Vector2 groundCheckPos)
+    {
+        return Physics2D.Raycast(groundCheckPos, Vector2.down, frontGroundCheckLength, LayerMask.GetMask("Ground"));
+    }
+
+    bool GetIsGrounded()
+    {
+        return Physics2D.Raycast(transform.position, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground"));
     }
 
     public bool GetFacingRight()

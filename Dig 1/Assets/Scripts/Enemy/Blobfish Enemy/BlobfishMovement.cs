@@ -17,13 +17,16 @@ public class BlobfishMovement : MonoBehaviour
 
     Rigidbody2D blobfishRB;
     Animator animator;
+    BlobfishCombat blobfishCombat;
 
     void Start()
     {
         blobfishRB = GetComponent<Rigidbody2D>();
+        blobfishCombat = GetComponent<BlobfishCombat>();
     }
     private void FixedUpdate()
-    {   
+    { 
+        if (!blobfishCombat.GetExpanding())
         Move();
     }
     void Move()

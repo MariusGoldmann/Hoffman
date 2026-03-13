@@ -41,7 +41,7 @@ public class BlobfishCombat : MonoBehaviour
         {
             Debug.Log("Dennis suger 1");
             Vector2 playerDirection = (playerTransform.position - transform.position).normalized;
-            playerHealth.ChangeHealth(-collisionDamage, playerDirection);
+            playerHealth.ChangeHealth(-collisionDamage, playerDirection, Vector2.up);
             if (!poison)
             {
                 StartCoroutine(Poison());
@@ -86,8 +86,13 @@ public class BlobfishCombat : MonoBehaviour
         for (int i = 0; i < poisonTickAmount; i++)
         {
             yield return new WaitForSeconds(poisionTickSpeed);
-            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero);
+            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero, Vector2.zero);
         }
         poison = false;
+    }
+
+    public bool GetExpanding()
+    {
+        return expanding;
     }
 }
