@@ -11,6 +11,8 @@ public class PauseManager : MonoBehaviour
     InputAction pauseAction;
     InputAction abilityTabAction;
 
+    ButtonScript buttonScript;
+
     bool tab;
     bool paused;
 
@@ -21,6 +23,7 @@ public class PauseManager : MonoBehaviour
 
         pauseAction = InputSystem.actions.FindAction("Pause");
         abilityTabAction = InputSystem.actions.FindAction("AbilityTab");
+        buttonScript = FindFirstObjectByType<ButtonScript>();
     }
 
     void Update()
@@ -35,6 +38,7 @@ public class PauseManager : MonoBehaviour
             } else
             {
                 pauseMenuUI.SetActive(false);
+                buttonScript.buttonPressed = false;
                 Time.timeScale = 1;
             }
                 
