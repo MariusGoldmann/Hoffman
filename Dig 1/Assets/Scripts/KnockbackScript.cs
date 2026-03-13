@@ -6,18 +6,29 @@ public class KnockbackScript : MonoBehaviour
     [SerializeField] float knockbackLength=0.2f;
     [SerializeField] float hitDirectionForce=10f;
     [SerializeField] float additionalDirectionalForce=5f;
-    [SerializeField] float someOtherForce=7.5f;
+    [SerializeField] bool debugBool;
 
     bool isKnockback;
 
-    Rigidbody2D rigidbody;
+    Rigidbody2D knockbackRigidbody;
+    PlayerMovement playerMovement;
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        knockbackRigidbody = GetComponent<Rigidbody2D>();
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
     }
 
-    public IEnumerator KnockbackAction(Vector2 hitDirection, Vector2 additionalForceDirection, float inputDirection)
+    private void Update()
+    {
+        if (debugBool)
+        {
+            StartCoroutine(KnockbackAction(Vector2.right, Vector2.up));
+            debugBool = false;
+        }
+    }
+
+    public IEnumerator KnockbackAction(Vector2 hitDirection, Vector2 additionalForceDirection)
     {
         isKnockback = true;
         
@@ -30,14 +41,14 @@ public class KnockbackScript : MonoBehaviour
         additionalForce = additionalForceDirection * additionalDirectionalForce;
 
 
-        while (time > knockbackLength)
+        while (time < knockbackLength)
         {
             time += Time.fixedDeltaTime;
-            combinedForce = hitForce + additionalForce + new Vector2(inputDirection, 0);
+            combinedForce = hitForce + additionalForce + playerMovement.GetMoveInput();
 
             yield return new WaitForFixedUpdate();
 
-            rigidbody.linearVelocity = combinedForce;
+            knockbackRigidbody.linearVelocity = combinedForce;
         }
 
         isKnockback=false;

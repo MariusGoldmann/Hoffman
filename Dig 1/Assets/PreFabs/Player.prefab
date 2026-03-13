@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 315493221406685201}
   - component: {fileID: 5082171930118937187}
   - component: {fileID: -4973419316017505786}
-  - component: {fileID: 6529638970767183344}
+  - component: {fileID: 8158543302636595784}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -149,17 +149,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 0
   walkSpeed: 10
-  runSpeed: 20
+  runSpeed: 15
   crouchSpeed: 5
   jumpForce: 45
   jumpCutMultiplier: 0.5
   coyoteTime: 0.1
   coyoteTimeCounter: 0
-  runPressed: 0
-  jumpPressed: 0
-  jumpRelesed: 0
-  crouchPressed: 0
-  facingDirection: 1
+  jumpBufferTime: 0.25
+  jumpBufferCounter: 0
   movingState: 0
 --- !u!114 &315493221406685201
 MonoBehaviour:
@@ -174,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   bomerangImage: {fileID: 0}
-  hasLeg: 1
+  hasLeg: 0
   hasEye: 0
   hasBoomerang: 0
   eyeTabCloud: {fileID: 0}
@@ -198,23 +195,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab5ade4392ac8e44886a2642388aed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackPoint: {fileID: 6432162865010492417}
   attackRadius: 0
+  attackPoint: {fileID: 6432162865010492417}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   slashDamage: 1
-  slashAttackCooldown: 1
-  slashAttackTimer: 0
+  slashCooldown: 1
+  slashTimer: 0
   kickDamage: 2
-  kickAttackCooldown: 2
-  kickAttackTimer: 0
+  kickCooldown: 2
+  kickTimer: 0
   boomerangDamage: 5
-  boomerangAttackCooldown: 5
-  boomerangAttackTimer: 0
-  boomerangAttackLengh: 1
-  boomerangAttackForce: 7
-  boomerangReturnAttackForce: 13
+  boomerangCooldown: 1
+  boomerangTimer: 0
+  boomerangForce: 100
+  boomerangReturnForce: 6
+  earlyReceiving: 0
+  boomerangAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -113.23316
+      outSlope: -113.23316
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.006410261
+    - serializedVersion: 3
+      time: 1
+      value: 0.0015869141
+      inSlope: 0.008744544
+      outSlope: 0.008744544
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.5474359
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerMovement: {fileID: 0}
   pickUpScript: {fileID: 0}
   boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
@@ -234,7 +255,7 @@ MonoBehaviour:
   playerHealTickSpeed: 0.5
   healOverTime: 0
   currentPlayerHealth: 0
---- !u!114 &6529638970767183344
+--- !u!114 &8158543302636595784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,7 +270,7 @@ MonoBehaviour:
   knockbackLength: 0.2
   hitDirectionForce: 10
   additionalDirectionalForce: 5
-  someOtherForce: 7.5
+  debugBool: 0
 --- !u!1 &6431615454298918249
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class BlobfishCombat : MonoBehaviour
 {
     [Header("Expansion")]
     [SerializeField] CircleCollider2D bodyCollider;
+    [SerializeField] Transform playerTransform;
     [SerializeField] float expandedRadius = 2f;
     [SerializeField] int collisionDamage = 2;
     [SerializeField] int maxTimeExpanded = 2;
@@ -23,6 +25,7 @@ public class BlobfishCombat : MonoBehaviour
     LayerMask playerLayer;
     PlayerHealth playerHealth;
     KnockbackScript knockbackScript;
+    
 
     private void Start()
     {
@@ -37,7 +40,9 @@ public class BlobfishCombat : MonoBehaviour
     {
         if (bodyCollider.IsTouchingLayers(playerLayer) && !knockbackScript.GetIsKnockback())
         {
-            playerHealth.ChangeHealth(-collisionDamage);
+            Debug.Log("Dennis suger 1");
+            Vector2 playerDirection = (playerTransform.position - transform.position).normalized;
+            playerHealth.ChangeHealth(-collisionDamage, playerDirection);
             if (!poison)
             {
                 StartCoroutine(Poison());
@@ -47,7 +52,6 @@ public class BlobfishCombat : MonoBehaviour
                 StopCoroutine(Poison());
                 StartCoroutine(Poison());
             }
-            //StartCoroutine(Knockback());
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -60,7 +64,7 @@ public class BlobfishCombat : MonoBehaviour
         shrinking = false;
         StopCoroutine(Shrink());
         //Animation for visual
-        for (float f = 0; f < expandedRadius; f = bodyCollider.radius)
+        while (bodyCollider.radius<expandedRadius)
         {
             bodyCollider.radius += expandedRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -72,7 +76,7 @@ public class BlobfishCombat : MonoBehaviour
     IEnumerator Shrink()
     {
         shrinking = true;
-        for (float f = bodyCollider.radius; f > normalRadius; f = bodyCollider.radius)
+        while (bodyCollider.radius > normalRadius)
         {
             bodyCollider.radius -= normalRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -86,7 +90,7 @@ public class BlobfishCombat : MonoBehaviour
         for (int i = 0; i < poisonTickAmount; i++)
         {
             yield return new WaitForSeconds(poisionTickSpeed);
-            playerHealth.ChangeHealth(-poisonTickDamage);
+            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero);
         }
         poison = false;
     }
