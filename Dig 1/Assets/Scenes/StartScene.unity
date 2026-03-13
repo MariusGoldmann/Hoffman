@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 237774172}
   - component: {fileID: 237774171}
   - component: {fileID: 237774170}
+  - component: {fileID: 237774173}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -147,7 +148,7 @@ RectTransform:
   m_GameObject: {fileID: 237774168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.0446, y: 3.0446, z: 3.0446}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1850620557}
@@ -252,6 +253,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237774168}
   m_CullTransparentMesh: 1
+--- !u!114 &237774173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237774168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d53d3a9673c364428ed25691c384e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonScript
+  buttonPressed: 0
+  desiredSize: {x: 3.5, y: 3.5, z: 3.5}
+  startSize: {x: 3, y: 3, z: 3}
 --- !u!1 &496018257
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +359,7 @@ GameObject:
   - component: {fileID: 584035228}
   - component: {fileID: 584035227}
   - component: {fileID: 584035226}
+  - component: {fileID: 584035229}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -359,7 +376,7 @@ RectTransform:
   m_GameObject: {fileID: 584035224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.0446, y: 3.0446, z: 3.0446}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2001348208}
@@ -464,6 +481,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584035224}
   m_CullTransparentMesh: 1
+--- !u!114 &584035229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584035224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d53d3a9673c364428ed25691c384e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonScript
+  buttonPressed: 0
+  desiredSize: {x: 3.5, y: 3.5, z: 3.5}
+  startSize: {x: 3, y: 3, z: 3}
 --- !u!1 &855416656
 GameObject:
   m_ObjectHideFlags: 0

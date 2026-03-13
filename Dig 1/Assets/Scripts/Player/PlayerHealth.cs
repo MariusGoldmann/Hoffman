@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; 
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,16 +11,22 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] int currentPlayerHealth;
 
+    [SerializeField] public Slider HealthBar;
 
+    
     private void Start()
     {
         currentPlayerHealth = maxPlayerHealth;
+        HealthBar.maxValue = maxPlayerHealth;
+        HealthBar.value = currentPlayerHealth;
     }
 
     public void ChangeHealth(int amount)
     { 
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
+
+        HealthBar.value = currentPlayerHealth;
 
         if (currentPlayerHealth <= 0) DeathSequence();
     }
