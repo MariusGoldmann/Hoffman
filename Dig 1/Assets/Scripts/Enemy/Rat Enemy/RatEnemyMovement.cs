@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class RatEnemyMovement : MonoBehaviour
 {
     [SerializeField] float idleMoveSpeed = 0.5f;
     [SerializeField] float chaseMoveSpeed = 1f;
@@ -9,18 +9,18 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Vector2 frontGroundCheckOffset = new Vector2(1, 0);
 
     [Header("Debug")]
-    [SerializeField] bool facingRight=true;
+    [SerializeField] bool facingRight = true;
     Vector2 frontGroundCheckPos;
 
     Rigidbody2D enemyRB;
     Animator animator;
-    EnemyState state;
+    RatEnemyState state;
 
     private void Start()
     {
         enemyRB = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        state = GetComponentInChildren<EnemyState>();
+        state = GetComponentInChildren<RatEnemyState>();
     }
 
     void Update()
@@ -62,14 +62,14 @@ public class EnemyMovement : MonoBehaviour
 
     void IdleMovement()
     {
-        
+
         if (facingRight)
         {
-            frontGroundCheckPos= new Vector2(transform.position.x+frontGroundCheckOffset.x,transform.position.y+frontGroundCheckOffset.y);
+            frontGroundCheckPos = new Vector2(transform.position.x + frontGroundCheckOffset.x, transform.position.y + frontGroundCheckOffset.y);
             if (GetIsGroundInFront(frontGroundCheckPos))
             {
                 enemyRB.linearVelocityX = idleMoveSpeed;
-               
+
             }
             else if (GetIsGrounded())
             {
