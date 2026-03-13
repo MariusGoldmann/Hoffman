@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.iOS;
 
@@ -7,6 +8,7 @@ public class BlobfishCombat : MonoBehaviour
     [Header("Expansion")]
     [SerializeField] CircleCollider2D bodyCollider;
     [SerializeField] Transform playerTransform;
+    [SerializeField] KnockbackScript knockbackScript;
     [SerializeField] float expandedRadius = 2f;
     [SerializeField] int collisionDamage = 2;
     [SerializeField] int maxTimeExpanded = 2;
@@ -19,19 +21,16 @@ public class BlobfishCombat : MonoBehaviour
     [Header("Debug")]
     float normalRadius;
     bool poison;
-    [SerializeField] bool expanding=false;
-    [SerializeField] bool shrinking=false;
+    bool expanding=false;
 
     LayerMask playerLayer;
     PlayerHealth playerHealth;
-    KnockbackScript knockbackScript;
     
 
     private void Start()
     {
         playerLayer = LayerMask.GetMask("Player");
         playerHealth = FindAnyObjectByType<PlayerHealth>();
-        knockbackScript = GetComponent<KnockbackScript>();
 
         normalRadius = bodyCollider.radius;
     }
@@ -61,7 +60,6 @@ public class BlobfishCombat : MonoBehaviour
     IEnumerator Expand()
     {
         expanding = true;
-        shrinking = false;
         StopCoroutine(Shrink());
         //Animation for visual
         while (bodyCollider.radius<expandedRadius)
@@ -75,13 +73,11 @@ public class BlobfishCombat : MonoBehaviour
     }
     IEnumerator Shrink()
     {
-        shrinking = true;
         while (bodyCollider.radius > normalRadius)
         {
             bodyCollider.radius -= normalRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        shrinking = false;
     }
 
     IEnumerator Poison()
