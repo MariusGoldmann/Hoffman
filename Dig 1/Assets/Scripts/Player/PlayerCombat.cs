@@ -42,6 +42,7 @@ public class PlayerCombat : MonoBehaviour
 
     // Component references
     [SerializeField] GameObject boomerangPrefab; // drag in inspector
+    [SerializeField] GameObject slashEffect; // drag in inspector
     Animator animator;
 
     void Awake()
@@ -128,6 +129,7 @@ public class PlayerCombat : MonoBehaviour
         {
             slashTimer = slashCooldown;
             MeleeAttack(slashDamage, "Slash");
+            AttackEffects(slashEffect);
             Debug.Log("Slash");
         }
     }
@@ -150,6 +152,12 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Throwing");
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }
+    }
+
+    void AttackEffects(GameObject attackEffect)
+    {
+        Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
+        Instantiate(attackEffect, spawnPosition, Quaternion.identity);
     }
     void HandleCooldowns()
     {
