@@ -33,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] AnimationCurve boomerangAnimationCurve;
 
+    [SerializeField] Transform effectPoint;
     // Private variables
     Coroutine boomerangSpawnerCoroutine;
 
@@ -156,8 +157,8 @@ public class PlayerCombat : MonoBehaviour
 
     void AttackEffects(GameObject attackEffect)
     {
-        Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
-        GameObject effect = Instantiate(attackEffect, spawnPosition, Quaternion.identity);
+        GameObject effect = Instantiate(attackEffect, effectPoint.position, Quaternion.identity);
+        effect.transform.SetParent(transform);
         effect.transform.localScale = new Vector3(effect.transform.localScale.x * playerMovement.GetFacingDirection(), effect.transform.localScale.y, effect.transform.localScale.z);
     }
     void HandleCooldowns()
