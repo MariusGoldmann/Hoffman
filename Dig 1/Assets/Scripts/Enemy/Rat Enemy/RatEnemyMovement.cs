@@ -1,117 +1,167 @@
+using System.Collections;
 using UnityEngine;
 
 public class RatEnemyMovement : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] float idleMoveSpeed = 0.5f;
-    [SerializeField] float chaseMoveSpeed = 1f;
-    [SerializeField] float groundCheckLength = 1f;
+    [SerializeField] float groundCheckLength = 0.1f;
     [SerializeField] float frontGroundCheckLength = 1.67f;
-    [SerializeField] Vector2 frontGroundCheckOffset = new Vector2(1, 0);
+    [SerializeField] Transform frontRaycastOrigin;
+
+    [Header("Combat")]
+    [SerializeField] int damageAmount = 5;
+    [SerializeField] float chaseMoveSpeed = 2f;
+    [SerializeField] float chaseDuration = 1.5f;
+    [SerializeField] float chaseAnticipationTime = 0.3f;
+    [SerializeField] float attackCooldown = 0.5f;
+    [SerializeField] float downedCooldown = 1f;
+    [SerializeField] float wallCheckLength = 0.1f;
+    [SerializeField] Transform wallCheckPosition;
 
     [Header("Debug")]
     [SerializeField] bool facingRight = true;
-    Vector2 frontGroundCheckPos;
+    bool isChasing;
+    bool isCooldown;
+    float currentCooldown;
 
     Rigidbody2D enemyRB;
     Animator animator;
     RatEnemyState state;
+    PlayerHealth playerHealth;
 
     private void Start()
     {
         enemyRB = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         state = GetComponentInChildren<RatEnemyState>();
+        playerHealth = FindFirstObjectByType<PlayerHealth>();
     }
-
     void Update()
     {
-        if (state.GetInCombat()) HandleDirection();
         HandleAnimations();
+        HandleCooldowns();
     }
-
     private void FixedUpdate()
     {
-        if (state.GetInCombat())
+        if (!isChasing && !isCooldown)
         {
-            ChasePlayer();
-        }
-        else
-        {
-            IdleMovement();
+            if (state.GetInCombat())
+            {
+                StartCoroutine(ChasePlayer());
+            }
+            else
+            {
+                IdleMovement();
+            }
         }
     }
-
-    private void HandleDirection()
+    void HandleCooldowns()
     {
-        if (state.GetPlayerDirection() > 0)
+        if (GetIsWall())
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            facingRight = true;
+            StopCoroutine(ChasePlayer());
+            isChasing = false;
+            currentCooldown = downedCooldown;
+        }
+        currentCooldown -= Time.deltaTime;
+        if (currentCooldown < 0)
+        {
+            isCooldown = false;
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            facingRight = false;
+            isCooldown = true;
         }
     }
-
     void HandleAnimations()
     {
 
     }
-
     void IdleMovement()
     {
-
-        if (facingRight)
+        if (facingRight && GetIsGrounded())
         {
-            frontGroundCheckPos = new Vector2(transform.position.x + frontGroundCheckOffset.x, transform.position.y + frontGroundCheckOffset.y);
-            if (GetIsGroundInFront(frontGroundCheckPos))
+            if (!GetIsGroundInFront() || GetIsWallInFront())
             {
-                enemyRB.linearVelocityX = idleMoveSpeed;
-
-            }
-            else if (GetIsGrounded())
-            {
-                enemyRB.linearVelocityX = -idleMoveSpeed;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 facingRight = false;
             }
+            else
+            {
+                enemyRB.linearVelocityX = idleMoveSpeed;
+            }
         }
-        else
+        else if (GetIsGrounded())
         {
-            frontGroundCheckPos = new Vector2(transform.position.x - frontGroundCheckOffset.x, transform.position.y - frontGroundCheckOffset.y);
-            if (GetIsGroundInFront(frontGroundCheckPos))
+            if (!GetIsGroundInFront() || GetIsWallInFront())
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                facingRight = true;
+            }
+            else
             {
                 enemyRB.linearVelocityX = -idleMoveSpeed;
 
             }
-            else if (GetIsGrounded())
-            {
-                enemyRB.linearVelocityX = idleMoveSpeed;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                facingRight = true;
-            }
+            
         }
     }
-
-    void ChasePlayer()
+    IEnumerator ChasePlayer()
     {
-        enemyRB.linearVelocity = new Vector2(state.GetPlayerDirection() * chaseMoveSpeed, enemyRB.linearVelocityY);
-    }
+        isChasing = true;
+        float chaseTime=0f;
 
-    bool GetIsGroundInFront(Vector2 groundCheckPos)
+        enemyRB.linearVelocity = Vector2.zero;
+        yield return new WaitForSeconds(chaseAnticipationTime);
+
+        while (chaseTime<chaseDuration)
+        {
+            if (facingRight)
+            { 
+                enemyRB.linearVelocity = new Vector2(chaseMoveSpeed, enemyRB.linearVelocityY);
+            }
+            else
+            {
+                enemyRB.linearVelocity = new Vector2(-chaseMoveSpeed, enemyRB.linearVelocityY);
+            }
+            chaseTime += Time.fixedDeltaTime;
+            yield return null;
+        }
+
+        isChasing = false;
+        currentCooldown = attackCooldown;
+    }
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        return Physics2D.Raycast(groundCheckPos, Vector2.down, frontGroundCheckLength, LayerMask.GetMask("Ground"));
+        if (other.gameObject.CompareTag("Player")) playerHealth.ChangeHealth(-damageAmount, (other.transform.position-transform.position).normalized, Vector2.up);
     }
-
+    bool GetIsGroundInFront()
+    {
+        return Physics2D.Raycast(frontRaycastOrigin.position, Vector2.down, frontGroundCheckLength, LayerMask.GetMask("Ground"));
+    }
     bool GetIsGrounded()
     {
         return Physics2D.Raycast(transform.position, Vector2.down, groundCheckLength, LayerMask.GetMask("Ground"));
     }
-
+    bool GetIsWallInFront()
+    {
+        return Physics2D.Raycast(frontRaycastOrigin.position, Vector2.right, groundCheckLength, LayerMask.GetMask("Ground"));
+    }
+    bool GetIsWall()
+    {
+        return Physics2D.Raycast(wallCheckPosition.position, Vector2.right, wallCheckLength, LayerMask.GetMask("Ground"));
+    }
     public bool GetFacingRight()
     {
         return facingRight;
+    }
+    public bool GetIsChasing()
+    {
+        return isChasing;
+    }
+    public bool GetIsCooldown()
+    {
+        return isCooldown;
     }
 }
