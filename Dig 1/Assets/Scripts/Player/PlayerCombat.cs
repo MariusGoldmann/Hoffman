@@ -62,7 +62,7 @@ public class PlayerCombat : MonoBehaviour
     void MeleeAttack(int damage, string animation)
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
-
+            
         animator.SetTrigger(animation);
 
         if (enemies != null)
