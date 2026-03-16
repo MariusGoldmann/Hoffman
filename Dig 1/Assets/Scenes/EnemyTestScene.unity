@@ -695,6 +695,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cef0dc1b7019948a81ddd98f0845f8, type: 3}
+--- !u!114 &1679895395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5082171930118937187, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+  m_PrefabInstance: {fileID: 1014976036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab5ade4392ac8e44886a2642388aed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
 --- !u!1001 &1947639737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -800,11 +811,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4455082567385806073, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
-      propertyPath: enemyMovement
+    - target: {fileID: 4182727920968109421, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
+      propertyPath: playerCombat
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4455082567385806073, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
+      objectReference: {fileID: 1679895395}
+    - target: {fileID: 5605187441174547169, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1014976037}
@@ -825,6 +836,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1616870180474529382, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.92

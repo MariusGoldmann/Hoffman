@@ -7,7 +7,6 @@ public class BlobfishCombat : MonoBehaviour
 {
     [Header("Expansion")]
     [SerializeField] CircleCollider2D bodyCollider;
-    [SerializeField] Transform playerTransform;
     [SerializeField] KnockbackScript knockbackScript;
     [SerializeField] float expandedRadius = 2f;
     [SerializeField] int collisionDamage = 2;
@@ -34,13 +33,11 @@ public class BlobfishCombat : MonoBehaviour
 
         normalRadius = bodyCollider.radius;
     }
-
-    private void FixedUpdate()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (bodyCollider.IsTouchingLayers(playerLayer) && !knockbackScript.GetIsKnockback())
+        if (other.gameObject.CompareTag("Player") && !knockbackScript.GetIsKnockback())
         {
-            Vector2 playerDirection = (playerTransform.position - transform.position).normalized;
-            playerHealth.ChangeHealth(-collisionDamage, playerDirection, Vector2.up);
+            playerHealth.ChangeHealth(-collisionDamage, (other.transform.position - transform.position).normalized, Vector2.up);
             if (!poison)
             {
                 StartCoroutine(Poison());
