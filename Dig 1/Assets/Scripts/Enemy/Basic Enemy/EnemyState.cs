@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyState : MonoBehaviour
 {
-    
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform enemyPosition;
     [SerializeField] Rigidbody2D enemyParentRB;

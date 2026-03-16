@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,23 +15,29 @@ public class PlayerHealth : MonoBehaviour
     KnockbackScript knockbackScript;
     PlayerMovement playerMovement;
 
+    [SerializeField] Slider healthSlider; 
+
     private void Start()
     {
         knockbackScript = GetComponent<KnockbackScript>();
         playerMovement= GetComponent<PlayerMovement>();
 
         currentPlayerHealth = maxPlayerHealth;
+
+        healthSlider.maxValue = maxPlayerHealth;
+        healthSlider.value = currentPlayerHealth;
     }
     private void Update()
     {
         Debug.Log(currentPlayerHealth);
     }
-    public void ChangeHealth(int amount, Vector2 hitDirection)
+    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton)
     {
-        Debug.Log("Dennis suger 2");
+        //Dennis suger 2 was here :D 
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
-        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, Vector2.up));
+        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton));
+        healthSlider.value = currentPlayerHealth; 
         if (currentPlayerHealth <= 0) DeathSequence();
     }
 

@@ -8,7 +8,7 @@ using static PlayerMovement;
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Basic combat settings")]
-    [SerializeField] float attackRadius;
+    [SerializeField] float attackRadius = 1.4f;
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask enemyLayer;
 
@@ -33,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] AnimationCurve boomerangAnimationCurve;
 
+    [SerializeField] Transform effectPoint;
     // Private variables
     Coroutine boomerangSpawnerCoroutine;
 
@@ -42,6 +43,7 @@ public class PlayerCombat : MonoBehaviour
 
     // Component references
     [SerializeField] GameObject boomerangPrefab; // drag in inspector
+    [SerializeField] GameObject slashEffect; // drag in inspector
     Animator animator;
 
     void Awake()
@@ -67,16 +69,16 @@ public class PlayerCombat : MonoBehaviour
         {
             foreach (Collider2D enemy in enemies)
             {
-                enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage);
+                Vector2 direction = (enemy.transform.position - transform.position).normalized;
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction);
             }
         }
     }
-
     IEnumerator BoomerangSpawner()
     {
         Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
         GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
-        
+
         Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
 
         earlyReceiving = false;
@@ -86,7 +88,7 @@ public class PlayerCombat : MonoBehaviour
         float boomerangSpeed;
         float boomerangReturnSpeed = boomerangReturnForce;
         int boomerangDirection = playerMovement.GetFacingDirection(); //Where the player is facing
-        
+
         while (timer < duration && !earlyReceiving)
         {
             timer += Time.deltaTime;
@@ -96,11 +98,11 @@ public class PlayerCombat : MonoBehaviour
 
             yield return null;
         }
-        
+
         while (boomerang != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f || earlyReceiving)
         {
             boomerangReturnSpeed += 50 * Time.deltaTime;
-            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position , transform.position, boomerangReturnSpeed * Time.deltaTime);
+            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, boomerangReturnSpeed * Time.deltaTime);
 
             earlyReceiving = true;
             yield return null;
@@ -128,6 +130,7 @@ public class PlayerCombat : MonoBehaviour
         {
             slashTimer = slashCooldown;
             MeleeAttack(slashDamage, "Slash");
+            AttackEffects(slashEffect);
             Debug.Log("Slash");
         }
     }
@@ -151,6 +154,13 @@ public class PlayerCombat : MonoBehaviour
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }
     }
+
+    void AttackEffects(GameObject attackEffect)
+    {
+        GameObject effect = Instantiate(attackEffect, effectPoint.position, Quaternion.identity);
+        effect.transform.SetParent(transform);
+        effect.transform.localScale = new Vector3(effect.transform.localScale.x * playerMovement.GetFacingDirection(), effect.transform.localScale.y, effect.transform.localScale.z);
+    }
     void HandleCooldowns()
     {
         slashTimer -= Time.deltaTime;
@@ -169,10 +179,6 @@ public class PlayerCombat : MonoBehaviour
     {
         return earlyReceiving = value;
     }
-
-    void OnDrawGizmos() // Attack radius debug
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(attackPoint.position, attackRadius);
-    }
 }
+
+

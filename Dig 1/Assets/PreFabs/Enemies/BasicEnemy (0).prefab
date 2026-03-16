@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2701222916841014927}
   - component: {fileID: 8803518736054272759}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,8 @@ GameObject:
   - component: {fileID: 7647764781272537226}
   - component: {fileID: 2940546551316196417}
   - component: {fileID: 4964431797290458676}
-  m_Layer: 0
+  - component: {fileID: 5293295106038382280}
+  m_Layer: 7
   m_Name: BasicEnemy (0)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -266,8 +267,25 @@ MonoBehaviour:
   idleMoveSpeed: 3
   chaseMoveSpeed: 4
   groundCheckLength: 1.67
-  groundCheckOffset: {x: 1, y: 0}
+  frontGroundCheckLength: 1.67
+  frontGroundCheckOffset: {x: 1, y: 0}
   facingRight: 1
+--- !u!114 &5293295106038382280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3690491964236662844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed67d94bbfb00444846715de9a9380b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  currentEnemyHealth: 0
+  maxEnemyHealth: 5
+  playerCombat: {fileID: 0}
+  damageFlash: {fileID: 0}
 --- !u!1 &7127967758966049105
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +297,7 @@ GameObject:
   - component: {fileID: 3328409903372722080}
   - component: {fileID: 1891334873788177499}
   - component: {fileID: 3347148803880107307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
