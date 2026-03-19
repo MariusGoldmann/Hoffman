@@ -18,6 +18,7 @@ public class CameraShake : MonoBehaviour
         {
             ShakeCamera(0.5f, 0.05f, true, true);
         }
+
     }
 
     public void ShakeCamera(float duration, float severity, bool vertical, bool horizontal)
@@ -27,6 +28,7 @@ public class CameraShake : MonoBehaviour
             return;
         }
 
+        print("cam shaking");
         StartCoroutine(Shake(duration, severity, vertical, horizontal));
     }
 

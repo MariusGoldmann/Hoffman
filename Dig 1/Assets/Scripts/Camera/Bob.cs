@@ -1,4 +1,5 @@
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bob : MonoBehaviour
@@ -10,7 +11,7 @@ public class Bob : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
-   public void damage(float damageAmount)
+    public void damage(float damageAmount)
    {
         CameraShakeManager.instance.CameraShake(impulseSource);
    }

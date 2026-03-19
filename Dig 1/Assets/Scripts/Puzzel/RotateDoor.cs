@@ -17,7 +17,7 @@ public class RotateDoor : MonoBehaviour
     }
     void SpinningDoor()
     {
-        float targetRotation = IsVertical ? 0f : 90f;
+        float targetRotation = IsVertical ? -90f : -180f;
 
         StopAllCoroutines();
         StartCoroutine(RotateSmooth(targetRotation));
