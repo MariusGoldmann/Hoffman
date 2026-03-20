@@ -170,6 +170,21 @@ public class PlayerCombat : MonoBehaviour
         boomerangTimer -= Time.deltaTime;
     }
 
+    public float GetSlashTimer()
+    {
+        return slashTimer;
+    }
+
+    public float GetKickTimer()
+    {
+        return kickTimer;
+    }
+
+    public float GetBoomerangTimer()
+    {
+        return boomerangTimer;
+    }
+
     public int GetBoomerangDamage()
     {
         return boomerangDamage;
