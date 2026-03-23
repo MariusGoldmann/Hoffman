@@ -41,6 +41,7 @@ public class PauseManager : MonoBehaviour
             {
                 pauseMenuUI.SetActive(false);
                 buttonScript.buttonPressed = false;
+                optionUI.SetActive(false);
                 Time.timeScale = 1;
             }
                 
@@ -66,6 +67,7 @@ public class PauseManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         abilityTabUI.SetActive(false);
+        optionUI.SetActive(false);
         Time.timeScale = 1;
     }
 
@@ -73,5 +75,11 @@ public class PauseManager : MonoBehaviour
    {
         Time.timeScale = 1;
    }
-    
+
+    public void Options()
+    {
+        optionUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1; 
+    }
 }
