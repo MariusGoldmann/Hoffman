@@ -16,7 +16,10 @@ public class SpawnManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null) Destroy(this.gameObject);
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
         else
         {
             instance = this;

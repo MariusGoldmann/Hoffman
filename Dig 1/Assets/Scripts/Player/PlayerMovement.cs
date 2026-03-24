@@ -35,8 +35,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
 
     //Script references
-    PickUpScript pickUpScript;
-    KnockbackScript knockbackScript;
+    [SerializeField] PickUpScript pickUpScript;
+    [SerializeField] KnockbackScript knockbackScript;
 
     //Component references
     Rigidbody2D playerRB;
@@ -51,7 +51,10 @@ public class PlayerMovement : MonoBehaviour
         pickUpScript = GetComponent<PickUpScript>();
         knockbackScript = FindFirstObjectByType<KnockbackScript>();
 
-        transform.position = SpawnManager.instance.spawnPosition;
+        if (SpawnManager.instance != null)
+        {
+            transform.position = SpawnManager.instance.spawnPosition;
+        }
     }
 
     void Start()

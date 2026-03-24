@@ -28,10 +28,5 @@ public class BoomerangColission : MonoBehaviour
             Debug.Log("Ground hit");
             playerCombat.GetEarlyReceiving(true);
         }
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-
-        }
     }
 }
