@@ -37,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
         StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton));
-        healthSlider.value = currentPlayerHealth; 
+        if (healthSlider!=null) healthSlider.value = currentPlayerHealth; 
         if (currentPlayerHealth <= 0) DeathSequence();
     }
 

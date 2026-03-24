@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
     [SerializeField] private GameObject abilityTabUI;
+    [SerializeField] private GameObject optionUI;
 
     InputAction pauseAction;
     InputAction abilityTabAction;
@@ -20,6 +21,7 @@ public class PauseManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         abilityTabUI.SetActive(false);
+        optionUI.SetActive(false);
 
         pauseAction = InputSystem.actions.FindAction("Pause");
         abilityTabAction = InputSystem.actions.FindAction("AbilityTab");
