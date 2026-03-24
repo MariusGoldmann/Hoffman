@@ -33,17 +33,18 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] AnimationCurve boomerangAnimationCurve;
 
-    [SerializeField] Transform effectPoint;
+    [SerializeField] Transform effectPoint; // drag in inspector
     // Private variables
     Coroutine boomerangSpawnerCoroutine;
 
     // Script references
-    [SerializeField] PlayerMovement playerMovement;
-    [SerializeField] PickUpScript pickUpScript;
+    PlayerMovement playerMovement;
+    PickUpScript pickUpScript;
 
     // Component references
     [SerializeField] GameObject boomerangPrefab; // drag in inspector
     [SerializeField] GameObject slashEffect; // drag in inspector
+    [SerializeField] GameObject kickEffect; // drag in inspector
     Animator animator;
 
     void Awake()
@@ -119,8 +120,6 @@ public class PlayerCombat : MonoBehaviour
 
             boomerangSpawnerCoroutine = null;
             Destroy(boomerang);
-
-            boomerangTimer = boomerangCooldown;
         }
     }
 
@@ -131,7 +130,6 @@ public class PlayerCombat : MonoBehaviour
             slashTimer = slashCooldown;
             MeleeAttack(slashDamage, "Slash");
             AttackEffects(slashEffect);
-            Debug.Log("Slash");
         }
     }
 
@@ -139,9 +137,9 @@ public class PlayerCombat : MonoBehaviour
     {
         if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg())
         {
-            Debug.Log("Kick");
-            MeleeAttack(kickDamage, "Kick");
             kickTimer = kickCooldown;
+            MeleeAttack(kickDamage, "Kick");
+            AttackEffects(kickEffect);
         }
     }
 
@@ -149,7 +147,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang())
         {
-            Debug.Log("Throw");
+            boomerangTimer = boomerangCooldown;
             animator.SetTrigger("Throwing");
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
         }
