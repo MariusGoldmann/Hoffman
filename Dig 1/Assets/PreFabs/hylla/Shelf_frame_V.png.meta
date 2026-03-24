@@ -1,40 +1,40 @@
 fileFormatVersion: 2
-guid: 45c114c9166124c4b970807fe3452c42
+guid: 210fffe9b03527f4c9c87888a6c389e2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6629729683368314055
-    second: Shelf_Frame_H_0
+      213: 7263280009061433715
+    second: Shelf_frame_V_0
   - first:
-      213: 3144681021868707672
-    second: Shelf_Frame_H_1
+      213: -4489671740704183708
+    second: Shelf_frame_V_1
   - first:
-      213: -7385399364077510735
-    second: Shelf_Frame_H_2
+      213: 6577904887447329568
+    second: Shelf_frame_V_2
   - first:
-      213: -7226927490006142858
-    second: Shelf_Frame_H_3
+      213: -6067539436375448050
+    second: Shelf_frame_V_3
   - first:
-      213: -3694269432418632070
-    second: Shelf_Frame_H_4
+      213: 8786854143439757680
+    second: Shelf_frame_V_4
   - first:
-      213: 5308606241510461200
-    second: Shelf_Frame_H_5
+      213: 609264687650247982
+    second: Shelf_frame_V_5
   - first:
-      213: -9198289801132695508
-    second: Shelf_Frame_H_6
+      213: -2389881462834166056
+    second: Shelf_frame_V_6
   - first:
-      213: -3900108979982351163
-    second: Shelf_Frame_H_7
+      213: -4606448087418419627
+    second: Shelf_frame_V_7
   - first:
-      213: -4205698324314998255
-    second: Shelf_Frame_H_8
+      213: -1783257431398610610
+    second: Shelf_frame_V_8
   - first:
-      213: -7733493023978930749
-    second: Shelf_Frame_H_9
+      213: -6806534349113370699
+    second: Shelf_frame_V_9
   - first:
-      213: 8161116343888735885
-    second: Shelf_Frame_H_10
+      213: -6126962894133264296
+    second: Shelf_frame_V_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -130,10 +130,32 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shelf_Frame_H_0
+      name: Shelf_frame_V_0
       rect:
         serializedVersion: 2
-        x: 1495
+        x: 1209
+        y: 1622
+        width: 47
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3718d4c8faa5cc460800000000000000
+      internalID: 7263280009061433715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shelf_frame_V_1
+      rect:
+        serializedVersion: 2
+        x: 1215
         y: 1645
         width: 41
         height: 26
@@ -145,61 +167,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c4080e6508810c50800000000000000
-      internalID: 6629729683368314055
+      spriteID: 46aa731d65b71b1c0800000000000000
+      internalID: -4489671740704183708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_Frame_H_1
+      name: Shelf_frame_V_2
       rect:
         serializedVersion: 2
-        x: 1495
-        y: 1642
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 85f85686ab624ab20800000000000000
-      internalID: 3144681021868707672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_Frame_H_2
-      rect:
-        serializedVersion: 2
-        x: 1495
-        y: 1622
-        width: 41
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1bf93cb686ac18990800000000000000
-      internalID: -7385399364077510735
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_Frame_H_3
-      rect:
-        serializedVersion: 2
-        x: 1504
+        x: 1228
         y: 1643
         width: 19
         height: 10
@@ -211,20 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 670bdacdcbbc4bb90800000000000000
-      internalID: -7226927490006142858
+      spriteID: 02b9a96d4a9694b50800000000000000
+      internalID: 6577904887447329568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_Frame_H_4
+      name: Shelf_frame_V_3
       rect:
         serializedVersion: 2
-        x: 1480
-        y: 1378
-        width: 276
-        height: 252
+        x: 1250
+        y: 1642
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,20 +211,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7e7a1836815bbcc0800000000000000
-      internalID: -3694269432418632070
+      spriteID: e06ea22a705cbcba0800000000000000
+      internalID: -6067539436375448050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_Frame_H_5
+      name: Shelf_frame_V_4
       rect:
         serializedVersion: 2
-        x: 1598
-        y: 1622
-        width: 9
-        height: 7
+        x: 1005
+        y: 1372
+        width: 266
+        height: 258
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,17 +233,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 01f07ad1045fba940800000000000000
-      internalID: 5308606241510461200
+      spriteID: 07165e8e94d21f970800000000000000
+      internalID: 8786854143439757680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_Frame_H_6
+      name: Shelf_frame_V_5
       rect:
         serializedVersion: 2
-        x: 1626
+        x: 1100
         y: 1620
         width: 25
         height: 12
@@ -277,41 +255,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c202366192c195080800000000000000
-      internalID: -9198289801132695508
+      spriteID: e251591610b847800800000000000000
+      internalID: 609264687650247982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_Frame_H_7
+      name: Shelf_frame_V_6
       rect:
         serializedVersion: 2
-        x: 1765
-        y: 1570
-        width: 7
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5c447dedb8700e9c0800000000000000
-      internalID: -3900108979982351163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_Frame_H_8
-      rect:
-        serializedVersion: 2
-        x: 1765
-        y: 1565
-        width: 6
+        x: 1144
+        y: 1622
+        width: 9
         height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -321,17 +277,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 11abfb228ab52a5c0800000000000000
-      internalID: -4205698324314998255
+      spriteID: 8d68a70c87f65ded0800000000000000
+      internalID: -2389881462834166056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_Frame_H_9
+      name: Shelf_frame_V_7
       rect:
         serializedVersion: 2
-        x: 1775
+        x: 968
         y: 1549
         width: 8
         height: 62
@@ -343,17 +299,61 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3cd36c8811d1da490800000000000000
-      internalID: -7733493023978930749
+      spriteID: 556c529dedb9210c0800000000000000
+      internalID: -4606448087418419627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_Frame_H_10
+      name: Shelf_frame_V_8
       rect:
         serializedVersion: 2
-        x: 1764
+        x: 979
+        y: 1570
+        width: 7
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e49096270d89047e0800000000000000
+      internalID: -1783257431398610610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shelf_frame_V_9
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 1565
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b75a9172155a81a0800000000000000
+      internalID: -6806534349113370699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shelf_frame_V_10
+      rect:
+        serializedVersion: 2
+        x: 980
         y: 1549
         width: 7
         height: 17
@@ -365,8 +365,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8e6f18431c124170800000000000000
-      internalID: 8161116343888735885
+      spriteID: 8500037b5b7a8faa0800000000000000
+      internalID: -6126962894133264296
       vertices: []
       indices: 
       edges: []
@@ -385,17 +385,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Shelf_Frame_H_0: 6629729683368314055
-      Shelf_Frame_H_1: 3144681021868707672
-      Shelf_Frame_H_10: 8161116343888735885
-      Shelf_Frame_H_2: -7385399364077510735
-      Shelf_Frame_H_3: -7226927490006142858
-      Shelf_Frame_H_4: -3694269432418632070
-      Shelf_Frame_H_5: 5308606241510461200
-      Shelf_Frame_H_6: -9198289801132695508
-      Shelf_Frame_H_7: -3900108979982351163
-      Shelf_Frame_H_8: -4205698324314998255
-      Shelf_Frame_H_9: -7733493023978930749
+      Shelf_frame_V_0: 7263280009061433715
+      Shelf_frame_V_1: -4489671740704183708
+      Shelf_frame_V_10: -6126962894133264296
+      Shelf_frame_V_2: 6577904887447329568
+      Shelf_frame_V_3: -6067539436375448050
+      Shelf_frame_V_4: 8786854143439757680
+      Shelf_frame_V_5: 609264687650247982
+      Shelf_frame_V_6: -2389881462834166056
+      Shelf_frame_V_7: -4606448087418419627
+      Shelf_frame_V_8: -1783257431398610610
+      Shelf_frame_V_9: -6806534349113370699
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

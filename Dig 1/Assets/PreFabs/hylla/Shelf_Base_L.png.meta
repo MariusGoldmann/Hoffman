@@ -1,76 +1,67 @@
 fileFormatVersion: 2
-guid: 2638d2980f5455142bf1038f70b65678
+guid: 3029dd3bc0c137b4a851581b5a7efedc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1358079206980710347
-    second: Shelf_bredd_L_0
+      213: -7167487268897355480
+    second: Shelf_Base_L_0
   - first:
-      213: 1341313541806899799
-    second: Shelf_bredd_L_1
+      213: -3308144366339908977
+    second: Shelf_Base_L_1
   - first:
-      213: 7057082979429517440
-    second: Shelf_bredd_L_2
+      213: 7488608290557264068
+    second: Shelf_Base_L_2
   - first:
-      213: -5851724691994095659
-    second: Shelf_bredd_L_3
+      213: -2566507568681601978
+    second: Shelf_Base_L_3
   - first:
-      213: 6123245823400988386
-    second: Shelf_bredd_L_4
+      213: -3414738593974044596
+    second: Shelf_Base_L_4
   - first:
-      213: 9039579993644299319
-    second: Shelf_bredd_L_5
+      213: -8492962209675554528
+    second: Shelf_Base_L_5
   - first:
-      213: -3984600142702356129
-    second: Shelf_bredd_L_6
+      213: -8202468835981435806
+    second: Shelf_Base_L_6
   - first:
-      213: 8155876247551347638
-    second: Shelf_bredd_L_7
+      213: -6927943374585864074
+    second: Shelf_Base_L_7
   - first:
-      213: 6183875970599124209
-    second: Shelf_bredd_L_8
+      213: 3513985220599264852
+    second: Shelf_Base_L_8
   - first:
-      213: 4478267994147969863
-    second: Shelf_bredd_L_9
+      213: -7166562384032798225
+    second: Shelf_Base_L_9
   - first:
-      213: 2876853734948145722
-    second: Shelf_bredd_L_10
+      213: 3250099010727681773
+    second: Shelf_Base_L_10
   - first:
-      213: -8059039958938962613
-    second: Shelf_bredd_L_11
+      213: -1051632599391755778
+    second: Shelf_Base_L_11
   - first:
-      213: 8188089095345125616
-    second: Shelf_bredd_L_12
+      213: 5610841479015175942
+    second: Shelf_Base_L_12
   - first:
-      213: -6614545918156015205
-    second: Shelf_bredd_L_13
+      213: 1831254544464704493
+    second: Shelf_Base_L_13
   - first:
-      213: -7307540268628239908
-    second: Shelf_bredd_L_14
+      213: 1614530048982903820
+    second: Shelf_Base_L_14
   - first:
-      213: 779890590337532768
-    second: Shelf_bredd_L_15
+      213: 6781383625091144180
+    second: Shelf_Base_L_15
   - first:
-      213: -1251956251112622965
-    second: Shelf_bredd_L_16
+      213: 7408215149686341156
+    second: Shelf_Base_L_16
   - first:
-      213: -4997269629571251226
-    second: Shelf_bredd_L_17
+      213: -5379988850842132185
+    second: Shelf_Base_L_17
   - first:
-      213: 3256605483818689890
-    second: Shelf_bredd_L_18
+      213: 2485059908472198184
+    second: Shelf_Base_L_18
   - first:
-      213: 7712001438559513918
-    second: Shelf_bredd_L_19
-  - first:
-      213: -3793500585794449824
-    second: Shelf_bredd_L_20
-  - first:
-      213: 4497324573509482458
-    second: Shelf_bredd_L_21
-  - first:
-      213: 5554630205242066311
-    second: Shelf_bredd_L_22
+      213: 7301286499886819252
+    second: Shelf_Base_L_19
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -166,13 +157,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shelf_bredd_L_0
+      name: Shelf_Base_L_0
       rect:
         serializedVersion: 2
-        x: 19
+        x: 836
         y: 131
-        width: 1221
-        height: 79
+        width: 1289
+        height: 83
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,19 +172,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 530121b1822272de0800000000000000
-      internalID: -1358079206980710347
+      spriteID: 8290d3dcd48f78c90800000000000000
+      internalID: -7167487268897355480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_1
+      name: Shelf_Base_L_1
       rect:
         serializedVersion: 2
-        x: 77
+        x: 911
         y: 204
-        width: 41
+        width: 24
         height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -203,17 +194,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75242d74f8d4d9210800000000000000
-      internalID: 1341313541806899799
+      spriteID: f8a9992e93c1712d0800000000000000
+      internalID: -3308144366339908977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_2
+      name: Shelf_Base_L_2
       rect:
         serializedVersion: 2
-        x: 118
+        x: 935
         y: 204
         width: 7
         height: 7
@@ -225,17 +216,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0880a5b649bcfe160800000000000000
-      internalID: 7057082979429517440
+      spriteID: 4c006bc5091ece760800000000000000
+      internalID: 7488608290557264068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_3
+      name: Shelf_Base_L_3
       rect:
         serializedVersion: 2
-        x: 125
+        x: 942
         y: 203
         width: 81
         height: 14
@@ -247,17 +238,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5df4f4a756f7acea0800000000000000
-      internalID: -5851724691994095659
+      spriteID: 644b167d6fee16cd0800000000000000
+      internalID: -2566507568681601978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_4
+      name: Shelf_Base_L_4
       rect:
         serializedVersion: 2
-        x: 208
+        x: 1025
+        y: 204
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c483c5147596c90d0800000000000000
+      internalID: -3414738593974044596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shelf_Base_L_5
+      rect:
+        serializedVersion: 2
+        x: 1074
         y: 204
         width: 27
         height: 10
@@ -269,39 +282,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2eec53052a32af450800000000000000
-      internalID: 6123245823400988386
+      spriteID: 021d8713edfe22a80800000000000000
+      internalID: -8492962209675554528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_5
+      name: Shelf_Base_L_6
       rect:
         serializedVersion: 2
-        x: 240
-        y: 204
-        width: 44
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 73475e74c1a037d70800000000000000
-      internalID: 9039579993644299319
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_bredd_L_6
-      rect:
-        serializedVersion: 2
-        x: 292
+        x: 1109
         y: 204
         width: 34
         height: 21
@@ -313,17 +304,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f595142184bd3b8c0800000000000000
-      internalID: -3984600142702356129
+      spriteID: 26c5d1e5d0afa2e80800000000000000
+      internalID: -8202468835981435806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_7
+      name: Shelf_Base_L_7
       rect:
         serializedVersion: 2
-        x: 323
+        x: 1140
         y: 204
         width: 16
         height: 13
@@ -335,17 +326,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6bb08574c3e7f2170800000000000000
-      internalID: 8155876247551347638
+      spriteID: 670e9c5e4300bdf90800000000000000
+      internalID: -6927943374585864074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_8
+      name: Shelf_Base_L_8
       rect:
         serializedVersion: 2
-        x: 344
+        x: 1161
         y: 204
         width: 30
         height: 13
@@ -357,17 +348,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fc72a28e6a81d550800000000000000
-      internalID: 6183875970599124209
+      spriteID: 456bac3b0fe24c030800000000000000
+      internalID: 3513985220599264852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_9
+      name: Shelf_Base_L_9
       rect:
         serializedVersion: 2
-        x: 578
+        x: 1395
         y: 210
         width: 19
         height: 7
@@ -379,17 +370,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74bd0388301062e30800000000000000
-      internalID: 4478267994147969863
+      spriteID: fe96c075b714b8c90800000000000000
+      internalID: -7166562384032798225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_10
+      name: Shelf_Base_L_10
       rect:
         serializedVersion: 2
-        x: 583
+        x: 1400
         y: 204
         width: 22
         height: 6
@@ -401,17 +392,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3a075eca33ace720800000000000000
-      internalID: 2876853734948145722
+      spriteID: dee954b94dbaa1d20800000000000000
+      internalID: 3250099010727681773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_11
+      name: Shelf_Base_L_11
       rect:
         serializedVersion: 2
-        x: 606
+        x: 1423
         y: 204
         width: 18
         height: 8
@@ -423,19 +414,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b45b3c02bd9882090800000000000000
-      internalID: -8059039958938962613
+      spriteID: ef1a80ff8b9d761f0800000000000000
+      internalID: -1051632599391755778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_12
+      name: Shelf_Base_L_12
       rect:
         serializedVersion: 2
-        x: 646
+        x: 1466
         y: 203
-        width: 34
+        width: 31
         height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -445,17 +436,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f8bb4d56afe1a170800000000000000
-      internalID: 8188089095345125616
+      spriteID: 6071abff896bddd40800000000000000
+      internalID: 5610841479015175942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_13
+      name: Shelf_Base_L_13
       rect:
         serializedVersion: 2
-        x: 884
+        x: 1701
         y: 210
         width: 19
         height: 7
@@ -467,17 +458,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b99fcc568896434a0800000000000000
-      internalID: -6614545918156015205
+      spriteID: de373284e4ce96910800000000000000
+      internalID: 1831254544464704493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_14
+      name: Shelf_Base_L_14
       rect:
         serializedVersion: 2
-        x: 889
+        x: 1706
         y: 204
         width: 22
         height: 6
@@ -489,17 +480,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd91d8ab7d6669a90800000000000000
-      internalID: -7307540268628239908
+      spriteID: c0ce1d08686f76610800000000000000
+      internalID: 1614530048982903820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_15
+      name: Shelf_Base_L_15
       rect:
         serializedVersion: 2
-        x: 912
+        x: 1729
         y: 204
         width: 18
         height: 8
@@ -511,105 +502,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0630db02c5ab2da00800000000000000
-      internalID: 779890590337532768
+      spriteID: 4f9553b4a705c1e50800000000000000
+      internalID: 6781383625091144180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_16
+      name: Shelf_Base_L_16
       rect:
         serializedVersion: 2
-        x: 954
-        y: 203
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b843a1a3c6820aee0800000000000000
-      internalID: -1251956251112622965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_bredd_L_17
-      rect:
-        serializedVersion: 2
-        x: 1157
-        y: 210
-        width: 19
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6e3ce82afb126aab0800000000000000
-      internalID: -4997269629571251226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_bredd_L_18
-      rect:
-        serializedVersion: 2
-        x: 1162
-        y: 204
-        width: 22
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2652a9cee69c13d20800000000000000
-      internalID: 3256605483818689890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_bredd_L_19
-      rect:
-        serializedVersion: 2
-        x: 1185
-        y: 204
-        width: 18
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e3d24acc278860b60800000000000000
-      internalID: 7712001438559513918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_bredd_L_20
-      rect:
-        serializedVersion: 2
-        x: 1227
+        x: 1772
         y: 203
         width: 6
         height: 11
@@ -621,19 +524,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06e4c78e057ca5bc0800000000000000
-      internalID: -3793500585794449824
+      spriteID: 42eb8b0ad644fc660800000000000000
+      internalID: 7408215149686341156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_21
+      name: Shelf_Base_L_17
       rect:
         serializedVersion: 2
-        x: 1244
-        y: 188
-        width: 28
+        x: 1974
+        y: 210
+        width: 19
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7212ef105a07655b0800000000000000
+      internalID: -5379988850842132185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shelf_Base_L_18
+      rect:
+        serializedVersion: 2
+        x: 1979
+        y: 204
+        width: 22
         height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -643,20 +568,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad7faab2fd4b96e30800000000000000
-      internalID: 4497324573509482458
+      spriteID: 824dc0202d4bc7220800000000000000
+      internalID: 2485059908472198184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_bredd_L_22
+      name: Shelf_Base_L_19
       rect:
         serializedVersion: 2
-        x: 1271
-        y: 188
-        width: 37
-        height: 6
+        x: 2002
+        y: 204
+        width: 18
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -665,8 +590,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 785cb12fdb2061d40800000000000000
-      internalID: 5554630205242066311
+      spriteID: 4b7eb154361635560800000000000000
+      internalID: 7301286499886819252
       vertices: []
       indices: 
       edges: []
@@ -685,29 +610,26 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Shelf_bredd_L_0: -1358079206980710347
-      Shelf_bredd_L_1: 1341313541806899799
-      Shelf_bredd_L_10: 2876853734948145722
-      Shelf_bredd_L_11: -8059039958938962613
-      Shelf_bredd_L_12: 8188089095345125616
-      Shelf_bredd_L_13: -6614545918156015205
-      Shelf_bredd_L_14: -7307540268628239908
-      Shelf_bredd_L_15: 779890590337532768
-      Shelf_bredd_L_16: -1251956251112622965
-      Shelf_bredd_L_17: -4997269629571251226
-      Shelf_bredd_L_18: 3256605483818689890
-      Shelf_bredd_L_19: 7712001438559513918
-      Shelf_bredd_L_2: 7057082979429517440
-      Shelf_bredd_L_20: -3793500585794449824
-      Shelf_bredd_L_21: 4497324573509482458
-      Shelf_bredd_L_22: 5554630205242066311
-      Shelf_bredd_L_3: -5851724691994095659
-      Shelf_bredd_L_4: 6123245823400988386
-      Shelf_bredd_L_5: 9039579993644299319
-      Shelf_bredd_L_6: -3984600142702356129
-      Shelf_bredd_L_7: 8155876247551347638
-      Shelf_bredd_L_8: 6183875970599124209
-      Shelf_bredd_L_9: 4478267994147969863
+      Shelf_Base_L_0: -7167487268897355480
+      Shelf_Base_L_1: -3308144366339908977
+      Shelf_Base_L_10: 3250099010727681773
+      Shelf_Base_L_11: -1051632599391755778
+      Shelf_Base_L_12: 5610841479015175942
+      Shelf_Base_L_13: 1831254544464704493
+      Shelf_Base_L_14: 1614530048982903820
+      Shelf_Base_L_15: 6781383625091144180
+      Shelf_Base_L_16: 7408215149686341156
+      Shelf_Base_L_17: -5379988850842132185
+      Shelf_Base_L_18: 2485059908472198184
+      Shelf_Base_L_19: 7301286499886819252
+      Shelf_Base_L_2: 7488608290557264068
+      Shelf_Base_L_3: -2566507568681601978
+      Shelf_Base_L_4: -3414738593974044596
+      Shelf_Base_L_5: -8492962209675554528
+      Shelf_Base_L_6: -8202468835981435806
+      Shelf_Base_L_7: -6927943374585864074
+      Shelf_Base_L_8: 3513985220599264852
+      Shelf_Base_L_9: -7166562384032798225
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
