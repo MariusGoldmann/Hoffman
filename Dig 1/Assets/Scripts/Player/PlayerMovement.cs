@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
         pickUpScript = GetComponent<PickUpScript>();
         knockbackScript = FindFirstObjectByType<KnockbackScript>();
+
+        transform.position = SpawnManager.instance.spawnPosition;
     }
 
     void Start()
