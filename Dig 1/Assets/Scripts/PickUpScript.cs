@@ -70,21 +70,21 @@ public class PickUpScript : MonoBehaviour
 
     private void Update()
     {
-        RigSetter();
         if (hasLeg == true)
         {
             animator.SetBool("HasLeg", true);
-            
+            Debug.Log("Has leg");
             newLegRig.transform.localScale = new Vector3(1, 1, 1);
             oldLegRig.transform.localScale = new Vector3(0, 0, 0);
         }
         else
         {
             animator.SetBool("HasLeg", false);
-
+            Debug.Log("No leg");
             newLegRig.transform.localScale = new Vector3(0, 0, 0);
             oldLegRig.transform.localScale = new Vector3(1, 1, 1);
         }
+        RigSetter();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -127,7 +127,7 @@ public class PickUpScript : MonoBehaviour
 
     void RigSetter()
     {
-        if (spawnManager.legOwned)
+        if (spawnManager.legOwned == true)
         {
             hasLeg = true;
         }
