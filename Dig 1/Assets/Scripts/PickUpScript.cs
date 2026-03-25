@@ -6,20 +6,26 @@ using UnityEngine.UI;
 
 public class PickUpScript : MonoBehaviour
 {
-    [SerializeField] GameObject bomerangImage;
-
+    [Header("Pick Up Bools")]
     [SerializeField] bool hasLeg;
     [SerializeField] bool hasEye;
-    [SerializeField] bool hasEar; 
+    [SerializeField] bool hasEar;
     [SerializeField] bool hasBoomerang;
-
-    [SerializeField] GameObject eyeTabCloud;
-    [SerializeField] GameObject boomerangTabCloud;
-
     [SerializeField] bool isInteracting;
 
     InputAction interactAction;
 
+    [Header("UI")]
+    [SerializeField] GameObject eyeTabCloud;
+    [SerializeField] GameObject boomerangTabCloud;
+
+    [Header("Particles")]
+    [SerializeField] ParticleSystem pickUpLegParticle;
+    [SerializeField] ParticleSystem pickUpEyeParticle;
+    [SerializeField] ParticleSystem pickUpEarParticle;
+
+
+    [Header("Rigs")]
     [SerializeField] GameObject newLegRig;
     [SerializeField] GameObject oldLegRig;
     [SerializeField] GameObject newEarRig;
@@ -44,13 +50,6 @@ public class PickUpScript : MonoBehaviour
         newEarRig.transform.localScale = new Vector3(0, 0, 0);
 
         animator = GetComponentInChildren<Animator>();
-
-
-        if (bomerangImage != null)
-        {
-            bomerangImage.SetActive(false);
-        }
-
 
         interactAction = InputSystem.actions.FindAction("Interact");
     }
@@ -94,12 +93,16 @@ public class PickUpScript : MonoBehaviour
             hasLeg = true;
             spawnManager.legOwned = true;
 
+
+            pickUpLegParticle.Play();
+
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)
         {
             hasEye = true;
             spawnManager.eyeOwned = true;
+            pickUpEyeParticle.Play();
             newEyeRig.transform.localScale = new Vector3(1, 1, 1);
 
             eyeTabCloud.SetActive(false);
@@ -110,7 +113,6 @@ public class PickUpScript : MonoBehaviour
             hasBoomerang = true;
             spawnManager.boomerangOwned = true;
 
-            bomerangImage.SetActive(true);
             boomerangTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
@@ -119,7 +121,7 @@ public class PickUpScript : MonoBehaviour
         {
             hasEar = true;
             spawnManager.earOwned = true;
-
+            pickUpEarParticle.Play();
             newEarRig.transform.localScale = new Vector3(1, 1, 1);
             Destroy(collision.gameObject);
         }
@@ -144,7 +146,6 @@ public class PickUpScript : MonoBehaviour
         {
             hasBoomerang = true;
 
-            bomerangImage.SetActive(true);
             boomerangTabCloud.SetActive(false);
         }
 
