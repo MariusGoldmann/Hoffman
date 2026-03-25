@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     public bool legOwned = false;
     public bool eyeOwned = false;
     public bool boomerangOwned = false;
+    public bool earOwned = false;
 
     PickUpScript pickUpScript;
 
@@ -57,6 +58,10 @@ public class SpawnManager : MonoBehaviour
         if (pickUpScript.GetHasBoomerang() == true)
         {
             boomerangOwned = true;
+        }
+        if (pickUpScript.GetHasEar() == true)
+        {
+            earOwned = true;
         }
     }
 }

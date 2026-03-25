@@ -10,7 +10,7 @@ public class PickUpScript : MonoBehaviour
 
     [SerializeField] bool hasLeg;
     [SerializeField] bool hasEye;
-    // [SerializeField] bool hasEar; 
+    [SerializeField] bool hasEar; 
     [SerializeField] bool hasBoomerang;
 
     [SerializeField] GameObject eyeTabCloud;
@@ -24,16 +24,21 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] GameObject oldLegRig;
     [SerializeField] GameObject newEarRig;
     [SerializeField] GameObject newEyeRig;
-    [SerializeField] public bool hasLegAnim;
 
     [SerializeField] Animator animator;
 
+    SpawnManager spawnManager;
+
+    void Awake()
+    {
+        spawnManager = FindFirstObjectByType<SpawnManager>();
+    }
     void Start()
     {
         hasLeg = false;
         hasEye = false;
         hasBoomerang = false;
-        hasLegAnim = false;
+        hasEar = false;
 
         newEyeRig.transform.localScale = new Vector3(0, 0, 0);
         newEarRig.transform.localScale = new Vector3(0, 0, 0);
@@ -65,7 +70,8 @@ public class PickUpScript : MonoBehaviour
 
     private void Update()
     {
-        if (hasLegAnim == true)
+        RigSetter();
+        if (hasLeg == true)
         {
             animator.SetBool("HasLeg", true);
             
@@ -86,14 +92,14 @@ public class PickUpScript : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true)
         {
             hasLeg = true;
-            hasLegAnim = true;
-
+            spawnManager.legOwned = true;
 
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)
         {
             hasEye = true;
+            spawnManager.eyeOwned = true;
             newEyeRig.transform.localScale = new Vector3(1, 1, 1);
 
             eyeTabCloud.SetActive(false);
@@ -102,6 +108,8 @@ public class PickUpScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Boomerang") && isInteracting == true)
         {
             hasBoomerang = true;
+            spawnManager.boomerangOwned = true;
+
             bomerangImage.SetActive(true);
             boomerangTabCloud.SetActive(false);
             Destroy(collision.gameObject);
@@ -109,9 +117,42 @@ public class PickUpScript : MonoBehaviour
 
         if (collision.gameObject.CompareTag("PlayerEar") && isInteracting == true)
         {
-            // hasEar = true;
+            hasEar = true;
+            spawnManager.earOwned = true;
+
             newEarRig.transform.localScale = new Vector3(1, 1, 1);
             Destroy(collision.gameObject);
+        }
+    }
+
+    void RigSetter()
+    {
+        if (spawnManager.legOwned)
+        {
+            hasLeg = true;
+        }
+
+        if (spawnManager.eyeOwned == true)
+        {
+            hasEye = true;
+            newEyeRig.transform.localScale = new Vector3(1, 1, 1);
+
+            eyeTabCloud.SetActive(false);
+        }
+
+        if (spawnManager.boomerangOwned == true)
+        {
+            hasBoomerang = true;
+
+            bomerangImage.SetActive(true);
+            boomerangTabCloud.SetActive(false);
+        }
+
+        if (spawnManager.earOwned == true)
+        {
+            hasEar = true;
+
+            newEarRig.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -128,6 +169,11 @@ public class PickUpScript : MonoBehaviour
     public bool GetHasBoomerang()
     {
         return hasBoomerang;
+    }
+
+    public bool GetHasEar()
+    {
+        return hasEar;
     }
 
 }
