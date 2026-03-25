@@ -16,6 +16,7 @@ public class PauseManager : MonoBehaviour
 
     bool tab;
     bool paused;
+    bool option;
 
     void Start()
     {
@@ -30,22 +31,32 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (pauseAction.WasPerformedThisFrame())
+        if (pauseAction.WasPerformedThisFrame() )
         {
-            paused = !paused;
-            if (!paused)
+
+            if (!paused && option)
             {
-                pauseMenuUI.SetActive(true);
-                Time.timeScale = 0;
+                ResumeGame();
             } else
             {
-                pauseMenuUI.SetActive(false);
-                buttonScript.buttonPressed = false;
-                optionUI.SetActive(false);
-                Time.timeScale = 1;
+                paused = !paused;
+                if (!paused)
+                {
+                    pauseMenuUI.SetActive(true);
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    pauseMenuUI.SetActive(false);
+                    buttonScript.buttonPressed = false;
+                    optionUI.SetActive(false);
+                    Time.timeScale = 1;
+                }
             }
-                
+
         }
+
+
 
         if (abilityTabAction.WasPerformedThisFrame())
         {
@@ -68,6 +79,7 @@ public class PauseManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         abilityTabUI.SetActive(false);
         optionUI.SetActive(false);
+        option = false;
         Time.timeScale = 1;
     }
 
@@ -76,9 +88,11 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1;
    }
 
+    
     public void Options()
     {
         optionUI.SetActive(true);
+        option = true;  
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1; 
     }
