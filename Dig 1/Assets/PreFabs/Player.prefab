@@ -177,6 +177,7 @@ MonoBehaviour:
   bomerangImage: {fileID: 0}
   hasLeg: 0
   hasEye: 0
+  hasEar: 0
   hasBoomerang: 0
   eyeTabCloud: {fileID: 0}
   boomerangTabCloud: {fileID: 0}
@@ -185,7 +186,6 @@ MonoBehaviour:
   oldLegRig: {fileID: 0}
   newEarRig: {fileID: 292627542125557896}
   newEyeRig: {fileID: 2273869489023985549}
-  hasLegAnim: 0
   animator: {fileID: 0}
 --- !u!114 &5082171930118937187
 MonoBehaviour:
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 7113160492993734734}
   - component: {fileID: 3174493436772123492}
   m_Layer: 0
-  m_Name: Spot Light 2D
+  m_Name: Player Light Spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 0.64
   m_Color: {r: 1, g: 0.70118463, b: 0.43081754, a: 1}
   m_Intensity: 1.2
   m_LightVolumeIntensity: 1
@@ -349,8 +349,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 7.5
-  m_PointLightOuterRadius: 17
+  m_PointLightInnerRadius: 4
+  m_PointLightOuterRadius: 20
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
