@@ -251,7 +251,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -305,7 +305,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobfishMovement
   moveSpeed: 0.2
+  expandedMoveSpeed: 0.2
   waypointDistance: 0.1
   waypoints:
   - {fileID: 3645036137680934135}
@@ -357,6 +358,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 0
   maxEnemyHealth: 5
+  timeDead: 3
+  hitDirectionForce: 10
+  additionalDirectionalForce: 5
   playerCombat: {fileID: 0}
   damageFlash: {fileID: 0}
   knockbackScript: {fileID: 0}
@@ -373,9 +377,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlobfishCombat
   bodyCollider: {fileID: 1616870180474529382}
-  playerTransform: {fileID: 0}
   knockbackScript: {fileID: 0}
   expandedRadius: 2
+  hitDirectionForce: 10
+  additionalDirectionalForce: 5
   collisionDamage: 2
   maxTimeExpanded: 2
   poisonTickDamage: 1

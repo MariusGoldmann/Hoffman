@@ -6,6 +6,7 @@ public class BlobfishMovement : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] float moveSpeed = 0.5f;
+    [SerializeField] float expandedMoveSpeed = 0.2f;
     [SerializeField] float waypointDistance = 0.1f;
     [SerializeField] Transform[] waypoints;
 
@@ -26,13 +27,19 @@ public class BlobfishMovement : MonoBehaviour
     }
     private void FixedUpdate()
     { 
-        if (!blobfishCombat.GetExpanding())
-        Move();
+        if (blobfishCombat.GetExpanding())
+        {
+            Move(expandedMoveSpeed);
+        }
+        else
+        {
+            Move(moveSpeed);
+        }
     }
-    void Move()
+    void Move(float activeMoveSpeed)
     {
         targetPosition = waypoints[waypointIndex].position;
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, activeMoveSpeed);
 
         if (waypointIndex == 0 && !movingRight)
         {

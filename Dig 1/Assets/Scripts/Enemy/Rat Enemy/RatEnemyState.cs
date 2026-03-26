@@ -4,8 +4,7 @@ public class RatEnemyState : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform enemyPosition;
-    [SerializeField] Rigidbody2D enemyParentRB;
-    [SerializeField] EnemyMovement enemyMovement;
+    [SerializeField] Rigidbody2D enemyRB;
 
     [Header("Debug")]
     int playerDirection;
