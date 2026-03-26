@@ -33,7 +33,7 @@ public class DamageFlash : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            currentFlashAmount = Mathf.Lerp(1f, flashSpeedCurve.Evaluate(elapsedTime), (elapsedTime / flashTime));
+            currentFlashAmount = flashSpeedCurve.Evaluate(elapsedTime/flashTime);
 
             SetFlashAmount(currentFlashAmount);
 
