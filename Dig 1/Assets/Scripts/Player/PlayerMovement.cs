@@ -219,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Running;
         }
 
-        if (playerRB.linearVelocityY > 0)
+        if (playerRB.linearVelocityY > 0.1)
         {
             movingState = MovingStates.Jumping;
         }
