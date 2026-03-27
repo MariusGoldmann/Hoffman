@@ -90,7 +90,7 @@ public class PlayerCombat : MonoBehaviour
         float boomerangReturnSpeed = boomerangReturnForce;
         int boomerangDirection = playerMovement.GetFacingDirection(); //Where the player is facing
 
-        while (timer < duration && !earlyReceiving)
+        while (boomerang != null && timer < duration && !earlyReceiving)
         {
             timer += Time.deltaTime;
             boomerangSpeed = boomerangForce * boomerangAnimationCurve.Evaluate(timer / duration);
