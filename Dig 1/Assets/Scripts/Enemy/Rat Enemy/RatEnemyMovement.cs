@@ -5,7 +5,9 @@ public class RatEnemyMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float idleMoveSpeed = 0.5f;
-    [SerializeField] float groundCheckLength = 2.3f;
+    [SerializeField] float groundCheckLength = 0.1f;
+    [SerializeField] float frontGroundCheckLength = 1.67f;
+    [SerializeField] Transform frontRaycastOrigin;
 
     [Header("Combat")]
     [SerializeField] int damageAmount = 5;
@@ -14,17 +16,8 @@ public class RatEnemyMovement : MonoBehaviour
     [SerializeField] float chaseAnticipationTime = 0.3f;
     [SerializeField] float attackCooldown = 0.5f;
     [SerializeField] float downedCooldown = 1f;
-
-    [Header("Knockback")]
-    [SerializeField] float additionalDirectionalForce = 5f;
-    [SerializeField] float hitDirectionForce = 10f;
-    [SerializeField] KnockbackScript knockbackScript;
-
-    [Header("Rayacst")]
-    [SerializeField] float wallCheckLength = 1f;
+    [SerializeField] float wallCheckLength = 0.1f;
     [SerializeField] Transform wallCheckPosition;
-    [SerializeField] float frontGroundCheckLength = 1.67f;
-    [SerializeField] Transform frontRaycastOrigin;
 
     [Header("Debug")]
     [SerializeField] bool facingRight = true;
@@ -48,14 +41,12 @@ public class RatEnemyMovement : MonoBehaviour
     {
         HandleAnimations();
         HandleCooldowns();
-        Debug.Log(isCooldown);
-        Debug.Log(currentCooldown);
     }
     private void FixedUpdate()
     {
         if (!isChasing && !isCooldown)
         {
-            if (state.GetInCombat() && GetIsGrounded())
+            if (state.GetInCombat())
             {
                 StartCoroutine(ChasePlayer());
             }
@@ -67,9 +58,11 @@ public class RatEnemyMovement : MonoBehaviour
     }
     void HandleCooldowns()
     {
-        if (!GetIsGroundInFront() || GetIsWallInFront())
+        if (GetIsWall())
         {
-            StopChasePlayer(true);
+            StopCoroutine(ChasePlayer());
+            isChasing = false;
+            currentCooldown = downedCooldown;
         }
         currentCooldown -= Time.deltaTime;
         if (currentCooldown < 0)
@@ -83,17 +76,8 @@ public class RatEnemyMovement : MonoBehaviour
     }
     void HandleAnimations()
     {
-        if (isChasing)
-        {
-            animator.SetBool("RatIsAggressive", true);
-        }
-        else
-        {
-            animator.SetBool("RatIsAggressive", false);
-        }
-        if (knockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
-    }
 
+    }
     void IdleMovement()
     {
         if (facingRight && GetIsGrounded())
@@ -118,6 +102,7 @@ public class RatEnemyMovement : MonoBehaviour
             else
             {
                 enemyRB.linearVelocityX = -idleMoveSpeed;
+
             }
             
         }
@@ -147,26 +132,9 @@ public class RatEnemyMovement : MonoBehaviour
         isChasing = false;
         currentCooldown = attackCooldown;
     }
-    void StopChasePlayer(bool downed)
-    {
-        StopCoroutine(ChasePlayer());
-        isChasing=false;
-        if (downed)
-        {
-            currentCooldown = downedCooldown;
-        }
-        else
-        {
-            currentCooldown = attackCooldown;
-        }
-    }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalDirectionalForce);
-            StopChasePlayer(false);
-        }
+        if (other.gameObject.CompareTag("Player")) playerHealth.ChangeHealth(-damageAmount, (other.transform.position-transform.position).normalized, Vector2.up);
     }
     bool GetIsGroundInFront()
     {

@@ -31,12 +31,12 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log(currentPlayerHealth);
     }
-    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalDirectionalForce)
+    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton)
     {
         //Dennis suger 2 was here :D 
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
-        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalDirectionalForce));
+        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton));
         if (healthSlider!=null) healthSlider.value = currentPlayerHealth; 
         if (currentPlayerHealth <= 0) DeathSequence();
     }

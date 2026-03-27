@@ -7,8 +7,6 @@ public class BlobfishCombat : MonoBehaviour
     [SerializeField] CircleCollider2D bodyCollider;
     [SerializeField] KnockbackScript knockbackScript;
     [SerializeField] float expandedRadius = 2f;
-    [SerializeField] float hitDirectionForce = 10f;
-    [SerializeField] float additionalDirectionalForce = 5f;
     [SerializeField] int collisionDamage = 2;
     [SerializeField] int maxTimeExpanded = 2;
 
@@ -37,7 +35,7 @@ public class BlobfishCombat : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !knockbackScript.GetIsKnockback())
         {
-            playerHealth.ChangeHealth(-collisionDamage, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalDirectionalForce);
+            playerHealth.ChangeHealth(-collisionDamage, (other.transform.position - transform.position).normalized, Vector2.up);
             if (!poison)
             {
                 StartCoroutine(Poison());
@@ -82,7 +80,7 @@ public class BlobfishCombat : MonoBehaviour
         for (int i = 0; i < poisonTickAmount; i++)
         {
             yield return new WaitForSeconds(poisionTickSpeed);
-            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero, Vector2.zero, 0.5f, 0);
+            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero, Vector2.zero);
         }
         poison = false;
     }

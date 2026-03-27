@@ -4,6 +4,8 @@ using UnityEngine;
 public class KnockbackScript : MonoBehaviour
 {
     [SerializeField] float knockbackLength=0.2f;
+    [SerializeField] float hitDirectionForce=10f;
+    [SerializeField] float additionalDirectionalForce=5f;
     [SerializeField] bool debugBool;
 
     bool isKnockback=false;
@@ -17,7 +19,16 @@ public class KnockbackScript : MonoBehaviour
         playerMovement = FindFirstObjectByType<PlayerMovement>();
     }
 
-    public IEnumerator KnockbackAction(Vector2 hitDirection, Vector2 additionalForceDirection, float hitDirectionForce, float additionalDirectionalForce)
+    private void Update()
+    {
+        if (debugBool)
+        {
+            StartCoroutine(KnockbackAction(Vector2.right, Vector2.up));
+            debugBool = false;
+        }
+    }
+
+    public IEnumerator KnockbackAction(Vector2 hitDirection, Vector2 additionalForceDirection)
     {
         isKnockback = true;
         

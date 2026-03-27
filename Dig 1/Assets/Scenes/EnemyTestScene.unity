@@ -390,14 +390,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 8158543302636595784, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
-      propertyPath: hitDirectionForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8158543302636595784, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
-      propertyPath: additionalDirectionalForce
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8405303931973681530, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -781,7 +773,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2250447569052621783, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.34
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 2250447569052621783, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
       propertyPath: m_LocalPosition.y
@@ -844,10 +836,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 19290072690374208, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
-      propertyPath: m_Mass
-      value: 10000
-      objectReference: {fileID: 0}
     - target: {fileID: 1616870180474529382, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
       propertyPath: m_IsTrigger
       value: 0
