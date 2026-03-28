@@ -242,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
         if (knockbackScript.GetIsKnockback())
         {
             movingState = MovingStates.KnockBack;
+            animator.SetTrigger("Knockback");
         }
     }
     void HandleAnimations()

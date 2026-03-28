@@ -46,8 +46,6 @@ public class DialogueController : MonoBehaviour
             FinishParagraphEarly();
         }
 
-        NPCDialogueText.text = paragraph;
-
         if (paragraphs.Count == 0)
         {
             conversationEnded = true;

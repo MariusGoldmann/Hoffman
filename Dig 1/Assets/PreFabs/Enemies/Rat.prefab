@@ -115,6 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 183
   maxEnemyHealth: 119
+  timeDead: 3
+  hitDirectionForce: 10
+  additionalDirectionalForce: 5
   playerCombat: {fileID: 0}
   damageFlash: {fileID: 0}
   knockbackScript: {fileID: 0}
@@ -130,28 +133,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bbdda670385b74f92cf01b22984c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  flashColor: {r: 4, g: 4, b: 4, a: 1}
-  flashTime: 0.3
+  flashColor: {r: 7.9066997, g: 7.9066997, b: 7.9066997, a: 1}
+  flashTime: 0.5
   flashSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.0007247925
       value: 1
-      inSlope: -48.007763
-      outSlope: -48.007763
+      inSlope: -14.151269
+      outSlope: -14.151269
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.062820524
+      outWeight: 0.15341301
     - serializedVersion: 3
-      time: 0.3
+      time: 0.10829433
+      value: 0.43628258
+      inSlope: -0.31450057
+      outSlope: -11.842125
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.7887079
+      outWeight: 0.10582146
+    - serializedVersion: 3
+      time: 0.5
       value: 0
-      inSlope: 0.054302596
-      outSlope: 0.054302596
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.48717943
+      inWeight: 0.05902114
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -171,8 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
   knockbackLength: 0.2
-  hitDirectionForce: 10
-  additionalDirectionalForce: 5
   debugBool: 0
 --- !u!1001 &2774498629463284814
 PrefabInstance:
