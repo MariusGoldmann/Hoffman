@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58bee9b4c46a224c80d4cfa351830c1, type: 3}
+  m_Name: Mannekin Conversation
+  m_EditorClassIdentifier: Assembly-CSharp::DialougeText
+  npcName: Mannekin
+  paragraphs:
+  - Oh... You are that new kid everyone has been talking about.
+  - 'Not that i care or anything but there was some people who took your erhm, body
+    parts... '
+  - 'I think they dropped your leg while they were running so it shouldn''t be that
+    far from here. '
+  - 'Just remember that they do not like the thought of being replaced. '
+  - 'So if you get to close too them. '
+  - 'Be ready for a fight. '
