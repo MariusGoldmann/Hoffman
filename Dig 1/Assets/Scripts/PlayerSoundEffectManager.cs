@@ -25,8 +25,12 @@ public class PlayerSoundEffectManager : MonoBehaviour
     {
         WALK,
         RUN,
+        JUMP,
         SLASH,
-        KICK
+        KICK,
+        BOOMERANG,
+        DAMAGE
+
     }
 
 }
