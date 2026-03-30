@@ -18,7 +18,7 @@ public class RatEnemyMovement : MonoBehaviour
     [Header("Knockback")]
     [SerializeField] float additionalDirectionalForce = 5f;
     [SerializeField] float hitDirectionForce = 10f;
-    [SerializeField] KnockbackScript knockbackScript;
+    [SerializeField] KnockbackScript ratKnockbackScript;
 
     [Header("Rayacst")]
     [SerializeField] float wallCheckLength = 1f;
@@ -48,8 +48,7 @@ public class RatEnemyMovement : MonoBehaviour
     {
         HandleAnimations();
         HandleCooldowns();
-        Debug.Log(isCooldown);
-        Debug.Log(currentCooldown);
+        Debug.Log(GetIsGrounded());
     }
     private void FixedUpdate()
     {
@@ -63,11 +62,13 @@ public class RatEnemyMovement : MonoBehaviour
             {
                 IdleMovement();
             }
+            Debug.Log(GetIsGrounded());
         }
+        Debug.Log(isCooldown);
     }
     void HandleCooldowns()
     {
-        if (!GetIsGroundInFront() || GetIsWallInFront())
+        if (isChasing && (!GetIsGroundInFront() || GetIsWallInFront()))
         {
             StopChasePlayer(true);
         }
@@ -91,7 +92,7 @@ public class RatEnemyMovement : MonoBehaviour
         {
             animator.SetBool("RatIsAggressive", false);
         }
-        if (knockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
+        if (ratKnockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
     }
 
     void IdleMovement()
@@ -162,7 +163,7 @@ public class RatEnemyMovement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && isChasing)
         {
             playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalDirectionalForce);
             StopChasePlayer(false);

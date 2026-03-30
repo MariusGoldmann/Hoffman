@@ -14,6 +14,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] DamageFlash damageFlash;
     [SerializeField] KnockbackScript knockbackScript;
+    [SerializeField] BlobfishCombat blobfishCombat;
+
 
     SpriteRenderer spriteRenderer;
 
@@ -23,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
     {
         playerCombat = FindFirstObjectByType<PlayerCombat>();
         knockbackScript = GetComponent<KnockbackScript>();
-        damageFlash = GetComponent<DamageFlash>();
+        damageFlash = GetComponentInChildren<DamageFlash>();
         animator = GetComponentInChildren<Animator>();
     }
     void Start()
@@ -33,8 +35,11 @@ public class EnemyHealth : MonoBehaviour
 
     public void ChangeHealth(int amount, Vector2 knockbackdirection)
     {
-        StartCoroutine(knockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalDirectionalForce));
-        currentEnemyHealth += amount;
+        if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
+        {
+            StartCoroutine(knockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalDirectionalForce));
+            currentEnemyHealth += amount;
+        }
 
         if (currentEnemyHealth > maxEnemyHealth)
         {
