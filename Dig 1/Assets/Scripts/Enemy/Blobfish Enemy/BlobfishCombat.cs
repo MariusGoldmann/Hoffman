@@ -20,7 +20,7 @@ public class BlobfishCombat : MonoBehaviour
     [Header("Debug")]
     float normalRadius;
     bool poison;
-    bool expanding=false;
+    bool isExpanding=false;
 
     LayerMask playerLayer;
     PlayerHealth playerHealth;
@@ -51,11 +51,15 @@ public class BlobfishCombat : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !expanding) StartCoroutine(Expand());
+        if (other.gameObject.CompareTag("Player") && !isExpanding) StartCoroutine(Expand());
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player")) StartCoroutine(Shrink());
     }
     IEnumerator Expand()
     {
-        expanding = true;
+        isExpanding = true;
         StopCoroutine(Shrink());
         //Animation for visual
         while (bodyCollider.radius<expandedRadius)
@@ -63,19 +67,17 @@ public class BlobfishCombat : MonoBehaviour
             bodyCollider.radius += expandedRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(maxTimeExpanded);
-        StartCoroutine(Shrink());
-        expanding = false;
     }
     IEnumerator Shrink()
     {
+        yield return new WaitForSeconds(maxTimeExpanded);
+        isExpanding = false;
         while (bodyCollider.radius > normalRadius)
         {
             bodyCollider.radius -= normalRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
     }
-
     IEnumerator Poison()
     {
         poison = true;
@@ -86,9 +88,8 @@ public class BlobfishCombat : MonoBehaviour
         }
         poison = false;
     }
-
-    public bool GetExpanding()
+    public bool GetIsExpanding()
     {
-        return expanding;
+        return isExpanding;
     }
 }

@@ -27,7 +27,7 @@ public class BlobfishMovement : MonoBehaviour
     }
     private void FixedUpdate()
     { 
-        if (blobfishCombat.GetExpanding())
+        if (blobfishCombat.GetIsExpanding())
         {
             Move(expandedMoveSpeed);
         }
