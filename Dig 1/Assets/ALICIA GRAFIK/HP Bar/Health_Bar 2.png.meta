@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6bc32698c43b5684db03b471b03e8764
+guid: 4131a924ef719374f9902500324d2114
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1717822407257231910
-    second: LJUS_mp_0
+      213: -106643721456979847
+    second: Health_Bar 2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LJUS_mp_0
+      name: Health_Bar 2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1113
-        height: 912
+        width: 712
+        height: 244
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 62216c3c06ee6d710800000000000000
-      internalID: 1717822407257231910
+      spriteID: 970f701b910258ef0800000000000000
+      internalID: -106643721456979847
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LJUS_mp_0: 1717822407257231910
+      Health_Bar 2_0: -106643721456979847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,17 +14,17 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Slash settings")]
     [SerializeField] int slashDamage = 1;
-    [SerializeField] int slashCooldown = 1;
+    [SerializeField] float slashCooldown = 1f;
     [SerializeField] float slashTimer;
 
     [Header("Kick settings")]
     [SerializeField] int kickDamage = 2;
-    [SerializeField] int kickCooldown = 2;
+    [SerializeField] float kickCooldown = 2f;
     [SerializeField] float kickTimer;
 
     [Header("Boomerang settings")]
     [SerializeField] int boomerangDamage = 5;
-    [SerializeField] int boomerangCooldown = 5;
+    [SerializeField] float boomerangCooldown = 5f;
     [SerializeField] float boomerangTimer;
     [SerializeField] float boomerangForce;
     [SerializeField] float boomerangReturnForce;

@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,21 +5,6 @@ public class MusicManager : MonoBehaviour
 {
 
     [SerializeField] Slider volumeSlider; 
-
-    private void Awake()
-    {
-        int numberOfMusicManager = FindObjectsByType<MusicManager>(FindObjectsSortMode.None).Length;
-
-        if (numberOfMusicManager > 1)
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-    }
 
     void Start()
     {

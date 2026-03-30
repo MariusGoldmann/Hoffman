@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float moveSpeed;
+    [SerializeField] float oneLegSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float crouchSpeed;
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float coyoteTime;
     [SerializeField] float coyoteTimeCounter;
     [SerializeField] float jumpBufferTime;
-    [SerializeField] float jumpBufferCounter;
+    [SerializeField] float jumpBufferCounter;   
 
     [Header("State")]
     [SerializeField] MovingStates movingState;
@@ -105,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         Flip();
         HandleTimers();
         HandleAnimations();
-        HandleStates();
+        
     }
 
     void FixedUpdate()
@@ -115,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
             HandleMovement();
             HandleJump();
         }
+
+        HandleStates();
     }
 
     void HandleMovement()
@@ -131,6 +134,11 @@ public class PlayerMovement : MonoBehaviour
         if (crouchPressed)
         {
             moveSpeed = crouchSpeed;
+        }
+
+        if (!pickUpScript.GetHasLeg())
+        {
+            moveSpeed = oneLegSpeed;
         }
 
         playerRB.linearVelocityX = moveInput.x * moveSpeed;
@@ -219,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Running;
         }
 
-        if (playerRB.linearVelocityY > 0)
+        if (playerRB.linearVelocityY > 0.1) //ugly jumps sometimes in build...
         {
             movingState = MovingStates.Jumping;
         }
@@ -242,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
         if (knockbackScript.GetIsKnockback())
         {
             movingState = MovingStates.KnockBack;
+            animator.SetTrigger("Knockback");
         }
     }
     void HandleAnimations()
