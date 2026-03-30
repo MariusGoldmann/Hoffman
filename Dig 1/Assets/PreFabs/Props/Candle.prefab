@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6143460492634547553}
   - component: {fileID: 7875911206752545581}
+  - component: {fileID: 2286288127737346426}
   m_Layer: 0
   m_Name: Candle Light Spot  3 (1)
   m_TagString: Untagged
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 8.96
+  m_PointLightOuterRadius: 9.03
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -84,6 +85,22 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2286288127737346426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424874254000553258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e53a41642771d4187470d807981272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  light2D: {fileID: 0}
+  minLightIntensity: 1
+  maxLightIntensity: 2
+  lightChangeSpeed: 0.5
 --- !u!1 &910350764177065920
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1776252225993338418, guid: f9f14e50b8a8e2540b7558f43cd3f350, type: 3}
+  m_Sprite: {fileID: -4438440904522470661, guid: 3f13976f3cf2cc7478a186898ca75eac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -221,6 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 437711152739908832}
   - component: {fileID: 7367599114865379614}
+  - component: {fileID: 4261818831171993075}
   m_Layer: 0
   m_Name: Candle Light Spot  3
   m_TagString: Untagged
@@ -295,6 +313,22 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &4261818831171993075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3519410689438170289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e53a41642771d4187470d807981272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  light2D: {fileID: 0}
+  minLightIntensity: 1
+  maxLightIntensity: 5
+  lightChangeSpeed: 0.5
 --- !u!1 &7851779559585314799
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8869010449705150149}
   - component: {fileID: 5168833910785772057}
+  - component: {fileID: 4005449556291653829}
   m_Layer: 0
   m_Name: Candle Light Spot  2
   m_TagString: Untagged
@@ -379,6 +414,22 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &4005449556291653829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7851779559585314799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e53a41642771d4187470d807981272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  light2D: {fileID: 0}
+  minLightIntensity: 1
+  maxLightIntensity: 7
+  lightChangeSpeed: 0.5
 --- !u!1 &7930077448209527758
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5075191281772251289}
   - component: {fileID: 5288260020464973209}
+  - component: {fileID: 7282825975078384521}
   m_Layer: 0
   m_Name: 'Candle Light Spot 1 '
   m_TagString: Untagged
@@ -463,3 +515,19 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &7282825975078384521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7930077448209527758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e53a41642771d4187470d807981272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  light2D: {fileID: 0}
+  minLightIntensity: 1
+  maxLightIntensity: 8
+  lightChangeSpeed: 0.5
