@@ -1,34 +1,31 @@
 fileFormatVersion: 2
-guid: b90150c8ab7881e4288880b5727f9d2e
+guid: 9a4ba57015fed804aafec1fa436d9032
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3865275925551867046
-    second: Shelf_wall_M_0
+      213: -8990666211905932806
+    second: Platform_parkour_0
   - first:
-      213: 2748322553543966063
-    second: Shelf_wall_M_1
+      213: 4277714974919091044
+    second: Platform_parkour_1
   - first:
-      213: -4291881657384746858
-    second: Shelf_wall_M_2
+      213: 5144776219533692875
+    second: Platform_parkour_2
   - first:
-      213: -1264180989016692081
-    second: Shelf_wall_M_3
+      213: 257078599029736309
+    second: Platform_parkour_3
   - first:
-      213: -5744098749388612828
-    second: Shelf_wall_M_4
+      213: -5613121084771659783
+    second: Platform_parkour_4
   - first:
-      213: 8643936289637921438
-    second: Shelf_wall_M_5
+      213: -1598994155826294847
+    second: Platform_parkour_5
   - first:
-      213: -3436554379741906256
-    second: Shelf_wall_M_6
+      213: -6719644533579795212
+    second: Platform_parkour_6
   - first:
-      213: -7721147559165933646
-    second: Shelf_wall_M_7
-  - first:
-      213: 5691920127461688548
-    second: Shelf_wall_M_8
+      213: -3884647820369510315
+    second: Platform_parkour_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -124,78 +121,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shelf_wall_M_0
+      name: Platform_parkour_0
       rect:
         serializedVersion: 2
-        x: 1567
-        y: 551
-        width: 271
-        height: 848
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a5b9c9a5608cb5ac0800000000000000
-      internalID: -3865275925551867046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_wall_M_1
-      rect:
-        serializedVersion: 2
-        x: 1856
-        y: 974
-        width: 215
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f6dbe2c1dc0042620800000000000000
-      internalID: 2748322553543966063
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_wall_M_2
-      rect:
-        serializedVersion: 2
-        x: 2020
-        y: 977
-        width: 10
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 69041993f5c2074c0800000000000000
-      internalID: -4291881657384746858
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shelf_wall_M_3
-      rect:
-        serializedVersion: 2
-        x: 2028
-        y: 980
-        width: 6
+        x: 1
+        y: 255
+        width: 8
         height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -205,20 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f8aabd1a61ab47ee0800000000000000
-      internalID: -1264180989016692081
+      spriteID: af17d3107bcba3380800000000000000
+      internalID: -8990666211905932806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_wall_M_4
+      name: Platform_parkour_1
       rect:
         serializedVersion: 2
-        x: 1563
-        y: 551
-        width: 12
-        height: 7
+        x: 20
+        y: 189
+        width: 239
+        height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42b1de7fe9cd840b0800000000000000
-      internalID: -5744098749388612828
+      spriteID: 463eb6afa1f7d5b30800000000000000
+      internalID: 4277714974919091044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_wall_M_5
+      name: Platform_parkour_2
       rect:
         serializedVersion: 2
-        x: 1704
-        y: 558
+        x: 81
+        y: 179
         width: 6
-        height: 6
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,20 +180,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e92f9f4024e65f770800000000000000
-      internalID: 8643936289637921438
+      spriteID: bcfce26a6bae56740800000000000000
+      internalID: 5144776219533692875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_wall_M_6
+      name: Platform_parkour_3
       rect:
         serializedVersion: 2
-        x: 1924
-        y: 551
-        width: 147
-        height: 8
+        x: 94
+        y: 178
+        width: 34
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0babb20dff7ee40d0800000000000000
-      internalID: -3436554379741906256
+      spriteID: 573c58eaf93519300800000000000000
+      internalID: 257078599029736309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_wall_M_7
+      name: Platform_parkour_4
       rect:
         serializedVersion: 2
-        x: 2021
-        y: 554
-        width: 9
-        height: 8
+        x: 125
+        y: 175
+        width: 7
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -293,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2b74a8d0439f8d490800000000000000
-      internalID: -7721147559165933646
+      spriteID: 9ff0eecec103a12b0800000000000000
+      internalID: -5613121084771659783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shelf_wall_M_8
+      name: Platform_parkour_5
       rect:
         serializedVersion: 2
-        x: 2028
-        y: 557
-        width: 6
-        height: 6
+        x: 136
+        y: 178
+        width: 22
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -315,8 +246,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e40047e233cdfe40800000000000000
-      internalID: 5691920127461688548
+      spriteID: 1cf4c00894b3fc9e0800000000000000
+      internalID: -1598994155826294847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Platform_parkour_6
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 179
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f4b41f16e60fb2a0800000000000000
+      internalID: -6719644533579795212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Platform_parkour_7
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 147
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 550416d9365f61ac0800000000000000
+      internalID: -3884647820369510315
       vertices: []
       indices: 
       edges: []
@@ -335,15 +310,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Shelf_wall_M_0: -3865275925551867046
-      Shelf_wall_M_1: 2748322553543966063
-      Shelf_wall_M_2: -4291881657384746858
-      Shelf_wall_M_3: -1264180989016692081
-      Shelf_wall_M_4: -5744098749388612828
-      Shelf_wall_M_5: 8643936289637921438
-      Shelf_wall_M_6: -3436554379741906256
-      Shelf_wall_M_7: -7721147559165933646
-      Shelf_wall_M_8: 5691920127461688548
+      Platform_parkour_0: -8990666211905932806
+      Platform_parkour_1: 4277714974919091044
+      Platform_parkour_2: 5144776219533692875
+      Platform_parkour_3: 257078599029736309
+      Platform_parkour_4: -5613121084771659783
+      Platform_parkour_5: -1598994155826294847
+      Platform_parkour_6: -6719644533579795212
+      Platform_parkour_7: -3884647820369510315
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
