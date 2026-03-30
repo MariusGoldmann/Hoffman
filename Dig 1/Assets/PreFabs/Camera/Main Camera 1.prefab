@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6634075368651522675}
   - component: {fileID: 9086728841626397851}
-  - component: {fileID: 7146817676838915874}
+  - component: {fileID: 8507477324050722485}
   m_Layer: 8
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -73,7 +73,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 4371568384337095925}
---- !u!114 &7146817676838915874
+--- !u!114 &8507477324050722485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,7 +84,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c30549452b2b0fc49a484595a2d4d77c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::CameraDirection
+  directionChangeSpeed: 5
+  virtualCamera: {fileID: 9086728841626397851}
+  framingTransposer: {fileID: 0}
 --- !u!1 &7237177266878722551
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,46 @@
 using Cinemachine;
+using System.Collections;
+using System.Xml.Serialization;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CameraDirection : MonoBehaviour
 {
-    int cameraDirection;
+    [SerializeField] float directionChangeSpeed;
 
-    CinemachineVirtualCamera virtualCamera;
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
+    [SerializeField] CinemachineFramingTransposer framingTransposer;
+
+    PlayerMovement playerMovement;
+
+    void Awake()
+    {
+        framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
+
+        StartCoroutine(FacingDirection());
+    }
+
+    IEnumerator FacingDirection()
+    {
+        float lerpSpeed = directionChangeSpeed;
+        while (true)
+        {
+            float targetPosition = DetermineEndPoint();
+            framingTransposer.m_ScreenX = Mathf.Lerp(framingTransposer.m_ScreenX, targetPosition, lerpSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    float DetermineEndPoint()
+    {
+        if (playerMovement.GetFacingDirection() > 0)
+        {
+            return 0.45f;
+        }
+        else
+        {
+            return 0.55f;
+        }
+    }
 }
