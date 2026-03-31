@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         pickUpScript = GetComponent<PickUpScript>();
-        knockbackScript = FindFirstObjectByType<KnockbackScript>();
+        knockbackScript = GetComponent<KnockbackScript>();
 
         if (SpawnManager.instance != null)
         {
