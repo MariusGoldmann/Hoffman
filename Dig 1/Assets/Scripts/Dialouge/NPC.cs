@@ -48,4 +48,9 @@ public abstract class NPC : MonoBehaviour, IInteractable
             return false;
         }
     }
+
+    public bool GetIsWithinInteractDistance()
+    {
+        return IsWithinInteractDistance();
+    }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488730367422112783}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FrontRaycastOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4554192857374076194}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WallCheckPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4443998666330714368}
   - component: {fileID: 5605187441174547169}
   - component: {fileID: 7884375983571872051}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PlayerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,9 +167,10 @@ GameObject:
   - component: {fileID: 2250447569052621783}
   - component: {fileID: 7521869268331679978}
   - component: {fileID: 4182727920968109421}
-  - component: {fileID: 4817415991613190083}
   - component: {fileID: 4054453495651370544}
   - component: {fileID: 645283559206760039}
+  - component: {fileID: 7308718663657940365}
+  - component: {fileID: 8563240839915267902}
   m_Layer: 7
   m_Name: Rat Enemy (0)
   m_TagString: Enemy
@@ -212,18 +213,18 @@ MonoBehaviour:
   idleMoveSpeed: 0.5
   groundCheckLength: 2.3
   damageAmount: 5
-  chaseMoveSpeed: 2
-  chaseDuration: 1.5
-  chaseAnticipationTime: 0.3
-  attackCooldown: 0.5
+  chaseMoveSpeed: 10
+  chaseDuration: 3
+  chaseAnticipationTime: 1
+  attackCooldown: 3
   downedCooldown: 1
-  additionalDirectionalForce: 5
-  hitDirectionForce: 10
-  ratKnockbackScript: {fileID: 0}
+  additionalDirectionalForce: 10
+  hitDirectionForce: 20
+  ratKnockbackScript: {fileID: 8563240839915267902}
   wallCheckLength: 1
-  wallCheckPosition: {fileID: 0}
+  wallCheckPosition: {fileID: 4554192857374076194}
   frontGroundCheckLength: 1.67
-  frontRaycastOrigin: {fileID: 0}
+  frontRaycastOrigin: {fileID: 1488730367422112783}
   facingRight: 1
 --- !u!114 &4182727920968109421
 MonoBehaviour:
@@ -246,20 +247,6 @@ MonoBehaviour:
   damageFlash: {fileID: 4465401982838308614}
   enemyKnockbackScript: {fileID: 0}
   blobfishCombat: {fileID: 0}
---- !u!114 &4817415991613190083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6380048116863226706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8eb8f12c5457304f9197a85f67aab7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
-  knockbackLength: 0.2
-  debugBool: 0
 --- !u!70 &4054453495651370544
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -324,6 +311,73 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &7308718663657940365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380048116863226706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cinemachine::Cinemachine.CinemachineImpulseSource
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0.5, y: -0.5, z: 0}
+--- !u!114 &8563240839915267902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380048116863226706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8eb8f12c5457304f9197a85f67aab7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
+  knockbackLength: 0.2
+  debugBool: 0
 --- !u!1 &9144269908591859644
 GameObject:
   m_ObjectHideFlags: 0
@@ -5314,6 +5368,7 @@ PrefabInstance:
     - {fileID: 8552818378700148629, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
     - {fileID: 7509450431102027240, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
     - {fileID: 2832536398586049987, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
+    - {fileID: 424228128359465119, guid: c033845114ec2dd40bfffd803a8162c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

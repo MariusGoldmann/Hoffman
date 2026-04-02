@@ -16,6 +16,7 @@ public class DialogueController : MonoBehaviour
 
     bool conversationEnded;
     bool isTyping;
+    [SerializeField] bool isInDialogue;
 
     string paragraph;
     Coroutine typewriterCoroutine;
@@ -24,6 +25,7 @@ public class DialogueController : MonoBehaviour
 
     public void DisplayNextParagraph(DialogueText dialogueText)
     {
+        isInDialogue = true;
         if (paragraphs.Count == 0)
         {
             if (!conversationEnded)
@@ -70,6 +72,7 @@ public class DialogueController : MonoBehaviour
     }
     public void EndConversation()
     {
+        isInDialogue = false;
         conversationEnded = false;
 
         if (gameObject.activeSelf)
@@ -106,5 +109,10 @@ public class DialogueController : MonoBehaviour
         NPCDialogueText.maxVisibleCharacters = paragraph.Length;
 
         isTyping = false;
+    }
+
+    public bool GetIsInDialogue()
+    {
+        return isInDialogue;
     }
 }

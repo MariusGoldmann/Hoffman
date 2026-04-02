@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(currentPlayerHealth);
+
     }
     public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalDirectionalForce)
     {
