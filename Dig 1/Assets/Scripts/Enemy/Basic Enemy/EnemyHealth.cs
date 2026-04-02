@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] KnockbackScript knockbackScript;
     [SerializeField] BlobfishCombat blobfishCombat;
 
+    CinemachineImpulseSource impulseSource;
+
 
     SpriteRenderer spriteRenderer;
 
@@ -31,10 +34,13 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentEnemyHealth = maxEnemyHealth; 
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     public void ChangeHealth(int amount, Vector2 knockbackdirection)
     {
+        CameraShakeManager.instance.CameraShake(impulseSource);
         if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
         {
             StartCoroutine(knockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalDirectionalForce));

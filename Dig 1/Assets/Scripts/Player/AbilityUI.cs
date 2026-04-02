@@ -22,14 +22,14 @@ public class AbilityUI : MonoBehaviour
         BoomerangImageUpdater();
     }
 
-    void SlashImageUpdater()
+    void SlashImageUpdater()  
     {
-        slashImage.fillAmount = playerCombat.GetSlashTimer();
+        slashImage.fillAmount = playerCombat.GetSlashTimer() * 2;
     }
 
     void KickImageUpdater()
     {
-        kickImage.fillAmount = playerCombat.GetKickTimer();
+        kickImage.fillAmount = playerCombat.GetKickTimer() * 2;
     }
 
     void BoomerangImageUpdater()
