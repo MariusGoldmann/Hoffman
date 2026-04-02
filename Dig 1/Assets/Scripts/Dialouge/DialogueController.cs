@@ -10,6 +10,7 @@ public class DialogueController : MonoBehaviour
 
     [SerializeField] float typeSpeed = 5f;
     [SerializeField] float MaxTypeTime = 0.1f;
+    
 
     Queue<string> paragraphs = new Queue<string>();
 
@@ -17,8 +18,9 @@ public class DialogueController : MonoBehaviour
     bool isTyping;
 
     string paragraph;
-
     Coroutine typewriterCoroutine;
+
+
 
     public void DisplayNextParagraph(DialogueText dialogueText)
     {
@@ -66,7 +68,7 @@ public class DialogueController : MonoBehaviour
             paragraphs.Enqueue(dialogueText.paragraphs[i]);
         }
     }
-    void EndConversation()
+    public void EndConversation()
     {
         conversationEnded = false;
 

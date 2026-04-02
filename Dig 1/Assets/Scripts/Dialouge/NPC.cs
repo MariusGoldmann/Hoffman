@@ -5,9 +5,11 @@ using UnityEngine.InputSystem;
 public abstract class NPC : MonoBehaviour, IInteractable
 {
     [SerializeField] SpriteRenderer interactSprite;
+    
 
     Transform playerTransform;
     PickUpScript pickupScript;
+    
 
     float interactDistance = 5f;
 
