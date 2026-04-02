@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] DamageFlash damageFlash;
-    [SerializeField] KnockbackScript knockbackScript;
+    [SerializeField] KnockbackScript enemyKnockbackScript;
     [SerializeField] BlobfishCombat blobfishCombat;
 
     CinemachineImpulseSource impulseSource;
@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
     void Awake()
     {
         playerCombat = FindFirstObjectByType<PlayerCombat>();
-        knockbackScript = GetComponent<KnockbackScript>();
+        enemyKnockbackScript = GetComponent<KnockbackScript>();
         damageFlash = GetComponentInChildren<DamageFlash>();
         animator = GetComponentInChildren<Animator>();
     }
@@ -43,7 +43,7 @@ public class EnemyHealth : MonoBehaviour
         CameraShakeManager.instance.CameraShake(impulseSource);
         if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
         {
-            StartCoroutine(knockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalDirectionalForce));
+            StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalDirectionalForce));
             currentEnemyHealth += amount;
         }
 

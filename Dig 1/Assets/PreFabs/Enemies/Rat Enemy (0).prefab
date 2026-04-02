@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2250447569052621783}
-  - component: {fileID: 2984852375285362780}
+  - component: {fileID: 7521869268331679978}
   - component: {fileID: 4182727920968109421}
   - component: {fileID: 4817415991613190083}
   - component: {fileID: 4054453495651370544}
@@ -197,7 +197,7 @@ Transform:
   - {fileID: 4901156587538242849}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2984852375285362780
+--- !u!114 &7521869268331679978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,21 +209,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b363b4a61a9838d40849b3e8d3df541b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RatEnemyMovement
-  idleMoveSpeed: 3
-  groundCheckLength: 2
+  idleMoveSpeed: 0.5
+  groundCheckLength: 2.3
   damageAmount: 5
-  chaseMoveSpeed: 10
-  chaseDuration: 2
-  chaseAnticipationTime: 0.4
-  attackCooldown: 0.75
-  downedCooldown: 1.5
+  chaseMoveSpeed: 2
+  chaseDuration: 1.5
+  chaseAnticipationTime: 0.3
+  attackCooldown: 0.5
+  downedCooldown: 1
   additionalDirectionalForce: 5
   hitDirectionForce: 10
-  ratKnockbackScript: {fileID: 4817415991613190083}
-  wallCheckLength: 0.1
-  wallCheckPosition: {fileID: 4554192857374076194}
+  ratKnockbackScript: {fileID: 0}
+  wallCheckLength: 1
+  wallCheckPosition: {fileID: 0}
   frontGroundCheckLength: 1.67
-  frontRaycastOrigin: {fileID: 1488730367422112783}
+  frontRaycastOrigin: {fileID: 0}
   facingRight: 1
 --- !u!114 &4182727920968109421
 MonoBehaviour:
@@ -244,7 +244,8 @@ MonoBehaviour:
   additionalDirectionalForce: 5
   playerCombat: {fileID: 0}
   damageFlash: {fileID: 4465401982838308614}
-  ratKnockbackScript: {fileID: 4817415991613190083}
+  enemyKnockbackScript: {fileID: 0}
+  blobfishCombat: {fileID: 0}
 --- !u!114 &4817415991613190083
 MonoBehaviour:
   m_ObjectHideFlags: 0
