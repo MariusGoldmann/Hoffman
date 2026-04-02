@@ -2089,7 +2089,9 @@ Transform:
   m_LocalPosition: {x: -156.25, y: -22.6, z: 0}
   m_LocalScale: {x: 4, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2497060680329394474}
+  - {fileID: 7167971089462320230}
   m_Father: {fileID: 7745099933135038267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4533558172930159337
@@ -3547,8 +3549,6 @@ Transform:
   - {fileID: 4250873650866713160}
   - {fileID: 4595591632464737089}
   - {fileID: 3863108680125624937}
-  - {fileID: 7745099933135038267}
-  - {fileID: 6613715217838521581}
   m_Father: {fileID: 7194252902305908396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2633903114303919501
@@ -3581,6 +3581,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1058694245105334471}
+  - {fileID: 7745099933135038267}
   m_Father: {fileID: 2739639428318762573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2649803340604561141
@@ -5388,11 +5389,11 @@ Transform:
   m_GameObject: {fileID: 3899225951476144897}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.384, z: 0}
-  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
+  m_LocalPosition: {x: 0.005004883, y: -0.4119994, z: 0}
+  m_LocalScale: {x: 1.125, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7318867693450186126}
+  m_Father: {fileID: 6813495282179150473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2543814016999310949
 SpriteRenderer:
@@ -6029,7 +6030,8 @@ Transform:
   m_LocalPosition: {x: -114.81, y: -67.66, z: 0}
   m_LocalScale: {x: 4, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6613715217838521581}
   m_Father: {fileID: 1058694245105334471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4058559763117056419
@@ -7770,11 +7772,11 @@ Transform:
   m_GameObject: {fileID: 5137956869170007279}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.315, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
+  m_LocalPosition: {x: 0.005004883, y: -0.64499986, z: 0}
+  m_LocalScale: {x: 0.875, y: 1.1666667, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7318867693450186126}
+  m_Father: {fileID: 6813495282179150473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6612390647043640993
 SpriteRenderer:
@@ -10750,7 +10752,7 @@ Transform:
   m_GameObject: {fileID: 6551333058461607756}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5786057, y: 0, z: 0}
+  m_LocalPosition: {x: 75.98, y: 25.505783, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10758,7 +10760,7 @@ Transform:
   - {fileID: 5578773821344487728}
   - {fileID: 414782382064740081}
   - {fileID: 7318867693450186126}
-  m_Father: {fileID: 1058694245105334471}
+  m_Father: {fileID: 7194252902305908396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6556006489357129381
 GameObject:
@@ -13089,13 +13091,13 @@ Transform:
   m_GameObject: {fileID: 7611684870221070008}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -114.7914, y: -69.35578, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.004650116, y: -0.56525934, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.33333334, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 749641987533127071}
   - {fileID: 814174344204708227}
-  m_Father: {fileID: 1058694245105334471}
+  m_Father: {fileID: 4250873650866713160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7879089589244316020
 GameObject:
@@ -14980,8 +14982,6 @@ Transform:
   m_LocalPosition: {x: -156.23, y: -24.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7167971089462320230}
-  - {fileID: 2497060680329394474}
+  m_Children: []
   m_Father: {fileID: 7745099933135038267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
