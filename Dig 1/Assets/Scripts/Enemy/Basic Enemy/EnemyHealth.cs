@@ -12,10 +12,13 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float hitDirectionForce = 10f;
     [SerializeField] float additionalDirectionalForce = 5f;
 
+    [SerializeField] bool knockedOut = false;
+
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] DamageFlash damageFlash;
     [SerializeField] KnockbackScript enemyKnockbackScript;
     [SerializeField] BlobfishCombat blobfishCombat;
+    [SerializeField] RatEnemyMovement ratEnemyMovement;
 
     CinemachineImpulseSource impulseSource;
 
@@ -30,6 +33,7 @@ public class EnemyHealth : MonoBehaviour
         enemyKnockbackScript = GetComponent<KnockbackScript>();
         damageFlash = GetComponentInChildren<DamageFlash>();
         animator = GetComponentInChildren<Animator>();
+        ratEnemyMovement = GetComponent<RatEnemyMovement>();
     }
     void Start()
     {
@@ -38,13 +42,22 @@ public class EnemyHealth : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
+    void Update()
+    {
+       if (knockedOut)
+        {
+            ratEnemyMovement.SetKnockedOut(true);
+        }
+    }
+
     public void ChangeHealth(int amount, Vector2 knockbackdirection)
     {
-        CameraShakeManager.instance.CameraShake(impulseSource);
         if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
         {
             StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalDirectionalForce));
             currentEnemyHealth += amount;
+            CameraShakeManager.instance.CameraShake(impulseSource);
+            damageFlash.GetDamageFlasher();
         }
 
         if (currentEnemyHealth > maxEnemyHealth)
@@ -58,13 +71,15 @@ public class EnemyHealth : MonoBehaviour
         }
         IEnumerator DeathSequence()
         {
+            knockedOut = true;
             // Deactivate all
             animator.SetTrigger("RatDied");
             //while (spriteRenderer.color.) Make less opaque
-            yield return null;
+            yield return new WaitForSeconds(3);
+            animator.SetTrigger("PermaDied");
+            yield return new WaitForSeconds(10);
             Destroy(gameObject);
+            knockedOut = false;
         }
-
-        damageFlash.GetDamageFlasher();
     }
 }

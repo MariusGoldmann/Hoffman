@@ -4,20 +4,22 @@ public class BoomerangColission : MonoBehaviour
 {
     // Script references
     PlayerCombat playerCombat;
-    EnemyHealth enemyHealth;
 
     void Awake()
     {
         playerCombat = FindAnyObjectByType<PlayerCombat>();
-        enemyHealth = FindAnyObjectByType<EnemyHealth>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            EnemyHealth enemyHealth;
+
             GameObject enemy = collision.gameObject;
             Vector2 direction = (enemy.transform.position - transform.position).normalized;
+            enemyHealth = enemy.gameObject.GetComponent<EnemyHealth>();
+            
             Debug.Log("Enemy hit");
             enemyHealth.ChangeHealth(-playerCombat.GetBoomerangDamage(), direction);
             playerCombat.GetEarlyReceiving(true);
