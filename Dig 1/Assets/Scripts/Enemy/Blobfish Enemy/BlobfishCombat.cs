@@ -21,6 +21,7 @@ public class BlobfishCombat : MonoBehaviour
     [Header("Debug")]
     float normalRadius;
     bool poison;
+    bool bodyColliderRadiusChanging;
     bool isExpanding=false;
 
     LayerMask playerLayer;
@@ -64,22 +65,26 @@ public class BlobfishCombat : MonoBehaviour
         StopCoroutine(Shrink());
         StartCoroutine(SpriteSwitch());
 
+        bodyColliderRadiusChanging = true;
         while (bodyCollider.radius<expandedRadius)
         {
             bodyCollider.radius += expandedRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        bodyColliderRadiusChanging = false;
     }
     IEnumerator Shrink()
     {
         yield return new WaitForSeconds(maxTimeExpanded);
         StartCoroutine(SpriteSwitch());
         isExpanding = false;
+        bodyColliderRadiusChanging = true;
         while (bodyCollider.radius > normalRadius)
         {
             bodyCollider.radius -= normalRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        bodyColliderRadiusChanging=false;
     }
     IEnumerator Poison()
     {
@@ -92,50 +97,53 @@ public class BlobfishCombat : MonoBehaviour
         poison = false;
     }
     [Header("Graphics")]
+    [SerializeField] ParticleSystem transitionParticles;
     [SerializeField] Transform bigTransform;
     [SerializeField] Transform smallTransform;
     [SerializeField] SpriteRenderer bigSprite;
     [SerializeField] SpriteRenderer smallSprite;
     [SerializeField] float sizeChangeSpeed=1;
+
     IEnumerator SpriteSwitch()
     {
         float size;
         float originalSize;
+        Transform currentTransform;
+        SpriteRenderer currentSpriteRenderer;
+        SpriteRenderer nextSpriteRenderer;
 
         if (bigSprite.enabled==true)
         {
-            originalSize=bigTransform.localScale.x;
-            size = bigTransform.localScale.x;
-            while (bigTransform.lossyScale.x>smallTransform.lossyScale.x)
-            {
-                size -= Time.deltaTime * sizeChangeSpeed;
-                bigTransform.localScale = new Vector2(size, size);
-                yield return new WaitForEndOfFrame();
-            }
-            //TODO play particles
-            bigSprite.enabled = false;
-            smallSprite.enabled = true;
-            bigTransform.localScale = new Vector2(originalSize, originalSize);
+            currentTransform = bigTransform;
+            currentSpriteRenderer = bigSprite;
+            nextSpriteRenderer= smallSprite;
         }
         else
         {
-            originalSize = smallTransform.localScale.x;
-            size = smallTransform.lossyScale.x;
-            while (smallTransform.lossyScale.x<bigTransform.lossyScale.x)
-            {
-                size += Time.deltaTime * sizeChangeSpeed;
-                smallTransform.localScale = new Vector2(size, size);
-                yield return new WaitForEndOfFrame();
-            }
-            //TODO play particles
-            smallSprite.enabled = false;
-            bigSprite.enabled = true;
-            smallTransform.localScale= new Vector2(originalSize, originalSize);
+            currentTransform=smallTransform;
+            currentSpriteRenderer=smallSprite;
+            nextSpriteRenderer = bigSprite;
         }
+        originalSize=GetActiveTransform().localScale.x;
+        while (bodyColliderRadiusChanging)
+        {
+            size = bodyCollider.radius * 2;
+            currentTransform.localScale=new Vector2(size, size);
+            yield return null;
+        }
+        if (transitionParticles != null) transitionParticles.Play();
+        currentSpriteRenderer.enabled = false;
+        nextSpriteRenderer.enabled = true;
+        currentTransform.localScale = new Vector2(originalSize, originalSize);
     }
     public bool GetIsExpanding()
     {
         return isExpanding;
+    }
+    Transform GetActiveTransform()
+    {
+        if (bigSprite.enabled == true) return bigTransform;
+        else return smallTransform;
     }
     public SpriteRenderer GetActiveSpriteRenderer()
     {
