@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -15,12 +16,16 @@ public class PlayerHealth : MonoBehaviour
     KnockbackScript knockbackScript;
     PlayerMovement playerMovement;
 
+    CinemachineImpulseSource impulseSource;
+
     [SerializeField] Slider healthSlider; 
 
     private void Start()
     {
         knockbackScript = GetComponent<KnockbackScript>();
         playerMovement= GetComponent<PlayerMovement>();
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
 
         currentPlayerHealth = maxPlayerHealth;
 
@@ -33,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalDirectionalForce)
     {
+        CameraShakeManager.instance.CameraShake(impulseSource);
         //Dennis suger 2 was here :D 
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
