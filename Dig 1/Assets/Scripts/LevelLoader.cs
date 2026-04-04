@@ -8,4 +8,9 @@ public class LevelLoader : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
     }
+
+    public void FadeOut()
+    {
+        animator.SetTrigger("Start");
+    }
 }

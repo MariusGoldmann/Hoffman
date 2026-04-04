@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!dialogueController.GetIsInDialogue())
+        if (!dialogueController.GetIsInDialogue() && !knockbackScript.GetIsKnockback())
         {
             HandleMovement();
             HandleJump();

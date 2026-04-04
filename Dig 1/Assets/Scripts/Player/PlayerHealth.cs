@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
     KnockbackScript knockbackScript;
     PlayerMovement playerMovement;
+    LevelLoader levelLoader;
 
     CinemachineImpulseSource impulseSource;
 
@@ -24,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     {
         knockbackScript = GetComponent<KnockbackScript>();
         playerMovement= GetComponent<PlayerMovement>();
+        levelLoader = FindAnyObjectByType<LevelLoader>();
 
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
@@ -44,11 +46,14 @@ public class PlayerHealth : MonoBehaviour
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
         StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalDirectionalForce));
         if (healthSlider!=null) healthSlider.value = currentPlayerHealth; 
-        if (currentPlayerHealth <= 0) DeathSequence();
+        if (currentPlayerHealth <= 0) StartCoroutine(Deathsequence());
     }
 
-    void DeathSequence()
+
+    IEnumerator Deathsequence()
     {
+        levelLoader.FadeOut();
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
