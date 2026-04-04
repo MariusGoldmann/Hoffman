@@ -487,6 +487,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2715625535597060279, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5605187441174547169, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
       propertyPath: playerTransform
       value: 

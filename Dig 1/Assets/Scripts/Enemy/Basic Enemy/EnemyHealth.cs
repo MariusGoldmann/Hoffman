@@ -20,6 +20,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
 
+    [SerializeField] ParticleSystem hitParticles;
+
     CinemachineImpulseSource impulseSource;
 
 
@@ -34,6 +36,7 @@ public class EnemyHealth : MonoBehaviour
         damageFlash = GetComponentInChildren<DamageFlash>();
         animator = GetComponentInChildren<Animator>();
         ratEnemyMovement = GetComponent<RatEnemyMovement>();
+        hitParticles = GetComponentInChildren<ParticleSystem>();
     }
     void Start()
     {
@@ -58,6 +61,7 @@ public class EnemyHealth : MonoBehaviour
             currentEnemyHealth += amount;
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();
+            hitParticles.Play();
         }
 
         if (currentEnemyHealth > maxEnemyHealth)
