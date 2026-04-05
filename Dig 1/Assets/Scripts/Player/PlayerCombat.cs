@@ -130,6 +130,7 @@ public class PlayerCombat : MonoBehaviour
             slashTimer = slashCooldown;
             MeleeAttack(slashDamage, "Slash");
             AttackEffects(slashEffect);
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASH, 1f);
         }
     }
 

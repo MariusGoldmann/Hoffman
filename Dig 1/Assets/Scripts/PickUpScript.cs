@@ -105,7 +105,7 @@ public class PickUpScript : MonoBehaviour
             eyeTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("Boomerang") && isInteracting == true)
+        if (collision.gameObject.CompareTag("BoomerangPickUp") && isInteracting == true)
         {
             hasBoomerang = true;
             spawnManager.boomerangOwned = true;

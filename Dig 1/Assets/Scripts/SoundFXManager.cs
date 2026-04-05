@@ -1,14 +1,18 @@
 using UnityEngine;
 
-public class PlayerSoundEffectManager : MonoBehaviour
+public class PlayerSoundFXManager : MonoBehaviour
 {
+    public static PlayerSoundFXManager instance;
+
     [SerializeField] AudioClip[] soundEffectList;
-    static PlayerSoundEffectManager instance;
     AudioSource audioSource;
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     void Start()
@@ -16,7 +20,7 @@ public class PlayerSoundEffectManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static void PlaySound(SoundType sound, float volume = 1)
+    public void PlaySound(SoundType sound, float volume = 1)
     {
         instance.audioSource.PlayOneShot(instance.soundEffectList[(int)sound], volume);
     }
@@ -30,7 +34,6 @@ public class PlayerSoundEffectManager : MonoBehaviour
         KICK,
         BOOMERANG,
         DAMAGE
-
     }
 
 }

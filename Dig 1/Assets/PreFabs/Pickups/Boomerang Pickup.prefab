@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7155773810961597292}
   m_Layer: 0
   m_Name: Boomerang Pickup
-  m_TagString: Untagged
+  m_TagString: BoomerangPickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4926148280445940359}
   m_Layer: 0
   m_Name: Bomerang Pickup Art
-  m_TagString: Boomerang
+  m_TagString: BoomerangPickUp
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -3849849079039935540, guid: e9a67b7941bd5b84c857a332e0f89b77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

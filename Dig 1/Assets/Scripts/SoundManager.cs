@@ -1,0 +1,44 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SoundManager : MonoBehaviour
+{
+    [Header("Volume Sliders")]
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider soundFXSlider;
+
+    [Header("Audio Sources")]
+    [SerializeField] AudioSource musicAudioSource;
+    [SerializeField] AudioSource soundFXAudioSource;
+
+    void Start()
+    {
+        if (!PlayerPrefs.HasKey("musicVolume"))
+        {
+            PlayerPrefs.SetFloat("musicVolume", 1);
+        }
+        else
+        {
+            Load();
+        }
+    }
+
+    public void ChangeVolume()
+    {
+        musicAudioSource.volume = musicSlider.value;
+        soundFXAudioSource.volume = soundFXSlider.value;
+        Save();
+    }
+
+    private void Load()
+    {
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        soundFXSlider.value = PlayerPrefs.GetFloat("soundFXVolume");
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
+        PlayerPrefs.SetFloat("soundFXVolume", soundFXSlider.value);
+    }
+}

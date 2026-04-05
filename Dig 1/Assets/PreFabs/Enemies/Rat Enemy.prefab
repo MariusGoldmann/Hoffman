@@ -211,14 +211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b363b4a61a9838d40849b3e8d3df541b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RatEnemyMovement
-  idleMoveSpeed: 0.5
+  idleMoveSpeed: 2
   groundCheckLength: 2.3
   damageAmount: 5
   chaseMoveSpeed: 10
   chaseDuration: 3
   chaseAnticipationTime: 1
   attackCooldown: 3
-  downedCooldown: 1
+  dazedCooldown: 3
   additionalDirectionalForce: 10
   hitDirectionForce: 20
   ratKnockbackScript: {fileID: 8563240839915267902}
@@ -227,6 +227,10 @@ MonoBehaviour:
   frontGroundCheckLength: 1.67
   frontRaycastOrigin: {fileID: 1488730367422112783}
   facingRight: 1
+  isChasing: 0
+  isCooldown: 0
+  currentCooldown: 0
+  knockedOut: 0
 --- !u!114 &4182727920968109421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,10 +248,13 @@ MonoBehaviour:
   timeDead: 3
   hitDirectionForce: 10
   additionalDirectionalForce: 5
+  knockedOut: 0
   playerCombat: {fileID: 0}
   damageFlash: {fileID: 0}
   enemyKnockbackScript: {fileID: 0}
   blobfishCombat: {fileID: 0}
+  ratEnemyMovement: {fileID: 0}
+  hitParticles: {fileID: 0}
 --- !u!70 &4054453495651370544
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -300,7 +307,7 @@ Rigidbody2D:
   m_Mass: 10000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -364,7 +371,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0.5, y: -0.5, z: 0}
+  m_DefaultVelocity: {x: 0.2, y: -0.2, z: 0}
 --- !u!114 &8563240839915267902
 MonoBehaviour:
   m_ObjectHideFlags: 0
