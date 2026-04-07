@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class BlobfishMovement : MonoBehaviour
 {
@@ -16,17 +14,14 @@ public class BlobfishMovement : MonoBehaviour
     bool facingRight;
     [SerializeField] Vector2 targetPosition;
 
-    Rigidbody2D blobfishRB;
-    Animator animator;
     BlobfishCombat blobfishCombat;
 
     void Start()
     {
-        blobfishRB = GetComponent<Rigidbody2D>();
         blobfishCombat = GetComponent<BlobfishCombat>();
     }
     private void FixedUpdate()
-    { 
+    {
         if (blobfishCombat.GetIsExpanding())
         {
             Move(expandedMoveSpeed);
@@ -35,6 +30,8 @@ public class BlobfishMovement : MonoBehaviour
         {
             Move(moveSpeed);
         }
+        if (facingRight) transform.rotation = Quaternion.Euler(0, 180, 0);
+        else transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     void Move(float activeMoveSpeed)
     {
