@@ -38,28 +38,30 @@ public class BlobfishMovement : MonoBehaviour
     }
     void Move(float activeMoveSpeed)
     {
-        targetPosition = waypoints[waypointIndex].position;
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, activeMoveSpeed);
-
-        if (waypointIndex == 0 && !movingRight)
+        if (waypoints.Length > 0)
         {
-            movingRight = true;
-        }
-        else if (waypointIndex == waypoints.Length - 1 && movingRight)
-        {
-            movingRight = false;
-        }
-        if (Vector2.Distance(transform.position, targetPosition) < waypointDistance)
-        {
-            if (movingRight)
+            targetPosition = waypoints[waypointIndex].position;
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, activeMoveSpeed);
+            if (waypointIndex == 0 && !movingRight)
             {
-                waypointIndex++;
-                facingRight = true;
+                movingRight = true;
             }
-            else
+            else if (waypointIndex == waypoints.Length - 1 && movingRight)
             {
-                waypointIndex--;
-                facingRight = false;
+                movingRight = false;
+            }
+            if (Vector2.Distance(transform.position, targetPosition) < waypointDistance)
+            {
+                if (movingRight)
+                {
+                    waypointIndex++;
+                    facingRight = true;
+                }
+                else
+                {
+                    waypointIndex--;
+                    facingRight = false;
+                }
             }
         }
     }

@@ -40,6 +40,7 @@ public class PlayerCombat : MonoBehaviour
     // Script references
     PlayerMovement playerMovement;
     PickUpScript pickUpScript;
+    PauseManager pauseManager;
 
     // Component references
     [SerializeField] GameObject boomerangPrefab; // drag in inspector
@@ -51,6 +52,7 @@ public class PlayerCombat : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         pickUpScript = GetComponent<PickUpScript>();
+        pauseManager = FindAnyObjectByType<PauseManager>();
 
         animator = GetComponentInChildren<Animator>();
     }
@@ -125,17 +127,18 @@ public class PlayerCombat : MonoBehaviour
 
     void OnSlash(InputValue slashbutton)
     {
-        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg())
+        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
         {
             slashTimer = slashCooldown;
             MeleeAttack(slashDamage, "Slash");
             AttackEffects(slashEffect);
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASH, 1f);
         }
     }
 
     void OnKick(InputValue kickButton)
     {
-        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg())
+        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
         {
             kickTimer = kickCooldown;
             MeleeAttack(kickDamage, "Kick");
@@ -145,7 +148,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang())
+        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang() && !pauseManager.GetIsPaused())
         {
             boomerangTimer = boomerangCooldown;
             animator.SetTrigger("Throwing");

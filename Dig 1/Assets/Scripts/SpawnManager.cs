@@ -7,11 +7,16 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager instance;
     public Vector2 spawnPosition;
 
-    public bool reloadScene = false;
+    [SerializeField] bool reloadScene = false;
     public bool legOwned = false;
     public bool eyeOwned = false;
     public bool boomerangOwned = false;
     public bool earOwned = false;
+
+    [SerializeField] GameObject legPickUp;
+    [SerializeField] GameObject eyePickup;
+    [SerializeField] GameObject earPickUp;
+    [SerializeField] GameObject boomerangPickUp;
 
     PickUpScript pickUpScript;
 
@@ -32,8 +37,14 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
+        legPickUp = GameObject.FindGameObjectWithTag("PlayerLeg");
+        eyePickup = GameObject.FindGameObjectWithTag("PlayerEye");
+        earPickUp = GameObject.FindGameObjectWithTag("PlayerEar");
+        boomerangPickUp = GameObject.FindGameObjectWithTag("BoomerangPickUp");
+
         SceneReloader();
         PickUpManager();
+        PickupDestroy();
     }
 
     void SceneReloader()
@@ -50,6 +61,7 @@ public class SpawnManager : MonoBehaviour
         if (pickUpScript.GetHasLeg() == true)
         {
             legOwned = true;
+            
         }
         if (pickUpScript.GetHasEye() == true)
         {
@@ -62,6 +74,26 @@ public class SpawnManager : MonoBehaviour
         if (pickUpScript.GetHasEar() == true)
         {
             earOwned = true;
+        }
+    }
+
+    void PickupDestroy()
+    {
+        if (legOwned)
+        {
+            Destroy(legPickUp);
+        }
+        if (eyeOwned)
+        {
+            Destroy(eyePickup);
+        }
+        if (earOwned)
+        {
+            Destroy(earPickUp);
+        }
+        if (boomerangOwned)
+        {
+            Destroy(boomerangPickUp);
         }
     }
 }

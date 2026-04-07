@@ -18,6 +18,8 @@ public class PauseManager : MonoBehaviour
     bool paused;
     bool option;
 
+    [SerializeField] bool isPaused = false;
+
     void Start()
     {
         pauseMenuUI.SetActive(false);
@@ -53,10 +55,16 @@ public class PauseManager : MonoBehaviour
                     Time.timeScale = 1;
                 }
             }
-
         }
 
-
+        if (pauseMenuUI.activeSelf == false && abilityTabUI.activeSelf == false && optionUI.activeSelf == false)
+        {
+            isPaused = false;
+        }
+        else
+        {
+            isPaused = true;
+        }
 
         if (abilityTabAction.WasPerformedThisFrame())
         {
@@ -95,5 +103,10 @@ public class PauseManager : MonoBehaviour
         option = true;  
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1; 
+    }
+
+    public bool GetIsPaused()
+    {
+        return isPaused;
     }
 }
