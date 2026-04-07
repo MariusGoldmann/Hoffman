@@ -139,6 +139,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8404942764436946076, guid: 0e61f23b8f545e0458678a539358cef0, type: 3}
   m_PrefabInstance: {fileID: 830368535913304747}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &269348536 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8225604302655947516, guid: 47d29db2237a52348841478024541464, type: 3}
+  m_PrefabInstance: {fileID: 528027160778917496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ffc4a3b7e714444b1ef9bf971f9510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicManager
 --- !u!4 &293738618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7155773810961597292, guid: 0696a708ec6f6db41bdf038c3546ee58, type: 3}
@@ -590,11 +601,11 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Time: 0.3
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.29914278
+    widthMultiplier: 0.4740608
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -649,7 +660,7 @@ TrailRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 5
+    numCornerVertices: 53
     numCapVertices: 90
     alignment: 0
     textureMode: 3
@@ -971,7 +982,7 @@ Transform:
   m_GameObject: {fileID: 1697790424}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.14, y: 1.11, z: 0}
+  m_LocalPosition: {x: 8.9, y: -0.17, z: 0}
   m_LocalScale: {x: 0.58, y: 0.58, z: 0.58}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1469,6 +1480,18 @@ PrefabInstance:
     - target: {fileID: 4217295209444647926, guid: 47d29db2237a52348841478024541464, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796732381345235179, guid: 47d29db2237a52348841478024541464, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 269348536}
+    - target: {fileID: 4796732381345235179, guid: 47d29db2237a52348841478024541464, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796732381345235179, guid: 47d29db2237a52348841478024541464, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SoundManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5169004993770129011, guid: 47d29db2237a52348841478024541464, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2023,18 +2046,6 @@ PrefabInstance:
     - target: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174493436772123492, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174493436772123492, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[1]'
-      value: -714823789
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174493436772123492, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[2]'
-      value: -32143307
       objectReference: {fileID: 0}
     - target: {fileID: 7253600528976546947, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: dialogueController

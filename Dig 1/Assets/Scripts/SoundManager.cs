@@ -21,6 +21,15 @@ public class SoundManager : MonoBehaviour
         {
             Load();
         }
+
+        if (!PlayerPrefs.HasKey("soundFXVolume"))
+        {
+            PlayerPrefs.SetFloat("soundFXVolume", 1);
+        }
+        else
+        {
+            Load();
+        }
     }
 
     public void ChangeVolume()
