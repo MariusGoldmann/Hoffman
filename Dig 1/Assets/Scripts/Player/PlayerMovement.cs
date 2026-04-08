@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     bool jumpRelesed;
     bool crouchPressed;
 
+    public bool isOnPlatform;
+
     // Ints
     int facingDirection = 1;
 
@@ -40,9 +42,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] KnockbackScript knockbackScript;
     [SerializeField] DialogueController dialogueController;
     [SerializeField] SpawnManager spawnManager;
+    [SerializeField] MovingPlatform movingPlatform;
 
     //Component references
     Rigidbody2D playerRB;
+    public Rigidbody2D platformRB;
     CapsuleCollider2D playerCollider;
     Animator animator;
     void Awake()
@@ -149,7 +153,14 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = oneLegSpeed;
         }
 
-        playerRB.linearVelocityX = moveInput.x * moveSpeed;
+        if (isOnPlatform)
+        {
+            playerRB.linearVelocityX = (moveInput.x * moveSpeed) + platformRB.linearVelocityX;
+        }
+        else
+        {
+            playerRB.linearVelocityX = moveInput.x * moveSpeed;
+        }
 
     }
     void HandleJump()

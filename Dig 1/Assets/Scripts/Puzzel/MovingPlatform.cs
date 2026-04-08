@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -6,8 +7,11 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] int startingPoint;
     [SerializeField] Transform[] points;
     [SerializeField] int i;
+
+    [SerializeField] PlayerMovement playerMovement;
     void Start()
     {
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
         transform.position = points[startingPoint].position;
     }
 
@@ -24,12 +28,19 @@ public class MovingPlatform : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-     // collision.transform.SetParent(transform);
-   // }
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-       // collision.transform.SetParent(null);
-    //}
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerMovement.isOnPlatform = true;
+            playerMovement.platformRB = gameObject.GetComponent<Rigidbody2D>();
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerMovement.isOnPlatform = false;
+        }
+    }
 }
