@@ -74,6 +74,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 Vector2 direction = (enemy.transform.position - transform.position).normalized;
                 enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction);
+                PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT, 1f);
             }
         }
     }
@@ -108,6 +109,8 @@ public class PlayerCombat : MonoBehaviour
             boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, boomerangReturnSpeed * Time.deltaTime);
 
             earlyReceiving = true;
+
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BOOMERANGRETURN, 1f);
             yield return null;
         }
     }
@@ -143,6 +146,7 @@ public class PlayerCombat : MonoBehaviour
             kickTimer = kickCooldown;
             MeleeAttack(kickDamage, "Kick");
             AttackEffects(kickEffect);
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.KICK, 1f);
         }
     }
 
@@ -153,6 +157,7 @@ public class PlayerCombat : MonoBehaviour
             boomerangTimer = boomerangCooldown;
             animator.SetTrigger("Throwing");
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BOOMERANGTHROW, 1f);
         }
     }
 
