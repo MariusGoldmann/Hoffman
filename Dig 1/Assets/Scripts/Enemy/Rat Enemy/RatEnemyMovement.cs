@@ -34,11 +34,12 @@ public class RatEnemyMovement : MonoBehaviour
 
     [SerializeField] bool knockedOut;
 
+    Coroutine chasePlayerCoroutine;
+
     Rigidbody2D ratRB;
     Animator animator;
     RatEnemyState ratEnemyState;
     PlayerHealth playerHealth;
-    KnockbackScript knockbackScript;
 
     private void Start()
     {
@@ -54,14 +55,15 @@ public class RatEnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!isChasing && !isCooldown && !knockedOut)
+        if (!isChasing && !isCooldown && !knockedOut && !ratKnockbackScript.GetIsKnockback())
         {
             if (ratEnemyState.GetInCombat() && GetIsGrounded())
             {
-                StartCoroutine(ChasePlayer());
+                if (chasePlayerCoroutine==null) chasePlayerCoroutine=StartCoroutine(ChasePlayer());
             }
             else
             {
+                if (chasePlayerCoroutine != null) StopChasePlayer(false);
                 IdleMovement();
             }
         }
@@ -137,7 +139,7 @@ public class RatEnemyMovement : MonoBehaviour
         ratRB.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(chaseAnticipationTime);
 
-        while (chaseTime<chaseDuration)
+        while (chaseTime<chaseDuration && !ratKnockbackScript.GetIsKnockback())
         {
             if (facingRight)
             { 
@@ -154,11 +156,11 @@ public class RatEnemyMovement : MonoBehaviour
         isChasing = false;
         currentCooldown = attackCooldown;
     }
-    void StopChasePlayer(bool downed)
+    void StopChasePlayer(bool dazed)
     {
-        StopCoroutine(ChasePlayer());
+        StopCoroutine(chasePlayerCoroutine);
         isChasing=false;
-        if (downed)
+        if (dazed)
         {
             currentCooldown = dazedCooldown;
         }

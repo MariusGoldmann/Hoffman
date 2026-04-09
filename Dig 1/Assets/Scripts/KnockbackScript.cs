@@ -4,6 +4,7 @@ using UnityEngine;
 public class KnockbackScript : MonoBehaviour
 {
     [SerializeField] float knockbackLength=0.2f;
+    [SerializeField] float inputForce=7.5f;
     [SerializeField] bool debugBool;
 
     bool isKnockback=false;
@@ -14,30 +15,29 @@ public class KnockbackScript : MonoBehaviour
     private void Start()
     {
         knockbackRigidbody = GetComponent<Rigidbody2D>();
-        playerMovement = FindFirstObjectByType<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
-    public IEnumerator KnockbackAction(Vector2 hitDirection, Vector2 additionalForceDirection, float hitDirectionForce, float additionalDirectionalForce)
+    public IEnumerator KnockbackAction(Vector2 hitDirection, Vector2 additionalForceDirection, float hitForce, float additionalForce)
     {
         isKnockback = true;
         
-        float time = 0f;
-        Vector2 hitForce;
-        Vector2 additionalForce;
+        float elapsedTime = 0f;
+        Vector2 knockbackForce;
         Vector2 combinedForce;
 
-        hitForce = hitDirection * hitDirectionForce;
-        additionalForce = additionalForceDirection * additionalDirectionalForce;
+        knockbackForce = hitDirection * hitForce + additionalForceDirection * additionalForce;
 
-
-        while (time < knockbackLength)
+        while (elapsedTime < knockbackLength)
         {
-            time += Time.fixedDeltaTime;
-            combinedForce = hitForce + additionalForce + playerMovement.GetMoveInput();
+            elapsedTime += Time.fixedDeltaTime;
 
-            yield return new WaitForFixedUpdate();
+            if (playerMovement != null) combinedForce = knockbackForce + playerMovement.GetMoveInput();
+            else combinedForce = knockbackForce;
 
             knockbackRigidbody.linearVelocity = combinedForce;
+
+            yield return new WaitForFixedUpdate();
         }
 
         isKnockback=false;

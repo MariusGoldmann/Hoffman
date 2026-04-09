@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isOnPlatform)
         {
-            playerRB.linearVelocityX = (moveInput.x * moveSpeed) + platformRB.linearVelocityX;
+            playerRB.linearVelocityX = (moveInput.x * moveSpeed);// + platformRB.linearVelocityX;
         }
         else
         {

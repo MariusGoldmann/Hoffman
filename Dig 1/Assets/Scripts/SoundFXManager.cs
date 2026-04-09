@@ -32,8 +32,10 @@ public class PlayerSoundFXManager : MonoBehaviour
         JUMP,
         SLASH,
         KICK,
-        BOOMERANG,
-        DAMAGE
+        BOOMERANGTHROW,
+        BOOMERANGRETURN,
+        SLASHHIT,
+        KICKHIT
     }
 
 }
