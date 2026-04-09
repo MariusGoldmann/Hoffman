@@ -15,20 +15,25 @@ public class BlobfishMovement : MonoBehaviour
     [SerializeField] Vector2 targetPosition;
 
     BlobfishCombat blobfishCombat;
+    KnockbackScript blobfishKnockbackScript;
 
     void Start()
     {
         blobfishCombat = GetComponent<BlobfishCombat>();
+        blobfishKnockbackScript = GetComponent<KnockbackScript>();
     }
     private void FixedUpdate()
     {
-        if (blobfishCombat.GetIsExpanding())
+        if (!blobfishKnockbackScript.GetIsKnockback())
         {
-            Move(expandedMoveSpeed);
-        }
-        else
-        {
-            Move(moveSpeed);
+            if (blobfishCombat.GetIsExpanding())
+            {
+                Move(expandedMoveSpeed);
+            }
+            else
+            {
+                Move(moveSpeed);
+            }
         }
         if (facingRight) transform.rotation = Quaternion.Euler(0, 180, 0);
         else transform.rotation = Quaternion.Euler(0, 0, 0);
