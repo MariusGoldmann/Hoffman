@@ -35,12 +35,10 @@ public class BlobfishCombat : MonoBehaviour
     Coroutine shrinkCoroutine;
     Coroutine poisonCoroutine;
 
-    LayerMask playerLayer;
     PlayerHealth playerHealth;
 
     private void Start()
     {
-        playerLayer = LayerMask.GetMask("Player");
         playerHealth = FindAnyObjectByType<PlayerHealth>();
 
         normalRadius = bodyCollider.radius;
@@ -68,7 +66,7 @@ public class BlobfishCombat : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && !isBlown) StartCoroutine(Expand());
     }

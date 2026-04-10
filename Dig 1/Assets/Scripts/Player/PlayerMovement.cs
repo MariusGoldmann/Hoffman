@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] DialogueController dialogueController;
     [SerializeField] SpawnManager spawnManager;
     [SerializeField] MovingPlatform movingPlatform;
+    [SerializeField] PlayerHealth playerHealth;
 
     //Component references
     Rigidbody2D playerRB;
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         pickUpScript = GetComponent<PickUpScript>();
         knockbackScript = GetComponent<KnockbackScript>();
         spawnManager = FindFirstObjectByType<SpawnManager>();
+        playerHealth = GetComponent<PlayerHealth>();
 
         if (SpawnManager.instance != null)
         {
@@ -118,12 +120,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!dialogueController.GetIsInDialogue() && !knockbackScript.GetIsKnockback())
+        if (!dialogueController.GetIsInDialogue() && !knockbackScript.GetIsKnockback() && !playerHealth.GetIsDead())
         {
             HandleMovement();
             HandleJump();
         }
-        else if (dialogueController.GetIsInDialogue())
+        else if (dialogueController.GetIsInDialogue() || playerHealth.GetIsDead())
         {
             playerRB.linearVelocity = new Vector2(0, playerRB.linearVelocityY);
             moveInput.x = 0;
@@ -270,6 +272,11 @@ public class PlayerMovement : MonoBehaviour
         {
             movingState = MovingStates.KnockBack;
         }
+
+        if (playerHealth.GetIsDead())
+        {
+            movingState = MovingStates.Dead;
+        }
     }
     void HandleAnimations()
     {
@@ -369,7 +376,8 @@ public class PlayerMovement : MonoBehaviour
         Falling,
         Crouching,
         CrouchWalking,
-        KnockBack
+        KnockBack,
+        Dead
     }
 
     public int GetFacingDirection()
