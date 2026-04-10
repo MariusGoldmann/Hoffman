@@ -55,9 +55,9 @@ public class RatEnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!isChasing && !isCooldown && !knockedOut && !ratKnockbackScript.GetIsKnockback())
+        if (!isChasing && !knockedOut)
         {
-            if (ratEnemyState.GetInCombat() && GetIsGrounded())
+            if (ratEnemyState.GetInCombat() && GetIsGrounded() && !ratKnockbackScript.GetIsKnockback() && !isCooldown)
             {
                 if (chasePlayerCoroutine == null)
                 {
