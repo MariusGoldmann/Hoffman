@@ -1,5 +1,6 @@
 using Cinemachine;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -17,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
     [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] GameObject hpParticlePrefab;
 
     CinemachineImpulseSource impulseSource;
     SpriteRenderer spriteRenderer;
@@ -50,7 +52,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
         {
-            if (currentEnemyHealth>0) StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
+            if (currentEnemyHealth>0 && blobfishCombat==null) StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
             currentEnemyHealth += amount;
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();
@@ -75,7 +77,11 @@ public class EnemyHealth : MonoBehaviour
             {
                 timeLeft -= Time.deltaTime;
                 spriteRenderer.color = new Color(1f, 1f, 1f, timeLeft / 13);
-                if (timeLeft<10) animator.SetTrigger("PermaDied");
+                if (timeLeft < 10)
+                {
+                    animator.SetTrigger("PermaDied");
+                    for (int i = 0; i<Random.Range(1,3); i++) Instantiate(hpParticlePrefab, new Vector2(transform.position.x+i, transform.position.y), Quaternion.identity);
+                }
                 yield return null;
             }
             Destroy(gameObject);
