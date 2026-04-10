@@ -12,6 +12,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask enemyLayer;
 
+    [Header("Knockback Settings")]
+    [SerializeField] float hitDirectionForce = 7.5f;
+    [SerializeField] float additionalForce = 7.5f;
+
     [Header("Slash settings")]
     [SerializeField] int slashDamage = 1;
     [SerializeField] float slashCooldown = 1f;
@@ -62,7 +66,7 @@ public class PlayerCombat : MonoBehaviour
         HandleCooldowns();
     }
 
-    void MeleeAttack(int damage, string animation)
+    void MeleeAttack(int damage, string animation, float knockbackMultiplier)
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
             
@@ -73,7 +77,7 @@ public class PlayerCombat : MonoBehaviour
             foreach (Collider2D enemy in enemies)
             {
                 Vector2 direction = (enemy.transform.position - transform.position).normalized;
-                enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction);
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction, hitDirectionForce*knockbackMultiplier, additionalForce*knockbackMultiplier);
                 PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT, 1f);
             }
         }
@@ -133,7 +137,7 @@ public class PlayerCombat : MonoBehaviour
         if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
         {
             slashTimer = slashCooldown;
-            MeleeAttack(slashDamage, "Slash");
+            MeleeAttack(slashDamage, "Slash", 1f);
             AttackEffects(slashEffect);
             PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASH, 1f);
         }
@@ -144,7 +148,7 @@ public class PlayerCombat : MonoBehaviour
         if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
         {
             kickTimer = kickCooldown;
-            MeleeAttack(kickDamage, "Kick");
+            MeleeAttack(kickDamage, "Kick", 2f);
             AttackEffects(kickEffect);
             PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.KICK, 1f);
         }

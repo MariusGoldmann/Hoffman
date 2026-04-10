@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BoomerangColission : MonoBehaviour
 {
+    [SerializeField] float hitDirectionForce = 10f;
+    [SerializeField] float additionalForce = 5f;
     // Script references
     PlayerCombat playerCombat;
 
@@ -21,7 +23,7 @@ public class BoomerangColission : MonoBehaviour
             enemyHealth = enemy.gameObject.GetComponent<EnemyHealth>();
             
             Debug.Log("Enemy hit");
-            enemyHealth.ChangeHealth(-playerCombat.GetBoomerangDamage(), direction);
+            enemyHealth.ChangeHealth(-playerCombat.GetBoomerangDamage(), direction, hitDirectionForce, additionalForce);
             playerCombat.GetEarlyReceiving(true);
         }
 

@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class KnockbackScript : MonoBehaviour
 {
-    [SerializeField] float knockbackLength=0.2f;
+    [SerializeField] float knockbackLength=0.1f;
     [SerializeField] float inputForce=7.5f;
-    [SerializeField] bool debugBool;
 
     bool isKnockback=false;
 
@@ -17,7 +16,6 @@ public class KnockbackScript : MonoBehaviour
         knockbackRigidbody = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
     }
-
     public IEnumerator KnockbackAction(Vector2 hitDirection, Vector2 additionalForceDirection, float hitForce, float additionalForce)
     {
         isKnockback = true;
@@ -25,6 +23,10 @@ public class KnockbackScript : MonoBehaviour
         float elapsedTime = 0f;
         Vector2 knockbackForce;
         Vector2 combinedForce;
+
+        if (hitDirection.x > 0) hitDirection = Vector2.right;
+        else hitDirection = Vector2.left;
+        Debug.Log(hitDirection);
 
         knockbackForce = hitDirection * hitForce + additionalForceDirection * additionalForce;
 
@@ -34,6 +36,7 @@ public class KnockbackScript : MonoBehaviour
 
             if (playerMovement != null) combinedForce = knockbackForce + playerMovement.GetMoveInput();
             else combinedForce = knockbackForce;
+            Debug.Log(combinedForce);
 
             knockbackRigidbody.linearVelocity = combinedForce;
 
