@@ -12,29 +12,24 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] bool knockedOut = false;
 
-    [SerializeField] PlayerCombat playerCombat;
     [SerializeField] DamageFlash damageFlash;
     [SerializeField] KnockbackScript enemyKnockbackScript;
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
-
     [SerializeField] ParticleSystem hitParticles;
 
     CinemachineImpulseSource impulseSource;
-
-
     SpriteRenderer spriteRenderer;
-
     Animator animator;
 
     void Awake()
     {
-        playerCombat = FindFirstObjectByType<PlayerCombat>();
         enemyKnockbackScript = GetComponent<KnockbackScript>();
         damageFlash = GetComponentInChildren<DamageFlash>();
         animator = GetComponentInChildren<Animator>();
         ratEnemyMovement = GetComponent<RatEnemyMovement>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     void Start()
     {
@@ -55,13 +50,12 @@ public class EnemyHealth : MonoBehaviour
     {
         if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
         {
-            StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
+            if (currentEnemyHealth>0) StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
             currentEnemyHealth += amount;
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();
             hitParticles.Play();
         }
-
         if (currentEnemyHealth > maxEnemyHealth)
         {
             currentEnemyHealth = maxEnemyHealth;
@@ -73,13 +67,17 @@ public class EnemyHealth : MonoBehaviour
         }
         IEnumerator DeathSequence()
         {
+            float timeLeft = 13f;
             knockedOut = true;
             // Deactivate all
             animator.SetTrigger("RatDied");
-            //while (spriteRenderer.color.) Make less opaque
-            yield return new WaitForSeconds(3);
-            animator.SetTrigger("PermaDied");
-            yield return new WaitForSeconds(10);
+            while (timeLeft>0)
+            {
+                timeLeft -= Time.deltaTime;
+                spriteRenderer.color = new Color(1f, 1f, 1f, timeLeft / 13);
+                if (timeLeft<10) animator.SetTrigger("PermaDied");
+                yield return null;
+            }
             Destroy(gameObject);
             knockedOut = false;
         }

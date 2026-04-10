@@ -59,20 +59,28 @@ public class RatEnemyMovement : MonoBehaviour
         {
             if (ratEnemyState.GetInCombat() && GetIsGrounded())
             {
-                if (chasePlayerCoroutine==null) chasePlayerCoroutine=StartCoroutine(ChasePlayer());
+                if (chasePlayerCoroutine == null)
+                {
+                    chasePlayerCoroutine = StartCoroutine(ChasePlayer());
+                    Debug.Log("1");
+                }
+                Debug.Log("2");
             }
             else
             {
                 if (chasePlayerCoroutine != null) StopChasePlayer(false);
                 IdleMovement();
+                Debug.Log("3");
             }
         }
-
+        /*Debug.Log(isChasing + "1");
+        Debug.Log(isCooldown + "2");
+        Debug.Log(knockedOut + "3");
+        Debug.Log(ratKnockbackScript.GetIsKnockback() + "4");*/
         if (knockedOut)
         {
             ratRB.linearVelocity = Vector2.zero;
         }
-        Debug.Log(isCooldown);
     }
     void HandleCooldowns()
     {
@@ -155,10 +163,12 @@ public class RatEnemyMovement : MonoBehaviour
 
         isChasing = false;
         currentCooldown = attackCooldown;
+        chasePlayerCoroutine = null;
     }
     void StopChasePlayer(bool dazed)
     {
         StopCoroutine(chasePlayerCoroutine);
+        chasePlayerCoroutine=null;
         isChasing=false;
         if (dazed)
         {

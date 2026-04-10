@@ -27,6 +27,9 @@ public class BlobfishCombat : MonoBehaviour
     [SerializeField] float sizeChangeMultiplier = 2;
 
     [Header("Debug")]
+    float size;
+    float sizeLowerBoundary;
+    float sizeUpperBoundary;
     float normalRadius;
     bool isBlown=false;
     Coroutine shrinkCoroutine;
@@ -41,7 +44,13 @@ public class BlobfishCombat : MonoBehaviour
         playerHealth = FindAnyObjectByType<PlayerHealth>();
 
         normalRadius = bodyCollider.radius;
-        bigSprite.enabled=false;
+        bigSprite.enabled = false;
+        sizeLowerBoundary = smallTransform.localScale.x;
+        sizeUpperBoundary = 1.6f;
+    }
+    private void Update()
+    {
+        Mathf.Clamp(size, sizeLowerBoundary, sizeUpperBoundary);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -65,17 +74,16 @@ public class BlobfishCombat : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player")) shrinkCoroutine = StartCoroutine(Shrink());
+        if (other.gameObject.CompareTag("Player") && shrinkCoroutine==null) shrinkCoroutine = StartCoroutine(Shrink());
     }
     IEnumerator Expand()
     {
         isBlown = true;
-        if (shrinkCoroutine!=null) StopCoroutine(shrinkCoroutine);
         StartCoroutine(SpriteSwitch());
 
         while (bodyCollider.radius<expandedRadius)
         {
-            bodyCollider.radius += expandedRadius * Time.deltaTime;
+            bodyCollider.radius += sizeChangeMultiplier * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
     }
@@ -89,6 +97,7 @@ public class BlobfishCombat : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         isBlown = false;
+        shrinkCoroutine = null;
     }
     IEnumerator Poison()
     {
@@ -100,13 +109,8 @@ public class BlobfishCombat : MonoBehaviour
     }
     IEnumerator SpriteSwitch()
     {
-        float size;
-        float originalSize;
-        Debug.Log(bigSprite.enabled);
-
         if (bigSprite.enabled==true)
         {
-            originalSize = bigTransform.localScale.x;
             size = bigTransform.localScale.x;
             if (transitionParticles != null) transitionParticles.Play();
             bigSprite.enabled = false;
@@ -117,7 +121,6 @@ public class BlobfishCombat : MonoBehaviour
                 smallTransform.localScale = new Vector3(size, size, 1);
                 yield return null;
             }
-            bigTransform.localScale = new Vector3(originalSize, originalSize, 1);
         }
         else
         {

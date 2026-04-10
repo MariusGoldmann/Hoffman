@@ -1067,6 +1067,78 @@ Transform:
   - {fileID: 1498181536}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1663316791
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 37.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731903404757562638, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: knockbackScript
+      value: 
+      objectReference: {fileID: 1663316792}
+    - target: {fileID: 8121612068831819699, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: m_Name
+      value: Blobfish Enemy Bundle (0)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+--- !u!114 &1663316792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3760515510861773110, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+  m_PrefabInstance: {fileID: 1663316791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8eb8f12c5457304f9197a85f67aab7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
 --- !u!4 &1676205542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6387554562484891162, guid: 50d76bc8fbef6d04d8c09e730d781e97, type: 3}
@@ -2985,4 +3057,5 @@ SceneRoots:
   - {fileID: 1697790425}
   - {fileID: 3976474646823263996}
   - {fileID: 9148385878705572202}
+  - {fileID: 1663316791}
   - {fileID: 1624336168}
