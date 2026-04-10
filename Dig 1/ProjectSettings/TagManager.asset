@@ -11,6 +11,8 @@ TagManager:
   - Movable
   - PlayerEar
   - Ground
+  - Ink tile
+  - BoomerangPickUp
   layers:
   - Default
   - TransparentFX
@@ -50,6 +52,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3580143507
+    locked: 0
+  - name: Trail thingy
+    uniqueID: 4262823989
     locked: 0
   m_RenderingLayers:
   - Default

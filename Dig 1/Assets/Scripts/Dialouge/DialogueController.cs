@@ -10,18 +10,22 @@ public class DialogueController : MonoBehaviour
 
     [SerializeField] float typeSpeed = 5f;
     [SerializeField] float MaxTypeTime = 0.1f;
+    
 
     Queue<string> paragraphs = new Queue<string>();
 
     bool conversationEnded;
     bool isTyping;
+    [SerializeField] bool isInDialogue;
 
     string paragraph;
-
     Coroutine typewriterCoroutine;
+
+
 
     public void DisplayNextParagraph(DialogueText dialogueText)
     {
+        isInDialogue = true;
         if (paragraphs.Count == 0)
         {
             if (!conversationEnded)
@@ -66,8 +70,9 @@ public class DialogueController : MonoBehaviour
             paragraphs.Enqueue(dialogueText.paragraphs[i]);
         }
     }
-    void EndConversation()
+    public void EndConversation()
     {
+        isInDialogue = false;
         conversationEnded = false;
 
         if (gameObject.activeSelf)
@@ -104,5 +109,10 @@ public class DialogueController : MonoBehaviour
         NPCDialogueText.maxVisibleCharacters = paragraph.Length;
 
         isTyping = false;
+    }
+
+    public bool GetIsInDialogue()
+    {
+        return isInDialogue;
     }
 }

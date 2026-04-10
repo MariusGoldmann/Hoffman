@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     bool jumpRelesed;
     bool crouchPressed;
 
+    public bool isOnPlatform;
+
     // Ints
     int facingDirection = 1;
 
@@ -38,9 +40,13 @@ public class PlayerMovement : MonoBehaviour
     //Script references
     [SerializeField] PickUpScript pickUpScript;
     [SerializeField] KnockbackScript knockbackScript;
+    [SerializeField] DialogueController dialogueController;
+    [SerializeField] SpawnManager spawnManager;
+    [SerializeField] MovingPlatform movingPlatform;
 
     //Component references
     Rigidbody2D playerRB;
+    public Rigidbody2D platformRB;
     CapsuleCollider2D playerCollider;
     Animator animator;
     void Awake()
@@ -51,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
         pickUpScript = GetComponent<PickUpScript>();
         knockbackScript = GetComponent<KnockbackScript>();
+        spawnManager = FindFirstObjectByType<SpawnManager>();
 
         if (SpawnManager.instance != null)
         {
@@ -111,10 +118,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!knockbackScript.GetIsKnockback())
+        if (!dialogueController.GetIsInDialogue() && !knockbackScript.GetIsKnockback())
         {
             HandleMovement();
             HandleJump();
+        }
+        else
+        {
+            playerRB.linearVelocity = new Vector2(0, playerRB.linearVelocityY);
+            moveInput.x = 0;
         }
 
         HandleStates();
@@ -141,7 +153,14 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = oneLegSpeed;
         }
 
-        playerRB.linearVelocityX = moveInput.x * moveSpeed;
+        if (isOnPlatform)
+        {
+            playerRB.linearVelocityX = (moveInput.x * moveSpeed);// + platformRB.linearVelocityX;
+        }
+        else
+        {
+            playerRB.linearVelocityX = moveInput.x * moveSpeed;
+        }
 
     }
     void HandleJump()
@@ -202,12 +221,12 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsGrounded", false);
         }
 
-        if (IsGrounded() && moveInput.x == 0 && pickUpScript.GetHasLeg())
+        if (IsGrounded() && moveInput.x == 0 && pickUpScript.GetHasLeg() || dialogueController.GetIsInDialogue())
         {
             movingState = MovingStates.Idle;
         }
 
-        if (IsGrounded() && moveInput.x == 0 && !pickUpScript.GetHasLeg())
+        if (IsGrounded() && moveInput.x == 0 && !pickUpScript.GetHasLeg() || dialogueController.GetIsInDialogue())
         {
             movingState = MovingStates.OneLegIdle;
         }
@@ -227,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Running;
         }
 
-        if (playerRB.linearVelocityY > 0.1) //ugly jumps sometimes in build...
+        if (playerRB.linearVelocityY > 0.1)
         {
             movingState = MovingStates.Jumping;
         }
@@ -250,7 +269,6 @@ public class PlayerMovement : MonoBehaviour
         if (knockbackScript.GetIsKnockback())
         {
             movingState = MovingStates.KnockBack;
-            animator.SetTrigger("Knockback");
         }
     }
     void HandleAnimations()
@@ -268,11 +286,16 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouching", movingState == MovingStates.Crouching);
 
         animator.SetBool("IsCrouchWalking", movingState == MovingStates.CrouchWalking);
+
+        animator.SetBool("Knockback", movingState == MovingStates.KnockBack);
     }
 
     void OnMove(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        if (dialogueController.GetIsInDialogue() == false)
+        {
+            moveInput = value.Get<Vector2>();
+        }
     }
 
     void OnRun(InputValue value)
@@ -346,7 +369,7 @@ public class PlayerMovement : MonoBehaviour
         Falling,
         Crouching,
         CrouchWalking,
-        KnockBack,
+        KnockBack
     }
 
     public int GetFacingDirection()

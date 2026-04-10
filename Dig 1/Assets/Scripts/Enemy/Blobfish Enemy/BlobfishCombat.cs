@@ -17,11 +17,20 @@ public class BlobfishCombat : MonoBehaviour
     [SerializeField] int poisonTickDamage = 1;
     [SerializeField] int poisonTickAmount = 3;
     [SerializeField] float poisionTickSpeed = 1;
+   
+    [Header("Graphics")]
+    [SerializeField] ParticleSystem transitionParticles;
+    [SerializeField] Transform bigTransform;
+    [SerializeField] Transform smallTransform;
+    [SerializeField] SpriteRenderer bigSprite;
+    [SerializeField] SpriteRenderer smallSprite;
+    [SerializeField] float sizeChangeMultiplier = 2;
 
     [Header("Debug")]
     float normalRadius;
-    bool poison;
-    bool isExpanding=false;
+    bool isBlown=false;
+    Coroutine shrinkCoroutine;
+    Coroutine poisonCoroutine;
 
     LayerMask playerLayer;
     PlayerHealth playerHealth;
@@ -39,29 +48,29 @@ public class BlobfishCombat : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !knockbackScript.GetIsKnockback())
         {
             playerHealth.ChangeHealth(-collisionDamage, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalDirectionalForce);
-            if (!poison)
+            if (poisonCoroutine==null)
             {
-                StartCoroutine(Poison());
+                poisonCoroutine=StartCoroutine(Poison());
             }
             else
             {
-                StopCoroutine(Poison());
-                StartCoroutine(Poison());
+                StopCoroutine(poisonCoroutine);
+                poisonCoroutine=StartCoroutine(Poison());
             }
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !isExpanding) StartCoroutine(Expand());
+        if (other.gameObject.CompareTag("Player") && !isBlown) StartCoroutine(Expand());
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player")) StartCoroutine(Shrink());
+        if (other.gameObject.CompareTag("Player")) shrinkCoroutine = StartCoroutine(Shrink());
     }
     IEnumerator Expand()
     {
-        isExpanding = true;
-        StopCoroutine(Shrink());
+        isBlown = true;
+        if (shrinkCoroutine!=null) StopCoroutine(shrinkCoroutine);
         StartCoroutine(SpriteSwitch());
 
         while (bodyCollider.radius<expandedRadius)
@@ -74,68 +83,59 @@ public class BlobfishCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(maxTimeExpanded);
         StartCoroutine(SpriteSwitch());
-        isExpanding = false;
         while (bodyCollider.radius > normalRadius)
         {
             bodyCollider.radius -= normalRadius * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        isBlown = false;
     }
     IEnumerator Poison()
     {
-        poison = true;
         for (int i = 0; i < poisonTickAmount; i++)
         {
             yield return new WaitForSeconds(poisionTickSpeed);
             playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero, Vector2.zero, 0.5f, 0);
         }
-        poison = false;
     }
-    [Header("Graphics")]
-    [SerializeField] Transform bigTransform;
-    [SerializeField] Transform smallTransform;
-    [SerializeField] SpriteRenderer bigSprite;
-    [SerializeField] SpriteRenderer smallSprite;
-    [SerializeField] float sizeChangeSpeed=1;
     IEnumerator SpriteSwitch()
     {
         float size;
         float originalSize;
+        Debug.Log(bigSprite.enabled);
 
         if (bigSprite.enabled==true)
         {
-            originalSize=bigTransform.localScale.x;
+            originalSize = bigTransform.localScale.x;
             size = bigTransform.localScale.x;
-            while (bigTransform.lossyScale.x>smallTransform.lossyScale.x)
-            {
-                size -= Time.deltaTime * sizeChangeSpeed;
-                bigTransform.localScale = new Vector2(size, size);
-                yield return new WaitForEndOfFrame();
-            }
-            //TODO play particles
+            if (transitionParticles != null) transitionParticles.Play();
             bigSprite.enabled = false;
             smallSprite.enabled = true;
-            bigTransform.localScale = new Vector2(originalSize, originalSize);
+            while (smallTransform.localScale.x>1)
+            {
+                size -= sizeChangeMultiplier * Time.deltaTime;
+                smallTransform.localScale = new Vector3(size, size, 1);
+                yield return null;
+            }
+            bigTransform.localScale = new Vector3(originalSize, originalSize, 1);
         }
         else
         {
-            originalSize = smallTransform.localScale.x;
-            size = smallTransform.lossyScale.x;
-            while (smallTransform.lossyScale.x<bigTransform.lossyScale.x)
+            size = smallTransform.localScale.x;
+            while (smallTransform.localScale.x<bigTransform.localScale.x)
             {
-                size += Time.deltaTime * sizeChangeSpeed;
-                smallTransform.localScale = new Vector2(size, size);
-                yield return new WaitForEndOfFrame();
+                size += sizeChangeMultiplier * Time.deltaTime;
+                smallTransform.localScale = new Vector3(size, size, 1);
+                yield return null;
             }
-            //TODO play particles
+            if (transitionParticles != null) transitionParticles.Play();
             smallSprite.enabled = false;
             bigSprite.enabled = true;
-            smallTransform.localScale= new Vector2(originalSize, originalSize);
         }
     }
     public bool GetIsExpanding()
     {
-        return isExpanding;
+        return isBlown;
     }
     public SpriteRenderer GetActiveSpriteRenderer()
     {

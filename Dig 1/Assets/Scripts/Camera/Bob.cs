@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bob : MonoBehaviour
 {
     private CinemachineImpulseSource impulseSource;
-   
+    
     void Start()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();

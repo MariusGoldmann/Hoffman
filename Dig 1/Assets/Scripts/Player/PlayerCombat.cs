@@ -40,6 +40,7 @@ public class PlayerCombat : MonoBehaviour
     // Script references
     PlayerMovement playerMovement;
     PickUpScript pickUpScript;
+    PauseManager pauseManager;
 
     // Component references
     [SerializeField] GameObject boomerangPrefab; // drag in inspector
@@ -51,6 +52,7 @@ public class PlayerCombat : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         pickUpScript = GetComponent<PickUpScript>();
+        pauseManager = FindAnyObjectByType<PauseManager>();
 
         animator = GetComponentInChildren<Animator>();
     }
@@ -72,6 +74,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 Vector2 direction = (enemy.transform.position - transform.position).normalized;
                 enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction);
+                PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT, 1f);
             }
         }
     }
@@ -106,6 +109,8 @@ public class PlayerCombat : MonoBehaviour
             boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, boomerangReturnSpeed * Time.deltaTime);
 
             earlyReceiving = true;
+
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BOOMERANGRETURN, 1f);
             yield return null;
         }
     }
@@ -125,31 +130,34 @@ public class PlayerCombat : MonoBehaviour
 
     void OnSlash(InputValue slashbutton)
     {
-        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg())
+        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
         {
             slashTimer = slashCooldown;
             MeleeAttack(slashDamage, "Slash");
             AttackEffects(slashEffect);
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASH, 1f);
         }
     }
 
     void OnKick(InputValue kickButton)
     {
-        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg())
+        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
         {
             kickTimer = kickCooldown;
             MeleeAttack(kickDamage, "Kick");
             AttackEffects(kickEffect);
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.KICK, 1f);
         }
     }
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang())
+        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang() && !pauseManager.GetIsPaused())
         {
             boomerangTimer = boomerangCooldown;
             animator.SetTrigger("Throwing");
             boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BOOMERANGTHROW, 1f);
         }
     }
 

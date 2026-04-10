@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -14,6 +15,9 @@ public class PlayerHealth : MonoBehaviour
 
     KnockbackScript knockbackScript;
     PlayerMovement playerMovement;
+    LevelLoader levelLoader;
+
+    CinemachineImpulseSource impulseSource;
 
     [SerializeField] Slider healthSlider; 
 
@@ -21,6 +25,9 @@ public class PlayerHealth : MonoBehaviour
     {
         knockbackScript = GetComponent<KnockbackScript>();
         playerMovement= GetComponent<PlayerMovement>();
+        levelLoader = FindAnyObjectByType<LevelLoader>();
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
 
         currentPlayerHealth = maxPlayerHealth;
 
@@ -29,20 +36,24 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(currentPlayerHealth);
+
     }
-    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalDirectionalForce)
+    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce)
     {
+        if (CameraShakeManager.instance!=null) CameraShakeManager.instance.CameraShake(impulseSource);
         //Dennis suger 2 was here :D 
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
-        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalDirectionalForce));
+        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));
         if (healthSlider!=null) healthSlider.value = currentPlayerHealth; 
-        if (currentPlayerHealth <= 0) DeathSequence();
+        if (currentPlayerHealth <= 0) StartCoroutine(Deathsequence());
     }
 
-    void DeathSequence()
+
+    IEnumerator Deathsequence()
     {
+        levelLoader.FadeOut();
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

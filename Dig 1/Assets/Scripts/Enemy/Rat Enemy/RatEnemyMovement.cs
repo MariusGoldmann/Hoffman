@@ -4,16 +4,16 @@ using UnityEngine;
 public class RatEnemyMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float idleMoveSpeed = 0.5f;
+    [SerializeField] float idleMoveSpeed = 2f;
     [SerializeField] float groundCheckLength = 2.3f;
 
     [Header("Combat")]
     [SerializeField] int damageAmount = 5;
-    [SerializeField] float chaseMoveSpeed = 2f;
-    [SerializeField] float chaseDuration = 1.5f;
-    [SerializeField] float chaseAnticipationTime = 0.3f;
-    [SerializeField] float attackCooldown = 0.5f;
-    [SerializeField] float downedCooldown = 1f;
+    [SerializeField] float chaseMoveSpeed = 5f;
+    [SerializeField] float chaseDuration = 8f;
+    [SerializeField] float chaseAnticipationTime = 1f;
+    [SerializeField] float attackCooldown = 2f;
+    [SerializeField] float dazedCooldown = 3f;
 
     [Header("Knockback")]
     [SerializeField] float additionalDirectionalForce = 5f;
@@ -28,51 +28,60 @@ public class RatEnemyMovement : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] bool facingRight = true;
-    bool isChasing;
-    bool isCooldown;
-    float currentCooldown;
+    [SerializeField] bool isChasing;
+    [SerializeField] bool isCooldown;
+    [SerializeField] float currentCooldown;
 
-    Rigidbody2D enemyRB;
+    [SerializeField] bool knockedOut;
+
+    Coroutine chasePlayerCoroutine;
+
+    Rigidbody2D ratRB;
     Animator animator;
-    RatEnemyState state;
+    RatEnemyState ratEnemyState;
     PlayerHealth playerHealth;
 
     private void Start()
     {
-        enemyRB = GetComponent<Rigidbody2D>();
+        ratRB = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        state = GetComponentInChildren<RatEnemyState>();
+        ratEnemyState = GetComponentInChildren<RatEnemyState>();
         playerHealth = FindFirstObjectByType<PlayerHealth>();
     }
     void Update()
     {
         HandleAnimations();
         HandleCooldowns();
-        Debug.Log(GetIsGrounded());
     }
     private void FixedUpdate()
     {
-        if (!isChasing && !isCooldown)
+        if (!isChasing && !isCooldown && !knockedOut && !ratKnockbackScript.GetIsKnockback())
         {
-            if (state.GetInCombat() && GetIsGrounded())
+            if (ratEnemyState.GetInCombat() && GetIsGrounded())
             {
-                StartCoroutine(ChasePlayer());
+                if (chasePlayerCoroutine==null) chasePlayerCoroutine=StartCoroutine(ChasePlayer());
             }
             else
             {
+                if (chasePlayerCoroutine != null) StopChasePlayer(false);
                 IdleMovement();
             }
-            Debug.Log(GetIsGrounded());
+        }
+
+        if (knockedOut)
+        {
+            ratRB.linearVelocity = Vector2.zero;
         }
         Debug.Log(isCooldown);
     }
     void HandleCooldowns()
     {
+        currentCooldown -= Time.deltaTime;
+
         if (isChasing && (!GetIsGroundInFront() || GetIsWallInFront()))
         {
             StopChasePlayer(true);
         }
-        currentCooldown -= Time.deltaTime;
         if (currentCooldown < 0)
         {
             isCooldown = false;
@@ -106,7 +115,7 @@ public class RatEnemyMovement : MonoBehaviour
             }
             else
             {
-                enemyRB.linearVelocityX = idleMoveSpeed;
+                ratRB.linearVelocityX = idleMoveSpeed;
             }
         }
         else if (GetIsGrounded())
@@ -118,9 +127,8 @@ public class RatEnemyMovement : MonoBehaviour
             }
             else
             {
-                enemyRB.linearVelocityX = -idleMoveSpeed;
+                ratRB.linearVelocityX = -idleMoveSpeed;
             }
-            
         }
     }
     IEnumerator ChasePlayer()
@@ -128,18 +136,18 @@ public class RatEnemyMovement : MonoBehaviour
         isChasing = true;
         float chaseTime=0f;
 
-        enemyRB.linearVelocity = Vector2.zero;
+        ratRB.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(chaseAnticipationTime);
 
-        while (chaseTime<chaseDuration)
+        while (chaseTime<chaseDuration && !ratKnockbackScript.GetIsKnockback())
         {
             if (facingRight)
             { 
-                enemyRB.linearVelocity = new Vector2(chaseMoveSpeed, enemyRB.linearVelocityY);
+                ratRB.linearVelocity = new Vector2(chaseMoveSpeed, ratRB.linearVelocityY);
             }
             else
             {
-                enemyRB.linearVelocity = new Vector2(-chaseMoveSpeed, enemyRB.linearVelocityY);
+                ratRB.linearVelocity = new Vector2(-chaseMoveSpeed, ratRB.linearVelocityY);
             }
             chaseTime += Time.fixedDeltaTime;
             yield return null;
@@ -148,19 +156,20 @@ public class RatEnemyMovement : MonoBehaviour
         isChasing = false;
         currentCooldown = attackCooldown;
     }
-    void StopChasePlayer(bool downed)
+    void StopChasePlayer(bool dazed)
     {
-        StopCoroutine(ChasePlayer());
+        StopCoroutine(chasePlayerCoroutine);
         isChasing=false;
-        if (downed)
+        if (dazed)
         {
-            currentCooldown = downedCooldown;
+            currentCooldown = dazedCooldown;
         }
         else
         {
             currentCooldown = attackCooldown;
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player") && isChasing)
@@ -169,6 +178,8 @@ public class RatEnemyMovement : MonoBehaviour
             StopChasePlayer(false);
         }
     }
+
+
     bool GetIsGroundInFront()
     {
         return Physics2D.Raycast(frontRaycastOrigin.position, Vector2.down, frontGroundCheckLength, LayerMask.GetMask("Ground"));
@@ -196,5 +207,10 @@ public class RatEnemyMovement : MonoBehaviour
     public bool GetIsCooldown()
     {
         return isCooldown;
+    }
+
+    public void SetKnockedOut(bool b)
+    {
+        knockedOut = b;
     }
 }

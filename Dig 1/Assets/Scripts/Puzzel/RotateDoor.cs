@@ -8,7 +8,7 @@ public class RotateDoor : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.gKey.wasPressedThisFrame)
+        if (Keyboard.current.hKey.wasPressedThisFrame)
         {
             SpinningDoor();
         }

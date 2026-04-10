@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64702766e7b30ce4f8b50a886fdee29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundEffectManager
-  soundEffectList: []
+  soundEffectList:
+  - {fileID: 8300000, guid: d5ecf7abf7c06234bb952db4610dab1e, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 3b8befe022466d44b8a217f0f26fb53f, type: 3}
+  - {fileID: 0}
 --- !u!82 &5733562196409095140
 AudioSource:
   m_ObjectHideFlags: 0
