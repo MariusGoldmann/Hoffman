@@ -1,54 +1,65 @@
 using Cinemachine;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int maxPlayerHealth = 20;
+    [SerializeField] int maxPlayerHealth = 100;
     [SerializeField] float playerHealTickSpeed = 0.5f;
     [HideInInspector] public bool healOverTime;
 
     [SerializeField] int currentPlayerHealth;
 
     KnockbackScript knockbackScript;
+    DamageFlash damageFlash;
     LevelLoader levelLoader;
 
     CinemachineImpulseSource impulseSource;
+    Animator animator;
 
-    [SerializeField] Slider healthSlider; 
+    [SerializeField] Slider healthSlider;
+
+    bool dead;
 
     private void Start()
     {
         knockbackScript = GetComponent<KnockbackScript>();
+        damageFlash=GetComponent<DamageFlash>();
         levelLoader = FindAnyObjectByType<LevelLoader>();
 
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        animator = GetComponentInChildren<Animator>();
 
         currentPlayerHealth = maxPlayerHealth;
 
         healthSlider.maxValue = maxPlayerHealth;
         healthSlider.value = currentPlayerHealth;
     }
-    private void Update()
-    {
-
-    }
     public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce)
     {
         if (CameraShakeManager.instance!=null) CameraShakeManager.instance.CameraShake(impulseSource);
         //Dennis suger 2 was here :D 
+        damageFlash.GetDamageFlasher();
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
-        StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));
+        if (currentPlayerHealth>0) StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));
         if (healthSlider!=null) healthSlider.value = currentPlayerHealth; 
         if (currentPlayerHealth <= 0) StartCoroutine(Deathsequence());
     }
-
-
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.GetMask("HpParticle"))
+        {
+            currentPlayerHealth += 10;
+        }
+    }
     IEnumerator Deathsequence()
     {
+        dead = true;
+        animator.SetTrigger("Dying");
         levelLoader.FadeOut();
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -64,5 +75,9 @@ public class PlayerHealth : MonoBehaviour
                 yield return new WaitForSeconds(playerHealTickSpeed);
             }
         }
+    }
+    public bool GetIsDead()
+    {
+        return dead;
     }
 }

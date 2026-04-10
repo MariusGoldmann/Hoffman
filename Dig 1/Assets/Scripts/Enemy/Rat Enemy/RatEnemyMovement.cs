@@ -62,21 +62,14 @@ public class RatEnemyMovement : MonoBehaviour
                 if (chasePlayerCoroutine == null)
                 {
                     chasePlayerCoroutine = StartCoroutine(ChasePlayer());
-                    Debug.Log("1");
                 }
-                Debug.Log("2");
             }
             else
             {
                 if (chasePlayerCoroutine != null) StopChasePlayer(false);
                 IdleMovement();
-                Debug.Log("3");
             }
         }
-        /*Debug.Log(isChasing + "1");
-        Debug.Log(isCooldown + "2");
-        Debug.Log(knockedOut + "3");
-        Debug.Log(ratKnockbackScript.GetIsKnockback() + "4");*/
         if (knockedOut)
         {
             ratRB.linearVelocity = Vector2.zero;
@@ -188,8 +181,6 @@ public class RatEnemyMovement : MonoBehaviour
             StopChasePlayer(false);
         }
     }
-
-
     bool GetIsGroundInFront()
     {
         return Physics2D.Raycast(frontRaycastOrigin.position, Vector2.down, frontGroundCheckLength, LayerMask.GetMask("Ground"));
