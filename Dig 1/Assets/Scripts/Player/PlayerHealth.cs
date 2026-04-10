@@ -1,6 +1,5 @@
 using Cinemachine;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +13,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int currentPlayerHealth;
 
     KnockbackScript knockbackScript;
-    PlayerMovement playerMovement;
     LevelLoader levelLoader;
 
     CinemachineImpulseSource impulseSource;
@@ -24,7 +22,6 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         knockbackScript = GetComponent<KnockbackScript>();
-        playerMovement= GetComponent<PlayerMovement>();
         levelLoader = FindAnyObjectByType<LevelLoader>();
 
         impulseSource = GetComponent<CinemachineImpulseSource>();

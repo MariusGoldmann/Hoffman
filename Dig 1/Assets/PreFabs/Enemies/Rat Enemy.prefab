@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b363b4a61a9838d40849b3e8d3df541b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RatEnemyMovement
-  idleMoveSpeed: 2
+  idleMoveSpeed: 3
   groundCheckLength: 2.3
   damageAmount: 5
   chaseMoveSpeed: 10
@@ -219,8 +219,8 @@ MonoBehaviour:
   chaseAnticipationTime: 1
   attackCooldown: 3
   dazedCooldown: 3
-  additionalDirectionalForce: 10
-  hitDirectionForce: 20
+  additionalForce: 10
+  hitDirectionForce: 10
   ratKnockbackScript: {fileID: 8563240839915267902}
   wallCheckLength: 1
   wallCheckPosition: {fileID: 4554192857374076194}
@@ -246,8 +246,6 @@ MonoBehaviour:
   currentEnemyHealth: 0
   maxEnemyHealth: 15
   timeDead: 3
-  hitDirectionForce: 10
-  additionalDirectionalForce: 5
   knockedOut: 0
   playerCombat: {fileID: 0}
   damageFlash: {fileID: 0}
@@ -385,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
   knockbackLength: 0.2
-  debugBool: 0
+  inputForce: 7.5
 --- !u!114 &6264606926653388431
 MonoBehaviour:
   m_ObjectHideFlags: 0

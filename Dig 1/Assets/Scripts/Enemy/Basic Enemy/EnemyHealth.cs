@@ -9,8 +9,6 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] float timeDead=3f;
 
-    [SerializeField] float hitDirectionForce = 10f;
-    [SerializeField] float additionalDirectionalForce = 5f;
 
     [SerializeField] bool knockedOut = false;
 
@@ -53,11 +51,11 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void ChangeHealth(int amount, Vector2 knockbackdirection)
+    public void ChangeHealth(int amount, Vector2 knockbackdirection, float hitDirectionForce, float additionalForce)
     {
         if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
         {
-            StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalDirectionalForce));
+            StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
             currentEnemyHealth += amount;
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();

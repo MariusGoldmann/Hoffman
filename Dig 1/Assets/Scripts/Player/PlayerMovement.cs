@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             HandleMovement();
             HandleJump();
         }
-        else
+        else if (dialogueController.GetIsInDialogue())
         {
             playerRB.linearVelocity = new Vector2(0, playerRB.linearVelocityY);
             moveInput.x = 0;

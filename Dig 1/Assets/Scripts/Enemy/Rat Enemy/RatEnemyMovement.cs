@@ -16,7 +16,7 @@ public class RatEnemyMovement : MonoBehaviour
     [SerializeField] float dazedCooldown = 3f;
 
     [Header("Knockback")]
-    [SerializeField] float additionalDirectionalForce = 5f;
+    [SerializeField] float additionalForce = 10f;
     [SerializeField] float hitDirectionForce = 10f;
     [SerializeField] KnockbackScript ratKnockbackScript;
 
@@ -174,7 +174,7 @@ public class RatEnemyMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && isChasing)
         {
-            playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalDirectionalForce);
+            playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce);
             StopChasePlayer(false);
         }
     }
