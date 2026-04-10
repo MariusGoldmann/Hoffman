@@ -6,15 +6,11 @@ using UnityEngine.InputSystem.LowLevel;
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
-    [SerializeField] private GameObject abilityTabUI;
     [SerializeField] private GameObject optionUI;
 
     InputAction pauseAction;
-    InputAction abilityTabAction;
 
     ButtonScript buttonScript;
-
-    bool tab;
     bool paused;
     bool option;
 
@@ -23,11 +19,9 @@ public class PauseManager : MonoBehaviour
     void Start()
     {
         pauseMenuUI.SetActive(false);
-        abilityTabUI.SetActive(false);
         optionUI.SetActive(false);
 
         pauseAction = InputSystem.actions.FindAction("Pause");
-        abilityTabAction = InputSystem.actions.FindAction("AbilityTab");
         buttonScript = FindFirstObjectByType<ButtonScript>();
     }
 
@@ -57,7 +51,7 @@ public class PauseManager : MonoBehaviour
             }
         }
 
-        if (pauseMenuUI.activeSelf == false && abilityTabUI.activeSelf == false && optionUI.activeSelf == false)
+        if (pauseMenuUI.activeSelf == false && optionUI.activeSelf == false)
         {
             isPaused = false;
         }
@@ -65,27 +59,11 @@ public class PauseManager : MonoBehaviour
         {
             isPaused = true;
         }
-
-        if (abilityTabAction.WasPerformedThisFrame())
-        {
-            tab = !tab;
-            if (tab)
-            {
-                abilityTabUI.SetActive(true);
-                Time.timeScale = 0;
-            }   else
-            {
-                abilityTabUI.SetActive(false);
-                Time.timeScale = 1;
-            }
-               
-        }
     }
 
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
-        abilityTabUI.SetActive(false);
         optionUI.SetActive(false);
         option = false;
         Time.timeScale = 1;

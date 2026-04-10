@@ -11,7 +11,7 @@ public abstract class NPC : MonoBehaviour, IInteractable
     PickUpScript pickupScript;
     
 
-    float interactDistance = 5f;
+    [SerializeField] float interactDistance = 5f;
 
     void Start()
     {
