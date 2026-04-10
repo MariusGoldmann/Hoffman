@@ -138,9 +138,4 @@ public class BlobfishCombat : MonoBehaviour
     {
         return isBlown;
     }
-    public SpriteRenderer GetActiveSpriteRenderer()
-    {
-        if (bigSprite.enabled == true) return bigSprite;
-        else return smallSprite;
-    }
 }

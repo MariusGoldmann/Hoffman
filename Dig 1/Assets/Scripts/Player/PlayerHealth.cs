@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
         if (currentPlayerHealth>0) StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));
-        if (healthSlider!=null) healthSlider.value = currentPlayerHealth; 
+        if (healthSlider!=null) healthSlider.value = currentPlayerHealth;
         if (currentPlayerHealth <= 0) StartCoroutine(Deathsequence());
     }
     private void OnCollisionEnter2D(Collision2D other)

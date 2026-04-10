@@ -247,12 +247,12 @@ MonoBehaviour:
   maxEnemyHealth: 15
   timeDead: 3
   knockedOut: 0
-  playerCombat: {fileID: 0}
-  damageFlash: {fileID: 0}
-  enemyKnockbackScript: {fileID: 0}
+  damageFlash: {fileID: 6264606926653388431}
+  enemyKnockbackScript: {fileID: 8563240839915267902}
   blobfishCombat: {fileID: 0}
-  ratEnemyMovement: {fileID: 0}
-  hitParticles: {fileID: 0}
+  ratEnemyMovement: {fileID: 7521869268331679978}
+  hitParticles: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+  hpParticlePrefab: {fileID: 6834462511129556811, guid: b1c479a279be2a748a4fc81854fa3c2b, type: 3}
 --- !u!70 &4054453495651370544
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

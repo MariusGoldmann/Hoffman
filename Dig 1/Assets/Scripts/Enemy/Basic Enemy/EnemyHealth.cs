@@ -32,12 +32,11 @@ public class EnemyHealth : MonoBehaviour
         ratEnemyMovement = GetComponent<RatEnemyMovement>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
     void Start()
     {
         currentEnemyHealth = maxEnemyHealth; 
-
-        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     void Update()
@@ -50,7 +49,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void ChangeHealth(int amount, Vector2 knockbackdirection, float hitDirectionForce, float additionalForce)
     {
-        if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
+        if (blobfishCombat == null || !blobfishCombat.GetIsExpanding())
         {
             if (currentEnemyHealth>0 && blobfishCombat==null) StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
             currentEnemyHealth += amount;

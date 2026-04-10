@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8158543302636595784}
   - component: {fileID: 7608657297451854872}
   - component: {fileID: 609324191019590571}
+  - component: {fileID: 1837902685417045395}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -173,6 +174,7 @@ MonoBehaviour:
   dialogueController: {fileID: 0}
   spawnManager: {fileID: 0}
   movingPlatform: {fileID: 0}
+  playerHealth: {fileID: 0}
   platformRB: {fileID: 0}
 --- !u!114 &315493221406685201
 MonoBehaviour:
@@ -397,6 +399,55 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0.5, y: -0.5, z: 0}
+--- !u!114 &1837902685417045395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278727348191356785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bbdda670385b74f92cf01b22984c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashTime: 0.5
+  flashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0007247925
+      value: 1
+      inSlope: -14.151269
+      outSlope: -14.151269
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.15341301
+    - serializedVersion: 3
+      time: 0.10829433
+      value: 0.43628258
+      inSlope: -0.31450057
+      outSlope: -11.842125
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.7887079
+      outWeight: 0.10582146
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.05902114
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spriteRenderer: {fileID: 0}
+  material: {fileID: 2100000, guid: ef6b23c22137e984aae3eedbf105f317, type: 2}
 --- !u!1 &3777659576444688403
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +500,7 @@ MonoBehaviour:
   m_Intensity: 1.97
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000093a764d5
+  m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -562,7 +613,7 @@ PrefabInstance:
     - target: {fileID: 448613949268388683, guid: f208ffc8e4b09b24b8d846ada6655676, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+      objectReference: {fileID: 2100000, guid: ef6b23c22137e984aae3eedbf105f317, type: 2}
     - target: {fileID: 4038870928498198261, guid: f208ffc8e4b09b24b8d846ada6655676, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.001
