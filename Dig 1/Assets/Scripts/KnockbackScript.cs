@@ -26,7 +26,6 @@ public class KnockbackScript : MonoBehaviour
 
         if (hitDirection.x > 0) hitDirection = Vector2.right;
         else hitDirection = Vector2.left;
-        Debug.Log(hitDirection);
 
         knockbackForce = hitDirection * hitForce + additionalForceDirection * additionalForce;
 
@@ -36,7 +35,6 @@ public class KnockbackScript : MonoBehaviour
 
             if (playerMovement != null) combinedForce = knockbackForce + playerMovement.GetMoveInput();
             else combinedForce = knockbackForce;
-            Debug.Log(combinedForce);
 
             knockbackRigidbody.linearVelocity = combinedForce;
 
