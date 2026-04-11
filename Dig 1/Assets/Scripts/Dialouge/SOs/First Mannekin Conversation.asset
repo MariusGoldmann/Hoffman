@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58bee9b4c46a224c80d4cfa351830c1, type: 3}
+  m_Name: First Mannekin Conversation
+  m_EditorClassIdentifier: Assembly-CSharp::DialougeText
+  npcName: Mannequin
+  paragraphs:
+  - 'Oh, you''re the new kid right? '
+  - 'The others ripped you apart while you were asleep, they were clearly not happy
+    about being replaced.  '
+  - 'Your parts are somewhere around the area, your leg should be just over there.  '

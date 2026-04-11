@@ -174,4 +174,9 @@ public class PickUpScript : MonoBehaviour
         return hasEar;
     }
 
+    public bool GetIsInteracting()
+    {
+        return isInteracting;
+    }
+
 }

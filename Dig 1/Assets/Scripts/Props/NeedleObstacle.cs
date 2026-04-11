@@ -6,14 +6,10 @@ public class NeedleObstacle : MonoBehaviour
     [SerializeField] float damageCooldown = 1;
     float timer;
 
-    CircleCollider2D needleCollider;
     PlayerHealth playerHealth;
-
-    
 
     void Start()
     {
-        needleCollider = GetComponent<CircleCollider2D>();
         playerHealth = FindFirstObjectByType<PlayerHealth>();
     }
 
@@ -29,7 +25,7 @@ public class NeedleObstacle : MonoBehaviour
             if (timer < 0)
             {
                 Debug.Log("Needle Hit");
-                playerHealth.ChangeHealth(-3, Vector2.zero, Vector2.zero, 1, 1);
+                playerHealth.ChangeHealth(-15, Vector2.zero, Vector2.zero, 1, 1, collision.transform.position);
                 timer = damageCooldown;
             }
         }

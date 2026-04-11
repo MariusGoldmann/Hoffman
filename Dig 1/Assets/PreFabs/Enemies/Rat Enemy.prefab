@@ -211,14 +211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b363b4a61a9838d40849b3e8d3df541b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RatEnemyMovement
-  idleMoveSpeed: 3
+  idleMoveSpeed: 5
   groundCheckLength: 2.3
-  damageAmount: 5
-  chaseMoveSpeed: 10
+  damageAmount: 20
+  chaseMoveSpeed: 15
   chaseDuration: 3
-  chaseAnticipationTime: 1
-  attackCooldown: 3
-  dazedCooldown: 3
+  chaseAnticipationTime: 0.5
+  attackCooldown: 1
+  dazedCooldown: 2
   additionalForce: 10
   hitDirectionForce: 10
   ratKnockbackScript: {fileID: 8563240839915267902}
@@ -247,12 +247,12 @@ MonoBehaviour:
   maxEnemyHealth: 15
   timeDead: 3
   knockedOut: 0
-  playerCombat: {fileID: 0}
-  damageFlash: {fileID: 0}
-  enemyKnockbackScript: {fileID: 0}
+  damageFlash: {fileID: 6264606926653388431}
+  enemyKnockbackScript: {fileID: 8563240839915267902}
   blobfishCombat: {fileID: 0}
-  ratEnemyMovement: {fileID: 0}
-  hitParticles: {fileID: 0}
+  ratEnemyMovement: {fileID: 7521869268331679978}
+  hitParticles: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+  hpParticlePrefab: {fileID: 6834462511129556811, guid: b1c479a279be2a748a4fc81854fa3c2b, type: 3}
 --- !u!70 &4054453495651370544
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -441,6 +441,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2250447569052621783}
     m_Modifications:
+    - target: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6546110316580557993, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_Name
       value: FloofWhenHit

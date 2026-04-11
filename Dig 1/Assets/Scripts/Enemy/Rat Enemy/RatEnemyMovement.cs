@@ -55,9 +55,9 @@ public class RatEnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!isChasing && !isCooldown && !knockedOut && !ratKnockbackScript.GetIsKnockback())
+        if (!isChasing && !knockedOut)
         {
-            if (ratEnemyState.GetInCombat() && GetIsGrounded())
+            if (ratEnemyState.GetInCombat() && GetIsGrounded() && !ratKnockbackScript.GetIsKnockback() && !isCooldown)
             {
                 if (chasePlayerCoroutine == null)
                 {
@@ -177,7 +177,7 @@ public class RatEnemyMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && isChasing)
         {
-            playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce);
+            playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point);
             StopChasePlayer(false);
         }
     }

@@ -18,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
     [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] ParticleSystem hpParticleSpawnParticles;
     [SerializeField] GameObject hpParticlePrefab;
 
     CinemachineImpulseSource impulseSource;
@@ -32,12 +33,11 @@ public class EnemyHealth : MonoBehaviour
         ratEnemyMovement = GetComponent<RatEnemyMovement>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
     void Start()
     {
         currentEnemyHealth = maxEnemyHealth; 
-
-        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     void Update()
@@ -48,44 +48,65 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void ChangeHealth(int amount, Vector2 knockbackdirection, float hitDirectionForce, float additionalForce)
+    public void ChangeHealth(int amount, Vector2 knockbackdirection, float hitDirectionForce, float additionalForce, Vector3 collisionPoint)
     {
-        if (blobfishCombat == null || blobfishCombat.GetIsExpanding() == false)
+        if (blobfishCombat == null || !blobfishCombat.GetIsExpanding())
         {
             if (currentEnemyHealth>0 && blobfishCombat==null) StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
             currentEnemyHealth += amount;
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();
+            hitParticles.transform.position= collisionPoint;
             hitParticles.Play();
         }
         if (currentEnemyHealth > maxEnemyHealth)
         {
             currentEnemyHealth = maxEnemyHealth;
         }
-        else if (currentEnemyHealth <= 0)
+        else if (currentEnemyHealth <= 0 && knockedOut==false)
         {
             Debug.Log("Enemy died");
             StartCoroutine(DeathSequence());
         }
         IEnumerator DeathSequence()
         {
-            float timeLeft = 13f;
-            knockedOut = true;
-            // Deactivate all
-            animator.SetTrigger("RatDied");
-            while (timeLeft>0)
+            if (blobfishCombat == null)
             {
-                timeLeft -= Time.deltaTime;
-                spriteRenderer.color = new Color(1f, 1f, 1f, timeLeft / 13);
-                if (timeLeft < 10)
+                float timeLeft = 13f;
+                bool hasDroppedHP = false;
+                knockedOut = true;
+                if (animator != null) animator.SetTrigger("RatDied");
+                while (timeLeft > 0)
                 {
-                    animator.SetTrigger("PermaDied");
-                    for (int i = 0; i<Random.Range(1,3); i++) Instantiate(hpParticlePrefab, new Vector2(transform.position.x+i, transform.position.y), Quaternion.identity);
+                    timeLeft -= Time.deltaTime;
+                    spriteRenderer.color = new Color(1f, 1f, 1f, timeLeft / 13);
+                    if (timeLeft < 10 && !hasDroppedHP)
+                    {
+                        for (int i = 0; i < Random.Range(1, 3); i++)
+                        {
+                            hpParticleSpawnParticles.Play();
+                            Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+                        }
+                        if (animator != null) animator.SetTrigger("PermaDied");
+                        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                        GetComponent<Collider2D>().enabled = false;
+                        hasDroppedHP = true;
+                    }
+                    yield return null;
                 }
-                yield return null;
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
-            knockedOut = false;
+            else
+            {
+                for (int i = 0; i < Random.Range(1, 3); i++)
+                {
+                    Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+                    hitParticles.Play(); 
+                    CameraShakeManager.instance.CameraShake(impulseSource);
+                    yield return new WaitForSeconds(0.1f);
+                }
+                Destroy(gameObject);
+            }
         }
     }
 }

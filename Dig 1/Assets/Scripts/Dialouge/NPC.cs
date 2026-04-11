@@ -9,9 +9,9 @@ public abstract class NPC : MonoBehaviour, IInteractable
 
     Transform playerTransform;
     PickUpScript pickupScript;
-    
 
-    [SerializeField] float interactDistance = 5f;
+
+    [SerializeField] bool isWithinInteractDistance;
 
     void Start()
     {
@@ -20,16 +20,16 @@ public abstract class NPC : MonoBehaviour, IInteractable
 
     void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame && IsWithinInteractDistance())
+        if (Keyboard.current.eKey.wasPressedThisFrame && isWithinInteractDistance)
         {
             Interact();
         }
 
-        if (interactSprite.gameObject.activeSelf && !IsWithinInteractDistance())
+        if (interactSprite.gameObject.activeSelf && !isWithinInteractDistance)
         {
             interactSprite.gameObject.SetActive(false);
         }
-        else if (!interactSprite.gameObject.activeSelf && IsWithinInteractDistance())
+        else if (!interactSprite.gameObject.activeSelf && isWithinInteractDistance)
         {
             interactSprite.gameObject.SetActive(true);
         }
@@ -37,20 +37,18 @@ public abstract class NPC : MonoBehaviour, IInteractable
 
     public abstract void Interact();
 
-    bool IsWithinInteractDistance()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Vector2.Distance(playerTransform.position, gameObject.transform.position) < interactDistance)
+        if (collision.CompareTag("Player"))
         {
-            return true;
-        }
-        else
-        {
-            return false;
+            isWithinInteractDistance = true;
         }
     }
-
-    public bool GetIsWithinInteractDistance()
+    void OnTriggerExit2D(Collider2D collision)
     {
-        return IsWithinInteractDistance();
+        if (collision.CompareTag("Player"))
+        {
+            isWithinInteractDistance = false;
+        }
     }
 }
