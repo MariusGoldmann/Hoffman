@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PickUpScript : MonoBehaviour
 {
@@ -114,6 +115,9 @@ public class PickUpScript : MonoBehaviour
             pickUpEarParticle.Play();
             newEarRig.transform.localScale = new Vector3(1, 1, 1);
             Destroy(collision.gameObject);
+
+            
+            SceneManager.LoadScene(2);
         }
     }
 
