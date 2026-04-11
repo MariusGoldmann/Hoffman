@@ -23,7 +23,7 @@ public class BoomerangColission : MonoBehaviour
             enemyHealth = enemy.gameObject.GetComponentInChildren<EnemyHealth>();
             
             Debug.Log("Enemy hit");
-            enemyHealth.ChangeHealth(-playerCombat.GetBoomerangDamage(), direction, hitDirectionForce, additionalForce);
+            enemyHealth.ChangeHealth(-playerCombat.GetBoomerangDamage(), direction, hitDirectionForce, additionalForce, collision.GetContact(0).point);
             playerCombat.GetEarlyReceiving(true);
         }
 

@@ -40,11 +40,12 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.maxValue = maxPlayerHealth;
         healthSlider.value = currentPlayerHealth;
     }
-    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce)
+    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce, Vector3 collisionPoint)
     {
         if (CameraShakeManager.instance!=null) CameraShakeManager.instance.CameraShake(impulseSource);
         //Dennis suger 2 was here :D 
         damageFlash.GetDamageFlasher();
+        hitParticles.transform.position = collisionPoint;
         hitParticles.Play();
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);

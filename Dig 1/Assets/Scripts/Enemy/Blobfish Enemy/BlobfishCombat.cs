@@ -54,7 +54,7 @@ public class BlobfishCombat : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !knockbackScript.GetIsKnockback())
         {
-            playerHealth.ChangeHealth(-collisionDamage, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce);
+            playerHealth.ChangeHealth(-collisionDamage, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point);
             if (poisonCoroutine==null)
             {
                 poisonCoroutine=StartCoroutine(Poison());
@@ -102,7 +102,7 @@ public class BlobfishCombat : MonoBehaviour
         for (int i = 0; i < poisonTickAmount; i++)
         {
             yield return new WaitForSeconds(poisionTickSpeed);
-            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero, Vector2.zero, 0, 0);
+            playerHealth.ChangeHealth(-poisonTickDamage, Vector2.zero, Vector2.zero, 0, 0, playerHealth.transform.position);
         }
     }
     IEnumerator SpriteSwitch()
