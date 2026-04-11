@@ -1,8 +1,6 @@
 using Cinemachine;
 using System.Collections;
-using System.Xml.Serialization;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CameraDirection : MonoBehaviour
 {
