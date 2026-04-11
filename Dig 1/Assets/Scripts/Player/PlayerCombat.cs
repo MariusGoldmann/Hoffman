@@ -58,7 +58,6 @@ public class PlayerCombat : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         pickUpScript = GetComponent<PickUpScript>();
         pauseManager = FindAnyObjectByType<PauseManager>();
-        dialogueController = FindAnyObjectByType<DialogueController>();
 
         animator = GetComponentInChildren<Animator>();
     }
