@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58bee9b4c46a224c80d4cfa351830c1, type: 3}
+  m_Name: Second Mannekin Conversation
+  m_EditorClassIdentifier: Assembly-CSharp::DialougeText
+  npcName: Mannequin
+  paragraphs:
+  - 'Look who finally got a leg up. '
+  - 'Now you can finally move properly. Press A, D for your new and improved walk
+    and run. '
+  - 'SHIFT if you want to speed up and CROUCH if you want to bend over. SPACE for
+    your new jump.  '
+  - 'You''ve also unlocked new pvp moves. LEFT MB for your slash, and Q for your
+    kick. '

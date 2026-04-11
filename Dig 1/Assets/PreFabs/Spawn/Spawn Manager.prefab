@@ -44,8 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d895f56a4776e3644aa11c43626d3889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  spawnPosition: {x: -1.56, y: -2.46}
+  spawnPosition: {x: -2.68, y: -19.34}
   reloadScene: 0
   legOwned: 0
   eyeOwned: 0
   boomerangOwned: 0
+  earOwned: 0
+  legPickUp: {fileID: 0}
+  eyePickup: {fileID: 0}
+  earPickUp: {fileID: 0}
+  boomerangPickUp: {fileID: 0}

@@ -103,28 +103,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ink_bottle_stopper_0
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 108
-        width: 11
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 64663da56b8843b90800000000000000
-      internalID: -7263029982252538298
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Ink_bottle_stopper_1
       rect:
         serializedVersion: 2
@@ -133,7 +111,7 @@ TextureImporter:
         width: 50
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -150,7 +128,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 97b863ec8cba4de4bba7a8904cee3a35
     internalID: 0
     vertices: []
     indices: 
@@ -162,6 +140,7 @@ TextureImporter:
     nameFileIdTable:
       Ink_bottle_stopper_0: -7263029982252538298
       Ink_bottle_stopper_1: 5955824682333673490
+      Ink_bottle_stopper_2: 46033767
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

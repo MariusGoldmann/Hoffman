@@ -113,8 +113,6 @@ public class PlayerCombat : MonoBehaviour
             boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, boomerangReturnSpeed * Time.deltaTime);
 
             earlyReceiving = true;
-
-            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BOOMERANGRETURN, 1f);
             yield return null;
         }
     }

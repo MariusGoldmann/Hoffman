@@ -248,12 +248,12 @@ public class PlayerMovement : MonoBehaviour
             movingState = MovingStates.Running;
         }
 
-        if (playerRB.linearVelocityY > 0.1)
+        if (playerRB.linearVelocityY > 0.5f && !IsGrounded())
         {
             movingState = MovingStates.Jumping;
         }
 
-        if (playerRB.linearVelocityY < 0 && !IsGrounded())
+        if (playerRB.linearVelocityY < -0.8f && !IsGrounded())
         {
             movingState = MovingStates.Falling;
         }
@@ -362,7 +362,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, 1.8f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, playerCollider.size, 0, Vector2.down, 0.8f, LayerMask.GetMask("Ground"));
+        return hit.collider != null;
     }
 
     public enum MovingStates
