@@ -2437,7 +2437,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenuUI: {fileID: 155994866}
-  abilityTabUI: {fileID: 1884185698}
   optionUI: {fileID: 2086773373}
   isPaused: 0
 --- !u!4 &1699260055
@@ -2537,11 +2536,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74890e62ecbe4b442865ee2005dbc720, type: 3}
---- !u!1 &1884185698 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9220513689606378842, guid: 482dee7fc9b08594c9b77b769a4e6198, type: 3}
-  m_PrefabInstance: {fileID: 4499248125922579334}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1884185699 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226474838803679451, guid: 482dee7fc9b08594c9b77b769a4e6198, type: 3}
@@ -2675,7 +2669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2715625535597060279, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2715625535597060279, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
