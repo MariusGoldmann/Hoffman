@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 529601703948045397}
   - component: {fileID: 4494597396464673993}
   - component: {fileID: 8302798956997130513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Needle art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b68ddad7e3e1b45ad865d4fa21a2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NeedleObstacle
-  needleCollider: {fileID: 0}
+  damageCooldown: 1
 --- !u!1 &5834970791700336742
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,9 +249,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2383579770467171643}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Needle Obstacle
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

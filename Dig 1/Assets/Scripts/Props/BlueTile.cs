@@ -7,7 +7,7 @@ public class BlueTile : MonoBehaviour
 {
     SpawnManager spawnManager;
     SpriteRenderer spriteRenderer;
-    Collider2D collider;
+    new Collider2D collider;
     Light2D spotLight;
 
     void Start()
