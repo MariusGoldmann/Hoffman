@@ -245,7 +245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 0
   maxEnemyHealth: 15
-  timeDead: 3
   knockedOut: 0
   damageFlash: {fileID: 6264606926653388431}
   enemyKnockbackScript: {fileID: 8563240839915267902}
@@ -254,6 +253,7 @@ MonoBehaviour:
   hitParticles: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
   hpParticleSpawnParticles: {fileID: 0}
   hpParticlePrefab: {fileID: 6834462511129556811, guid: b1c479a279be2a748a4fc81854fa3c2b, type: 3}
+  impulseSource: {fileID: 0}
 --- !u!70 &4054453495651370544
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -384,7 +384,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
   knockbackLength: 0.2
-  inputForce: 7.5
 --- !u!114 &6264606926653388431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,6 +666,14 @@ PrefabInstance:
     - target: {fileID: 7604088557873887826, guid: 1a7fd77fec3a5aa4b9233f358cdf31e0, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863987907104286106, guid: 1a7fd77fec3a5aa4b9233f358cdf31e0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863987907104286106, guid: 1a7fd77fec3a5aa4b9233f358cdf31e0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -176136505
       objectReference: {fileID: 0}
     - target: {fileID: 7863987907104286106, guid: 1a7fd77fec3a5aa4b9233f358cdf31e0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

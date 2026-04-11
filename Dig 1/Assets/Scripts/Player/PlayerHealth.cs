@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     DamageFlash damageFlash;
     LevelLoader levelLoader;
 
-    CinemachineImpulseSource impulseSource;
+    [SerializeField] CinemachineImpulseSource impulseSource;
     Animator animator;
 
     [SerializeField] Slider healthSlider;
