@@ -98,7 +98,6 @@ public class PickUpScript : MonoBehaviour
             hasEye = true;
             spawnManager.eyeOwned = true;
             pickUpEyeParticle.Play();
-            newEyeRig.transform.localScale = new Vector3(1, 1, 1);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("BoomerangPickUp") && isInteracting == true)
@@ -120,7 +119,6 @@ public class PickUpScript : MonoBehaviour
 
     void RigSetter()
     {
-        Debug.Log("Rigsetter");
         if (spawnManager.legOwned == true)
         {
             hasLeg = true;
@@ -128,9 +126,7 @@ public class PickUpScript : MonoBehaviour
 
         if (spawnManager.eyeOwned == true)
         {
-            Debug.Log("HEEEEEEJ");
             hasEye = true;
-            newEyeRig.transform.localScale = new Vector3(1, 1, 1);
         }
 
         if (spawnManager.boomerangOwned == true)

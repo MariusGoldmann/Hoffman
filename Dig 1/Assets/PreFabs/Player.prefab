@@ -193,8 +193,6 @@ MonoBehaviour:
   hasEar: 0
   hasBoomerang: 0
   isInteracting: 0
-  eyeTabCloud: {fileID: 9220513689606378842, guid: 482dee7fc9b08594c9b77b769a4e6198, type: 3}
-  boomerangTabCloud: {fileID: 9220513689606378842, guid: 482dee7fc9b08594c9b77b769a4e6198, type: 3}
   pickUpLegParticle: {fileID: 8293890179333272315}
   pickUpEyeParticle: {fileID: 6744612093410850579}
   pickUpEarParticle: {fileID: 1346750603174515044}
@@ -202,7 +200,8 @@ MonoBehaviour:
   oldLegRig: {fileID: 3620727248242506661}
   newEarRig: {fileID: 292627542125557896}
   newEyeRig: {fileID: 2273869489023985549}
-  animator: {fileID: 0}
+  animator: {fileID: 3903036998953941080}
+  spawnManager: {fileID: 0}
 --- !u!114 &5082171930118937187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +258,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   effectPoint: {fileID: 6856671586184970655}
+  dialogueController: {fileID: 0}
   boomerangPrefab: {fileID: 416127359702845337, guid: 2540fb99e36f29746ad30ae03db6eac9, type: 3}
   slashEffect: {fileID: 3962425602705383972, guid: abf9afa9d1f576e44a8a5367e7013d15, type: 3}
   kickEffect: {fileID: 2716852656158451557, guid: 560f8fa0158c64642ba75a00a8fcd0c7, type: 3}
@@ -294,7 +294,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
   knockbackLength: 0.2
-  inputForce: 7.5
 --- !u!114 &7608657297451854872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +670,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4429676207155893602, guid: f208ffc8e4b09b24b8d846ada6655676, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4533701536390967843, guid: f208ffc8e4b09b24b8d846ada6655676, type: 3}
       propertyPath: m_Controller
       value: 
@@ -770,6 +773,11 @@ Transform:
 --- !u!1 &3620727248242506661 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4251335108812911070, guid: f208ffc8e4b09b24b8d846ada6655676, type: 3}
+  m_PrefabInstance: {fileID: 630696355687484027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3903036998953941080 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4533701536390967843, guid: f208ffc8e4b09b24b8d846ada6655676, type: 3}
   m_PrefabInstance: {fileID: 630696355687484027}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4901671972844314458 stripped
