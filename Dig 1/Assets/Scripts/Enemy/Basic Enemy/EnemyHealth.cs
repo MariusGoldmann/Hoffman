@@ -18,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
     [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] ParticleSystem hpParticleSpawnParticles;
     [SerializeField] GameObject hpParticlePrefab;
 
     CinemachineImpulseSource impulseSource;
@@ -47,7 +48,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void ChangeHealth(int amount, Vector2 knockbackdirection, float hitDirectionForce, float additionalForce)
+    public void ChangeHealth(int amount, Vector2 knockbackdirection, float hitDirectionForce, float additionalForce, Vector3 collisionPoint)
     {
         if (blobfishCombat == null || !blobfishCombat.GetIsExpanding())
         {
@@ -55,6 +56,7 @@ public class EnemyHealth : MonoBehaviour
             currentEnemyHealth += amount;
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();
+            hitParticles.transform.position= collisionPoint;
             hitParticles.Play();
         }
         if (currentEnemyHealth > maxEnemyHealth)
@@ -80,7 +82,11 @@ public class EnemyHealth : MonoBehaviour
                     spriteRenderer.color = new Color(1f, 1f, 1f, timeLeft / 13);
                     if (timeLeft < 10 && !hasDroppedHP)
                     {
-                        for (int i = 0; i < Random.Range(1, 3); i++) Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+                        for (int i = 0; i < Random.Range(1, 3); i++)
+                        {
+                            hpParticleSpawnParticles.Play();
+                            Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+                        }
                         if (animator != null) animator.SetTrigger("PermaDied");
                         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                         GetComponent<Collider2D>().enabled = false;
