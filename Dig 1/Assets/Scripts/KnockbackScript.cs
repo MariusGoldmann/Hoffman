@@ -4,7 +4,6 @@ using UnityEngine;
 public class KnockbackScript : MonoBehaviour
 {
     [SerializeField] float knockbackLength=0.1f;
-    [SerializeField] float inputForce=7.5f;
 
     bool isKnockback=false;
 

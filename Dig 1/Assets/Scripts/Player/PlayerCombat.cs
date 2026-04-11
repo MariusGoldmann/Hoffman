@@ -45,6 +45,7 @@ public class PlayerCombat : MonoBehaviour
     PlayerMovement playerMovement;
     PickUpScript pickUpScript;
     PauseManager pauseManager;
+    [SerializeField] DialogueController dialogueController;
 
     // Component references
     [SerializeField] GameObject boomerangPrefab; // drag in inspector
@@ -57,6 +58,7 @@ public class PlayerCombat : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         pickUpScript = GetComponent<PickUpScript>();
         pauseManager = FindAnyObjectByType<PauseManager>();
+        dialogueController = FindAnyObjectByType<DialogueController>();
 
         animator = GetComponentInChildren<Animator>();
     }
@@ -132,7 +134,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnSlash(InputValue slashbutton)
     {
-        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
+        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused() && !dialogueController.GetIsInDialogue())
         {
             slashTimer = slashCooldown;
             MeleeAttack(slashDamage, "Slash", 1f);
@@ -143,7 +145,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnKick(InputValue kickButton)
     {
-        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused())
+        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused() && !dialogueController.GetIsInDialogue())
         {
             kickTimer = kickCooldown;
             MeleeAttack(kickDamage, "Kick", 2f);
@@ -154,7 +156,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnBoomerang(InputValue boomerangButton)
     {
-        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang() && !pauseManager.GetIsPaused())
+        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang() && !pauseManager.GetIsPaused() && !dialogueController.GetIsInDialogue())
         {
             boomerangTimer = boomerangCooldown;
             animator.SetTrigger("Throwing");

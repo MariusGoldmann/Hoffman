@@ -4,17 +4,13 @@ using UnityEngine.InputSystem;
 public class PickUpScript : MonoBehaviour
 {
     [Header("Pick Up Bools")]
-    [SerializeField] bool hasLeg;
-    [SerializeField] bool hasEye;
-    [SerializeField] bool hasEar;
-    [SerializeField] bool hasBoomerang;
+    [SerializeField] bool hasLeg = false;
+    [SerializeField] bool hasEye = false;
+    [SerializeField] bool hasEar = false;
+    [SerializeField] bool hasBoomerang = false;
     [SerializeField] bool isInteracting;
 
     InputAction interactAction;
-
-    [Header("UI")]
-    [SerializeField] GameObject eyeTabCloud;
-    [SerializeField] GameObject boomerangTabCloud;
 
     [Header("Particles")]
     [SerializeField] ParticleSystem pickUpLegParticle;
@@ -30,11 +26,13 @@ public class PickUpScript : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    SpawnManager spawnManager;
+    [SerializeField] SpawnManager spawnManager;
 
     void Awake()
     {
         spawnManager = FindFirstObjectByType<SpawnManager>();
+        newEyeRig.transform.localScale = new Vector3(0, 0, 0);
+        newEarRig.transform.localScale = new Vector3(0, 0, 0);
     }
     void Start()
     {
@@ -101,16 +99,12 @@ public class PickUpScript : MonoBehaviour
             spawnManager.eyeOwned = true;
             pickUpEyeParticle.Play();
             newEyeRig.transform.localScale = new Vector3(1, 1, 1);
-
-            eyeTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("BoomerangPickUp") && isInteracting == true)
         {
             hasBoomerang = true;
             spawnManager.boomerangOwned = true;
-
-            boomerangTabCloud.SetActive(false);
             Destroy(collision.gameObject);
         }
 
@@ -126,6 +120,7 @@ public class PickUpScript : MonoBehaviour
 
     void RigSetter()
     {
+        Debug.Log("Rigsetter");
         if (spawnManager.legOwned == true)
         {
             hasLeg = true;
@@ -133,17 +128,14 @@ public class PickUpScript : MonoBehaviour
 
         if (spawnManager.eyeOwned == true)
         {
+            Debug.Log("HEEEEEEJ");
             hasEye = true;
             newEyeRig.transform.localScale = new Vector3(1, 1, 1);
-
-            eyeTabCloud.SetActive(false);
         }
 
         if (spawnManager.boomerangOwned == true)
         {
             hasBoomerang = true;
-
-            boomerangTabCloud.SetActive(false);
         }
 
         if (spawnManager.earOwned == true)

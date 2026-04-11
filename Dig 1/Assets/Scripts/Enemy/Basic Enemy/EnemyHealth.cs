@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int currentEnemyHealth;
     [SerializeField] int maxEnemyHealth = 5;
 
-    [SerializeField] float timeDead=3f;
 
 
     [SerializeField] bool knockedOut = false;
@@ -21,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] ParticleSystem hpParticleSpawnParticles;
     [SerializeField] GameObject hpParticlePrefab;
 
-    CinemachineImpulseSource impulseSource;
+    [SerializeField] CinemachineImpulseSource impulseSource;
     SpriteRenderer spriteRenderer;
     Animator animator;
 

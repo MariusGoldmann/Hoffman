@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3022481502982421459}
   - component: {fileID: 9038801629447664890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Intensity: 1.41
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000093a764d5358815fe
+  m_ApplyToSortingLayers: 00000000358815fe
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2590065676089179696}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crystal light Blue
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497216626509484721}
   - component: {fileID: 3964672405529183954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
