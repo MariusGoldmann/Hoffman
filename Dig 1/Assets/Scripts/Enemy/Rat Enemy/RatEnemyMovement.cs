@@ -175,7 +175,7 @@ public class RatEnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && isChasing)
+        if (other.gameObject.CompareTag("Player") && isChasing && !GetComponent<EnemyHealth>().GetKnockedOut())
         {
             playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point);
             StopChasePlayer(false);

@@ -1,4 +1,5 @@
 using Cinemachine;
+using JetBrains.Annotations;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -67,7 +68,8 @@ public class EnemyHealth : MonoBehaviour
             Debug.Log("Enemy died");
             StartCoroutine(DeathSequence());
         }
-        IEnumerator DeathSequence()
+    }
+    IEnumerator DeathSequence()
         {
             if (blobfishCombat == null)
             {
@@ -106,6 +108,10 @@ public class EnemyHealth : MonoBehaviour
                 }
                 Destroy(gameObject);
             }
-        }
+    }
+
+    public bool GetKnockedOut()
+    {
+        return knockedOut;
     }
 }
