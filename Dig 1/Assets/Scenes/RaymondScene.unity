@@ -244,6 +244,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3874846910161985248, guid: f06cb62300376b240a588216161c0827, type: 3}
   m_PrefabInstance: {fileID: 1739752793}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &504395425 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8826769895667284922, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+  m_PrefabInstance: {fileID: 1663316791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &549707247 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8251832131873855631, guid: 5f1d8abc79872784e8a0a69fdf839348, type: 3}
@@ -961,16 +966,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3929620782974902674, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: flashTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929620782974902674, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
       propertyPath: flashColor.b
-      value: 7.9066997
+      value: 2.9960787
       objectReference: {fileID: 0}
     - target: {fileID: 3929620782974902674, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
       propertyPath: flashColor.g
-      value: 7.9066997
+      value: 2.9960787
       objectReference: {fileID: 0}
     - target: {fileID: 3929620782974902674, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
       propertyPath: flashColor.r
-      value: 7.9066997
+      value: 2.9960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929620782974902674, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: flashSpeedCurve.m_Curve.Array.data[2].time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929620782974902674, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: flashSpeedCurve.m_Curve.Array.data[2].value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6300398379981092459, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1012,6 +1029,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6731903404757562638, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+      propertyPath: transitionParticles
+      value: 
+      objectReference: {fileID: 504395425}
     - target: {fileID: 8121612068831819699, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
       propertyPath: m_Name
       value: Blobfish Enemy Bundle (0)

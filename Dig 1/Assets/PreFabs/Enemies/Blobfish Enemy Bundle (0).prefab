@@ -270,7 +270,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 0
   maxEnemyHealth: 20
-  timeDead: 3
   knockedOut: 0
   damageFlash: {fileID: 3929620782974902674}
   enemyKnockbackScript: {fileID: 3760515510861773110}
@@ -321,7 +320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
   knockbackLength: 0.2
-  inputForce: 7.5
 --- !u!114 &3929620782974902674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bbdda670385b74f92cf01b22984c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  flashColor: {r: 15.813399, g: 15.813399, b: 15.813399, a: 1}
+  flashColor: {r: 766.99615, g: 766.99615, b: 766.99615, a: 1}
   flashTime: 0.5
   flashSpeedCurve:
     serializedVersion: 2
@@ -369,7 +367,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 6334868921946858911}
   material: {fileID: 2100000, guid: ef6b23c22137e984aae3eedbf105f317, type: 2}
 --- !u!114 &4468452362889978984
 MonoBehaviour:
