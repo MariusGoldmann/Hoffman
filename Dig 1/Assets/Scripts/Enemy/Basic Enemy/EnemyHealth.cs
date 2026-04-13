@@ -27,8 +27,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake()
     {
-        enemyKnockbackScript = GetComponent<KnockbackScript>();
         damageFlash = GetComponentInChildren<DamageFlash>();
+        enemyKnockbackScript = GetComponent<KnockbackScript>();
         animator = GetComponentInChildren<Animator>();
         ratEnemyMovement = GetComponent<RatEnemyMovement>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
@@ -58,6 +58,7 @@ public class EnemyHealth : MonoBehaviour
             damageFlash.GetDamageFlasher();
             hitParticles.transform.position= collisionPoint;
             hitParticles.Play();
+            ratEnemyMovement.TurnAround(knockbackdirection.x);
         }
         if (currentEnemyHealth > maxEnemyHealth)
         {
