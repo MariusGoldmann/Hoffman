@@ -10,7 +10,7 @@ public class PauseManager : MonoBehaviour
 
     InputAction pauseAction;
 
-    ButtonScript buttonScript;
+    [SerializeField] ButtonScript buttonScript;
     bool paused;
     bool option;
 
@@ -22,7 +22,6 @@ public class PauseManager : MonoBehaviour
         optionUI.SetActive(false);
 
         pauseAction = InputSystem.actions.FindAction("Pause");
-        buttonScript = FindFirstObjectByType<ButtonScript>();
     }
 
     void Update()
@@ -35,18 +34,15 @@ public class PauseManager : MonoBehaviour
                 ResumeGame();
             } else
             {
-                paused = !paused;
                 if (!paused)
                 {
+                    paused = true; 
                     pauseMenuUI.SetActive(true);
                     Time.timeScale = 0;
                 }
                 else
                 {
-                    pauseMenuUI.SetActive(false);
-                    buttonScript.buttonPressed = false;
-                    optionUI.SetActive(false);
-                    Time.timeScale = 1;
+                    ResumeGame();
                 }
             }
         }
@@ -65,6 +61,10 @@ public class PauseManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         optionUI.SetActive(false);
+        buttonScript.buttonPressed = false;  
+        // om buttonScript inte hittas fråga Molly :D 
+
+        paused = false;
         option = false;
         Time.timeScale = 1;
     }
