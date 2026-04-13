@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] ParticleSystem hitParticles;
     [SerializeField] ParticleSystem healthPickupParticles;
+    [SerializeField] ParticleSystem poisonParticles;
 
     bool dead;
 
@@ -40,13 +42,17 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.maxValue = maxPlayerHealth;
         healthSlider.value = currentPlayerHealth;
     }
-    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce, Vector3 collisionPoint)
+    public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce, Vector3 collisionPoint, bool poison)
     {
         if (CameraShakeManager.instance!=null) CameraShakeManager.instance.CameraShake(impulseSource);
         //Dennis suger 2 was here :D 
         damageFlash.GetDamageFlasher();
-        hitParticles.transform.position = collisionPoint;
-        hitParticles.Play();
+        if (poison) poisonParticles.Play();
+        else
+        {
+            hitParticles.transform.position = collisionPoint;
+            hitParticles.Play();
+        }
         currentPlayerHealth += amount;
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
         if (currentPlayerHealth>0) StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));

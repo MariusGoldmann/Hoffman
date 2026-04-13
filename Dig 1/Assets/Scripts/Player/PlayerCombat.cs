@@ -103,7 +103,7 @@ public class PlayerCombat : MonoBehaviour
             timer += Time.deltaTime;
             boomerangSpeed = boomerangForce * boomerangAnimationCurve.Evaluate(timer / duration);
 
-            boomerangRB.linearVelocity = new Vector2(boomerangDirection * boomerangSpeed, boomerangRB.linearVelocity.y);
+            if (boomerangRB!=null) boomerangRB.linearVelocity = new Vector2(boomerangDirection * boomerangSpeed, boomerangRB.linearVelocity.y);
 
             yield return null;
         }

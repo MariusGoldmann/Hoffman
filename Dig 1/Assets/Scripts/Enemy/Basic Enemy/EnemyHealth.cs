@@ -56,7 +56,7 @@ public class EnemyHealth : MonoBehaviour
             currentEnemyHealth += amount;
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();
-            hitParticles.transform.position= collisionPoint;
+            hitParticles.transform.position=collisionPoint;
             hitParticles.Play();
             if (ratEnemyMovement!=null) ratEnemyMovement.TurnAround(knockbackdirection.x);
         }
@@ -71,44 +71,44 @@ public class EnemyHealth : MonoBehaviour
         }
     }
     IEnumerator DeathSequence()
+    {
+        if (blobfishCombat == null)
         {
-            if (blobfishCombat == null)
-            {
-                float timeLeft = 13f;
-                bool hasDroppedHP = false;
-                knockedOut = true;
-                if (animator != null) animator.SetTrigger("RatDied");
-                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                GetComponent<Collider2D>().enabled = false;
+            float timeLeft = 4f;
+            bool permaDied = false;
+            knockedOut = true;
+            if (animator != null) animator.SetTrigger("RatDied");
             while (timeLeft > 0)
-                {
-                    timeLeft -= Time.deltaTime;
-                    spriteRenderer.color = new Color(1f, 1f, 1f, timeLeft / 13);
-                    if (timeLeft < 10 && !hasDroppedHP)
-                    {
-                        for (int i = 0; i < Random.Range(1, 3); i++)
-                        {
-                            hpParticleSpawnParticles.Play();
-                            Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
-                        }
-                        if (animator != null) animator.SetTrigger("PermaDied");
-                        hasDroppedHP = true;
-                    }
-                    yield return null;
-                }
-                Destroy(gameObject);
-            }
-            else
             {
-                for (int i = 0; i < Random.Range(1, 3); i++)
+                timeLeft -= Time.deltaTime;
+                if (timeLeft < 2 && !permaDied)
                 {
-                    Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
-                    hitParticles.Play(); 
-                    CameraShakeManager.instance.CameraShake(impulseSource);
-                    yield return new WaitForSeconds(0.1f);
+                    permaDied = true;
+                    if (animator != null) animator.SetTrigger("PermaDied");
                 }
-                Destroy(gameObject);
+                yield return null;
             }
+            for (int i = 0; i < Random.Range(1, 3); i++)
+            {
+                hpParticleSpawnParticles.Play();
+                Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+                yield return null;
+            }
+            hitParticles.transform.position = transform.position;
+            hitParticles.Play();
+            Destroy(gameObject);
+        }
+        else
+        {
+            for (int i = 0; i < Random.Range(1, 3); i++)
+            {
+                Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+                hitParticles.Play();
+                CameraShakeManager.instance.CameraShake(impulseSource);
+                yield return new WaitForSeconds(0.1f);
+            }
+            Destroy(gameObject);
+        }
     }
 
     public bool GetKnockedOut()
