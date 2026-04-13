@@ -25,7 +25,7 @@ public class NeedleObstacle : MonoBehaviour
             if (timer < 0)
             {
                 Debug.Log("Needle Hit");
-                playerHealth.ChangeHealth(-15, Vector2.zero, Vector2.zero, 1, 1, collision.transform.position);
+                playerHealth.ChangeHealth(-15, Vector2.zero, Vector2.zero, 1, 1, collision.transform.position, false);
                 timer = damageCooldown;
             }
         }

@@ -26,13 +26,11 @@ public class DamageFlash : MonoBehaviour
     IEnumerator DamageFlasher()
     {
         SetFlashColor();
-        Debug.Log("1");
         float currentFlashAmount = 0f;
         float elapsedTime = 0f;
 
         while (elapsedTime < flashTime)
         {
-            Debug.Log("2");
             elapsedTime += Time.deltaTime;
 
             currentFlashAmount = flashSpeedCurve.Evaluate(elapsedTime/flashTime);
@@ -56,7 +54,6 @@ public class DamageFlash : MonoBehaviour
 
     public void GetDamageFlasher()
     {
-        Debug.Log("4");
         damageFlasherCoroutine = StartCoroutine(DamageFlasher());
     }
 }

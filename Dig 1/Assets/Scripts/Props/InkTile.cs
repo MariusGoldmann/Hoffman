@@ -12,7 +12,7 @@ public class InkTile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerHealth.ChangeHealth(-100, Vector2.zero, Vector2.zero, 0, 0, other.GetContact(0).point);
+            playerHealth.ChangeHealth(-100, Vector2.zero, Vector2.zero, 0, 0, other.GetContact(0).point, false);
         }
     }
 }

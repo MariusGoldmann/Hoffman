@@ -180,7 +180,7 @@ public class RatEnemyMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && isChasing && !enemyHealth.GetKnockedOut())
         {
-            playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point);
+            playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
             StopChasePlayer(false);
         }
     }

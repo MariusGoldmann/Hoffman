@@ -301,7 +301,7 @@ MonoBehaviour:
   poisonTickDamage: 5
   poisonTickAmount: 3
   poisionTickSpeed: 1.5
-  transitionParticles: {fileID: 0}
+  transitionParticles: {fileID: 8826769895667284922}
   bigTransform: {fileID: 5551009914155615636}
   smallTransform: {fileID: 4778599179884697807}
   bigSprite: {fileID: 4152717698289331328}
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bbdda670385b74f92cf01b22984c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  flashColor: {r: 766.99615, g: 766.99615, b: 766.99615, a: 1}
+  flashColor: {r: 2.9960787, g: 2.9960787, b: 2.9960787, a: 1}
   flashTime: 0.5
   flashSpeedCurve:
     serializedVersion: 2
@@ -846,5 +846,10 @@ PrefabInstance:
 --- !u!4 &2005593389309511212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+  m_PrefabInstance: {fileID: 8930540014199543832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8826769895667284922 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
   m_PrefabInstance: {fileID: 8930540014199543832}
   m_PrefabAsset: {fileID: 0}
