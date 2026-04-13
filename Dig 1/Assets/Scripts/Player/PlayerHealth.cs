@@ -55,13 +55,12 @@ public class PlayerHealth : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("1");
         if (other.gameObject.CompareTag("HpParticle"))
         {
-            Debug.Log("2");
             currentPlayerHealth += 10;
             healthPickupParticles.Play();
             Destroy(other.gameObject);
+            if (healthSlider != null) healthSlider.value = currentPlayerHealth;
         }
     }
     IEnumerator Deathsequence()
