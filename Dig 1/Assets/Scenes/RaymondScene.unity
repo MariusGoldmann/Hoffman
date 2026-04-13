@@ -2129,6 +2129,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -4973419316017505786, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
+      propertyPath: maxPlayerHealth
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -4973419316017505786, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: poisonParticles
       value: 
       objectReference: {fileID: 1388935433}

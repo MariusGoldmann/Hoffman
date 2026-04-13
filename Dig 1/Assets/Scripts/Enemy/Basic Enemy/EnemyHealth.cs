@@ -18,7 +18,6 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
     [SerializeField] ParticleSystem hitParticles;
-    [SerializeField] ParticleSystem hpParticleSpawnParticles;
     [SerializeField] GameObject hpParticlePrefab;
 
     [SerializeField] CinemachineImpulseSource impulseSource;
@@ -90,12 +89,12 @@ public class EnemyHealth : MonoBehaviour
             }
             for (int i = 0; i < Random.Range(1, 3); i++)
             {
-                hpParticleSpawnParticles.Play();
                 Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
-                yield return null;
+                hitParticles.transform.position= transform.position;
+                hitParticles.Play();
+                CameraShakeManager.instance.CameraShake(impulseSource);
+                yield return new WaitForSeconds(0.1f);
             }
-            hitParticles.transform.position = transform.position;
-            hitParticles.Play();
             Destroy(gameObject);
         }
         else

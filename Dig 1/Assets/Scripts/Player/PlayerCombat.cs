@@ -108,7 +108,7 @@ public class PlayerCombat : MonoBehaviour
             yield return null;
         }
 
-        while (boomerang != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f || earlyReceiving)
+        while (boomerang != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f || boomerang != null && earlyReceiving)
         {
             boomerangReturnSpeed += 50 * Time.deltaTime;
             boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, boomerangReturnSpeed * Time.deltaTime);
