@@ -44,6 +44,7 @@ public class ButtonScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (buttonPressed == true)
         {
             transform.localScale = desiredSize;
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BUTTON, 1);
         }
         else
         {
