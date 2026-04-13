@@ -1,4 +1,3 @@
-using Mono.Cecil.Cil;
 using System.Collections;
 using UnityEngine;
 
@@ -35,6 +34,7 @@ public class RatEnemyMovement : MonoBehaviour
 
     [SerializeField] bool knockedOut;
 
+    Coroutine chargeAnimationCoroutine;
     Coroutine chasePlayerCoroutine;
 
     Rigidbody2D ratRB;
@@ -97,15 +97,27 @@ public class RatEnemyMovement : MonoBehaviour
     }
     void HandleAnimations()
     {
-        if (isChasing)
+        if (isChasing && chargeAnimationCoroutine==null)
         {
-            animator.SetBool("RatIsAggressive", true);
+            chargeAnimationCoroutine = StartCoroutine(ChargeToAgressiveAnimation());
         }
         else
         {
             animator.SetBool("RatIsAggressive", false);
         }
         if (ratKnockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
+    }
+
+    IEnumerator ChargeToAgressiveAnimation()
+    {
+        animator.SetTrigger("Charge");
+        yield return new WaitForSeconds(chaseAnticipationTime);
+        while (isChasing)
+        {
+            animator.SetBool("RatIsAggressive", true);
+            yield return null;
+        }
+        chargeAnimationCoroutine = null;
     }
 
     void IdleMovement()
