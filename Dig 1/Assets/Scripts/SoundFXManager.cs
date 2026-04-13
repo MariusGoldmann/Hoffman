@@ -37,7 +37,8 @@ public class PlayerSoundFXManager : MonoBehaviour
         SLASHHIT,
         KICKHIT,
         BELL,
-        PUMPKIN
+        PUMPKIN,
+        BUTTON
     }
 
 }
