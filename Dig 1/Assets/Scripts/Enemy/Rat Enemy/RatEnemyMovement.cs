@@ -188,8 +188,16 @@ public class RatEnemyMovement : MonoBehaviour
     {
         if (!isChasing && !enemyHealth.GetKnockedOut())
         {
-            if (hitDirection > 0) transform.rotation = Quaternion.Euler(0, 180, 0);
-            else transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (hitDirection > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                facingRight = false;
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                facingRight=true;
+            }
         }
     }
     bool GetIsGroundInFront()
