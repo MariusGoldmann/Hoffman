@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using UnityEngine;
 
@@ -40,6 +41,7 @@ public class RatEnemyMovement : MonoBehaviour
     Animator animator;
     RatEnemyState ratEnemyState;
     PlayerHealth playerHealth;
+    EnemyHealth enemyHealth;
 
     private void Start()
     {
@@ -47,6 +49,7 @@ public class RatEnemyMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         ratEnemyState = GetComponentInChildren<RatEnemyState>();
         playerHealth = FindFirstObjectByType<PlayerHealth>();
+        enemyHealth= GetComponent<EnemyHealth>();
     }
     void Update()
     {
@@ -175,10 +178,26 @@ public class RatEnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && isChasing)
+        if (other.gameObject.CompareTag("Player") && isChasing && !enemyHealth.GetKnockedOut())
         {
             playerHealth.ChangeHealth(-damageAmount, (other.transform.position - transform.position).normalized, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point);
             StopChasePlayer(false);
+        }
+    }
+    public void TurnAround(float hitDirection)
+    {
+        if (!isChasing && !enemyHealth.GetKnockedOut())
+        {
+            if (hitDirection > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                facingRight = false;
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                facingRight=true;
+            }
         }
     }
     bool GetIsGroundInFront()

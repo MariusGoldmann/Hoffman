@@ -1,4 +1,5 @@
 using Cinemachine;
+using JetBrains.Annotations;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,8 +27,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake()
     {
-        enemyKnockbackScript = GetComponent<KnockbackScript>();
         damageFlash = GetComponentInChildren<DamageFlash>();
+        enemyKnockbackScript = GetComponent<KnockbackScript>();
         animator = GetComponentInChildren<Animator>();
         ratEnemyMovement = GetComponent<RatEnemyMovement>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
@@ -57,6 +58,7 @@ public class EnemyHealth : MonoBehaviour
             damageFlash.GetDamageFlasher();
             hitParticles.transform.position= collisionPoint;
             hitParticles.Play();
+            if (ratEnemyMovement!=null) ratEnemyMovement.TurnAround(knockbackdirection.x);
         }
         if (currentEnemyHealth > maxEnemyHealth)
         {
@@ -67,7 +69,8 @@ public class EnemyHealth : MonoBehaviour
             Debug.Log("Enemy died");
             StartCoroutine(DeathSequence());
         }
-        IEnumerator DeathSequence()
+    }
+    IEnumerator DeathSequence()
         {
             if (blobfishCombat == null)
             {
@@ -75,7 +78,9 @@ public class EnemyHealth : MonoBehaviour
                 bool hasDroppedHP = false;
                 knockedOut = true;
                 if (animator != null) animator.SetTrigger("RatDied");
-                while (timeLeft > 0)
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                GetComponent<Collider2D>().enabled = false;
+            while (timeLeft > 0)
                 {
                     timeLeft -= Time.deltaTime;
                     spriteRenderer.color = new Color(1f, 1f, 1f, timeLeft / 13);
@@ -87,8 +92,6 @@ public class EnemyHealth : MonoBehaviour
                             Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
                         }
                         if (animator != null) animator.SetTrigger("PermaDied");
-                        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                        GetComponent<Collider2D>().enabled = false;
                         hasDroppedHP = true;
                     }
                     yield return null;
@@ -106,6 +109,10 @@ public class EnemyHealth : MonoBehaviour
                 }
                 Destroy(gameObject);
             }
-        }
+    }
+
+    public bool GetKnockedOut()
+    {
+        return knockedOut;
     }
 }
