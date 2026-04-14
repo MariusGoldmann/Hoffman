@@ -4,7 +4,7 @@ using UnityEngine;
 public class CameraShakeManager : MonoBehaviour
 {
     public static CameraShakeManager instance;
-    [SerializeField] private float globalShakeForce = 1f;
+    [SerializeField] float globalShakeForce = 1f;
 
     private void Awake()
     {
@@ -17,6 +17,7 @@ public class CameraShakeManager : MonoBehaviour
     public void CameraShake(CinemachineImpulseSource impulseSource)
     {
         impulseSource.GenerateImpulseWithForce(globalShakeForce);
+        Debug.Log("Shake");
     }
 }   
                                                                             

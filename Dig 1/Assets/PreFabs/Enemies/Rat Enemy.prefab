@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 7308718663657940365}
   - component: {fileID: 8563240839915267902}
   - component: {fileID: 6264606926653388431}
+  - component: {fileID: 3738096181800424794}
   m_Layer: 7
   m_Name: Rat Enemy
   m_TagString: Enemy
@@ -252,8 +253,8 @@ MonoBehaviour:
   blobfishCombat: {fileID: 0}
   ratEnemyMovement: {fileID: 7521869268331679978}
   hitParticles: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
-  hpParticleSpawnParticles: {fileID: 4219223596248764135}
   hpParticlePrefab: {fileID: 6834462511129556811, guid: b1c479a279be2a748a4fc81854fa3c2b, type: 3}
+  hitStop: {fileID: 0}
   impulseSource: {fileID: 0}
 --- !u!70 &4054453495651370544
 CapsuleCollider2D:
@@ -434,6 +435,18 @@ MonoBehaviour:
     m_RotationOrder: 4
   spriteRenderer: {fileID: 0}
   material: {fileID: 2100000, guid: ef6b23c22137e984aae3eedbf105f317, type: 2}
+--- !u!114 &3738096181800424794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380048116863226706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ede323f2cbe84ba88e5f1610be02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitStop
 --- !u!1001 &771574689655859979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -491,11 +504,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50803879ca01da45b3d6b314a9bdc9a, type: 3}
---- !u!198 &4219223596248764135 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3474701480618108396, guid: d50803879ca01da45b3d6b314a9bdc9a, type: 3}
-  m_PrefabInstance: {fileID: 771574689655859979}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6567938730847171441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5878092987291031674, guid: d50803879ca01da45b3d6b314a9bdc9a, type: 3}

@@ -42,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce, Vector3 collisionPoint, bool poison)
     {
-        if (CameraShakeManager.instance!=null) CameraShakeManager.instance.CameraShake(impulseSource);
+        if (CameraShakeManager.instance != null) CameraShakeManager.instance.CameraShake(impulseSource);
         //Dennis suger 2 was here :D 
         damageFlash.GetDamageFlasher();
         if (poison) poisonParticles.Play();

@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] RatEnemyMovement ratEnemyMovement;
     [SerializeField] ParticleSystem hitParticles;
     [SerializeField] GameObject hpParticlePrefab;
+    [SerializeField] HitStop hitStop;
 
     [SerializeField] CinemachineImpulseSource impulseSource;
     SpriteRenderer spriteRenderer;
@@ -33,6 +34,8 @@ public class EnemyHealth : MonoBehaviour
         hitParticles = GetComponentInChildren<ParticleSystem>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        hitStop = GetComponent<HitStop>();
+        
     }
     void Start()
     {
@@ -53,6 +56,7 @@ public class EnemyHealth : MonoBehaviour
         {
             if (currentEnemyHealth>0 && blobfishCombat==null) StartCoroutine(enemyKnockbackScript.KnockbackAction(knockbackdirection, Vector2.up, hitDirectionForce, additionalForce));
             currentEnemyHealth += amount;
+            hitStop.Stop();
             CameraShakeManager.instance.CameraShake(impulseSource);
             damageFlash.GetDamageFlasher();
             hitParticles.transform.position=collisionPoint;
