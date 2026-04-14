@@ -1362,11 +1362,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0696a708ec6f6db41bdf038c3546ee58, type: 3}
---- !u!4 &812323041 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5647071721312934738, guid: 40939ac5a5389784bb8f9adf2cf7a6d2, type: 3}
-  m_PrefabInstance: {fileID: 4964287249813601402}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &819112477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,14 +2309,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 117934305530797825, guid: 40939ac5a5389784bb8f9adf2cf7a6d2, type: 3}
-      propertyPath: attackPoint
-      value: 
-      objectReference: {fileID: 812323041}
-    - target: {fileID: 117934305530797825, guid: 40939ac5a5389784bb8f9adf2cf7a6d2, type: 3}
-      propertyPath: fireProjectile
-      value: 
-      objectReference: {fileID: 8554783554031639518, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
     - target: {fileID: 415998798221065063, guid: 40939ac5a5389784bb8f9adf2cf7a6d2, type: 3}
       propertyPath: m_Name
       value: Dragon Daphne
@@ -2371,6 +2358,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40939ac5a5389784bb8f9adf2cf7a6d2, type: 3}
+--- !u!1001 &6576829867380242077
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -18.631699
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554783554031639518, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: m_Name
+      value: Fire Projectile (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2406,3 +2450,4 @@ SceneRoots:
   - {fileID: 743852173}
   - {fileID: 1557951287049495457}
   - {fileID: 4964287249813601402}
+  - {fileID: 6576829867380242077}
