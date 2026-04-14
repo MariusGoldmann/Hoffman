@@ -196,6 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenuUI: {fileID: 3515387627774476015}
   optionUI: {fileID: 3471735232969891589}
+  buttonScript: {fileID: 0}
   isPaused: 0
 --- !u!114 &4591893792123700600
 MonoBehaviour:
@@ -298,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131475234207519675, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.04
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4131475234207519675, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
       propertyPath: m_LocalScale.y
@@ -310,7 +311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131475234207519675, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4427147376357217169, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
       propertyPath: m_Name
@@ -367,6 +368,14 @@ PrefabInstance:
     - target: {fileID: 6949425676512147155, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
       propertyPath: m_Name
       value: Music slider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175025487551589870, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175025487551589870, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7175025487551589870, guid: b52638cb21874374f9ba898d0d25bd72, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -536,6 +545,14 @@ PrefabInstance:
     - target: {fileID: 597075473133362215, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680911722174024098, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680911722174024098, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 3981122032707618682, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -814,6 +831,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1019514673874407210, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019514673874407210, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019514673874407210, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8225604302655947516}
@@ -879,7 +904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7710777474908116904, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.04
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7710777474908116904, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
       propertyPath: m_LocalScale.y
@@ -891,7 +916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7710777474908116904, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8210458953429873484, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
       propertyPath: m_Name
