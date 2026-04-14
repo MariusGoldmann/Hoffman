@@ -3,7 +3,7 @@ using UnityEngine;
 public class FireProjectile : MonoBehaviour
 {
     [Header("General settings")]
-    [SerializeField] int damage;
+    [SerializeField] int projectileDamage;
     [SerializeField] float explosionRadius;
     [SerializeField] float additionalForce = 10f;
     [SerializeField] float hitDirectionForce = 10f;
@@ -27,14 +27,14 @@ public class FireProjectile : MonoBehaviour
         {
             PlayerHealth playerHealth = playerHit.GetComponent<PlayerHealth>();
             Vector2 hitDir = (playerHit.transform.position - transform.position).normalized;
-            playerHealth.ChangeHealth(-damage, hitDir, Vector2.up, hitDirectionForce, additionalForce, Vector3.zero, false);
+            playerHealth.ChangeHealth(-projectileDamage, hitDir, Vector2.up, hitDirectionForce, additionalForce, Vector3.zero, false);
             Destroy(gameObject);
         }
         if (enemyHit != null)
         {
             EnemyHealth enemyHealth = enemyHit.GetComponent<EnemyHealth>();
             Vector2 hitDir = (enemyHit.transform.position - transform.position).normalized;
-            enemyHealth.ChangeHealth(-damage, hitDir, hitDirectionForce, additionalForce, Vector3.zero);
+            enemyHealth.ChangeHealth(-projectileDamage, hitDir, hitDirectionForce, additionalForce, Vector3.zero);
             Destroy(gameObject);
         }
     }

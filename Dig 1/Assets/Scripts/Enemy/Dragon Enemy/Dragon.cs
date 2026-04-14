@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Dragon : MonoBehaviour
@@ -5,6 +6,10 @@ public class Dragon : MonoBehaviour
     [Header("General settings")]
     [SerializeField] float idleMovespeed;
     [SerializeField] int attackCooldown;
+    [SerializeField] int projectileSpeed;
+    [SerializeField] int anticipationTime;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] GameObject fireProjectile;
 
     [Header("Raycast/Collider settings")]
     [SerializeField] Transform groundCheck;
@@ -24,6 +29,8 @@ public class Dragon : MonoBehaviour
     KnockbackScript dragonKnockBackScript;
     Rigidbody2D dragonRB;
 
+    Coroutine rangedAttackCoroutine;
+
     void Awake()
     {
         dragonKnockBackScript = GetComponent<KnockbackScript>();
@@ -38,7 +45,42 @@ public class Dragon : MonoBehaviour
 
     void Patrol()
     {
-        dragonRB.linearVelocityX = idleMovespeed * facingDirection;
+        if (!IsPlayerDetected())
+        {
+            dragonRB.linearVelocityX = idleMovespeed * facingDirection;
+            rangedAttackCoroutine = null;
+        }
+        else
+        {
+            dragonRB.linearVelocity = new(dragonRB.linearVelocity.x, dragonRB.linearVelocity.y);
+            if (rangedAttackCoroutine == null)
+            {
+                rangedAttackCoroutine = StartCoroutine(RangedAttack());
+            }
+        }
+    }
+
+    IEnumerator RangedAttack()
+    {
+        float anticipationTimer = 0;
+
+        while (anticipationTime > anticipationTimer)
+        {
+            anticipationTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        Vector2 fireDirection = (PlayerTarget().position - transform.position).normalized;
+        float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
+
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+        GameObject projectile = Instantiate(fireProjectile, attackPoint.position, rotation);
+        Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
+        while (projectile != null)
+        {
+            projectileRB.linearVelocity = fireDirection * projectileSpeed;
+            yield return null;
+        }
     }
 
     void Flip()
@@ -46,6 +88,11 @@ public class Dragon : MonoBehaviour
         if (IsAtEdge() || IsAtWall())
         {
             facingDirection = facingDirection * -1;
+        }
+
+        if (PlayerTarget() != null)
+        {
+            facingDirection = (int)Mathf.Sign(PlayerTarget().position.x - transform.position.x);
         }
         transform.localScale = new Vector2(facingDirection, 1);
     }
@@ -64,7 +111,21 @@ public class Dragon : MonoBehaviour
     {
         Vector2 capsuleSize = new Vector2(horizontalDetectRange, verticalDetectRange);
         Collider2D hit = Physics2D.OverlapCapsule(transform.position, capsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
-        return hit.transform;
+        if (hit != null)
+        {
+            return hit.transform;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    bool IsPlayerDetected()
+    {
+        Vector2 capsuleSize = new Vector2(horizontalDetectRange, verticalDetectRange);
+        Collider2D hit = Physics2D.OverlapCapsule(transform.position, capsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
+        return hit;
     }
 
     void OnDrawGizmos()

@@ -356,7 +356,6 @@ public class PlayerMovement : MonoBehaviour
         {
             facingDirection = -1;
         }
-
         transform.localScale = new Vector3(facingDirection, 1, 1);
     }
 

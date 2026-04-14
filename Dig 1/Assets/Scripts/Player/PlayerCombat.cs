@@ -80,7 +80,7 @@ public class PlayerCombat : MonoBehaviour
             foreach (Collider2D enemy in enemies)
             {
                 Vector2 direction = (enemy.transform.position - transform.position).normalized;
-                enemy.GetComponentInChildren<EnemyHealth>().ChangeHealth(-damage, direction, hitDirectionForce*knockbackMultiplier, additionalForce*knockbackMultiplier, enemy.transform.position);
+                enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction, hitDirectionForce*knockbackMultiplier, additionalForce*knockbackMultiplier, enemy.transform.position);
                 PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT, 1f);
             }
         }
