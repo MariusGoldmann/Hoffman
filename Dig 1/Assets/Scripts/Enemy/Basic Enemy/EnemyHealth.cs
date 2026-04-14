@@ -76,6 +76,7 @@ public class EnemyHealth : MonoBehaviour
             float timeLeft = 4f;
             bool permaDied = false;
             knockedOut = true;
+            gameObject.layer = LayerMask.NameToLayer("Ground");
             if (animator != null) animator.SetTrigger("RatDied");
             while (timeLeft > 0)
             {
