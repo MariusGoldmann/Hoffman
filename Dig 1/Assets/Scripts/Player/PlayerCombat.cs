@@ -32,8 +32,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float boomerangTimer;
     [SerializeField] float boomerangForce;
     [SerializeField] float boomerangReturnForce;
+    [SerializeField] float invulnerableTime;
 
-    [SerializeField] bool earlyReceiving;
+      bool earlyReceiving;
+    bool isInvunerable;
 
     [SerializeField] AnimationCurve boomerangAnimationCurve;
 
@@ -98,18 +100,23 @@ public class PlayerCombat : MonoBehaviour
         float boomerangReturnSpeed = boomerangReturnForce;
         int boomerangDirection = playerMovement.GetFacingDirection(); //Where the player is facing
 
+
         while (timer < duration && !earlyReceiving)
         {
+            isInvunerable = true;
             timer += Time.deltaTime;
             boomerangSpeed = boomerangForce * boomerangAnimationCurve.Evaluate(timer / duration);
 
             if (boomerangRB!=null) boomerangRB.linearVelocity = new Vector2(boomerangDirection * boomerangSpeed, boomerangRB.linearVelocity.y);
+
+
 
             yield return null;
         }
 
         while (boomerang != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f || boomerang != null && earlyReceiving)
         {
+            isInvunerable = false;
             boomerangReturnSpeed += 50 * Time.deltaTime;
             boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, boomerangReturnSpeed * Time.deltaTime);
 
@@ -120,7 +127,7 @@ public class PlayerCombat : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Boomerang"))
+        if (collision.gameObject.CompareTag("Boomerang") && !isInvunerable)
         {
             Debug.Log("Boomerang picked up");
             GameObject boomerang = collision.gameObject;
