@@ -123,14 +123,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   idleMovespeed: 3
   attackCooldown: 4
-  projectileSpeed: 0
-  anticipationTime: 0
+  projectileSpeed: 5
+  anticipationTime: 1
   attackPoint: {fileID: 5647071721312934738}
   fireProjectile: {fileID: 8554783554031639518, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
   groundCheck: {fileID: 5699097910251668508}
   wallCheck: {fileID: 7809354441362954185}
-  horizontalDetectRange: 17
-  verticalDetectRange: 7
+  horizontalDetectRange: 42.4
+  verticalDetectRange: 18.55
   groundCheckDistance: 1.5
   wallCheckDistance: 0.5
   playerLayer:
