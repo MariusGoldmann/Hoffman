@@ -44,7 +44,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-       if (knockedOut)
+       if (ratEnemyMovement!=null && knockedOut)
         {
             ratEnemyMovement.SetKnockedOut(true);
         }
