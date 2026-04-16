@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -69.8, y: -21.24, z: 0}
-  m_LocalScale: {x: 2.04, y: 2.04, z: 2.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1649822689098809257}
@@ -121,7 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb887de6a709c847b326aa7d953f49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  idleMovespeed: 3
+  idleMoveSpeed: 3
+  recoilForce: 10
+  detectionRadius: 14
   attackCooldown: 4
   projectileSpeed: 5
   anticipationTime: 1
@@ -129,16 +131,11 @@ MonoBehaviour:
   fireProjectile: {fileID: 8554783554031639518, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
   groundCheck: {fileID: 5699097910251668508}
   wallCheck: {fileID: 7809354441362954185}
-  horizontalDetectRange: 42.4
-  verticalDetectRange: 18.55
+  playerTransform: {fileID: 0}
+  horizontalDetectRange: 43
+  verticalDetectRange: 19
   groundCheckDistance: 1.5
-  wallCheckDistance: 0.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  wallCheckDistance: 1.17
 --- !u!114 &769416511854112851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 0
-  maxEnemyHealth: 5
+  maxEnemyHealth: 25
   knockedOut: 0
   damageFlash: {fileID: 0}
   enemyKnockbackScript: {fileID: 0}
@@ -314,7 +311,7 @@ Transform:
   m_GameObject: {fileID: 634352000587852679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: -0.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

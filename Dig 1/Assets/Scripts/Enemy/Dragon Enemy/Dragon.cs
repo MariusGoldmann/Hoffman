@@ -4,9 +4,12 @@ using UnityEngine;
 public class Dragon : MonoBehaviour
 {
     [Header("General settings")]
-    [SerializeField] float idleMovespeed;
+    [SerializeField] float idleMoveSpeed;
+    [SerializeField] float recoilForce;
+    [SerializeField] float detectionRadius;
+
+    [Header("Attack settings")]
     [SerializeField] int attackCooldown;
-    [SerializeField] float cooldownTimer;
     [SerializeField] int projectileSpeed;
     [SerializeField] int anticipationTime;
     [SerializeField] Transform attackPoint;
@@ -15,16 +18,16 @@ public class Dragon : MonoBehaviour
     [Header("Raycast/Collider settings")]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform wallCheck;
+    [SerializeField] GameObject player;
     [SerializeField] float horizontalDetectRange;
     [SerializeField] float verticalDetectRange;
     [SerializeField] float groundCheckDistance;
     [SerializeField] float wallCheckDistance;
 
-    [Header("Layer")]
-    [SerializeField] LayerMask playerLayer;
-    [SerializeField] LayerMask groundLayer;
-
+    //Private variables
+    float cooldownTimer;
     int facingDirection = 1;
+    LayerMask groundLayer;
 
     //Script/Component references
     KnockbackScript dragonKnockBackScript;
@@ -34,27 +37,34 @@ public class Dragon : MonoBehaviour
 
     void Awake()
     {
+        groundLayer = LayerMask.GetMask("Ground");
         dragonKnockBackScript = GetComponent<KnockbackScript>();
         dragonRB = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void FixedUpdate()
     {
         Patrol();
         Flip();
+        HandleCooldown();
     }
 
     void Patrol()
     {
         if (!IsPlayerDetected())
         {
-            dragonRB.linearVelocityX = idleMovespeed * facingDirection;
+            dragonRB.linearVelocityX = idleMoveSpeed * facingDirection;
             rangedAttackCoroutine = null;
         }
         else
         {
             dragonRB.linearVelocity = new(dragonRB.linearVelocity.x, dragonRB.linearVelocity.y);
-            if (rangedAttackCoroutine == null && cooldownTimer <= attackCooldown)
+            if (cooldownTimer <= 0)
             {
                 rangedAttackCoroutine = StartCoroutine(RangedAttack());
             }
@@ -74,6 +84,7 @@ public class Dragon : MonoBehaviour
 
         if (PlayerTarget() != null)
         {
+            dragonRB.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
             Vector2 fireDirection = (PlayerTarget().position - transform.position).normalized;
             float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
@@ -115,54 +126,48 @@ public class Dragon : MonoBehaviour
 
     bool IsAtWall()
     {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, groundLayer);
+        return Physics2D.Raycast(wallCheck.position, Vector2.up, wallCheckDistance, groundLayer);
     }
 
     Transform PlayerTarget()
     {
-        Vector2 capsuleSize = new Vector2(horizontalDetectRange, verticalDetectRange);
-        Collider2D hit = Physics2D.OverlapCapsule(transform.position, capsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
-        if (hit != null)
+        if (Vector2.Distance(transform.position, player.transform.position) < detectionRadius)
         {
-            return hit.transform;
+            var hit = Physics2D.Linecast(transform.position, player.transform.position, ~LayerMask.GetMask("Enemy", "FireProjectile"));
+
+            if (hit.collider.gameObject.CompareTag("Player"))
+            {
+                return hit.transform;
+            }
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     bool IsPlayerDetected()
     {
-        Vector2 capsuleSize = new Vector2(horizontalDetectRange, verticalDetectRange);
-        Collider2D hit = Physics2D.OverlapCapsule(transform.position, capsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
-        return hit;
+        if (Vector2.Distance(transform.position, player.transform.position) < detectionRadius)
+        {
+            var hit = Physics2D.Linecast(transform.position, player.transform.position, ~LayerMask.GetMask("Enemy", "FireProjectile"));
+
+            Debug.Log(hit.collider.gameObject.tag);
+
+            if (hit.collider.gameObject.CompareTag("Player")) return true;
+
+        }
+        return false;
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-
-        Vector2 size = new Vector2(horizontalDetectRange, verticalDetectRange);
-        Vector2 center = transform.position;
-
-        float radius = verticalDetectRange / 2f;
-        float straightLength = horizontalDetectRange - (radius * 2f);
-
-        Vector2 left = center + Vector2.left * (straightLength / 2f);
-        Vector2 right = center + Vector2.right * (straightLength / 2f);
-
-        Gizmos.DrawLine(left + Vector2.up * radius, right + Vector2.up * radius);
-        Gizmos.DrawLine(left + Vector2.down * radius, right + Vector2.down * radius);
-
-        Gizmos.DrawWireSphere(left, radius);
-        Gizmos.DrawWireSphere(right, radius);
+        Gizmos.DrawLine(transform.position, player.transform.position);
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
         Gizmos.color = Color.green;
         Gizmos.DrawRay(groundCheck.position, Vector2.down * groundCheckDistance);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(wallCheck.position, transform.right * wallCheckDistance);
+        Gizmos.DrawRay(wallCheck.position, Vector2.up * wallCheckDistance);
     }
 
 

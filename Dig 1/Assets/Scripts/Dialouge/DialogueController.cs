@@ -7,6 +7,7 @@ public class DialogueController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI NPCNameText;
     [SerializeField] TextMeshProUGUI NPCDialogueText;
+    [SerializeField] TextMeshProUGUI skipText;
 
     [SerializeField] float typeSpeed = 5f;
     [SerializeField] float MaxTypeTime = 0.1f;
@@ -64,6 +65,7 @@ public class DialogueController : MonoBehaviour
         }
 
         NPCNameText.text = dialogueText.npcName;
+        
 
         for (int i = 0; i < dialogueText.paragraphs.Length; i++)
         {
