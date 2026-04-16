@@ -6,6 +6,7 @@ public class Dragon : MonoBehaviour
     [Header("General settings")]
     [SerializeField] float idleMovespeed;
     [SerializeField] int attackCooldown;
+    [SerializeField] float cooldownTimer;
     [SerializeField] int projectileSpeed;
     [SerializeField] int anticipationTime;
     [SerializeField] Transform attackPoint;
@@ -53,7 +54,7 @@ public class Dragon : MonoBehaviour
         else
         {
             dragonRB.linearVelocity = new(dragonRB.linearVelocity.x, dragonRB.linearVelocity.y);
-            if (rangedAttackCoroutine == null)
+            if (rangedAttackCoroutine == null && cooldownTimer <= attackCooldown)
             {
                 rangedAttackCoroutine = StartCoroutine(RangedAttack());
             }
@@ -62,6 +63,7 @@ public class Dragon : MonoBehaviour
 
     IEnumerator RangedAttack()
     {
+        cooldownTimer = attackCooldown;
         float anticipationTimer = 0;
 
         while (anticipationTime > anticipationTimer)
@@ -70,17 +72,21 @@ public class Dragon : MonoBehaviour
             yield return null;
         }
 
-        Vector2 fireDirection = (PlayerTarget().position - transform.position).normalized;
-        float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
-
-        Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        GameObject projectile = Instantiate(fireProjectile, attackPoint.position, rotation);
-        Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
-        while (projectile != null)
+        if (PlayerTarget() != null)
         {
-            projectileRB.linearVelocity = fireDirection * projectileSpeed;
-            yield return null;
+            Vector2 fireDirection = (PlayerTarget().position - transform.position).normalized;
+            float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
+
+            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+            GameObject projectile = Instantiate(fireProjectile, attackPoint.position, rotation);
+            Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
+            while (projectile != null)
+            {
+                projectileRB.linearVelocity = fireDirection * projectileSpeed;
+                yield return null;
+            }
         }
+        rangedAttackCoroutine = null;
     }
 
     void Flip()
@@ -95,6 +101,11 @@ public class Dragon : MonoBehaviour
             facingDirection = (int)Mathf.Sign(PlayerTarget().position.x - transform.position.x);
         }
         transform.localScale = new Vector2(facingDirection, 1);
+    }
+
+    void HandleCooldown()
+    {
+        cooldownTimer -= Time.deltaTime;
     }
 
     bool IsAtEdge()
