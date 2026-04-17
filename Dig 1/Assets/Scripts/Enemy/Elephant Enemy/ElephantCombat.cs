@@ -17,8 +17,11 @@ public class ElephantCombat : MonoBehaviour
     [SerializeField] bool stompAttack;
     [SerializeField] float stompAnticipationTime = 1;
 
+    [Header("References")]
     [SerializeField] GameObject trumpetShockwave;
     [SerializeField] GameObject stompShockwave;
+    [SerializeField] ElephantMovement elephantMovement;
+
 
     private void Update()
     {
@@ -48,7 +51,7 @@ public class ElephantCombat : MonoBehaviour
         Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
         while (projectile != null)
         {
-            projectileRB.linearVelocity = trumpetDirection * trumpetShockwaveSpeed;
+            projectileRB.linearVelocity = new Vector2(trumpetDirection.x*elephantMovement.GetFacingDirection(), trumpetDirection.y * trumpetShockwaveSpeed);
             yield return null;
         }
     }
