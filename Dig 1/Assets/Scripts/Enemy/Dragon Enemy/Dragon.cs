@@ -13,7 +13,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] int projectileSpeed;
     [SerializeField] int anticipationTime;
     [SerializeField] Transform attackPoint;
-    [SerializeField] GameObject fireProjectile;
+    [SerializeField] ObjectPooling fireProjectilePool;
 
     [Header("Raycast/Collider settings")]
     [SerializeField] Transform groundCheck;
@@ -89,7 +89,7 @@ public class Dragon : MonoBehaviour
             float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
-            GameObject projectile = Instantiate(fireProjectile, attackPoint.position, rotation);
+            GameObject projectile = fireProjectilePool.GetObject(attackPoint.position, rotation);
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
             while (projectile != null)
             {
