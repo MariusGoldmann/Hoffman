@@ -11,6 +11,8 @@ public class DialogueController : MonoBehaviour
 
     [SerializeField] float typeSpeed = 5f;
     [SerializeField] float MaxTypeTime = 0.1f;
+
+    [SerializeField] float fadeSpeed;
     
 
     Queue<string> paragraphs = new Queue<string>();
@@ -22,7 +24,11 @@ public class DialogueController : MonoBehaviour
     string paragraph;
     Coroutine typewriterCoroutine;
 
-
+    [SerializeField] CanvasGroup canvasGroup;
+    void Start()
+    {
+        canvasGroup.alpha = 0;
+    }
 
     public void DisplayNextParagraph(DialogueText dialogueText)
     {
@@ -62,6 +68,8 @@ public class DialogueController : MonoBehaviour
         if (!gameObject.activeSelf)
         {
             gameObject.SetActive(true);
+            LeanTween.alphaCanvas(canvasGroup, 1, fadeSpeed).setEaseInOutSine();
+
         }
 
         NPCNameText.text = dialogueText.npcName;
@@ -79,7 +87,8 @@ public class DialogueController : MonoBehaviour
 
         if (gameObject.activeSelf)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
+            LeanTween.alphaCanvas(canvasGroup, 0, fadeSpeed).setEaseInOutSine();
         }
     }
 
