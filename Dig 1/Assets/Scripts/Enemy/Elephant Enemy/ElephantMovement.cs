@@ -115,14 +115,18 @@ public class ElephantMovement : MonoBehaviour
 
         Gizmos.DrawWireSphere(left, radius);
         Gizmos.DrawWireSphere(right, radius);
-        
+
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, Vector2.down * groundCheckLength);
 
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(frontRaycastOrigin.position, Vector2.down * frontGroundCheckLength);
 
-        Gizmos.color= Color.yellow;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawRay(frontRaycastOrigin.position, Vector2.up * frontWallCheckLength);
+    }
+    public float GetFacingDirection()
+    {
+        return facingDirection;
     }
 }
