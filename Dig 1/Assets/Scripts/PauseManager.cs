@@ -10,7 +10,6 @@ public class PauseManager : MonoBehaviour
 
     InputAction pauseAction;
 
-    [SerializeField] ButtonScript buttonScript;
     bool paused;
     bool option;
 
@@ -61,7 +60,6 @@ public class PauseManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         optionUI.SetActive(false);
-        // om buttonScript inte hittas fråga Molly :D 
 
         paused = false;
         option = false;
