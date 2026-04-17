@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 2114890696487839586}
   - component: {fileID: 2818649188387640328}
   - component: {fileID: 1553411927596180110}
-  - component: {fileID: 4591893792123700600}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -196,23 +195,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenuUI: {fileID: 3515387627774476015}
   optionUI: {fileID: 3471735232969891589}
-  buttonScript: {fileID: 4591893792123700600}
+  buttonScript: {fileID: 0}
   isPaused: 0
---- !u!114 &4591893792123700600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8020158786247861243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d53d3a9673c364428ed25691c384e31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonScript
-  buttonPressed: 0
-  desiredSize: {x: 0, y: 0, z: 0}
-  startSize: {x: 0, y: 0, z: 0}
 --- !u!1001 &963339147743054996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -552,12 +536,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 8119083959426777139}
     m_Modifications:
     - target: {fileID: 597075473133362215, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 597075473133362215, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 597075473133362215, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1553411927596180110}
+      objectReference: {fileID: 0}
+    - target: {fileID: 597075473133362215, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 597075473133362215, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResumeGame
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3680911722174024098, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -591,6 +587,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5441645938850648644, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6415399164468502498, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -615,9 +615,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7114921213014271374, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7517776900181100392, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640010587094624423, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7988695127561631039, guid: 3e46882f4af3e4c4aad2f1df6f03685e, type: 3}
       propertyPath: m_Pivot.x

@@ -454,58 +454,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1701426256}
-    - target: {fileID: 4245298904255424334, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245298904255424334, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4516027917345647918, guid: 47d29db2237a52348841478024541464, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 819112478}
-    - target: {fileID: 6549611164555311444, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6549611164555311444, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6549611164555311444, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7269715554275079965, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7269715554275079965, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7587332596152991218, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7587332596152991218, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7682080362190123310, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7682080362190123310, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7682080362190123310, guid: 47d29db2237a52348841478024541464, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8020158786247861243, guid: 47d29db2237a52348841478024541464, type: 3}
       propertyPath: m_Name
       value: UI Canvas
@@ -702,10 +654,6 @@ PrefabInstance:
     - target: {fileID: 5696278656962020490, guid: 83caa8baa9275f249889d8a0f7284bc4, type: 3}
       propertyPath: m_Name
       value: EventSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 5696278656962020490, guid: 83caa8baa9275f249889d8a0f7284bc4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7470603458147268599, guid: 83caa8baa9275f249889d8a0f7284bc4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1012,46 +960,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4585362490990094209, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: m_Intensity
-      value: 0.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[0]'
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[1]'
-      value: -32143307
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[2]'
-      value: -253167023
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[3]'
-      value: -176136505
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735027453063038839, guid: 7d16296198675bc4193a5afac2cbced2, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[4]'
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1714,14 +1622,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 194588364410070079, guid: 56795261d60eaca48bec8aec7904d574, type: 3}
-      propertyPath: priority
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 194588364410070079, guid: 56795261d60eaca48bec8aec7904d574, type: 3}
-      propertyPath: m_IsGlobal
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4068323564564131511, guid: 56795261d60eaca48bec8aec7904d574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.56814
@@ -1920,14 +1820,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3313464981271318425, guid: e2cef0dc1b7019948a81ddd98f0845f8, type: 3}
-      propertyPath: field of view
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342999249491964907, guid: e2cef0dc1b7019948a81ddd98f0845f8, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7237177266878722551, guid: e2cef0dc1b7019948a81ddd98f0845f8, type: 3}
       propertyPath: m_Name
       value: Main Camera 1
