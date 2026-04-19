@@ -85,17 +85,13 @@ public class Dragon : MonoBehaviour
         if (PlayerTarget() != null)
         {
             dragonRB.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
-            Vector2 fireDirection = (PlayerTarget().position - transform.position).normalized;
+            Vector2 fireDirection = (PlayerTarget().position - attackPoint.position).normalized;
             float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
             GameObject projectile = fireProjectilePool.GetObject(attackPoint.position, rotation);
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
-            while (projectile != null)
-            {
-                projectileRB.linearVelocity = fireDirection * projectileSpeed;
-                yield return null;
-            }
+            projectileRB.linearVelocity = fireDirection * projectileSpeed;
         }
         rangedAttackCoroutine = null;
     }

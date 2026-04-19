@@ -23,6 +23,9 @@ public class FireProjectile : MonoBehaviour
 
         if (groundHit != null)
         {
+            gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
             fireProjectilePool.ReturnObject(gameObject);
         }
         if (playerHit != null)
@@ -30,10 +33,16 @@ public class FireProjectile : MonoBehaviour
             PlayerHealth playerHealth = playerHit.GetComponent<PlayerHealth>();
             Vector2 hitDir = (playerHit.transform.position - transform.position).normalized;
             playerHealth.ChangeHealth(-projectileDamage, hitDir, Vector2.up, hitDirectionForce, additionalForce, Vector3.zero, false);
+            gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
             fireProjectilePool.ReturnObject(gameObject);
         }
         if (enemyHit != null)
         {
+            gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
             EnemyHealth enemyHealth = enemyHit.GetComponent<EnemyHealth>();
             Vector2 hitDir = (enemyHit.transform.position - transform.position).normalized;
             enemyHealth.ChangeHealth(-projectileDamage, hitDir, hitDirectionForce, additionalForce, Vector3.zero);
