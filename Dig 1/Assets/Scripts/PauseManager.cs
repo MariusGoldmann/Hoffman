@@ -15,12 +15,17 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] bool isPaused = false;
 
+    
+
+    ButtonScript buttonScript;
+
     void Start()
     {
         pauseMenuUI.SetActive(false);
         optionUI.SetActive(false);
 
         pauseAction = InputSystem.actions.FindAction("Pause");
+        buttonScript = FindAnyObjectByType<ButtonScript>(); 
     }
 
     void Update()
@@ -37,6 +42,7 @@ public class PauseManager : MonoBehaviour
                 {
                     paused = true; 
                     pauseMenuUI.SetActive(true);
+                   // transform.localPosition = (transform.position)
                     Time.timeScale = 0;
                 }
                 else
