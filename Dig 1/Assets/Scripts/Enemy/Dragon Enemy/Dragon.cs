@@ -15,6 +15,10 @@ public class Dragon : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] ObjectPooling fireProjectilePool;
 
+    [Header("Death settings")]
+    [SerializeField] float deathTime;
+    [SerializeField] bool isKnockedOut;
+
     [Header("Raycast/Collider settings")]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform wallCheck;
@@ -31,6 +35,7 @@ public class Dragon : MonoBehaviour
 
     //Script/Component references
     KnockbackScript dragonKnockBackScript;
+    EnemyHealth enemyHealth;
     Rigidbody2D dragonRB;
 
     Coroutine rangedAttackCoroutine;
@@ -39,6 +44,7 @@ public class Dragon : MonoBehaviour
     {
         groundLayer = LayerMask.GetMask("Ground");
         dragonKnockBackScript = GetComponent<KnockbackScript>();
+        enemyHealth = GetComponent<EnemyHealth>();
         dragonRB = GetComponent<Rigidbody2D>();
     }
 
@@ -96,6 +102,14 @@ public class Dragon : MonoBehaviour
         rangedAttackCoroutine = null;
     }
 
+    void DeathSequence()
+    {
+        if (enemyHealth.GetHealth() <= 0)
+        {
+
+        }
+    }
+
     void Flip()
     {
         if (IsAtEdge() || IsAtWall())
@@ -144,8 +158,6 @@ public class Dragon : MonoBehaviour
         if (Vector2.Distance(transform.position, player.transform.position) < detectionRadius)
         {
             var hit = Physics2D.Linecast(transform.position, player.transform.position, ~LayerMask.GetMask("Enemy", "FireProjectile"));
-
-            Debug.Log(hit.collider.gameObject.tag);
 
             if (hit.collider.gameObject.CompareTag("Player")) return true;
 

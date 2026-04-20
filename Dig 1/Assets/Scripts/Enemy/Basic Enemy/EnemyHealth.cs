@@ -119,4 +119,9 @@ public class EnemyHealth : MonoBehaviour
     {
         return knockedOut;
     }
+
+    public float GetHealth()
+    {
+        return currentEnemyHealth;
+    }
 }
