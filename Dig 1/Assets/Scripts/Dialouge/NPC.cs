@@ -20,7 +20,7 @@ public abstract class NPC : MonoBehaviour, IInteractable
 
     void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame && isWithinInteractDistance)
+        if (Keyboard.current.eKey.wasPressedThisFrame && isWithinInteractDistance || Keyboard.current.enterKey.wasPressedThisFrame && isWithinInteractDistance)
         {
             Interact();
         }

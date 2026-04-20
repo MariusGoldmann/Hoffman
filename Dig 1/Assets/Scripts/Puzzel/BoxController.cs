@@ -6,7 +6,7 @@ public class BoxController : MonoBehaviour
     [SerializeField] Transform button;
     [SerializeField] float pullSpeed=100f;
 
-    float buttonDistance;
+    float buttonDistance=0;
     float closeEnoughDistance=1f;
 
     void Update()
@@ -16,7 +16,7 @@ public class BoxController : MonoBehaviour
 
     void FindTarget()
     {
-        buttonDistance= Vector2.Distance(button.position, transform.position);
+        if (button!=null) buttonDistance= Vector2.Distance(button.position, transform.position);
 
         if (buttonDistance < closeEnoughDistance )
         {

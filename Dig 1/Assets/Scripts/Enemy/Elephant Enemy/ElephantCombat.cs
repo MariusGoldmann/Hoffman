@@ -17,8 +17,11 @@ public class ElephantCombat : MonoBehaviour
     [SerializeField] bool stompAttack;
     [SerializeField] float stompAnticipationTime = 1;
 
-    [SerializeField] GameObject trumpetShockwave;
-    [SerializeField] GameObject stompShockwave;
+    [Header("References")]
+    [SerializeField] ObjectPooling trumpetPool;
+    [SerializeField] ObjectPooling stompPool;
+    [SerializeField] ElephantMovement elephantMovement;
+
 
     private void Update()
     {
@@ -44,13 +47,14 @@ public class ElephantCombat : MonoBehaviour
         }
 
         Quaternion projectileQuaternion = Quaternion.Euler(0, 0, MathF.Atan2(trumpetDirection.y, trumpetDirection.x) * Mathf.Rad2Deg);
-        GameObject projectile = Instantiate(trumpetShockwave, transform.position, projectileQuaternion); //Change transform.position to trumpetPosition
+        GameObject projectile = trumpetPool.GetObject(transform.position, Quaternion.identity); //Change transform.position to trumpetPosition
         Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
         while (projectile != null)
         {
-            projectileRB.linearVelocity = trumpetDirection * trumpetShockwaveSpeed;
+            projectileRB.linearVelocity = new Vector2(trumpetDirection.x*elephantMovement.GetFacingDirection(), trumpetDirection.y * trumpetShockwaveSpeed);
             yield return null;
         }
+        yield return new WaitForSeconds(2);
     }
     IEnumerator StompAttack()
     {

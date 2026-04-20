@@ -2,55 +2,61 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 using static UnityEngine.Timeline.DirectorControlPlayable;
 
-public class ButtonScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ButtonScript : MonoBehaviour
 {
-    public bool buttonPressed;
-    [SerializeField] Vector3 desiredSize;
-    [SerializeField] Vector3 startSize;
+    private Button buttonElement;
 
-    void Awake()
-    {
-        buttonPressed = false;
-    }
+    //void Awake()
+    //{
+    //    buttonPressed = false;
+    //}
 
     public void Start()
     {
-        buttonPressed = false;
-        transform.localScale = startSize;
+        buttonElement = GetComponent<Button>();
+        buttonElement.onClick.AddListener(OnButtonPressed);
     }
 
-    private void OnEnable()
+    //private void OnEnable()
+    //{
+    //    transform.localScale = startSize;
+    //}
+
+    //public void OnPointerDown(PointerEventData eventData)
+    //{
+    //    buttonPressed = true;
+    //}
+
+    //public void OnPointerUp(PointerEventData eventData)
+    //{
+    //    buttonPressed = false;
+    //    transform.localScale = startSize;
+    //}
+
+    public void OnButtonPressed()
     {
-        transform.localScale = startSize;
+        PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BUTTON, 1);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        buttonPressed = true;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        buttonPressed = false;
-        transform.localScale = startSize;
-    }
+    
 
 
-    private void Update()
-    {
+    //private void Update()
+    //{
 
-        if (buttonPressed == true)
-        {
-            transform.localScale = desiredSize;
-            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BUTTON, 1);
-        }
-        else
-        {
-            Debug.Log("Update loop");
-            transform.localScale = startSize;
-        }
+    //    if (buttonPressed == true)
+    //    {
+    //        transform.localScale = desiredSize;
+    //        PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BUTTON, 1);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Update loop");
+    //        transform.localScale = startSize;
+    //    }
 
         /* while (buttonPressed && transform.localScale.x < desiredSize.x)
          {
@@ -74,7 +80,7 @@ public class ButtonScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
              transform.localScale = Vector3.Lerp(transform.localScale, startSize, scaleSpeed * Time.deltaTime);
             break;
       }*/
-    }
+    //}
 
 
 

@@ -61,7 +61,6 @@ public class PauseManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         optionUI.SetActive(false);
-        buttonScript.buttonPressed = false;  
         // om buttonScript inte hittas fråga Molly :D 
 
         paused = false;
