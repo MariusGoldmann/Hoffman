@@ -29,7 +29,7 @@ public abstract class NPC : MonoBehaviour, IInteractable
         {
             if (!interactSprite.LeanIsTweening())
             {
-                LeanTween.scale(interactSprite, new Vector2(0, 0), 0.5f).setEaseInExpo();
+                LeanTween.scale(interactSprite, new Vector2(0, 0), 0.2f).setEaseInExpo();
             }
         }
         else
