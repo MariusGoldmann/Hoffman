@@ -15,6 +15,10 @@ public class Dragon : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] ObjectPooling fireProjectilePool;
 
+    [Header("Death settings")]
+    [SerializeField] float deathTime;
+    [SerializeField] bool isKnockedOut;
+
     [Header("Raycast/Collider settings")]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform wallCheck;
@@ -100,7 +104,10 @@ public class Dragon : MonoBehaviour
 
     void DeathSequence()
     {
-        if (enemyHealth)
+        if (enemyHealth.GetHealth() <= 0)
+        {
+
+        }
     }
 
     void Flip()
