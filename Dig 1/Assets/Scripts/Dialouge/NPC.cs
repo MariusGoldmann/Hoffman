@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public abstract class NPC : MonoBehaviour, IInteractable
 {
-    [SerializeField] SpriteRenderer interactSprite;
+    [SerializeField] GameObject interactSprite;
     
 
     Transform playerTransform;
@@ -25,13 +25,19 @@ public abstract class NPC : MonoBehaviour, IInteractable
             Interact();
         }
 
-        if (interactSprite.gameObject.activeSelf && !isWithinInteractDistance)
+        if (!isWithinInteractDistance)
         {
-            interactSprite.gameObject.SetActive(false);
+            if (!interactSprite.LeanIsTweening())
+            {
+                LeanTween.scale(interactSprite, new Vector2(0, 0), 0.2f).setEaseInExpo();
+            }
         }
-        else if (!interactSprite.gameObject.activeSelf && isWithinInteractDistance)
+        else
         {
-            interactSprite.gameObject.SetActive(true);
+            if (!interactSprite.LeanIsTweening())
+            {
+                LeanTween.scale(interactSprite, new Vector2(0.25f, 0.25f), 1).setEaseOutExpo();
+            }
         }
     }
 

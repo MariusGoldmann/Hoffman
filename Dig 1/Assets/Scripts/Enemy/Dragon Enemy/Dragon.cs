@@ -13,7 +13,11 @@ public class Dragon : MonoBehaviour
     [SerializeField] int projectileSpeed;
     [SerializeField] int anticipationTime;
     [SerializeField] Transform attackPoint;
-    [SerializeField] GameObject fireProjectile;
+    [SerializeField] ObjectPooling fireProjectilePool;
+
+    [Header("Death settings")]
+    [SerializeField] float deathTime;
+    [SerializeField] bool isKnockedOut;
 
     [Header("Raycast/Collider settings")]
     [SerializeField] Transform groundCheck;
@@ -31,6 +35,7 @@ public class Dragon : MonoBehaviour
 
     //Script/Component references
     KnockbackScript dragonKnockBackScript;
+    EnemyHealth enemyHealth;
     Rigidbody2D dragonRB;
 
     Coroutine rangedAttackCoroutine;
@@ -39,6 +44,7 @@ public class Dragon : MonoBehaviour
     {
         groundLayer = LayerMask.GetMask("Ground");
         dragonKnockBackScript = GetComponent<KnockbackScript>();
+        enemyHealth = GetComponent<EnemyHealth>();
         dragonRB = GetComponent<Rigidbody2D>();
     }
 
@@ -85,19 +91,23 @@ public class Dragon : MonoBehaviour
         if (PlayerTarget() != null)
         {
             dragonRB.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
-            Vector2 fireDirection = (PlayerTarget().position - transform.position).normalized;
+            Vector2 fireDirection = (PlayerTarget().position - attackPoint.position).normalized;
             float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
-            GameObject projectile = Instantiate(fireProjectile, attackPoint.position, rotation);
+            GameObject projectile = fireProjectilePool.GetObject(attackPoint.position, rotation);
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
-            while (projectile != null)
-            {
-                projectileRB.linearVelocity = fireDirection * projectileSpeed;
-                yield return null;
-            }
+            projectileRB.linearVelocity = fireDirection * projectileSpeed;
         }
         rangedAttackCoroutine = null;
+    }
+
+    void DeathSequence()
+    {
+        if (enemyHealth.GetHealth() <= 0)
+        {
+
+        }
     }
 
     void Flip()
@@ -148,8 +158,6 @@ public class Dragon : MonoBehaviour
         if (Vector2.Distance(transform.position, player.transform.position) < detectionRadius)
         {
             var hit = Physics2D.Linecast(transform.position, player.transform.position, ~LayerMask.GetMask("Enemy", "FireProjectile"));
-
-            Debug.Log(hit.collider.gameObject.tag);
 
             if (hit.collider.gameObject.CompareTag("Player")) return true;
 

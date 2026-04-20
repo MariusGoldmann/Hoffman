@@ -87,8 +87,8 @@ public class DialogueController : MonoBehaviour
 
         if (gameObject.activeSelf)
         {
-            gameObject.SetActive(true);
-            LeanTween.alphaCanvas(canvasGroup, 0, fadeSpeed).setEaseInOutSine();
+            canvasGroup.alpha = 0;
+            gameObject.SetActive(false);
         }
     }
 
