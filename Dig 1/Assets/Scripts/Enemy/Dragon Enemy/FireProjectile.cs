@@ -10,11 +10,13 @@ public class FireProjectile : MonoBehaviour
 
     [Header("Particles")]
     [SerializeField] GameObject fireSplitter;
+    [SerializeField] GameObject explosion;
 
     [Header("Layers")]
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] LayerMask enemyLayer;
+    [SerializeField] LayerMask bomerangLayer;
 
     [SerializeField] ObjectPooling fireProjectilePool;
 
@@ -27,11 +29,13 @@ public class FireProjectile : MonoBehaviour
         Collider2D groundHit = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, groundLayer);
         Collider2D playerHit  = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, playerLayer);
         Collider2D enemyHit = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, enemyLayer);
+        Collider2D bomerangHit = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, bomerangLayer);
 
         if (groundHit != null)
         {
             gameObject.SetActive(false);
             Instantiate(fireSplitter, transform.position, Quaternion.identity);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
             gameObject.transform.localRotation = Quaternion.identity;
             fireProjectilePool.ReturnObject(gameObject);
@@ -40,6 +44,7 @@ public class FireProjectile : MonoBehaviour
         {
             gameObject.SetActive(false);
             Instantiate(fireSplitter, transform.position, Quaternion.identity);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             PlayerHealth playerHealth = playerHit.GetComponent<PlayerHealth>();
             Vector2 hitDir = (playerHit.transform.position - transform.position).normalized;
             playerHealth.ChangeHealth(-projectileDamage, hitDir, Vector2.up, hitDirectionForce, additionalForce, Vector3.zero, false);
@@ -51,11 +56,21 @@ public class FireProjectile : MonoBehaviour
         {
             gameObject.SetActive(false);
             Instantiate(fireSplitter, transform.position, Quaternion.identity);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
             gameObject.transform.localRotation = Quaternion.identity;
             EnemyHealth enemyHealth = enemyHit.GetComponent<EnemyHealth>();
             Vector2 hitDir = (enemyHit.transform.position - transform.position).normalized;
             enemyHealth.ChangeHealth(-projectileDamage, hitDir, hitDirectionForce, additionalForce, Vector3.zero);
+            fireProjectilePool.ReturnObject(gameObject);
+        }
+        if (bomerangHit != null)
+        {
+            gameObject.SetActive(false);
+            Instantiate(fireSplitter, transform.position, Quaternion.identity);
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
             fireProjectilePool.ReturnObject(gameObject);
         }
     }
