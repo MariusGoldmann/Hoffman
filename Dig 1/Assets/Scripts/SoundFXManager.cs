@@ -9,10 +9,16 @@ public class PlayerSoundFXManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
         {
             instance = this;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -38,7 +44,8 @@ public class PlayerSoundFXManager : MonoBehaviour
         KICKHIT,
         BELL,
         PUMPKIN,
-        BUTTON
+        BUTTON,
+        FIREBALL
     }
 
 }

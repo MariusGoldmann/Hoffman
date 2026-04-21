@@ -17,7 +17,7 @@ public class Dragon : MonoBehaviour
 
     [Header("Death settings")]
     [SerializeField] float deathTime;
-    [SerializeField] bool isKnockedOut;
+    [SerializeField] bool isDead = false;
 
     [Header("Raycast/Collider settings")]
     [SerializeField] Transform groundCheck;
@@ -39,6 +39,7 @@ public class Dragon : MonoBehaviour
     Rigidbody2D dragonRB;
 
     Coroutine rangedAttackCoroutine;
+    Coroutine deathCoroutine;
 
     void Awake()
     {
@@ -58,11 +59,12 @@ public class Dragon : MonoBehaviour
         Patrol();
         Flip();
         HandleCooldown();
+        DeathSequence();
     }
 
     void Patrol()
     {
-        if (!IsPlayerDetected())
+        if (!IsPlayerDetected() && !isDead)
         {
             dragonRB.linearVelocityX = idleMoveSpeed * facingDirection;
             rangedAttackCoroutine = null;
@@ -70,7 +72,7 @@ public class Dragon : MonoBehaviour
         else
         {
             dragonRB.linearVelocity = new(dragonRB.linearVelocity.x, dragonRB.linearVelocity.y);
-            if (cooldownTimer <= 0)
+            if (cooldownTimer <= 0 && !isDead)
             {
                 rangedAttackCoroutine = StartCoroutine(RangedAttack());
             }
@@ -90,6 +92,7 @@ public class Dragon : MonoBehaviour
 
         if (PlayerTarget() != null)
         {
+            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.FIREBALL, 1);
             dragonRB.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
             Vector2 fireDirection = (PlayerTarget().position - attackPoint.position).normalized;
             float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
@@ -106,18 +109,31 @@ public class Dragon : MonoBehaviour
     {
         if (enemyHealth.GetHealth() <= 0)
         {
-
+            isDead = true;
+            dragonRB.linearVelocity = Vector2.zero;
+            if (deathCoroutine != null)
+            {
+                return;
+            }
+            deathCoroutine = StartCoroutine(DeathCoroutine());
         }
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        Debug.Log("Hej");
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
     }
 
     void Flip()
     {
-        if (IsAtEdge() || IsAtWall())
+        if (IsAtEdge() && !isDead || IsAtWall() && !isDead)
         {
             facingDirection = facingDirection * -1;
         }
 
-        if (PlayerTarget() != null)
+        if (PlayerTarget() != null && !isDead)
         {
             facingDirection = (int)Mathf.Sign(PlayerTarget().position.x - transform.position.x);
         }

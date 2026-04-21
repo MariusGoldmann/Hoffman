@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     KnockbackScript knockbackScript;
     DamageFlash damageFlash;
     LevelLoader levelLoader;
+    HitStop hitStop;
 
     [SerializeField] CinemachineImpulseSource impulseSource;
     Animator animator;
@@ -31,6 +32,7 @@ public class PlayerHealth : MonoBehaviour
         knockbackScript = GetComponent<KnockbackScript>();
         damageFlash=GetComponent<DamageFlash>();
         levelLoader = FindAnyObjectByType<LevelLoader>();
+        hitStop = GetComponent<HitStop>();
 
         impulseSource = GetComponent<CinemachineImpulseSource>();
         animator = GetComponentInChildren<Animator>();
@@ -43,6 +45,7 @@ public class PlayerHealth : MonoBehaviour
     public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce, Vector3 collisionPoint, bool poison)
     {
         if (CameraShakeManager.instance != null) CameraShakeManager.instance.CameraShake(impulseSource);
+        hitStop.Stop();
         //Dennis suger 2 was here :D 
         damageFlash.GetDamageFlasher();
         if (poison) poisonParticles.Play();
