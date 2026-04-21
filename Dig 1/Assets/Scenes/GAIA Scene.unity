@@ -2815,6 +2815,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5430149931722202778, guid: 1a8f94b5982f8834289edef979682236, type: 3}
+      propertyPath: UVModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5669712111425118129, guid: 1a8f94b5982f8834289edef979682236, type: 3}
       propertyPath: m_Name
       value: Explosion
@@ -3062,6 +3066,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1770408494021617710, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: UVModule.mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770408494021617710, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: UVModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770408494021617710, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
+      propertyPath: UVModule.sprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6212597313215191707, guid: 30cf2d56ae18eb245bba4fb598aa6d93, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.64

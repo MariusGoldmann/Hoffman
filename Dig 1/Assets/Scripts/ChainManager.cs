@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class ChainManager: MonoBehaviour
 {
-    public static ChainManager instance;
 
     SpawnManager spawnManager;
     [SerializeField] Image slashChain;
@@ -13,16 +12,6 @@ public class ChainManager: MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-
-        DontDestroyOnLoad(gameObject);
         spawnManager = FindAnyObjectByType<SpawnManager>();
     }
 
