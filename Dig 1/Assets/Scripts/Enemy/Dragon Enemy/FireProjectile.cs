@@ -24,10 +24,9 @@ public class FireProjectile : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collision) {
-		Collider2D groundHit   = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, groundLayer);
-		Collider2D playerHit   = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, playerLayer);
-		Collider2D enemyHit    = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, enemyLayer);
-		Collider2D bomerangHit = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, bomerangLayer);
+		var groundHit   = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, groundLayer);
+		var playerHit   = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, playerLayer);
+		var bomerangHit = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, bomerangLayer);
 
 		if (groundHit != null) {
 			gameObject.SetActive(false);
@@ -48,18 +47,6 @@ public class FireProjectile : MonoBehaviour {
 			                          Vector3.zero, false);
 			gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 			gameObject.transform.localRotation                    = Quaternion.identity;
-			fireProjectilePool.ReturnObject(gameObject);
-		}
-
-		if (enemyHit != null) {
-			gameObject.SetActive(false);
-			Instantiate(fireSplitter, transform.position, Quaternion.identity);
-			Instantiate(explosion,    transform.position, Quaternion.identity);
-			gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
-			gameObject.transform.localRotation                    = Quaternion.identity;
-			EnemyHealth enemyHealth = enemyHit.GetComponent<EnemyHealth>();
-			Vector2     hitDir      = (enemyHit.transform.position - transform.position).normalized;
-			enemyHealth.ChangeHealth(-projectileDamage, hitDir, hitDirectionForce, additionalForce, Vector3.zero);
 			fireProjectilePool.ReturnObject(gameObject);
 		}
 

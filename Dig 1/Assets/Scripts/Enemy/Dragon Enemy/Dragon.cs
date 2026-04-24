@@ -1,76 +1,99 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Dragon : MonoBehaviour {
+	private static readonly int FireCharge = Animator.StringToHash("FireCharge");
+	private static readonly int Death      = Animator.StringToHash("Death");
+	private static readonly int Knockback  = Animator.StringToHash("Knockback");
+	private static readonly int PermaDeath = Animator.StringToHash("PermaDeath");
+	private static readonly int Idle       = Animator.StringToHash("Idle");
+	private static readonly int Patrolling = Animator.StringToHash("Patrolling");
 	[Header("General settings")]
-	[SerializeField] float idleMoveSpeed;
-	[SerializeField] float recoilForce;
-	[SerializeField] float detectionRadius;
+	[SerializeField] private float idleMoveSpeed;
+	[SerializeField] private float recoilForce;
+	[SerializeField] private float detectionRadius;
 
 	[Header("Attack settings")]
-	[SerializeField] int attackCooldown;
-	[SerializeField] int           projectileSpeed;
-	[SerializeField] int           anticipationTime;
-	[SerializeField] Transform     attackPoint;
-	[SerializeField] ObjectPooling fireProjectilePool;
+	[SerializeField] private int attackCooldown;
+	[SerializeField] private int           projectileSpeed;
+	[SerializeField] private int           anticipationTime;
+	[SerializeField] private Transform     attackPoint;
+	[SerializeField] private ObjectPooling fireProjectilePool;
 
 	[Header("Death settings")]
-	[SerializeField] float deathTime;
-	[SerializeField] bool isDead = false;
+	[SerializeField] private float deathTime;
+	[SerializeField] private bool isDead = false;
+
+	[Header(("Animation bool"))]
+	[SerializeField] private bool isPatrolling;
 
 	[Header("Raycast/Collider settings")]
-	[SerializeField] Transform groundCheck;
-	[SerializeField] Transform  wallCheck;
-	[SerializeField] GameObject player;
-	[SerializeField] float      horizontalDetectRange;
-	[SerializeField] float      verticalDetectRange;
-	[SerializeField] float      groundCheckDistance;
-	[SerializeField] float      wallCheckDistance;
+	[SerializeField] private Transform groundCheck;
+	[SerializeField] private Transform  wallCheck;
+	[SerializeField] private GameObject player;
+	[SerializeField] private float      horizontalDetectRange;
+	[SerializeField] private float      verticalDetectRange;
+	[SerializeField] private float      groundCheckDistance;
+	[SerializeField] private float      wallCheckDistance;
 
 	//Private variables
-	float     cooldownTimer;
-	int       facingDirection = 1;
-	LayerMask groundLayer;
+	private float     cooldownTimer;
+	private int       facingDirection = 1;
+	[SerializeField] private bool      isKnockback = false;
+	private LayerMask groundLayer;
 
 	//Script/Component references
-	KnockbackScript dragonKnockBackScript;
-	EnemyHealth     enemyHealth;
-	Rigidbody2D     dragonRB;
+	private KnockbackScript dragonKnockBackScript;
+	private EnemyHealth     enemyHealth;
+	private Rigidbody2D     dragonRb;
+	private Animator        dragonAnimator;
 
-	Coroutine rangedAttackCoroutine;
-	Coroutine deathCoroutine;
 
-	void Awake() {
+	private Coroutine rangedAttackCoroutine;
+	private Coroutine deathCoroutine;
+
+	private void Awake() {
 		groundLayer           = LayerMask.GetMask("Ground");
 		dragonKnockBackScript = GetComponent<KnockbackScript>();
 		enemyHealth           = GetComponent<EnemyHealth>();
-		dragonRB              = GetComponent<Rigidbody2D>();
+		dragonRb              = GetComponent<Rigidbody2D>();
+		dragonAnimator = GetComponentInChildren<Animator>();
 	}
 
-	void Start() {
+	private void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
-	void FixedUpdate() {
+	private void Update() {
+		KnockbackUpdater();
+	}
+
+	private void FixedUpdate() {
 		Patrol();
 		Flip();
 		HandleCooldown();
 		DeathSequence();
 	}
 
-	void Patrol() {
+	private void Patrol() {
 		if (!IsPlayerDetected() && !isDead) {
-			dragonRB.linearVelocityX = idleMoveSpeed * facingDirection;
+			dragonRb.linearVelocityX = idleMoveSpeed * facingDirection;
+			dragonAnimator.SetBool(Idle,       false);
+			dragonAnimator.SetBool(Patrolling, true);
 			rangedAttackCoroutine    = null;
 		} else {
-			dragonRB.linearVelocity = new(dragonRB.linearVelocity.x, dragonRB.linearVelocity.y);
+			dragonRb.linearVelocity = new Vector2(dragonRb.linearVelocity.x, dragonRb.linearVelocity.y);
+			dragonAnimator.SetBool(Idle,       true);
+			dragonAnimator.SetBool(Patrolling, false);
 			if (cooldownTimer <= 0 && !isDead) {
 				rangedAttackCoroutine = StartCoroutine(RangedAttack());
 			}
 		}
 	}
 
-	IEnumerator RangedAttack() {
+	private IEnumerator RangedAttack() {
+		dragonAnimator.SetTrigger(FireCharge);
 		cooldownTimer = attackCooldown;
 		float anticipationTimer = 0;
 
@@ -79,88 +102,94 @@ public class Dragon : MonoBehaviour {
 			yield return null;
 		}
 
-		if (PlayerTarget() != null) {
+		if (PlayerTarget()) {
 			PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.FIREBALL, 1);
-			dragonRB.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
+			dragonRb.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
 			Vector2 fireDirection = (PlayerTarget().position - attackPoint.position).normalized;
-			float   angle         = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
+			var   angle         = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
-			Quaternion  rotation     = Quaternion.Euler(0, 0, angle);
-			GameObject  projectile   = fireProjectilePool.GetObject(attackPoint.position, rotation);
-			Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
-			projectileRB.linearVelocity = fireDirection * projectileSpeed;
+			var  rotation     = Quaternion.Euler(0, 0, angle);
+			var  projectile   = fireProjectilePool.GetObject(attackPoint.position, rotation);
+			var projectileRb = projectile.GetComponent<Rigidbody2D>();
+			projectileRb.linearVelocity = fireDirection * projectileSpeed;
 		}
 
 		rangedAttackCoroutine = null;
 	}
 
-	void DeathSequence() {
-		if (enemyHealth.GetHealth() <= 0) {
-			isDead                  = true;
-			dragonRB.linearVelocity = Vector2.zero;
-			if (deathCoroutine != null) {
-				return;
-			}
+	private void DeathSequence() {
+		if (!(enemyHealth.GetHealth() <= 0)) return;
+		isDead                  = true;
+		dragonRb.linearVelocity = Vector2.zero;
+		if (deathCoroutine != null) {
+			return;
+		}
 
-			deathCoroutine = StartCoroutine(DeathCoroutine());
+		deathCoroutine = StartCoroutine(DeathCoroutine());
+	}
+
+	private void KnockbackUpdater() {
+		isKnockback = dragonKnockBackScript.GetIsKnockback();
+		dragonAnimator.SetBool(Knockback, isKnockback);
+		if (isKnockback) {
+			cooldownTimer = attackCooldown;
 		}
 	}
 
-	IEnumerator DeathCoroutine() {
-		Debug.Log("Hej");
+	private IEnumerator DeathCoroutine() {
+		dragonAnimator.SetTrigger(Death);
+		Debug.Log("Dragon Dies");
+		yield return new WaitForSeconds(3);
+		dragonAnimator.SetTrigger(PermaDeath);
 		yield return new WaitForSeconds(3);
 		Destroy(gameObject);
 	}
 
-	void Flip() {
+	private void Flip() {
 		if (IsAtEdge() && !isDead || IsAtWall() && !isDead) {
 			facingDirection = facingDirection * -1;
 		}
 
-		if (PlayerTarget() != null && !isDead) {
+		if (PlayerTarget() && !isDead) {
 			facingDirection = (int)Mathf.Sign(PlayerTarget().position.x - transform.position.x);
 		}
 
 		transform.localScale = new Vector2(facingDirection, 1);
 	}
 
-	void HandleCooldown() {
+	private void HandleCooldown() {
 		cooldownTimer -= Time.deltaTime;
 	}
 
-	bool IsAtEdge() {
+	private bool IsAtEdge() {
 		return !Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
 	}
 
-	bool IsAtWall() {
+	private bool IsAtWall() {
 		return Physics2D.Raycast(wallCheck.position, Vector2.up, wallCheckDistance, groundLayer);
 	}
 
-	Transform PlayerTarget() {
-		if (Vector2.Distance(transform.position, player.transform.position) < detectionRadius) {
-			var hit = Physics2D.Linecast(transform.position, player.transform.position,
-			                             ~LayerMask.GetMask("Enemy", "FireProjectile"));
+	private Transform PlayerTarget() {
+		if (!(Vector2.Distance(transform.position, player.transform.position) < detectionRadius)) return null;
+		var hit = Physics2D.Linecast(transform.position, player.transform.position,
+		                             ~LayerMask.GetMask("Enemy", "FireProjectile"));
 
-			if (hit.collider.gameObject.CompareTag("Player")) {
-				return hit.transform;
-			}
+		if (hit.collider.gameObject.CompareTag("Player")) {
+			return hit.transform;
 		}
 
 		return null;
 	}
 
-	bool IsPlayerDetected() {
-		if (Vector2.Distance(transform.position, player.transform.position) < detectionRadius) {
-			var hit = Physics2D.Linecast(transform.position, player.transform.position,
-			                             ~LayerMask.GetMask("Enemy", "FireProjectile"));
+	private bool IsPlayerDetected() {
+		if (!(Vector2.Distance(transform.position, player.transform.position) < detectionRadius)) return false;
+		var hit = Physics2D.Linecast(transform.position, player.transform.position,
+		                             ~LayerMask.GetMask("Enemy", "FireProjectile"));
 
-			if (hit.collider.gameObject.CompareTag("Player")) return true;
-		}
-
-		return false;
+		return hit.collider.gameObject.CompareTag("Player");
 	}
 
-	void OnDrawGizmos() {
+	private void OnDrawGizmos() {
 		Gizmos.color = Color.red;
 		Gizmos.DrawLine(transform.position, player.transform.position);
 		Gizmos.DrawWireSphere(transform.position, detectionRadius);
