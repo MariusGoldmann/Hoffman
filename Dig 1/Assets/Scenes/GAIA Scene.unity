@@ -2920,6 +2920,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soundwave
       objectReference: {fileID: 0}
+    - target: {fileID: 3598724030389749600, guid: 79c73f32f7244fd468fe88621504f39c, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.003921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 3598724030389749600, guid: 79c73f32f7244fd468fe88621504f39c, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 24903
+      objectReference: {fileID: 0}
+    - target: {fileID: 3598724030389749600, guid: 79c73f32f7244fd468fe88621504f39c, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
