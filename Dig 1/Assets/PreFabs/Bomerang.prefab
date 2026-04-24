@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5089912715750252712}
   - component: {fileID: 7458968622366665910}
   - component: {fileID: 735490866313845022}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bomerang
   m_TagString: Boomerang
   m_Icon: {fileID: 0}
@@ -164,6 +164,10 @@ PrefabInstance:
     - target: {fileID: 7757867335549993895, guid: 378a46d5bf7552d4794528d92de10e16, type: 3}
       propertyPath: m_Name
       value: Button Spin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757867335549993895, guid: 378a46d5bf7552d4794528d92de10e16, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

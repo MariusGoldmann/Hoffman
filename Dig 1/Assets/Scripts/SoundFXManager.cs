@@ -1,44 +1,42 @@
 using UnityEngine;
 
-public class PlayerSoundFXManager : MonoBehaviour
-{
-    public static PlayerSoundFXManager instance;
+public class PlayerSoundFXManager : MonoBehaviour {
+	public static PlayerSoundFXManager instance;
 
-    [SerializeField] AudioClip[] soundEffectList;
-    AudioSource audioSource;
+	[SerializeField] private AudioClip[] soundEffectList;
+	private                  AudioSource audioSource;
 
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
+	void Awake() {
+		if (instance != null) {
+			Destroy(this.gameObject);
+		} else {
+			instance = this;
+		}
 
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+		DontDestroyOnLoad(gameObject);
+	}
 
-    public void PlaySound(SoundType sound, float volume = 1)
-    {
-        instance.audioSource.PlayOneShot(instance.soundEffectList[(int)sound], volume);
-    }
+	private void Start() {
+		audioSource = GetComponent<AudioSource>();
+	}
 
-    public enum SoundType
-    {
-        WALK,
-        RUN,
-        JUMP,
-        SLASH,
-        KICK,
-        BOOMERANGTHROW,
-        BOOMERANGRETURN,
-        SLASHHIT,
-        KICKHIT,
-        BELL,
-        PUMPKIN,
-        BUTTON
-    }
+	public void PlaySound(SoundType sound, float volume = 1) {
+		instance.audioSource.PlayOneShot(instance.soundEffectList[(int)sound], volume);
+	}
 
+	public enum SoundType {
+		WALK,
+		RUN,
+		JUMP,
+		SLASH,
+		KICK,
+		BOOMERANGTHROW,
+		BOOMERANGRETURN,
+		SLASHHIT,
+		KICKHIT,
+		BELL,
+		PUMPKIN,
+		BUTTON,
+		FIREBALL
+	}
 }

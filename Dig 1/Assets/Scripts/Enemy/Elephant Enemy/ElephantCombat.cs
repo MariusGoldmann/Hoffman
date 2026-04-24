@@ -1,19 +1,16 @@
-using System;
 using System.Collections;
-using System.IO.Pipes;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 public class ElephantCombat : MonoBehaviour
 {
-    [Header("Trunk Attack")]
+    [Header("Trumpet Attack")]
     [SerializeField] bool trumpetAttack;
+    [SerializeField] float projectileAmount = 3;
     [SerializeField] float trumpetAnticipationTime = 1;
     [SerializeField] float trumpetShockwaveSpeed = 5f;
     [SerializeField] Vector2 trumpetLocation;
     [SerializeField] Vector2 trumpetDirection;
 
-    [Header("Stomp")]
+    [Header("Stomp attack")]
     [SerializeField] bool stompAttack;
     [SerializeField] float stompAnticipationTime = 1;
 
@@ -37,24 +34,22 @@ public class ElephantCombat : MonoBehaviour
     }
     IEnumerator TrumpetAttack()
     {
-        float elapsedTime= 0;
+        float elapsedTime = 0;
 
         while (elapsedTime > trumpetAnticipationTime)
         {
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        Quaternion projectileQuaternion = Quaternion.Euler(0, 0, MathF.Atan2(trumpetDirection.y, trumpetDirection.x) * Mathf.Rad2Deg);
-        Vector2 initialDirection = new Vector2(trumpetDirection.x * elephantMovement.GetFacingDirection(), trumpetDirection.y);
-        GameObject projectile = trumpetPool.GetObject(transform.position, projectileQuaternion); //Change transform.position to trumpetPosition
+        Vector2 initialDirection = new Vector2;
+        
+        for (int i; i<projectileAmount; i++))
+        {
+            GameObject[i] projectile = trumpetPool.GetObject(transform.position, Quaternion.identity); //Change transform.position to trumpetPosition
+        }
+        
         Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
         TrumpetProjectile projectileScript = projectile.GetComponent<TrumpetProjectile>();
-        while (projectile != null)
-        {
-            projectileRB.linearVelocity =  projectileScript.GetDirection() * initialDirection * trumpetShockwaveSpeed;
-            yield return null;
-        }
         yield return new WaitForSeconds(2);
     }
     IEnumerator StompAttack()
@@ -67,5 +62,8 @@ public class ElephantCombat : MonoBehaviour
             yield return null;
         }
     }
-
+    public Vector2 GetInitialDirection()
+    {
+        return new Vector2(trumpetDirection.x * elephantMovement.GetFacingDirection(), trumpetDirection.y);
+    }
 }

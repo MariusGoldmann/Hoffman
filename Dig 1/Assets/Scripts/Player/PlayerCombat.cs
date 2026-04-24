@@ -1,215 +1,207 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using static PlayerMovement;
 
-public class PlayerCombat : MonoBehaviour
-{
-    [Header("Basic combat settings")]
-    [SerializeField] float attackRadius = 1.4f;
-    [SerializeField] Transform attackPoint;
-    [SerializeField] LayerMask enemyLayer;
+[RequireComponent(typeof(Transform))]
+public class PlayerCombat : MonoBehaviour {
+	private static readonly int Throwing = Animator.StringToHash("Throwing");
+	[Header("Basic combat settings")]
+	[SerializeField] private float attackRadius = 1.4f;
+	[SerializeField] private Transform attackPoint;
+	[SerializeField] private LayerMask enemyLayer;
 
-    [Header("Knockback Settings")]
-    [SerializeField] float hitDirectionForce = 7.5f;
-    [SerializeField] float additionalForce = 7.5f;
+	[Header("Knockback Settings")]
+	[SerializeField] private float hitDirectionForce = 7.5f;
+	[SerializeField] private float additionalForce = 7.5f;
 
-    [Header("Slash settings")]
-    [SerializeField] int slashDamage = 1;
-    [SerializeField] float slashCooldown = 1f;
-    [SerializeField] float slashTimer;
+	[Header("Slash settings")]
+	[SerializeField] private int slashDamage = 1;
+	[SerializeField] private float slashCooldown = 1f;
+	[SerializeField] private float slashTimer;
 
-    [Header("Kick settings")]
-    [SerializeField] int kickDamage = 2;
-    [SerializeField] float kickCooldown = 2f;
-    [SerializeField] float kickTimer;
+	[Header("Kick settings")]
+	[SerializeField] private int kickDamage = 2;
+	[SerializeField] private float kickCooldown = 2f;
+	[SerializeField] private float kickTimer;
 
-    [Header("Boomerang settings")]
-    [SerializeField] int boomerangDamage = 5;
-    [SerializeField] float boomerangCooldown = 5f;
-    [SerializeField] float boomerangTimer;
-    [SerializeField] float boomerangForce;
-    [SerializeField] float boomerangReturnForce;
-    [SerializeField] float invulnerableTime;
+	[Header("Boomerang settings")]
+	[SerializeField] private int boomerangDamage = 5;
+	[SerializeField] private float boomerangCooldown = 5f;
+	[SerializeField] private float boomerangTimer;
+	[SerializeField] private float boomerangForce;
+	[SerializeField] private float boomerangReturnForce;
+	[SerializeField] private float invulnerableTime;
 
-      bool earlyReceiving;
-    bool isInvunerable;
+	private bool earlyReceiving;
+	private bool isInvulnerable;
 
-    [SerializeField] AnimationCurve boomerangAnimationCurve;
+	[SerializeField] private AnimationCurve boomerangAnimationCurve;
 
-    [SerializeField] Transform effectPoint; // drag in inspector
-    // Private variables
-    Coroutine boomerangSpawnerCoroutine;
+	[SerializeField] private Transform effectPoint; // drag in inspector
+	// Private variables
+	private Coroutine boomerangSpawnerCoroutine;
 
-    // Script references
-    PlayerMovement playerMovement;
-    PickUpScript pickUpScript;
-    PauseManager pauseManager;
-    [SerializeField] DialogueController dialogueController;
+	// Script references
+	private PlayerMovement playerMovement;
+	private PickUpScript   pickUpScript;
+	private PauseManager   pauseManager;
+	[SerializeField] private DialogueController dialogueController;
 
-    // Component references
-    [SerializeField] GameObject boomerangPrefab; // drag in inspector
-    [SerializeField] GameObject slashEffect; // drag in inspector
-    [SerializeField] GameObject kickEffect; // drag in inspector
-    Animator animator;
+	// Component references
+	[SerializeField] private GameObject boomerangPrefab; // drag in inspector
+	[SerializeField] private GameObject slashEffect;     // drag in inspector
+	[SerializeField] private GameObject kickEffect;      // drag in inspector
+	private                  Animator   animator;
 
-    void Awake()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-        pickUpScript = GetComponent<PickUpScript>();
-        pauseManager = FindAnyObjectByType<PauseManager>();
+	public PlayerCombat(Transform attackPoint, LayerMask enemyLayer) {
+		this.attackPoint = attackPoint;
+		this.enemyLayer  = enemyLayer;
+	}
 
-        animator = GetComponentInChildren<Animator>();
-    }
+	private void Start() {
+		attackPoint = GetComponent<Transform>();
+	}
 
-    void Update()
-    {
-        HandleCooldowns();
-    }
+	private void Awake() {
+		playerMovement = GetComponent<PlayerMovement>();
+		pickUpScript   = GetComponent<PickUpScript>();
+		pauseManager   = FindAnyObjectByType<PauseManager>();
 
-    void MeleeAttack(int damage, string animation, float knockbackMultiplier)
-    {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
-            
-        animator.SetTrigger(animation);
+		animator = GetComponentInChildren<Animator>();
+	}
 
-        if (enemies != null)
-        {
-            foreach (Collider2D enemy in enemies)
-            {
-                Vector2 direction = (enemy.transform.position - transform.position).normalized;
-                enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction, hitDirectionForce*knockbackMultiplier, additionalForce*knockbackMultiplier, enemy.transform.position);
-                PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT, 1f);
-            }
-        }
-    }
-    IEnumerator BoomerangSpawner()
-    {
-        Vector3 spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(), transform.position.y, transform.position.z);
-        GameObject boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
+	private void Update() {
+		HandleCooldowns();
+	}
 
-        Rigidbody2D boomerangRB = boomerang.GetComponent<Rigidbody2D>();
+	private void MeleeAttack(int damage, string animationName, float knockbackMultiplier) {
+		var enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer);
+		animator.SetTrigger(animationName);
 
-        earlyReceiving = false;
+		if (enemies == null) return;
+		foreach (var enemy in enemies) {
+			Vector2 direction = (enemy.transform.position - transform.position).normalized;
+			enemy.GetComponent<EnemyHealth>().ChangeHealth(-damage, direction,
+			                                               hitDirectionForce * knockbackMultiplier,
+			                                               additionalForce   * knockbackMultiplier,
+			                                               enemy.transform.position);
+			PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT);
+		}
+	}
 
-        float timer = 0;
-        float duration = 0.5f;
-        float boomerangSpeed;
-        float boomerangReturnSpeed = boomerangReturnForce;
-        int boomerangDirection = playerMovement.GetFacingDirection(); //Where the player is facing
+	private IEnumerator BoomerangSpawner() {
+		var spawnPosition = new Vector3(transform.position.x + 2 * playerMovement.GetFacingDirection(),
+		                                transform.position.y, transform.position.z);
+		var boomerang = Instantiate(boomerangPrefab, spawnPosition, Quaternion.identity);
 
+		var boomerangRb = boomerang.GetComponent<Rigidbody2D>();
 
-        while (timer < duration && !earlyReceiving)
-        {
-            isInvunerable = true;
-            timer += Time.deltaTime;
-            boomerangSpeed = boomerangForce * boomerangAnimationCurve.Evaluate(timer / duration);
+		earlyReceiving = false;
 
-            if (boomerangRB!=null) boomerangRB.linearVelocity = new Vector2(boomerangDirection * boomerangSpeed, boomerangRB.linearVelocity.y);
+		var         timer                = 0f;
+		const float duration             = 0.5f;
+		var         boomerangReturnSpeed = boomerangReturnForce;
+		var         boomerangDirection   = playerMovement.GetFacingDirection(); //Where the player is facing
 
 
+		while (timer < duration && !earlyReceiving) {
+			isInvulnerable =  true;
+			timer          += Time.deltaTime;
+			var boomerangSpeed = boomerangForce * boomerangAnimationCurve.Evaluate(timer / duration);
 
-            yield return null;
-        }
+			if (boomerangRb)
+				boomerangRb.linearVelocity =
+					new Vector2(boomerangDirection * boomerangSpeed, boomerangRb.linearVelocity.y);
 
-        while (boomerang != null && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f || boomerang != null && earlyReceiving)
-        {
-            isInvunerable = false;
-            boomerangReturnSpeed += 50 * Time.deltaTime;
-            boomerang.transform.position = Vector2.MoveTowards(boomerang.transform.position, transform.position, boomerangReturnSpeed * Time.deltaTime);
 
-            earlyReceiving = true;
-            yield return null;
-        }
-    }
+			yield return null;
+		}
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Boomerang") && !isInvunerable)
-        {
-            Debug.Log("Boomerang picked up");
-            GameObject boomerang = collision.gameObject;
-            earlyReceiving = false;
+		while (boomerang && Vector2.Distance(boomerang.transform.position, transform.position) > 0.1f ||
+		       boomerang && earlyReceiving) {
+			isInvulnerable       =  false;
+			boomerangReturnSpeed += 50 * Time.deltaTime;
+			boomerang.transform.position = Vector2.MoveTowards(
+			                                                   boomerang.transform.position,
+			                                                   transform.position,
+			                                                   boomerangReturnSpeed * Time.deltaTime
+			                                                   );
 
-            boomerangSpawnerCoroutine = null;
-            Destroy(boomerang);
-        }
-    }
+			earlyReceiving = true;
+			yield return null;
+		}
+	}
 
-    void OnSlash(InputValue slashbutton)
-    {
-        if (slashbutton.isPressed && slashTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused() && !dialogueController.GetIsInDialogue())
-        {
-            slashTimer = slashCooldown;
-            MeleeAttack(slashDamage, "Slash", 1f);
-            AttackEffects(slashEffect);
-            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASH, 1f);
-        }
-    }
+	private void OnCollisionEnter2D(Collision2D collision) {
+		if (!collision.gameObject.CompareTag("Boomerang") || isInvulnerable) return;
+		Debug.Log("Boomerang picked up");
+		var boomerang = collision.gameObject;
+		earlyReceiving = false;
 
-    void OnKick(InputValue kickButton)
-    {
-        if (kickButton.isPressed && kickTimer <= 0 && pickUpScript.GetHasLeg() && !pauseManager.GetIsPaused() && !dialogueController.GetIsInDialogue())
-        {
-            kickTimer = kickCooldown;
-            MeleeAttack(kickDamage, "Kick", 2f);
-            AttackEffects(kickEffect);
-            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.KICK, 1f);
-        }
-    }
+		boomerangSpawnerCoroutine = null;
+		Destroy(boomerang);
+	}
 
-    void OnBoomerang(InputValue boomerangButton)
-    {
-        if (boomerangButton.isPressed && boomerangTimer <= 0 && boomerangSpawnerCoroutine == null && pickUpScript.GetHasBoomerang() && !pauseManager.GetIsPaused() && !dialogueController.GetIsInDialogue())
-        {
-            boomerangTimer = boomerangCooldown;
-            animator.SetTrigger("Throwing");
-            boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
-            PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BOOMERANGTHROW, 1f);
-        }
-    }
+	private void OnSlash(InputValue slashButton) {
+		if (!slashButton.isPressed || !(slashTimer <= 0) || !pickUpScript.GetHasLeg() || pauseManager.GetIsPaused() ||
+		    dialogueController.GetIsInDialogue()) return;
+		slashTimer = slashCooldown;
+		MeleeAttack(slashDamage, "Slash", 1f);
+		AttackEffects(slashEffect);
+		PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASH);
+	}
 
-    void AttackEffects(GameObject attackEffect)
-    {
-        GameObject effect = Instantiate(attackEffect, effectPoint.position, Quaternion.identity);
-        effect.transform.SetParent(transform);
-        effect.transform.localScale = new Vector3(effect.transform.localScale.x * playerMovement.GetFacingDirection(), effect.transform.localScale.y, effect.transform.localScale.z);
-    }
-    void HandleCooldowns()
-    {
-        slashTimer -= Time.deltaTime;
+	private void OnKick(InputValue kickButton) {
+		if (!kickButton.isPressed || !(kickTimer <= 0) || !pickUpScript.GetHasLeg() || pauseManager.GetIsPaused() ||
+		    dialogueController.GetIsInDialogue()) return;
+		kickTimer = kickCooldown;
+		MeleeAttack(kickDamage, "Kick", 2f);
+		AttackEffects(kickEffect);
+		PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.KICK);
+	}
 
-        kickTimer -= Time.deltaTime;
+	private void OnBoomerang(InputValue boomerangButton) {
+		if (!boomerangButton.isPressed      || !(boomerangTimer <= 0)     || boomerangSpawnerCoroutine != null ||
+		    !pickUpScript.GetHasBoomerang() || pauseManager.GetIsPaused() ||
+		    dialogueController.GetIsInDialogue()) return;
+		boomerangTimer = boomerangCooldown;
+		animator.SetTrigger(Throwing);
+		boomerangSpawnerCoroutine = StartCoroutine(BoomerangSpawner());
+		PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BOOMERANGTHROW);
+	}
 
-        boomerangTimer -= Time.deltaTime;
-    }
+	private void AttackEffects(GameObject attackEffect) {
+		var effect = Instantiate(attackEffect, effectPoint.position, Quaternion.identity);
+		effect.transform.SetParent(transform);
+		effect.transform.localScale = new Vector3(effect.transform.localScale.x * playerMovement.GetFacingDirection(),
+		                                          effect.transform.localScale.y, effect.transform.localScale.z);
+	}
 
-    public float GetSlashTimer()
-    {
-        return slashTimer;
-    }
+	private void HandleCooldowns() {
+		slashTimer -= Time.deltaTime;
 
-    public float GetKickTimer()
-    {
-        return kickTimer;
-    }
+		kickTimer -= Time.deltaTime;
 
-    public float GetBoomerangTimer()
-    {
-        return boomerangTimer;
-    }
+		boomerangTimer -= Time.deltaTime;
+	}
 
-    public int GetBoomerangDamage()
-    {
-        return boomerangDamage;
-    }
+	public float GetSlashTimer() {
+		return slashTimer;
+	}
 
-    public bool GetEarlyReceiving(bool value)
-    {
-        return earlyReceiving = value;
-    }
+	public float GetKickTimer() {
+		return kickTimer;
+	}
+
+	public float GetBoomerangTimer() {
+		return boomerangTimer;
+	}
+
+	public int GetBoomerangDamage() {
+		return boomerangDamage;
+	}
+
+	public bool GetEarlyReceiving(bool value) {
+		return earlyReceiving = value;
+	}
 }
-
-

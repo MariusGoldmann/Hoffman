@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ChainManager: MonoBehaviour
 {
+
     SpawnManager spawnManager;
     [SerializeField] Image slashChain;
     [SerializeField] Image kickChain;

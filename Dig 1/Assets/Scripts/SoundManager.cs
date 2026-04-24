@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
+
     [Header("Volume Sliders")]
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider soundFXSlider;
@@ -10,7 +11,6 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Sources")]
     [SerializeField] AudioSource musicAudioSource;
     [SerializeField] AudioSource soundFXAudioSource;
-
     void Start()
     {
         if (!PlayerPrefs.HasKey("musicVolume"))
@@ -30,6 +30,10 @@ public class SoundManager : MonoBehaviour
         {
             Load();
         }
+    }
+    void Update()
+    {
+        ChangeVolume();
     }
 
     public void ChangeVolume()

@@ -152,9 +152,17 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1653678816750537458, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
+      propertyPath: interactSprite
+      value: 
+      objectReference: {fileID: 1809011460}
+    - target: {fileID: 1653678816750537458, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
       propertyPath: dialogueController
       value: 
       objectReference: {fileID: 1361376078}
+    - target: {fileID: 1917346147294671761, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
+      propertyPath: interactSprite
+      value: 
+      objectReference: {fileID: 362474556}
     - target: {fileID: 1917346147294671761, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
       propertyPath: dialogueController
       value: 
@@ -262,42 +270,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 151320151333600071, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
+    - {fileID: 4812248833018309193, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 56
+      insertIndex: 55
       addedObject: {fileID: 1011886640}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 57
+      insertIndex: 56
       addedObject: {fileID: 1202216941}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 58
+      insertIndex: 57
       addedObject: {fileID: 877361533}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 59
+      insertIndex: 58
       addedObject: {fileID: 1048602893}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 60
+      insertIndex: 59
       addedObject: {fileID: 1391800025}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 61
+      insertIndex: 60
       addedObject: {fileID: 2026993706}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 62
+      insertIndex: 61
       addedObject: {fileID: 435316343}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 63
+      insertIndex: 62
       addedObject: {fileID: 825996367}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 64
+      insertIndex: 63
       addedObject: {fileID: 322385725}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 65
+      insertIndex: 64
       addedObject: {fileID: 473939887}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 66
+      insertIndex: 65
       addedObject: {fileID: 1330439595}
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
-      insertIndex: 67
+      insertIndex: 66
       addedObject: {fileID: 965965756}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
@@ -894,6 +903,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7686619541633134826, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
+      propertyPath: interactSprite
+      value: 
+      objectReference: {fileID: 1861027758}
+    - target: {fileID: 7686619541633134826, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
       propertyPath: dialogueController
       value: 
       objectReference: {fileID: 1361376078}
@@ -1152,6 +1165,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 418e9e08fefbc234aaf251270f8730ae, type: 3}
+--- !u!1 &362474556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8822716202724814987, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
+  m_PrefabInstance: {fileID: 27655328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &389583630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2642,6 +2660,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1110344145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8026683461582818624, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
+  m_PrefabInstance: {fileID: 1681321615}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1134932567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3034,11 +3057,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806730635881535514, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -150.38943
+      value: 5.7
       objectReference: {fileID: 0}
     - target: {fileID: 8806730635881535514, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -27.19968
+      value: -18.2
       objectReference: {fileID: 0}
     - target: {fileID: 8806730635881535514, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3588,6 +3611,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 799793957482091559, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+      propertyPath: interactSprite
+      value: 
+      objectReference: {fileID: 1798991676}
+    - target: {fileID: 799793957482091559, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
       propertyPath: dialogueController
       value: 
       objectReference: {fileID: 1361376078}
@@ -3724,6 +3751,10 @@ PrefabInstance:
       propertyPath: hpParticleSpawnParticles
       value: 
       objectReference: {fileID: 318687200}
+    - target: {fileID: 1121360680758087258, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
+      propertyPath: interactSprite
+      value: 
+      objectReference: {fileID: 1110344145}
     - target: {fileID: 1121360680758087258, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
       propertyPath: dialogueController
       value: 
@@ -3869,6 +3900,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 330727501}
     - target: {fileID: 9140239589186209397, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
+      propertyPath: maxEnemyHealth
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140239589186209397, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
       propertyPath: hpParticleSpawnParticles
       value: 
       objectReference: {fileID: 318687200}
@@ -3954,6 +3989,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451dd997e1739f74eb728bc9ae769d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooling
+--- !u!1 &1798991676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7778329878817003325, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+  m_PrefabInstance: {fileID: 1669082300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1799883354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4106,6 +4146,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1809011460 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8509641185982777832, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
+  m_PrefabInstance: {fileID: 27655328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1848025209
 GameObject:
   m_ObjectHideFlags: 0
@@ -4288,6 +4333,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1861027758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 740567478548493296, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
+  m_PrefabInstance: {fileID: 318687199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2008600219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4622,7 +4672,7 @@ PrefabInstance:
     - target: {fileID: 5890713763649760831, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
       propertyPath: trumpetPool
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1798291712}
     - target: {fileID: 6191971011070247154, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -79.13

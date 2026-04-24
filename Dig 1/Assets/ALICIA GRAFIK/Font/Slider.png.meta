@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 35a4b607dc6ce4446b34a3a77ff35773
+guid: ea1ccae2e148b6b48afd229b9f623571
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4113829005332862926
-    second: 9_0
-  - first:
-      213: -215640629934891304
-    second: 9_1
-  - first:
-      213: 6460059290704040764
-    second: 9_2
+      213: -543334223871223522
+    second: IMG_5460_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
-    sRGBTexture: 0
+    enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -61,9 +55,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 1
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -106,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 9_0
+      name: IMG_5460_0
       rect:
         serializedVersion: 2
-        x: 323
-        y: 614
-        width: 42
-        height: 6
+        x: 14
+        y: 223
+        width: 474
+        height: 69
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec750913fa1471930800000000000000
-      internalID: 4113829005332862926
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 9_1
-      rect:
-        serializedVersion: 2
-        x: 364
-        y: 614
-        width: 12
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8ded6955df3e10df0800000000000000
-      internalID: -215640629934891304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 9_2
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 581
-        width: 492
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c335062b2bdb6a950800000000000000
-      internalID: 6460059290704040764
+      spriteID: e19d7dfe660b578f0800000000000000
+      internalID: -543334223871223522
       vertices: []
       indices: 
       edges: []
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      9_0: 4113829005332862926
-      9_1: -215640629934891304
-      9_2: 6460059290704040764
+      IMG_5460_0: -543334223871223522
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
