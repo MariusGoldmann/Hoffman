@@ -3,127 +3,113 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DialogueController : MonoBehaviour
-{
-    [SerializeField] TextMeshProUGUI NPCNameText;
-    [SerializeField] TextMeshProUGUI NPCDialogueText;
-    [SerializeField] TextMeshProUGUI skipText;
+public class DialogueController : MonoBehaviour {
+	[SerializeField] private TextMeshProUGUI NPCNameText;
+	[SerializeField] private TextMeshProUGUI NPCDialogueText;
+	[SerializeField]         TextMeshProUGUI skipText;
 
-    [SerializeField] float typeSpeed = 5f;
-    [SerializeField] float MaxTypeTime = 0.1f;
+	[SerializeField] private float typeSpeed   = 5f;
+	[SerializeField] private float MaxTypeTime = 0.1f;
 
-    [SerializeField] float fadeSpeed;
-    
+	[SerializeField] private float fadeSpeed;
 
-    Queue<string> paragraphs = new Queue<string>();
 
-    bool conversationEnded;
-    bool isTyping;
-    [SerializeField] bool isInDialogue;
+	private Queue<string> paragraphs = new Queue<string>();
 
-    string paragraph;
-    Coroutine typewriterCoroutine;
+	private                  bool conversationEnded;
+	private                  bool isTyping;
+	[SerializeField] private bool isInDialogue;
 
-    [SerializeField] CanvasGroup canvasGroup;
-    void Start()
-    {
-        canvasGroup.alpha = 0;
-    }
+	private string    paragraph;
+	private Coroutine typewriterCoroutine;
 
-    public void DisplayNextParagraph(DialogueText dialogueText)
-    {
-        isInDialogue = true;
-        if (paragraphs.Count == 0)
-        {
-            if (!conversationEnded)
-            {
-                StartConversation(dialogueText);
-            }
-            else if (conversationEnded && !isTyping)
-            {
-                EndConversation();
-                return;
-            }
-        }
+	[SerializeField] private CanvasGroup canvasGroup;
 
-        if (!isTyping)
-        {
-            paragraph = paragraphs.Dequeue();
+	public DialogueController(TextMeshProUGUI skipText, bool conversationEnded) {
+		this.skipText          = skipText;
+		this.conversationEnded = conversationEnded;
+	}
 
-            typewriterCoroutine = StartCoroutine(Typewriter(paragraph));
-        }
-        else
-        {
-            FinishParagraphEarly();
-        }
+	private void Start() {
+		canvasGroup.alpha = 0;
+	}
 
-        if (paragraphs.Count == 0)
-        {
-            conversationEnded = true;
-        }
-    }
+	public void DisplayNextParagraph(DialogueText dialogueText) {
+		isInDialogue = true;
+		if (paragraphs.Count == 0) {
+			switch (conversationEnded) {
+				case false:
+					StartConversation(dialogueText);
+					break;
+				case true when !isTyping:
+					EndConversation();
+					return;
+			}
+		}
 
-    void StartConversation(DialogueText dialogueText)
-    {
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-            LeanTween.alphaCanvas(canvasGroup, 1, fadeSpeed).setEaseInOutSine();
+		if (!isTyping) {
+			paragraph = paragraphs.Dequeue();
 
-        }
+			typewriterCoroutine = StartCoroutine(Typewriter(paragraph));
+		} else {
+			FinishParagraphEarly();
+		}
 
-        NPCNameText.text = dialogueText.npcName;
-        
+		if (paragraphs.Count == 0) {
+			conversationEnded = true;
+		}
+	}
 
-        for (int i = 0; i < dialogueText.paragraphs.Length; i++)
-        {
-            paragraphs.Enqueue(dialogueText.paragraphs[i]);
-        }
-    }
-    public void EndConversation()
-    {
-        isInDialogue = false;
-        conversationEnded = false;
+	private void StartConversation(DialogueText dialogueText) {
+		if (!gameObject.activeSelf) {
+			gameObject.SetActive(true);
+			LeanTween.alphaCanvas(canvasGroup, 1, fadeSpeed).setEaseInOutSine();
+		}
 
-        if (gameObject.activeSelf)
-        {
-            canvasGroup.alpha = 0;
-            gameObject.SetActive(false);
-        }
-    }
+		NPCNameText.text = dialogueText.npcName;
 
-    IEnumerator Typewriter(string paragraph)
-    {
-        isTyping = true;
 
-        int maxVisibleChars = 0;
+		foreach (var t in dialogueText.paragraphs) {
+			paragraphs.Enqueue(t);
+		}
+	}
 
-        NPCDialogueText.text = paragraph;
-        NPCDialogueText.maxVisibleCharacters = maxVisibleChars;
+	private void EndConversation() {
+		isInDialogue      = false;
+		conversationEnded = false;
 
-        foreach (char c in paragraph.ToCharArray())
-        {
+		if (!gameObject.activeSelf) return;
+		canvasGroup.alpha = 0;
+		gameObject.SetActive(false);
+	}
 
-            maxVisibleChars++;
-            NPCDialogueText.maxVisibleCharacters = maxVisibleChars;
+	private IEnumerator Typewriter(string paragraph) {
+		isTyping = true;
 
-            yield return new WaitForSeconds(MaxTypeTime / typeSpeed);
-        }
+		var maxVisibleChars = 0;
 
-        isTyping = false;
-    }
+		NPCDialogueText.text                 = paragraph;
+		NPCDialogueText.maxVisibleCharacters = maxVisibleChars;
 
-    void FinishParagraphEarly()
-    {
-        StopCoroutine(typewriterCoroutine);
+		foreach (var c in paragraph.ToCharArray()) {
+			maxVisibleChars++;
+			NPCDialogueText.maxVisibleCharacters = maxVisibleChars;
 
-        NPCDialogueText.maxVisibleCharacters = paragraph.Length;
+			yield return new WaitForSeconds(MaxTypeTime / typeSpeed);
+		}
 
-        isTyping = false;
-    }
+		isTyping = false;
+	}
 
-    public bool GetIsInDialogue()
-    {
-        return isInDialogue;
-    }
+	private void FinishParagraphEarly() {
+		StopCoroutine(typewriterCoroutine);
+
+		NPCDialogueText.maxVisibleCharacters = paragraph.Length;
+
+		isTyping = false;
+	}
+
+	public bool GetIsInDialogue() {
+		return isInDialogue;
+	}
 }

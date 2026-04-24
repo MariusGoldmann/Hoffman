@@ -3,8 +3,8 @@ using UnityEngine;
 public class PlayerSoundFXManager : MonoBehaviour {
 	public static PlayerSoundFXManager instance;
 
-	[SerializeField] AudioClip[] soundEffectList;
-	AudioSource                  audioSource;
+	[SerializeField] private AudioClip[] soundEffectList;
+	private                  AudioSource audioSource;
 
 	void Awake() {
 		if (instance != null) {
@@ -16,7 +16,7 @@ public class PlayerSoundFXManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 
-	void Start() {
+	private void Start() {
 		audioSource = GetComponent<AudioSource>();
 	}
 
