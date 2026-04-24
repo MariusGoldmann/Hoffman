@@ -12,12 +12,15 @@ public class BlobfishCombat : MonoBehaviour
     [SerializeField] int collisionDamage = 2;
     [SerializeField] int maxTimeExpanded = 2;
 
-
     [Header("Poison")]
     [SerializeField] int poisonTickDamage = 1;
     [SerializeField] int poisonTickAmount = 3;
-    [SerializeField] float poisionTickSpeed = 1;
-   
+    [SerializeField] float poisionTickSpeed = 1; 
+    
+    [Header("Death Sequence")]
+    [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] GameObject hpParticlePrefab;
+
     [Header("Graphics")]
     [SerializeField] ParticleSystem transitionParticles;
     [SerializeField] Transform bigTransform;
@@ -133,6 +136,16 @@ public class BlobfishCombat : MonoBehaviour
             smallSprite.enabled = false;
             bigSprite.enabled = true;
         }
+    }
+    public IEnumerator DeathSequence()
+    {
+        for (int i = 0; i < Random.Range(1, 3); i++)
+        {
+            Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+            hitParticles.Play();
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
     }
     public bool GetIsExpanding()
     {

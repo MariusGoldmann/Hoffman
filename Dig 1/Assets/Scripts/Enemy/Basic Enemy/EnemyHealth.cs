@@ -18,10 +18,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
     [SerializeField] ParticleSystem hitParticles;
-    [SerializeField] GameObject hpParticlePrefab;
     [SerializeField] HitStop hitStop;
-
     [SerializeField] CinemachineImpulseSource impulseSource;
+
     SpriteRenderer spriteRenderer;
     Animator animator;
 
@@ -70,49 +69,14 @@ public class EnemyHealth : MonoBehaviour
         else if (currentEnemyHealth <= 0 && knockedOut==false)
         {
             Debug.Log("Enemy died");
-            StartCoroutine(DeathSequence());
+            DeathSequence();
         }
     }
-    IEnumerator DeathSequence()
+
+    void DeathSequence()
     {
-        if (blobfishCombat == null)
-        {
-            float timeLeft = 4f;
-            bool permaDied = false;
-            knockedOut = true;
-            gameObject.layer = LayerMask.NameToLayer("Ground");
-            if (animator != null) animator.SetTrigger("RatDied");
-            while (timeLeft > 0)
-            {
-                timeLeft -= Time.deltaTime;
-                if (timeLeft < 2 && !permaDied)
-                {
-                    permaDied = true;
-                    if (animator != null) animator.SetTrigger("PermaDied");
-                }
-                yield return null;
-            }
-            for (int i = 0; i < Random.Range(1, 3); i++)
-            {
-                Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
-                hitParticles.transform.position= transform.position;
-                hitParticles.Play();
-                CameraShakeManager.instance.CameraShake(impulseSource);
-                yield return new WaitForSeconds(0.1f);
-            }
-            Destroy(gameObject);
-        }
-        else
-        {
-            for (int i = 0; i < Random.Range(1, 3); i++)
-            {
-                Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
-                hitParticles.Play();
-                CameraShakeManager.instance.CameraShake(impulseSource);
-                yield return new WaitForSeconds(0.1f);
-            }
-            Destroy(gameObject);
-        }
+        if (blobfishCombat != null) blobfishCombat.DeathSequence();
+        if (ratEnemyMovement != null) ratEnemyMovement.DeathSequence();
     }
 
     public bool GetKnockedOut()

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
@@ -25,6 +26,10 @@ public class RatEnemyMovement : MonoBehaviour
     [SerializeField] Transform wallCheckPosition;
     [SerializeField] float frontGroundCheckLength = 1.67f;
     [SerializeField] Transform frontRaycastOrigin;
+
+    [Header("Death Sequence")]
+    [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] GameObject hpParticlePrefab;
 
     [Header("Debug")]
     [SerializeField] bool facingRight = true;
@@ -211,6 +216,33 @@ public class RatEnemyMovement : MonoBehaviour
                 facingRight=true;
             }
         }
+    }
+
+    public IEnumerator DeathSequence()
+    {
+            float timeLeft = 4f;
+            bool permaDied = false;
+            knockedOut = true;
+            gameObject.layer = LayerMask.NameToLayer("Ground");
+            if (animator != null) animator.SetTrigger("RatDied");
+            while (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+                if (timeLeft < 2 && !permaDied)
+                {
+                    permaDied = true;
+                    if (animator != null) animator.SetTrigger("PermaDied");
+                }
+                yield return null;
+            }
+            for (int i = 0; i < Random.Range(1, 3); i++)
+            {
+                Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+                hitParticles.transform.position = transform.position;
+                hitParticles.Play();
+                yield return new WaitForSeconds(0.1f);
+            }
+            Destroy(gameObject);
     }
     bool GetIsGroundInFront()
     {
