@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
-using UnityEngine.Rendering;
 
 public class ObjectPooling : MonoBehaviour
 {
-    public GameObject prefab;
+    [SerializeField] GameObject prefab;
     Queue<GameObject> pool = new Queue<GameObject>();
 
     public GameObject GetObject(Vector2 spawnPosition, Quaternion rotation)

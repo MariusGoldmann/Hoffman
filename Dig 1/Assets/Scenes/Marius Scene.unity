@@ -701,6 +701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Object Pool Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 7907066892099260381, guid: ec1f5bba52634ee45bc460cf5ac22d00, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 2138564444}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2660,6 +2664,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1092167105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5890713763649760831, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
+  m_PrefabInstance: {fileID: 2668500916568238228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caedd2343b7434343907a615d3390d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElephantCombat
 --- !u!1 &1110344145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8026683461582818624, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
@@ -3051,17 +3066,21 @@ PrefabInstance:
       propertyPath: trumpetPool
       value: 
       objectReference: {fileID: 1798291712}
+    - target: {fileID: -1454245605328255418, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
+      propertyPath: elephantCombat
+      value: 
+      objectReference: {fileID: 1092167105}
     - target: {fileID: 8204275056132510389, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
       propertyPath: m_Name
       value: Trumpet Shockwave Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 8806730635881535514, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8806730635881535514, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -18.2
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 8806730635881535514, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4338,6 +4357,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 740567478548493296, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
   m_PrefabInstance: {fileID: 318687199}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1891220343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1891220344}
+  - component: {fileID: 1891220345}
+  m_Layer: 3
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1891220344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891220343}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.59714, y: -18.86182, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1891220345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891220343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a050669bd76348449f6e541b5f8c58a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReloadSceneTemporary
+  reload: 0
 --- !u!1001 &2008600219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4657,6 +4721,11 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 5733562196409095140, guid: 558ee9eb135031a4f99f73a5dd28bb71, type: 3}
   m_PrefabInstance: {fileID: 2097599375}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2138564444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8204275056132510389, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
+  m_PrefabInstance: {fileID: 1294486797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2668500916568238228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4673,6 +4742,10 @@ PrefabInstance:
       propertyPath: trumpetPool
       value: 
       objectReference: {fileID: 1798291712}
+    - target: {fileID: 5890713763649760831, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
+      propertyPath: trumpetAttack
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6191971011070247154, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -79.13
@@ -4724,6 +4797,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 330727500}
   - {fileID: 173151239}
+  - {fileID: 1891220344}
   - {fileID: 656539074}
   - {fileID: 27655328}
   - {fileID: 354632857}

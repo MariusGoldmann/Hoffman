@@ -3,32 +3,40 @@ using UnityEngine;
 
 public class TrumpetProjectile : MonoBehaviour
 {
-    [SerializeField] int damage;
-    [SerializeField] float timeUntilDeath;
+    [SerializeField] int damage=7;
+    [SerializeField] float timeUntilDeath = 3f;
+    [SerializeField] float speed = 10f;
 
+    float elapsedTime;
+    Vector2 initialDirection;
     Vector2 direction;
-    Vector2 wallDirection;
 
     [SerializeField] ObjectPooling trumpetPool;
     [SerializeField] ElephantCombat elephantCombat;
+    Rigidbody2D projectileRB;
 
     private void Start()
     {
+        projectileRB = GetComponent<Rigidbody2D>();
+        initialDirection = elephantCombat.GetInitialDirection();
         direction = new Vector2(1, 1);
     }
 
     private void Update()
     {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime > timeUntilDeath)
         {
-            Vector2 finalDirection =  elephantCombat.GetInitialDirection() * direction;
-            projectileRB.linearVelocity = finalDirection * trumpetShockwaveSpeed;
-            projectileRB.transform.rotation = Quaternion.LookRotation(finalDirection);
-            //projectileRB.transform.rotation = Quaternion.Euler(0, 0, -MathF.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg);
-            Debug.Log(finalDirection);
-            yield return null;
+            trumpetPool.ReturnObject(gameObject);
+            elapsedTime = 0;
         }
+        Vector2 finalDirection = initialDirection * direction;
+        Debug.Log(direction);
+        projectileRB.linearVelocity = finalDirection * speed;
+        transform.rotation = Quaternion.LookRotation(finalDirection);
+        Debug.Log(finalDirection);
     }
-private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -39,10 +47,5 @@ private void OnCollisionEnter2D(Collision2D other)
         {
             direction=(transform.position - other.transform.position).normalized;
         }
-    }
-
-    public Vector2 GetDirection()
-    {
-        return direction;
     }
 }

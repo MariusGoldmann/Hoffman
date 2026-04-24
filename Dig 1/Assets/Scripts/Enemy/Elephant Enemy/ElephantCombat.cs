@@ -4,9 +4,9 @@ public class ElephantCombat : MonoBehaviour
 {
     [Header("Trumpet Attack")]
     [SerializeField] bool trumpetAttack;
-    [SerializeField] float projectileAmount = 3;
     [SerializeField] float trumpetAnticipationTime = 1;
-    [SerializeField] float trumpetShockwaveSpeed = 5f;
+    [SerializeField] float projectileAmount = 3;
+    [SerializeField] float timeBetweenProjectiles = 0.2f;
     [SerializeField] Vector2 trumpetLocation;
     [SerializeField] Vector2 trumpetDirection;
 
@@ -19,16 +19,19 @@ public class ElephantCombat : MonoBehaviour
     [SerializeField] ObjectPooling stompPool;
     [SerializeField] ElephantMovement elephantMovement;
 
+    Coroutine trumpetCoroutine;
+    Coroutine stompCoroutine;
+
     private void Update()
     {
         if (trumpetAttack)
         {
-            StartCoroutine(TrumpetAttack());
+            trumpetCoroutine=StartCoroutine(TrumpetAttack());
             trumpetAttack = false;
         }
         if (stompAttack)
         {
-            StartCoroutine(StompAttack());
+            stompCoroutine=StartCoroutine(StompAttack());
             stompAttack = false;
         }
     }
@@ -41,16 +44,14 @@ public class ElephantCombat : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        Vector2 initialDirection = new Vector2;
         
-        for (int i; i<projectileAmount; i++))
+        for (int i=0; i<projectileAmount; i++)
         {
-            GameObject[i] projectile = trumpetPool.GetObject(transform.position, Quaternion.identity); //Change transform.position to trumpetPosition
+            trumpetPool.GetObject(transform.position, Quaternion.identity); //Change transform.position to trumpetPosition
+            yield return new WaitForSeconds(timeBetweenProjectiles);
         }
-        
-        Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
-        TrumpetProjectile projectileScript = projectile.GetComponent<TrumpetProjectile>();
-        yield return new WaitForSeconds(2);
+
+        trumpetCoroutine = null;
     }
     IEnumerator StompAttack()
     {
