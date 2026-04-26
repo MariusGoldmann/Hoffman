@@ -123,19 +123,19 @@ MonoBehaviour:
   idleMoveSpeed: 3
   recoilForce: 10
   detectionRadius: 14
+  aggroTime: 5
+  aggroTimer: 0
   attackCooldown: 4
   projectileSpeed: 10
   anticipationTime: 1
   attackPoint: {fileID: 5647071721312934738}
   fireProjectilePool: {fileID: 0}
-  deathTime: 0
+  deathTime: 1
   isDead: 0
   isPatrolling: 0
   groundCheck: {fileID: 5699097910251668508}
   wallCheck: {fileID: 7809354441362954185}
   player: {fileID: 0}
-  horizontalDetectRange: 43
-  verticalDetectRange: 19
   groundCheckDistance: 2
   wallCheckDistance: 3
   isKnockback: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bbdda670385b74f92cf01b22984c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  flashColor: {r: 5.992156, g: 5.992156, b: 5.992156, a: 1}
+  flashColor: {r: 5.9921565, g: 5.9921565, b: 5.9921565, a: 1}
   flashTime: 0.5
   flashSpeedCurve:
     serializedVersion: 2
@@ -375,7 +375,7 @@ Transform:
   m_GameObject: {fileID: 9221310158907548688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.52, y: 2, z: 0}
+  m_LocalPosition: {x: 1.8, y: 2.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -447,15 +447,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -72.59999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.376846
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -467,15 +467,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -556,6 +556,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon Art
       objectReference: {fileID: 0}
+    - target: {fileID: 6045796281155910941, guid: 58495b27f9541f244a205f6e09e097d3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045796281155910941, guid: 58495b27f9541f244a205f6e09e097d3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -176136505
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045796281155910941, guid: 58495b27f9541f244a205f6e09e097d3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ef6b23c22137e984aae3eedbf105f317, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
