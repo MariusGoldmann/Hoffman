@@ -14,7 +14,6 @@ public class ButtonScript : MonoBehaviour
         pauseManager = FindAnyObjectByType<PauseManager>();
     }
 
-    //  Skapa en delay när resume e klickad fade ut eller liknande. 
     public void OnButtonPressed()
     {
         PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BUTTON, 1);

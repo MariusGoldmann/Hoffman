@@ -842,7 +842,7 @@ PrefabInstance:
     - target: {fileID: 1917346147294671761, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
       propertyPath: interactSprite
       value: 
-      objectReference: {fileID: 1094687781}
+      objectReference: {fileID: 0}
     - target: {fileID: 1917346147294671761, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
       propertyPath: dialogueController
       value: 
@@ -1337,11 +1337,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5746755025260859168, guid: 2127ecc944462594487a2cf209c6e65e, type: 3}
   m_PrefabInstance: {fileID: 1066484295}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1094687781 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 740567478548493296, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
-  m_PrefabInstance: {fileID: 1326435172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1105158680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1569,7 +1564,7 @@ PrefabInstance:
     - target: {fileID: 7686619541633134826, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
       propertyPath: interactSprite
       value: 
-      objectReference: {fileID: 1094687781}
+      objectReference: {fileID: 0}
     - target: {fileID: 7686619541633134826, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
       propertyPath: dialogueController
       value: 
