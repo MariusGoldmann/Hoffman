@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,12 +12,14 @@ public class Dragon : MonoBehaviour {
 	[SerializeField] private float idleMoveSpeed;
 	[SerializeField] private float recoilForce;
 	[SerializeField] private float detectionRadius;
+	[SerializeField] private float aggroTime;
+	[SerializeField] private float aggroTimer;
 
 	[Header("Attack settings")]
 	[SerializeField] private int attackCooldown;
-	[SerializeField] private int           projectileSpeed;
-	[SerializeField] private int           anticipationTime;
-	[SerializeField] private Transform     attackPoint;
+	[SerializeField] private int projectileSpeed;
+	[SerializeField] private int anticipationTime;
+	[SerializeField] private Transform attackPoint;
 	[SerializeField] private ObjectPooling fireProjectilePool;
 
 	[Header("Death settings")]
@@ -32,8 +33,6 @@ public class Dragon : MonoBehaviour {
 	[SerializeField] private Transform groundCheck;
 	[SerializeField] private Transform  wallCheck;
 	[SerializeField] private GameObject player;
-	[SerializeField] private float      horizontalDetectRange;
-	[SerializeField] private float      verticalDetectRange;
 	[SerializeField] private float      groundCheckDistance;
 	[SerializeField] private float      wallCheckDistance;
 
@@ -77,7 +76,7 @@ public class Dragon : MonoBehaviour {
 	}
 
 	private void Patrol() {
-		if (!IsPlayerDetected() && !isDead) {
+		if (!IsPlayerDetected() && !isDead && aggroTimer < 0) {
 			dragonRb.linearVelocityX = idleMoveSpeed * facingDirection;
 			dragonAnimator.SetBool(Idle,       false);
 			dragonAnimator.SetBool(Patrolling, true);
@@ -95,15 +94,10 @@ public class Dragon : MonoBehaviour {
 	private IEnumerator RangedAttack() {
 		dragonAnimator.SetTrigger(FireCharge);
 		cooldownTimer = attackCooldown;
-		float anticipationTimer = 0;
-
-		while (anticipationTime > anticipationTimer) {
-			anticipationTimer += Time.deltaTime;
-			yield return null;
-		}
+		yield return new WaitForSeconds(anticipationTime);
 
 		if (PlayerTarget()) {
-			PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.FIREBALL, 1);
+			PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.FIREBALL);
 			dragonRb.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
 			Vector2 fireDirection = (PlayerTarget().position - attackPoint.position).normalized;
 			var   angle         = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
@@ -159,6 +153,11 @@ public class Dragon : MonoBehaviour {
 
 	private void HandleCooldown() {
 		cooldownTimer -= Time.deltaTime;
+		if (IsPlayerDetected()) {
+			aggroTimer = aggroTime;
+		} else {
+			aggroTimer -=  Time.deltaTime;
+		}
 	}
 
 	private bool IsAtEdge() {
@@ -170,14 +169,13 @@ public class Dragon : MonoBehaviour {
 	}
 
 	private Transform PlayerTarget() {
-		if (!(Vector2.Distance(transform.position, player.transform.position) < detectionRadius)) return null;
-		var hit = Physics2D.Linecast(transform.position, player.transform.position,
-		                             ~LayerMask.GetMask("Enemy", "FireProjectile"));
-
-		if (hit.collider.gameObject.CompareTag("Player")) {
-			return hit.transform;
+		if ((Vector2.Distance(transform.position, player.transform.position) < detectionRadius) || aggroTimer > 0f) {
+			var hit = Physics2D.Linecast(transform.position, player.transform.position,
+			                             ~LayerMask.GetMask("Enemy", "FireProjectile"));
+			if (hit.collider.gameObject.CompareTag("Player")) {
+				return hit.transform;
+			}
 		}
-
 		return null;
 	}
 

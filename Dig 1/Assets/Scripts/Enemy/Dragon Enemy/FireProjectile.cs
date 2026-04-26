@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class FireProjectile : MonoBehaviour {
 	[Header("General settings")]
-	[SerializeField] int projectileDamage;
-	[SerializeField] float explosionRadius;
-	[SerializeField] float additionalForce   = 10f;
-	[SerializeField] float hitDirectionForce = 10f;
+	[SerializeField] private int projectileDamage;
+	[SerializeField] private float explosionRadius;
+	[SerializeField] private float additionalForce   = 10f;
+	[SerializeField] private float hitDirectionForce = 10f;
 
 	[Header("Particles")]
-	[SerializeField] GameObject fireSplitter;
-	[SerializeField] GameObject explosion;
+	[SerializeField] private GameObject fireSplitter;
+	[SerializeField] private GameObject explosion;
 
 	[Header("Layers")]
-	[SerializeField] LayerMask groundLayer;
-	[SerializeField] LayerMask playerLayer;
-	[SerializeField] LayerMask enemyLayer;
-	[SerializeField] LayerMask bomerangLayer;
+	[SerializeField] private LayerMask groundLayer;
+	[SerializeField] private LayerMask playerLayer;
+	[SerializeField] private LayerMask enemyLayer;
+	[SerializeField] private LayerMask boomerangLayer;
 
-	[SerializeField] ObjectPooling fireProjectilePool;
+	[SerializeField] private ObjectPooling fireProjectilePool;
 
 	void Awake() {
 		gameObject.SetActive(true);
@@ -26,7 +26,7 @@ public class FireProjectile : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collision) {
 		var groundHit   = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, groundLayer);
 		var playerHit   = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, playerLayer);
-		var bomerangHit = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, bomerangLayer);
+		var boomerangHit = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, boomerangLayer);
 
 		if (groundHit != null) {
 			gameObject.SetActive(false);
@@ -50,13 +50,12 @@ public class FireProjectile : MonoBehaviour {
 			fireProjectilePool.ReturnObject(gameObject);
 		}
 
-		if (bomerangHit != null) {
-			gameObject.SetActive(false);
-			Instantiate(fireSplitter, transform.position, Quaternion.identity);
-			Instantiate(explosion,    transform.position, Quaternion.identity);
-			gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
-			gameObject.transform.localRotation                    = Quaternion.identity;
-			fireProjectilePool.ReturnObject(gameObject);
-		}
+		if (boomerangHit == null) return;
+		gameObject.SetActive(false);
+		Instantiate(fireSplitter, transform.position, Quaternion.identity);
+		Instantiate(explosion,    transform.position, Quaternion.identity);
+		gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+		gameObject.transform.localRotation                    = Quaternion.identity;
+		fireProjectilePool.ReturnObject(gameObject);
 	}
 }

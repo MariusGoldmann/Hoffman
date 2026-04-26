@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8158543302636595784}
   - component: {fileID: 7608657297451854872}
   - component: {fileID: 1837902685417045395}
+  - component: {fileID: 948679789114481460}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -112,8 +113,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.090370655, y: 0.043684244}
-  m_Size: {x: 1.1941023, y: 2.867858}
+  m_Offset: {x: 0.090370655, y: -0.00089752674}
+  m_Size: {x: 1.1941023, y: 2.9570215}
   m_Direction: 0
 --- !u!114 &1197925086779408942
 MonoBehaviour:
@@ -233,7 +234,7 @@ MonoBehaviour:
   boomerangTimer: 0
   boomerangForce: 100
   boomerangReturnForce: 6
-  earlyReceiving: 0
+  invulnerableTime: 0
   boomerangAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -399,6 +400,18 @@ MonoBehaviour:
     m_RotationOrder: 4
   spriteRenderer: {fileID: 0}
   material: {fileID: 2100000, guid: ef6b23c22137e984aae3eedbf105f317, type: 2}
+--- !u!114 &948679789114481460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278727348191356785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ede323f2cbe84ba88e5f1610be02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitStop
 --- !u!1 &3777659576444688403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,7 +1060,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3654542551904296016, guid: e72a747daa2459a4c9431656604f47e5, type: 3}
       propertyPath: m_Name
-      value: Floof
+      value: Earfloof
       objectReference: {fileID: 0}
     - target: {fileID: 3654542551904296016, guid: e72a747daa2459a4c9431656604f47e5, type: 3}
       propertyPath: m_Layer
@@ -1122,7 +1135,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3654542551904296016, guid: e72a747daa2459a4c9431656604f47e5, type: 3}
       propertyPath: m_Name
-      value: Floof (2)
+      value: Legfloof
       objectReference: {fileID: 0}
     - target: {fileID: 3654542551904296016, guid: e72a747daa2459a4c9431656604f47e5, type: 3}
       propertyPath: m_Layer
@@ -1264,7 +1277,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3654542551904296016, guid: e72a747daa2459a4c9431656604f47e5, type: 3}
       propertyPath: m_Name
-      value: Floof (1)
+      value: Eyefloof
       objectReference: {fileID: 0}
     - target: {fileID: 3654542551904296016, guid: e72a747daa2459a4c9431656604f47e5, type: 3}
       propertyPath: m_Layer
