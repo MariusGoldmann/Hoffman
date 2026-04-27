@@ -271,6 +271,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 151320151333600071, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
     - {fileID: 4812248833018309193, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
+    - {fileID: 1426059822738451772, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
       insertIndex: 55
@@ -909,7 +910,7 @@ PrefabInstance:
     - target: {fileID: 7686619541633134826, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
       propertyPath: interactSprite
       value: 
-      objectReference: {fileID: 1861027758}
+      objectReference: {fileID: 0}
     - target: {fileID: 7686619541633134826, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
       propertyPath: dialogueController
       value: 
@@ -2675,11 +2676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caedd2343b7434343907a615d3390d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElephantCombat
---- !u!1 &1110344145 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8026683461582818624, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
-  m_PrefabInstance: {fileID: 1681321615}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1134932567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3119,6 +3115,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
+--- !u!1 &1300573658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6908115780733834097, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
+  m_PrefabInstance: {fileID: 1681321615}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1330439594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3773,7 +3774,7 @@ PrefabInstance:
     - target: {fileID: 1121360680758087258, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
       propertyPath: interactSprite
       value: 
-      objectReference: {fileID: 1110344145}
+      objectReference: {fileID: 1300573658}
     - target: {fileID: 1121360680758087258, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
       propertyPath: dialogueController
       value: 
@@ -4352,11 +4353,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &1861027758 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 740567478548493296, guid: f6001118ef2548f4192374b915dc9d7d, type: 3}
-  m_PrefabInstance: {fileID: 318687199}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1891220343
 GameObject:
   m_ObjectHideFlags: 0

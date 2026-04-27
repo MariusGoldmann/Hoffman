@@ -27,14 +27,14 @@ public abstract class NPC : MonoBehaviour, IInteractable
 
         if (!isWithinInteractDistance)
         {
-            if (!interactSprite.LeanIsTweening())
+            if (!interactSprite.LeanIsTweening() &&interactSprite!=null)
             {
                 LeanTween.scale(interactSprite, new Vector2(0, 0), 0.2f).setEaseInExpo();
             }
         }
         else
         {
-            if (!interactSprite.LeanIsTweening())
+            if (!interactSprite.LeanIsTweening() && interactSprite!=null)
             {
                 LeanTween.scale(interactSprite, new Vector2(0.25f, 0.25f), 1).setEaseOutExpo();
             }
