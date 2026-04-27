@@ -9,17 +9,20 @@ public class TrumpetProjectile : MonoBehaviour
 
     float elapsedTime;
     Vector2 initialDirection;
-    Vector2 direction;
+    Vector2 finalDirection;
 
     [SerializeField] ObjectPooling trumpetPool;
     [SerializeField] ElephantCombat elephantCombat;
     Rigidbody2D projectileRB;
 
-    private void Start()
+    private void OnEnable()
     {
         projectileRB = GetComponent<Rigidbody2D>();
+
         initialDirection = elephantCombat.GetInitialDirection();
-        direction = new Vector2(1, 1);
+        finalDirection = initialDirection;
+        projectileRB.linearVelocity = Vector2.zero;
+
     }
 
     private void Update()
@@ -30,11 +33,10 @@ public class TrumpetProjectile : MonoBehaviour
             trumpetPool.ReturnObject(gameObject);
             elapsedTime = 0;
         }
-        Vector2 finalDirection = initialDirection * direction;
-        Debug.Log(direction);
         projectileRB.linearVelocity = finalDirection * speed;
-        transform.rotation = Quaternion.LookRotation(finalDirection);
-        Debug.Log(finalDirection);
+        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg);
+        Debug.Log(Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg);
+        transform.rotation = rotation;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -45,7 +47,7 @@ public class TrumpetProjectile : MonoBehaviour
         }
         else
         {
-            direction=(transform.position - other.transform.position).normalized;
+            finalDirection = Vector2.Reflect(finalDirection, other.GetContact(0).normal);
         }
     }
 }

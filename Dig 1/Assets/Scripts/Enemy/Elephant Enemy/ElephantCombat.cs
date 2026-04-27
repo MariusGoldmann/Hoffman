@@ -19,8 +19,8 @@ public class ElephantCombat : MonoBehaviour
     [SerializeField] ObjectPooling stompPool;
     [SerializeField] ElephantMovement elephantMovement;
 
-    Coroutine trumpetCoroutine;
-    Coroutine stompCoroutine;
+    public Coroutine trumpetCoroutine;
+    public Coroutine stompCoroutine;
 
     private void Update()
     {
@@ -35,15 +35,11 @@ public class ElephantCombat : MonoBehaviour
             stompAttack = false;
         }
     }
-    IEnumerator TrumpetAttack()
+    public IEnumerator TrumpetAttack()
     {
         float elapsedTime = 0;
 
-        while (elapsedTime > trumpetAnticipationTime)
-        {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(trumpetAnticipationTime);
         
         for (int i=0; i<projectileAmount; i++)
         {
@@ -53,7 +49,7 @@ public class ElephantCombat : MonoBehaviour
 
         trumpetCoroutine = null;
     }
-    IEnumerator StompAttack()
+    public IEnumerator StompAttack()
     {
         float elapsedTime = 0;
 
