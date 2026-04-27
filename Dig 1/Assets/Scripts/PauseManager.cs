@@ -14,21 +14,20 @@ public class PauseManager : MonoBehaviour
     bool option;
 
     bool UIIsActive; 
-    
-    [SerializeField] bool isPaused = false;
 
-    Animator animator; 
+    Animator animatorPause;
+    Animator animatorOptions; 
     ButtonScript buttonScript;
 
 
     void Start()
     {
-        optionUI.SetActive(false);
 
         UIIsActive = false;  
         // No menu active
 
-        animator = pauseMenuUI.GetComponent<Animator>();
+        animatorPause = pauseMenuUI.GetComponent<Animator>();
+        animatorOptions = optionUI.GetComponent<Animator>();
 
         pauseAction = InputSystem.actions.FindAction("Pause");
         buttonScript = FindAnyObjectByType<ButtonScript>(); 
@@ -36,14 +35,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (UIIsActive)
-        {
-            Debug.Log("UI is active");
-        }else
-        {
-            Debug.Log("UI is not active");
-        }
-
+        
 
         if (pauseAction.WasPerformedThisFrame())
         {
@@ -59,7 +51,7 @@ public class PauseManager : MonoBehaviour
                     paused = true;
                     UIIsActive = true;
 
-                    animator.SetTrigger("IsPaused");
+                    animatorPause.SetTrigger("IsPaused");
                     Time.timeScale = 0;
                 }
                 else
@@ -69,20 +61,13 @@ public class PauseManager : MonoBehaviour
             }
         }
 
-        if (pauseMenuUI.activeSelf == false && optionUI.activeSelf == false)
-        {
-            isPaused = false;
-        }
-        else
-        {
-            isPaused = true;
-        }
+
     }
 
     public void ResumeGame()
     {
-        animator.SetTrigger("IsPausedNot");
-        optionUI.SetActive(false);
+        animatorPause.SetTrigger("IsPausedNot");
+        animatorOptions.SetTrigger("OptionsUp"); 
 
         UIIsActive = false;
 
@@ -93,18 +78,15 @@ public class PauseManager : MonoBehaviour
     
     public void Options()
     {
-        optionUI.SetActive(true);
+        animatorOptions.SetTrigger("OptionsDown");
         option = true;
-        animator.SetTrigger("IsPausedNot");
+        animatorPause.SetTrigger("IsPausedNot");
         Time.timeScale = 1; 
     }
 
-    public bool GetIsPaused()
-    {
-        return isPaused;
-    }
+  
 
-    public bool GetUIIsActive()
+    public bool GetIsPaused()
     {
         return UIIsActive;
     }
