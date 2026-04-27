@@ -11,6 +11,12 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Sources")]
     [SerializeField] AudioSource musicAudioSource;
     [SerializeField] AudioSource soundFXAudioSource;
+
+    void Awake()
+    {
+       DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         if (!PlayerPrefs.HasKey("musicVolume"))
