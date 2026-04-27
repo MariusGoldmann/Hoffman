@@ -13,14 +13,20 @@ public class PauseManager : MonoBehaviour
     bool paused;
     bool option;
 
+    bool UIIsActive; 
+    
     [SerializeField] bool isPaused = false;
 
     Animator animator; 
     ButtonScript buttonScript;
 
+
     void Start()
     {
         optionUI.SetActive(false);
+
+        UIIsActive = false;  
+        // No menu active
 
         animator = pauseMenuUI.GetComponent<Animator>();
 
@@ -30,17 +36,29 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (pauseAction.WasPerformedThisFrame() )
+        if (UIIsActive)
+        {
+            Debug.Log("UI is active");
+        }else
+        {
+            Debug.Log("UI is not active");
+        }
+
+
+        if (pauseAction.WasPerformedThisFrame())
         {
 
             if (!paused && option)
             {
                 ResumeGame();
-            } else
+            }
+            else
             {
                 if (!paused)
                 {
                     paused = true;
+                    UIIsActive = true;
+
                     animator.SetTrigger("IsPaused");
                     Time.timeScale = 0;
                 }
@@ -66,16 +84,12 @@ public class PauseManager : MonoBehaviour
         animator.SetTrigger("IsPausedNot");
         optionUI.SetActive(false);
 
+        UIIsActive = false;
+
         paused = false;
         option = false;
         Time.timeScale = 1;
     }
-
-   public void TimeStart()
-   {
-        Time.timeScale = 1;
-   }
-
     
     public void Options()
     {
@@ -89,4 +103,10 @@ public class PauseManager : MonoBehaviour
     {
         return isPaused;
     }
+
+    public bool GetUIIsActive()
+    {
+        return UIIsActive;
+    }
+
 }
