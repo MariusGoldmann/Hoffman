@@ -49,7 +49,7 @@ public class SoundManager : MonoBehaviour
             Load();
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         ChangeVolume();
     }
