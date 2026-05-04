@@ -1952,6 +1952,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 655574369132297374, guid: 558ee9eb135031a4f99f73a5dd28bb71, type: 3}
+      propertyPath: 'soundEffectList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f5ef4827b3e414d4c899fb70702126cc, type: 3}
+    - target: {fileID: 655574369132297374, guid: 558ee9eb135031a4f99f73a5dd28bb71, type: 3}
+      propertyPath: 'soundEffectList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f5ef4827b3e414d4c899fb70702126cc, type: 3}
     - target: {fileID: 1590154285288668170, guid: 558ee9eb135031a4f99f73a5dd28bb71, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.56814
