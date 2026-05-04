@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4638534930789587907}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 45}
+  m_LocalPosition: {x: 0, y: 0, z: 0.9999771}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 2114890696487839586}
   - component: {fileID: 2818649188387640328}
   - component: {fileID: 1553411927596180110}
+  - component: {fileID: 2599723903698966956}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -420,6 +421,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenuUI: {fileID: 3515387627774476015}
   optionUI: {fileID: 3471735232969891589}
+--- !u!114 &2599723903698966956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8020158786247861243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ffc4a3b7e714444b1ef9bf971f9510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  musicSlider: {fileID: 3484385467703037819}
+  soundFXSlider: {fileID: 4593883637055627734}
+  musicAudioSource: {fileID: 0}
+  soundFXAudioSource: {fileID: 0}
 --- !u!1 &9167256579627713924
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +463,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9167256579627713924}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 45}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1326,6 +1343,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 69347840994478958, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
   m_PrefabInstance: {fileID: 3595785539824594684}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4593883637055627734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1019514673874407210, guid: d4ac0ecc616e47749aa44024eeb9cbea, type: 3}
+  m_PrefabInstance: {fileID: 3595785539824594684}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &3655159275674752070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1648,6 +1676,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3564320348976935650, guid: 4e1a5b1ee092af14f80ce0ac3a25ecc7, type: 3}
   m_PrefabInstance: {fileID: 3655159275674752070}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3484385467703037819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 207937311154395965, guid: 4e1a5b1ee092af14f80ce0ac3a25ecc7, type: 3}
+  m_PrefabInstance: {fileID: 3655159275674752070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &5630868040438517380
 PrefabInstance:
   m_ObjectHideFlags: 0
