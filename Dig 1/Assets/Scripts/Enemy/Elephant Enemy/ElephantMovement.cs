@@ -4,6 +4,7 @@ public class ElephantMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float idleMoveSpeed = 2f;
+    [SerializeField] float chaseMoveSpeed = 5f;
     [SerializeField] float facingDirection = 1;
     [SerializeField] KnockbackScript elephantKnockbackScript;
 
@@ -11,19 +12,24 @@ public class ElephantMovement : MonoBehaviour
     [SerializeField] float groundCheckLength = 2.3f;
     [SerializeField] float frontGroundCheckLength = 0.2f;
     [SerializeField] float frontWallCheckLength = 4f; //Elepthant Heigth
-    [SerializeField] Transform wallCheckPosition;
     [SerializeField] Transform frontRaycastOrigin;
 
     [Header("Player Detection")]
-    [SerializeField] float horizontalDetectRange;
-    [SerializeField] float verticalDetectRange;
+    [SerializeField] float aggressiveHorizontalDetectRange;
+    [SerializeField] float aggressiveVerticalDetectRange;
+    [SerializeField] float attackHorizontalDetectRange;
+    [SerializeField] float attackVerticalDetectRange;
+
 
     [Header("Debug")]
     [SerializeField] bool knockedOut;
+    bool aggressive;
+    bool inAttackRange;
 
     Rigidbody2D elephantRB;
     Animator animator;
     EnemyHealth enemyHealth;
+    ElephantCombat elephantCombat;
     LayerMask playerLayer;
     LayerMask groundLayer;
 
@@ -32,6 +38,7 @@ public class ElephantMovement : MonoBehaviour
         elephantRB = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         enemyHealth = GetComponent<EnemyHealth>();
+        elephantCombat = GetComponent<ElephantCombat>();
         playerLayer = LayerMask.GetMask("Player");
         groundLayer = LayerMask.GetMask("Ground");
     }
@@ -45,9 +52,14 @@ public class ElephantMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!knockedOut && GetIsGrounded())
+        if (!knockedOut && GetIsGrounded() && PlayerTarget() == null)
         {
             Patrol();
+            Flip();
+        }
+        else if (!knockedOut && GetIsGrounded())
+        {
+            Charge();
             Flip();
         }
     }
@@ -55,13 +67,20 @@ public class ElephantMovement : MonoBehaviour
     {
         elephantRB.linearVelocityX = idleMoveSpeed * facingDirection;
     }
+    void Charge()
+    {
+        if (!inAttackRange) elephantRB.linearVelocityX = chaseMoveSpeed * facingDirection;
+        else elephantCombat.trumpetCoroutine = StartCoroutine(elephantCombat.TrumpetAttack()); // Random attack logic?
+    }
     void Flip()
     {
+        Debug.Log(!GetIsGroundInFront() + "1");
+        Debug.Log(GetIsWallInFront() + "2");
         if (!GetIsGroundInFront() || GetIsWallInFront())
         {
             facingDirection = facingDirection * -1;
         }
-
+        Debug.Log(PlayerTarget()+"3");
         if (PlayerTarget() != null)
         {
             facingDirection = (int)Mathf.Sign(PlayerTarget().position.x - transform.position.x);
@@ -70,8 +89,11 @@ public class ElephantMovement : MonoBehaviour
     }
     Transform PlayerTarget()
     {
-        Vector2 capsuleSize = new Vector2(horizontalDetectRange, verticalDetectRange);
-        Collider2D hit = Physics2D.OverlapCapsule(transform.position, capsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
+        Vector2 aggressiveCapsuleSize = new Vector2(aggressiveHorizontalDetectRange, aggressiveVerticalDetectRange);
+        Vector2 attackCapsuleSize = new Vector2(attackHorizontalDetectRange, attackVerticalDetectRange);
+        Collider2D hit = Physics2D.OverlapCapsule(transform.position, aggressiveCapsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
+        inAttackRange = Physics2D.OverlapCapsule(transform.position, attackCapsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
+
         if (hit != null)
         {
             return hit.transform;
@@ -101,11 +123,11 @@ public class ElephantMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        Vector2 size = new Vector2(horizontalDetectRange, verticalDetectRange);
+        Vector2 size = new Vector2(aggressiveHorizontalDetectRange, aggressiveVerticalDetectRange);
         Vector2 center = transform.position;
 
-        float radius = verticalDetectRange / 2f;
-        float straightLength = horizontalDetectRange - (radius * 2f);
+        float radius = aggressiveVerticalDetectRange / 2f;
+        float straightLength = aggressiveHorizontalDetectRange - (radius * 2f);
 
         Vector2 left = center + Vector2.left * (straightLength / 2f);
         Vector2 right = center + Vector2.right * (straightLength / 2f);

@@ -2886,6 +2886,9 @@ public class LeanTween : MonoBehaviour {
     }
 
 
+    public static void cancel(CanvasGroup shadowCanvasGroup) {
+	    throw new NotImplementedException();
+    }
 } // End LeanTween class
 
 public class LTUtility {
