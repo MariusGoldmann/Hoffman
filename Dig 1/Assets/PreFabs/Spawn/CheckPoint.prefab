@@ -256,7 +256,7 @@ MonoBehaviour:
   isActive: 0
   innerSpotLight: {fileID: 5466527194634364335}
   outerSpotLight: {fileID: 3753106518181261134}
-  animator: {fileID: 0}
+  animator: {fileID: 5746755025260859168}
 --- !u!1001 &8835556047171455841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,5 +329,10 @@ PrefabInstance:
 --- !u!4 &3133284163401414470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5901292422038584359, guid: 2a69f3f4575a53646b05bc1ffd7cdc71, type: 3}
+  m_PrefabInstance: {fileID: 8835556047171455841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5746755025260859168 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3845687427132343361, guid: 2a69f3f4575a53646b05bc1ffd7cdc71, type: 3}
   m_PrefabInstance: {fileID: 8835556047171455841}
   m_PrefabAsset: {fileID: 0}

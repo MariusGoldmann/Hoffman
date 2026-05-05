@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
 
+    public static SoundManager instance;
+
     [Header("Volume Sliders")]
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider soundFXSlider;
@@ -14,7 +16,17 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-       DontDestroyOnLoad(gameObject);
+
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -37,7 +49,7 @@ public class SoundManager : MonoBehaviour
             Load();
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         ChangeVolume();
     }
