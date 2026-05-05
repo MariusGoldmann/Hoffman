@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Transform))]
 public class PlayerCombat : MonoBehaviour {
 	private static readonly int Throwing = Animator.StringToHash("Throwing");
 	[Header("Basic combat settings")]
