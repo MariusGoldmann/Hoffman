@@ -48,6 +48,17 @@ public class SoundManager : MonoBehaviour
         {
             Load();
         }
+
+        if (musicAudioSource == null)
+        {           
+            musicAudioSource = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<AudioSource>();
+        }
+
+
+        if (soundFXAudioSource == null)
+        {
+            soundFXAudioSource = GameObject.FindGameObjectWithTag("SoundFXAudioSource").GetComponent<AudioSource>();
+        }
     }
     void FixedUpdate()
     {
