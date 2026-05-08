@@ -964,10 +964,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6203812104025396336, guid: 2127ecc944462594487a2cf209c6e65e, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 738550291}
     - target: {fileID: 7350332497899359188, guid: 2127ecc944462594487a2cf209c6e65e, type: 3}
       propertyPath: m_Name
       value: CheckPoint (2)
@@ -977,11 +973,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2127ecc944462594487a2cf209c6e65e, type: 3}
---- !u!95 &738550291 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5746755025260859168, guid: 2127ecc944462594487a2cf209c6e65e, type: 3}
-  m_PrefabInstance: {fileID: 738550290}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &764178382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2739639428318762573, guid: 3d84249d40ac52f48b7b311a7ac3f65a, type: 3}
@@ -2246,10 +2237,6 @@ PrefabInstance:
     - target: {fileID: 278727348191356785, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2977112052947206648, guid: 50a7e535b2c096945a8c09b4211f4c71, type: 3}
       propertyPath: m_LocalPosition.x

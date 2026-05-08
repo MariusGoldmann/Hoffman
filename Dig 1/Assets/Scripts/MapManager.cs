@@ -6,6 +6,7 @@ public class MapManager : MonoBehaviour {
 	private static MapManager instance;
 
 	[SerializeField] private float fadeSpeed;
+	[SerializeField] private Image mapIcon;
 
 	[Header("Map Settings for bookshelf")]
 	[SerializeField] private GameObject mapImage;
@@ -70,6 +71,8 @@ public class MapManager : MonoBehaviour {
 		if (hiddenMapTriggered) {
 			ShadowFader(hiddenPassage, hiddenCanvasGroup, 1);
 		}
+		
+		MapIconActivator();
 	}
 
 	private void ShadowFader(Image shadowImage, CanvasGroup shadowCanvasGroup, float desiredAlpha) {
@@ -81,6 +84,18 @@ public class MapManager : MonoBehaviour {
 		
 		if (shadowCanvasGroup.alpha <= 0) {
 			shadowImage.gameObject.SetActive(false);
+		}
+	}
+
+	private void MapIconActivator() {
+		if (pinkCanvasGroup.alpha > 0 && pinkMapTriggered || redCanvasGroup.alpha > 0 && redMapTriggered|| yellowCanvasGroup.alpha > 0 && yellowMapTriggered|| blueCanvasGroup.alpha > 0 && blueMapTriggered|| hiddenCanvasGroup.alpha < 1 && hiddenMapTriggered) {
+			if (mapIcon) {
+				mapIcon.gameObject.SetActive(true);
+			}
+		} else {
+			if (mapIcon) {
+				mapIcon.gameObject.SetActive(false);
+			}
 		}
 	}
 }
