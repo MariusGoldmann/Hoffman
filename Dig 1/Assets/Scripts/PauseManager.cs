@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -52,6 +53,7 @@ public class PauseManager : MonoBehaviour
                     UIIsActive = true;
 
                     animatorPause.SetTrigger("IsPaused");
+                    EventSystem.current.SetSelectedGameObject(gameObject);
                     Time.timeScale = 0;
                 }
                 else

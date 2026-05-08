@@ -14,6 +14,8 @@ public class ButtonScript : MonoBehaviour
         pauseManager = FindAnyObjectByType<PauseManager>();
     }
 
+  
+
     public void OnButtonPressed()
     {
         PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.BUTTON, 1);
