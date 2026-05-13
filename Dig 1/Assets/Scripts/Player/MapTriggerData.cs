@@ -12,8 +12,6 @@ public class MapTriggerData : MonoBehaviour
 		} else {
 			instance = this;
 		}
-
-		DontDestroyOnLoad(gameObject);
 		mapManager = FindAnyObjectByType<MapManager>();
 	}
 
