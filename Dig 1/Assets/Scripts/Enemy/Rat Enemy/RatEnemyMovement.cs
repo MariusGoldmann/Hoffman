@@ -1,4 +1,3 @@
-using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
@@ -220,29 +219,29 @@ public class RatEnemyMovement : MonoBehaviour
 
     public IEnumerator DeathSequence()
     {
-            float timeLeft = 4f;
-            bool permaDied = false;
-            knockedOut = true;
-            gameObject.layer = LayerMask.NameToLayer("Ground");
-            if (animator != null) animator.SetTrigger("RatDied");
-            while (timeLeft > 0)
+        float timeLeft = 4f;
+        bool permaDied = false;
+        knockedOut = true;
+        gameObject.layer = LayerMask.NameToLayer("Ground");
+        if (animator != null) animator.SetTrigger("RatDied");
+        while (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 2 && !permaDied)
             {
-                timeLeft -= Time.deltaTime;
-                if (timeLeft < 2 && !permaDied)
-                {
-                    permaDied = true;
-                    if (animator != null) animator.SetTrigger("PermaDied");
-                }
-                yield return null;
+                permaDied = true;
+                if (animator != null) animator.SetTrigger("PermaDied");
             }
-            for (int i = 0; i < Random.Range(1, 3); i++)
-            {
-                Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
-                hitParticles.transform.position = transform.position;
-                hitParticles.Play();
-                yield return new WaitForSeconds(0.1f);
-            }
-            Destroy(gameObject);
+            yield return null;
+        }
+        for (int i = 0; i < Random.Range(1, 3); i++)
+        {
+            Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+            hitParticles.transform.position = transform.position;
+            hitParticles.Play();
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
     }
     bool GetIsGroundInFront()
     {
