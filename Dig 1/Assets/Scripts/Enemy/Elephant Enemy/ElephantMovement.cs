@@ -74,13 +74,10 @@ public class ElephantMovement : MonoBehaviour
     }
     void Flip()
     {
-        Debug.Log(!GetIsGroundInFront() + "1");
-        Debug.Log(GetIsWallInFront() + "2");
         if (!GetIsGroundInFront() || GetIsWallInFront())
         {
             facingDirection = facingDirection * -1;
         }
-        Debug.Log(PlayerTarget()+"3");
         if (PlayerTarget() != null)
         {
             facingDirection = (int)Mathf.Sign(PlayerTarget().position.x - transform.position.x);
