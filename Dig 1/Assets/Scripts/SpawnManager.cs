@@ -30,6 +30,8 @@ public class SpawnManager : MonoBehaviour
         {
             instance = this;
         }
+        
+        spawnPosition =  transform.position;
 
         pickUpScript = FindFirstObjectByType<PickUpScript>();
         DontDestroyOnLoad(gameObject);
