@@ -29,20 +29,13 @@ public class MusicManagerScript : MonoBehaviour
     }
 
     private void MusicSwitcher() {
-	    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) {
-		    audioSource.clip = mainMenuMusic;
-	    }
-
-	    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)) {
-		    audioSource.clip = mainGameMusic;
-	    }
-
-	    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2)) {
-		    audioSource.clip = mainMenuMusic;
-	    }
-
-	    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3)) {
-		    audioSource.clip = castleMusic;
-	    }
+	    audioSource.clip = SceneManager.GetActiveScene().name switch {
+		    "StartScene"   => mainMenuMusic,
+		    "Table Scene"  => mainGameMusic,
+		    "Shelf Scene"  => mainGameMusic,
+		    "Castle Scene" => castleMusic,
+		    _              => mainGameMusic
+	    };
+	    if (!audioSource.isPlaying) audioSource.Play();
     }
 }
