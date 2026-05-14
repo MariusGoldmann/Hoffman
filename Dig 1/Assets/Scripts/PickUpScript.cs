@@ -6,10 +6,11 @@ public class PickUpScript : MonoBehaviour
 {
     [Header("Pick Up Bools")]
     [SerializeField] bool hasLeg = false;
-    [SerializeField] bool hasEye = false;
-    [SerializeField] bool hasEar = false;
-    [SerializeField] bool hasBoomerang = false;
-    [SerializeField] bool isInteracting;
+    [SerializeField]         bool hasEye       = false;
+    [SerializeField]         bool hasEar       = false;
+    [SerializeField]         bool hasBoomerang = false;
+    [SerializeField]         bool isInteracting;
+    [SerializeField] private bool hasKey;
 
     InputAction interactAction;
 
@@ -117,6 +118,12 @@ public class PickUpScript : MonoBehaviour
             
             SceneManager.LoadScene(2);
         }
+
+        if (collision.gameObject.CompareTag("Key") && isInteracting == true) {
+	        hasKey = true;
+	        spawnManager.keyOwned = true;
+	        Destroy(collision.gameObject);
+        }
     }
 
     void RigSetter()
@@ -162,6 +169,10 @@ public class PickUpScript : MonoBehaviour
     public bool GetHasEar()
     {
         return hasEar;
+    }
+
+    public bool GetHasKey() {
+	    return hasKey;
     }
 
     public bool GetIsInteracting()

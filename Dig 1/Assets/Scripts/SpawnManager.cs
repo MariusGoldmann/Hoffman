@@ -12,11 +12,13 @@ public class SpawnManager : MonoBehaviour
     public bool eyeOwned = false;
     public bool boomerangOwned = false;
     public bool earOwned = false;
+    public bool keyOwned = false;
 
     [SerializeField] GameObject legPickUp;
     [SerializeField] GameObject eyePickup;
     [SerializeField] GameObject earPickUp;
     [SerializeField] GameObject boomerangPickUp;
+	[SerializeField] GameObject keyPickUp;
 
     PickUpScript pickUpScript;
 
@@ -43,6 +45,7 @@ public class SpawnManager : MonoBehaviour
         eyePickup = GameObject.FindGameObjectWithTag("PlayerEye");
         earPickUp = GameObject.FindGameObjectWithTag("PlayerEar");
         boomerangPickUp = GameObject.FindGameObjectWithTag("BoomerangPickUp");
+        keyPickUp = GameObject.FindGameObjectWithTag("Key");
 
         SceneReloader();
         PickUpManager();
@@ -77,6 +80,10 @@ public class SpawnManager : MonoBehaviour
         {
             earOwned = true;
         }
+
+        if (pickUpScript.GetHasKey() == true) {
+	        keyOwned = true;
+        }
     }
 
     void PickupDestroy()
@@ -96,6 +103,10 @@ public class SpawnManager : MonoBehaviour
         if (boomerangOwned)
         {
             Destroy(boomerangPickUp);
+        }
+
+        if (keyOwned) {
+	        Destroy(keyPickUp);
         }
     }
 }
