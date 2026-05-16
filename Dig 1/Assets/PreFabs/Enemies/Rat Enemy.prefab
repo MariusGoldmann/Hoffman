@@ -228,6 +228,8 @@ MonoBehaviour:
   wallCheckPosition: {fileID: 4554192857374076194}
   frontGroundCheckLength: 1.67
   frontRaycastOrigin: {fileID: 1488730367422112783}
+  hitParticles: {fileID: 2715625535597060279}
+  hpParticlePrefab: {fileID: 6834462511129556811, guid: b1c479a279be2a748a4fc81854fa3c2b, type: 3}
   facingRight: 1
   isChasing: 0
   isCooldown: 0
@@ -253,8 +255,7 @@ MonoBehaviour:
   blobfishCombat: {fileID: 0}
   ratEnemyMovement: {fileID: 7521869268331679978}
   hitParticles: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
-  hpParticlePrefab: {fileID: 6834462511129556811, guid: b1c479a279be2a748a4fc81854fa3c2b, type: 3}
-  hitStop: {fileID: 0}
+  hitStop: {fileID: 3738096181800424794}
   impulseSource: {fileID: 0}
 --- !u!70 &4054453495651370544
 CapsuleCollider2D:
@@ -618,6 +619,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+--- !u!198 &2715625535597060279 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+  m_PrefabInstance: {fileID: 2611680616674263829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4901156587538242849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}

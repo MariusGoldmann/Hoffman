@@ -75,8 +75,8 @@ public class EnemyHealth : MonoBehaviour
 
     void DeathSequence()
     {
-        if (blobfishCombat != null) blobfishCombat.DeathSequence();
-        if (ratEnemyMovement != null) ratEnemyMovement.DeathSequence();
+        if (blobfishCombat != null) StartCoroutine(blobfishCombat.DeathSequence());
+        if (ratEnemyMovement != null) StartCoroutine(ratEnemyMovement.DeathSequence());
     }
 
     public bool GetKnockedOut()

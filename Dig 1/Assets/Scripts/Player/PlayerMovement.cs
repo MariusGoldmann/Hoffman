@@ -60,11 +60,7 @@ public class PlayerMovement : MonoBehaviour
         knockbackScript = GetComponent<KnockbackScript>();
         spawnManager = FindFirstObjectByType<SpawnManager>();
         playerHealth = GetComponent<PlayerHealth>();
-
-        if (SpawnManager.instance != null)
-        {
-            transform.position = SpawnManager.instance.spawnPosition;
-        }
+        
     }
 
     void Start()

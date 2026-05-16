@@ -10,6 +10,10 @@ public class RatEnemyState : MonoBehaviour
     int playerDirection;
     bool inCombat;
 
+    private void Start()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
     private void Update()
     {
         if (enemyPosition.position.x < playerTransform.position.x)

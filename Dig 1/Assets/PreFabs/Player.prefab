@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7608657297451854872}
   - component: {fileID: 1837902685417045395}
   - component: {fileID: 948679789114481460}
+  - component: {fileID: 5320596030944724813}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -412,6 +413,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ede323f2cbe84ba88e5f1610be02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitStop
+--- !u!114 &5320596030944724813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278727348191356785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323e0c4e1fcf4664eaa672ae4789f0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &3777659576444688403
 GameObject:
   m_ObjectHideFlags: 0

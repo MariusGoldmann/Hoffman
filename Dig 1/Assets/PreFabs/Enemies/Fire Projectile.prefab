@@ -6205,7 +6205,7 @@ ParticleSystem:
   UVModule:
     serializedVersion: 2
     enabled: 0
-    mode: 0
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -6323,6 +6323,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
+    - sprite: {fileID: 0}
+    - sprite: {fileID: 0}
     - sprite: {fileID: 0}
     flipU: 0
     flipV: 0
@@ -9782,7 +9784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66059bd20081e44bbd7998e0ec24755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireProjectile
-  projectileDamage: 0
+  projectileDamage: 30
   explosionRadius: 1
   additionalForce: 10
   hitDirectionForce: 10
@@ -9797,9 +9799,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  bomerangLayer:
+  boomerangLayer:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   fireProjectilePool: {fileID: 0}
 --- !u!1001 &2627893881990133791
 PrefabInstance:

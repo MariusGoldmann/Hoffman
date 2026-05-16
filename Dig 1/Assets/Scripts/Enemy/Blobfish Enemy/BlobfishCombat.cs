@@ -139,12 +139,10 @@ public class BlobfishCombat : MonoBehaviour
     }
     public IEnumerator DeathSequence()
     {
-        for (int i = 0; i < Random.Range(1, 3); i++)
-        {
-            Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
-            hitParticles.Play();
-            yield return new WaitForSeconds(0.1f);
-        }
+        Debug.Log("started");
+        Instantiate(hpParticlePrefab, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        hitParticles.Play();
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
     public bool GetIsExpanding()

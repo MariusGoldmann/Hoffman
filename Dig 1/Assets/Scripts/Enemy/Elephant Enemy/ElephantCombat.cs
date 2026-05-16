@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class ElephantCombat : MonoBehaviour
 {
     [Header("Trumpet Attack")]
@@ -24,7 +25,7 @@ public class ElephantCombat : MonoBehaviour
 
     private void Update()
     {
-        if (trumpetAttack)
+        if (trumpetAttack || Keyboard.current.uKey.isPressed)
         {
             trumpetCoroutine=StartCoroutine(TrumpetAttack());
             trumpetAttack = false;
