@@ -6,6 +6,7 @@ public class TrumpetProjectile : MonoBehaviour
     [SerializeField] int damage=7;
     [SerializeField] float timeUntilDeath = 3f;
     [SerializeField] float speed = 10f;
+    [SerializeField] float rotationOffset = 180;
 
     float elapsedTime;
     Vector2 initialDirection;
@@ -34,8 +35,8 @@ public class TrumpetProjectile : MonoBehaviour
             elapsedTime = 0;
         }
         projectileRB.linearVelocity = finalDirection * speed;
-        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg);
-        Debug.Log(Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg);
+        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg + rotationOffset);
+        Debug.Log(Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg+rotationOffset);
         transform.rotation = rotation;
     }
     private void OnCollisionEnter2D(Collision2D other)

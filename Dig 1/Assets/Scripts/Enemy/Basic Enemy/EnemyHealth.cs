@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -13,28 +14,25 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] bool knockedOut = false;
 
-    [SerializeField] DamageFlash damageFlash;
+    [Header("References")]
     [SerializeField] KnockbackScript enemyKnockbackScript;
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
-    [SerializeField] ParticleSystem hitParticles;
-    [SerializeField] HitStop hitStop;
-    [SerializeField] CinemachineImpulseSource impulseSource;
 
-    SpriteRenderer spriteRenderer;
+
+    DamageFlash damageFlash;
     Animator animator;
+    ParticleSystem hitParticles;
+    CinemachineImpulseSource impulseSource;
+    HitStop hitStop;
 
     void Awake()
     {
         damageFlash = GetComponentInChildren<DamageFlash>();
-        enemyKnockbackScript = GetComponent<KnockbackScript>();
         animator = GetComponentInChildren<Animator>();
-        ratEnemyMovement = GetComponent<RatEnemyMovement>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         hitStop = GetComponent<HitStop>();
-        
     }
     void Start()
     {
@@ -75,6 +73,8 @@ public class EnemyHealth : MonoBehaviour
 
     void DeathSequence()
     {
+        BossSpawnStart bossSpawnStart = FindFirstObjectByType<BossSpawnStart>();
+        if (bossSpawnStart != null) bossSpawnStart.enemyCountBoss -= 1;
         if (blobfishCombat != null) StartCoroutine(blobfishCombat.DeathSequence());
         if (ratEnemyMovement != null) StartCoroutine(ratEnemyMovement.DeathSequence());
     }
