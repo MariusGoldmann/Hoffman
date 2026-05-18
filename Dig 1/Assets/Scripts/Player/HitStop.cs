@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class HitStop : MonoBehaviour
 {
-    float hitStopTime = 0.07f;
-    bool isWaiting;
+    [SerializeField] private float hitStopTime = 0.07f;
+    [SerializeField] private bool  isWaiting;
+
     public void Stop()
     {
         if (isWaiting)
@@ -16,7 +17,7 @@ public class HitStop : MonoBehaviour
         StartCoroutine(Wait());
     }
 
-    IEnumerator Wait()
+    private IEnumerator Wait()
     {
         isWaiting = true;
         yield return new WaitForSecondsRealtime(hitStopTime);

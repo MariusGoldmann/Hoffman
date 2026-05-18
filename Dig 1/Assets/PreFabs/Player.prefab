@@ -178,7 +178,7 @@ MonoBehaviour:
   spawnManager: {fileID: 0}
   movingPlatform: {fileID: 0}
   playerHealth: {fileID: 0}
-  platformRB: {fileID: 0}
+  platformRb: {fileID: 0}
 --- !u!114 &315493221406685201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   hasEar: 0
   hasBoomerang: 0
   isInteracting: 0
+  hasKey: 0
   pickUpLegParticle: {fileID: 8293890179333272315}
   pickUpEyeParticle: {fileID: 6744612093410850579}
   pickUpEarParticle: {fileID: 1346750603174515044}
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
   attackRadius: 2.7
+  recoilForce: 10
   attackPoint: {fileID: 6432162865010492417}
   enemyLayer:
     serializedVersion: 2
@@ -413,6 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ede323f2cbe84ba88e5f1610be02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitStop
+  hitStopTime: 0.07
+  isWaiting: 0
 --- !u!114 &5320596030944724813
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,36 +3,36 @@ using UnityEngine.UI;
 
 public class AbilityUI : MonoBehaviour
 {
-    [SerializeField] PlayerCombat playerCombat;
+    [SerializeField] private PlayerCombat playerCombat;
 
-    [SerializeField] Image slashImage;
-    [SerializeField] Image kickImage;
-    [SerializeField] Image boomerangImage;
+    [SerializeField] private Image slashImage;
+    [SerializeField] private Image kickImage;
+    [SerializeField] private Image boomerangImage;
 
 
-    void Start()
+    private void Start()
     {
         playerCombat = FindFirstObjectByType<PlayerCombat>();
     }
 
-    void Update()
+    private void Update()
     {
         SlashImageUpdater();
         KickImageUpdater();
         BoomerangImageUpdater();
     }
 
-    void SlashImageUpdater()  
+    private void SlashImageUpdater()  
     {
         slashImage.fillAmount = playerCombat.GetSlashTimer() * 2;
     }
 
-    void KickImageUpdater()
+    private void KickImageUpdater()
     {
         kickImage.fillAmount = playerCombat.GetKickTimer() * 2;
     }
 
-    void BoomerangImageUpdater()
+    private void BoomerangImageUpdater()
     {
         boomerangImage.fillAmount = playerCombat.GetBoomerangTimer();
     }

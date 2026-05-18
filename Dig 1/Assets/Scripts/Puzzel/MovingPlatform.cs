@@ -33,7 +33,7 @@ public class MovingPlatform : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerMovement.isOnPlatform = true;
-            playerMovement.platformRB = gameObject.GetComponent<Rigidbody2D>();
+            playerMovement.platformRb = gameObject.GetComponent<Rigidbody2D>();
         }
     }
     void OnTriggerExit2D(Collider2D collision)

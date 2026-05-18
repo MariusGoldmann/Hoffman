@@ -46,10 +46,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] PlayerHealth playerHealth;
 
     //Component references
-    Rigidbody2D playerRB;
+    Rigidbody2D        playerRB;
     public Rigidbody2D platformRB;
-    CapsuleCollider2D playerCollider;
-    Animator animator;
+    CapsuleCollider2D  playerCollider;
+    Animator           animator;
+    public Rigidbody2D platformRb;
+
     void Awake()
     { 
         playerRB = GetComponent<Rigidbody2D>();

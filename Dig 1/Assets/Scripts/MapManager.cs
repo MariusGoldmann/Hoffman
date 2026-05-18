@@ -55,7 +55,7 @@ public class MapManager : MonoBehaviour {
 
 		mapImage.SetActive(mapOpened);
 
-		Time.timeScale = mapOpened ? 0 : 1;
+		//Time.timeScale = mapOpened ? 0 : 1;
 		if (pinkMapTriggered) {
 			ShadowFader(pinkShadow, pinkCanvasGroup, 0);
 		}

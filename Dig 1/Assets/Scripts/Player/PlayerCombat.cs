@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour {
 	private static readonly int Throwing = Animator.StringToHash("Throwing");
 	[Header("Basic combat settings")]
 	[SerializeField] private float attackRadius = 1.4f;
+	[SerializeField] private float recoilForce = 10f;
 	[SerializeField] private Transform attackPoint;
 	[SerializeField] private LayerMask enemyLayer;
 
@@ -41,16 +42,18 @@ public class PlayerCombat : MonoBehaviour {
 	private Coroutine boomerangSpawnerCoroutine;
 
 	// Script references
-	private PlayerMovement playerMovement;
-	private PickUpScript   pickUpScript;
-	private PauseManager   pauseManager;
+	private                  PlayerMovement     playerMovement;
+	private                  PickUpScript       pickUpScript;
+	private                  PauseManager       pauseManager;
+	private                  HitStop            hitStop;
 	[SerializeField] private DialogueController dialogueController;
 
 	// Component references
-	[SerializeField] private GameObject boomerangPrefab; // drag in inspector
-	[SerializeField] private GameObject slashEffect;     // drag in inspector
-	[SerializeField] private GameObject kickEffect;      // drag in inspector
-	private                  Animator   animator;
+	[SerializeField] private GameObject  boomerangPrefab; // drag in inspector
+	[SerializeField] private GameObject  slashEffect;     // drag in inspector
+	[SerializeField] private GameObject  kickEffect;      // drag in inspector
+	private                  Rigidbody2D playerRb;
+	private                  Animator    animator;
 
 	public PlayerCombat(Transform attackPoint, LayerMask enemyLayer) {
 		this.attackPoint = attackPoint;
@@ -64,6 +67,8 @@ public class PlayerCombat : MonoBehaviour {
 	private void Awake() {
 		playerMovement = GetComponent<PlayerMovement>();
 		pickUpScript   = GetComponent<PickUpScript>();
+		hitStop        = GetComponent<HitStop>();
+		playerRb        = GetComponent<Rigidbody2D>();
 		pauseManager   = FindAnyObjectByType<PauseManager>();
 
 		animator = GetComponentInChildren<Animator>();
@@ -85,6 +90,7 @@ public class PlayerCombat : MonoBehaviour {
 			                                               additionalForce   * knockbackMultiplier,
 			                                               enemy.transform.position);
 			PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT);
+			hitStop.Stop();
 		}
 	}
 
