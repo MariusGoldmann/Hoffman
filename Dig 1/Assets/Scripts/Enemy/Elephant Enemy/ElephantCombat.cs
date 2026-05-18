@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class ElephantCombat : MonoBehaviour
 {
+    [SerializeField] float attackCooldown = 1f;
+
     [Header("Trumpet Attack")]
     [SerializeField] bool trumpetAttack;
     [SerializeField] float trumpetAnticipationTime = 1;
@@ -15,33 +17,40 @@ public class ElephantCombat : MonoBehaviour
     [SerializeField] bool stompAttack;
     [SerializeField] float stompAnticipationTime = 1;
 
+    bool isAlive = true;
+    float currentCooldown;
+
     [Header("References")]
     [SerializeField] ObjectPooling trumpetPool;
     [SerializeField] ObjectPooling stompPool;
     [SerializeField] ElephantMovement elephantMovement;
+    [SerializeField] KnockbackScript knockbackScript;
+    [SerializeField] EnemyHealth enemyHealth;
 
     public Coroutine trumpetCoroutine;
     public Coroutine stompCoroutine;
 
     private void Update()
     {
-        if (trumpetAttack || Keyboard.current.uKey.isPressed)
+        if (CanAttack())
         {
-            trumpetCoroutine=StartCoroutine(TrumpetAttack());
-            trumpetAttack = false;
+            currentCooldown = attackCooldown;
+            float attackPicker = Random.Range(0, 2);
+            if (attackPicker==0) trumpetCoroutine = StartCoroutine(TrumpetAttack());
+            else stompCoroutine=StartCoroutine(StompAttack());
         }
-        if (stompAttack)
+        currentCooldown -= Time.deltaTime;
+    }
+    bool CanAttack()
+    {
+        if (isAlive && currentCooldown < 0 && !knockbackScript.GetIsKnockback() && elephantMovement.GetPlayerTarget() != null)
         {
-            stompCoroutine=StartCoroutine(StompAttack());
-            stompAttack = false;
+            return true;
         }
+        return false;
     }
     public IEnumerator TrumpetAttack()
     {
-        float elapsedTime = 0;
-
-        yield return new WaitForSeconds(trumpetAnticipationTime);
-        
         for (int i=0; i<projectileAmount; i++)
         {
             trumpetPool.GetObject(transform.position, Quaternion.identity); //Change transform.position to trumpetPosition
@@ -52,13 +61,8 @@ public class ElephantCombat : MonoBehaviour
     }
     public IEnumerator StompAttack()
     {
-        float elapsedTime = 0;
-
-        while (elapsedTime > stompAnticipationTime)
-        {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+        Debug.Log("Did stomp attack");
+        yield return null;
     }
     public Vector2 GetInitialDirection()
     {

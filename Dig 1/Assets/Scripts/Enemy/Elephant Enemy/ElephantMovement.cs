@@ -52,7 +52,7 @@ public class ElephantMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!knockedOut && GetIsGrounded() && PlayerTarget() == null)
+        if (!knockedOut && GetIsGrounded() && GetPlayerTarget() == null)
         {
             Patrol();
             Flip();
@@ -78,13 +78,13 @@ public class ElephantMovement : MonoBehaviour
         {
             facingDirection = facingDirection * -1;
         }
-        if (PlayerTarget() != null)
+        if (GetPlayerTarget() != null)
         {
-            facingDirection = (int)Mathf.Sign(PlayerTarget().position.x - transform.position.x);
+            facingDirection = (int)Mathf.Sign(GetPlayerTarget().position.x - transform.position.x);
         }
         transform.localScale = new Vector2(facingDirection, 1);
     }
-    Transform PlayerTarget()
+    public Transform GetPlayerTarget()
     {
         Vector2 aggressiveCapsuleSize = new Vector2(aggressiveHorizontalDetectRange, aggressiveVerticalDetectRange);
         Vector2 attackCapsuleSize = new Vector2(attackHorizontalDetectRange, attackVerticalDetectRange);
