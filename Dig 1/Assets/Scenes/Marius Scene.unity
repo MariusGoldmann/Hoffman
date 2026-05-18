@@ -3180,28 +3180,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6908115780733834097, guid: 7f541e3505371304e9bde96ec36c86f0, type: 3}
   m_PrefabInstance: {fileID: 1681321615}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1301510261 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3713973616777110695, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
+--- !u!4 &1301510265 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6191971011070247154, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
   m_PrefabInstance: {fileID: 2668500916568238228}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8eb8f12c5457304f9197a85f67aab7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
---- !u!114 &1301510263 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8077266023925167110, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-  m_PrefabInstance: {fileID: 2668500916568238228}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ed67d94bbfb00444846715de9a9380b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
 --- !u!1001 &1330439594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4799,6 +4782,37 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 5733562196409095140, guid: 558ee9eb135031a4f99f73a5dd28bb71, type: 3}
   m_PrefabInstance: {fileID: 2097599375}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2105686818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105686819}
+  m_Layer: 7
+  m_Name: Slash Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2105686819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105686818}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.76, y: -1.62, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1301510265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2138564444 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8204275056132510389, guid: 5389a5f0ee595fa4d93c8259f8565a0c, type: 3}
@@ -4812,38 +4826,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1057363120353025244, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 1057363120353025244, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4310462974679019590, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-      propertyPath: frontWallCheckLength
-      value: 6.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4310462974679019590, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-      propertyPath: frontGroundCheckLength
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 5436363456454060602, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
       propertyPath: m_Name
       value: Elephant Enemy (0)
       objectReference: {fileID: 0}
     - target: {fileID: 5890713763649760831, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-      propertyPath: enemyHealth
+      propertyPath: slashOrigin
       value: 
-      objectReference: {fileID: 1301510263}
+      objectReference: {fileID: 2105686819}
+    - target: {fileID: 5890713763649760831, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
+      propertyPath: slashRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5890713763649760831, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
       propertyPath: trumpetPool
       value: 
       objectReference: {fileID: 1798291712}
     - target: {fileID: 5890713763649760831, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-      propertyPath: knockbackScript
-      value: 
-      objectReference: {fileID: 1301510261}
+      propertyPath: projectileOrigin.y
+      value: -4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6191971011070247154, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -76.3
@@ -4885,9 +4887,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5209215066912759114, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
-    m_AddedGameObjects: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6191971011070247154, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2105686819}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
 --- !u!1660057539 &9223372036854775807

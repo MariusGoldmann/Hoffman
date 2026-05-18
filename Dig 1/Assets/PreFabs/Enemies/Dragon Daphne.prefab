@@ -154,13 +154,9 @@ MonoBehaviour:
   currentEnemyHealth: 0
   maxEnemyHealth: 45
   knockedOut: 0
-  damageFlash: {fileID: 0}
-  enemyKnockbackScript: {fileID: 0}
+  enemyKnockbackScript: {fileID: 8424821009620200500}
   blobfishCombat: {fileID: 0}
   ratEnemyMovement: {fileID: 0}
-  hitParticles: {fileID: 1061878394642755921}
-  hitStop: {fileID: 0}
-  impulseSource: {fileID: 0}
 --- !u!114 &2824844533995411475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,11 +490,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
---- !u!198 &1061878394642755921 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
-  m_PrefabInstance: {fileID: 1093765998849118963}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8004933097908964551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}

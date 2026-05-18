@@ -17,19 +17,13 @@ public class ElephantMovement : MonoBehaviour
     [Header("Player Detection")]
     [SerializeField] float aggressiveHorizontalDetectRange;
     [SerializeField] float aggressiveVerticalDetectRange;
-    [SerializeField] float attackHorizontalDetectRange;
-    [SerializeField] float attackVerticalDetectRange;
 
-
-    [Header("Debug")]
-    [SerializeField] bool knockedOut;
-    bool aggressive;
-    bool inAttackRange;
+    bool isAlive=true;
 
     Rigidbody2D elephantRB;
     Animator animator;
-    EnemyHealth enemyHealth;
     ElephantCombat elephantCombat;
+    KnockbackScript knockbackScript;
     LayerMask playerLayer;
     LayerMask groundLayer;
 
@@ -37,31 +31,30 @@ public class ElephantMovement : MonoBehaviour
     {
         elephantRB = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        enemyHealth = GetComponent<EnemyHealth>();
         elephantCombat = GetComponent<ElephantCombat>();
+        knockbackScript = GetComponent<KnockbackScript>();
         playerLayer = LayerMask.GetMask("Player");
         groundLayer = LayerMask.GetMask("Ground");
     }
-    void Update()
-    {
-        HandleAnimations();
-    }
-    void HandleAnimations()
-    {
-
-    }
     private void FixedUpdate()
     {
-        if (!knockedOut && GetIsGrounded() && GetPlayerTarget() == null)
+        if (CanMove() && GetIsGrounded() && GetPlayerTarget() == null)
         {
             Patrol();
             Flip();
+            animator.SetBool("IsAggressive", false);
         }
-        else if (!knockedOut && GetIsGrounded())
+        else if (CanMove() && GetIsGrounded())
         {
             Charge();
             Flip();
+            animator.SetBool("IsAggressive", true);
         }
+    }
+    bool CanMove()
+    {
+        if (isAlive && !knockbackScript.GetIsKnockback() && !elephantCombat.GetIsAttacking()) return true;
+        return false;
     }
     void Patrol()
     {
@@ -69,8 +62,7 @@ public class ElephantMovement : MonoBehaviour
     }
     void Charge()
     {
-        if (!inAttackRange) elephantRB.linearVelocityX = chaseMoveSpeed * facingDirection;
-        else elephantCombat.trumpetCoroutine = StartCoroutine(elephantCombat.TrumpetAttack()); // Random attack logic?
+        elephantRB.linearVelocityX = chaseMoveSpeed * facingDirection;
     }
     void Flip()
     {
@@ -87,9 +79,7 @@ public class ElephantMovement : MonoBehaviour
     public Transform GetPlayerTarget()
     {
         Vector2 aggressiveCapsuleSize = new Vector2(aggressiveHorizontalDetectRange, aggressiveVerticalDetectRange);
-        Vector2 attackCapsuleSize = new Vector2(attackHorizontalDetectRange, attackVerticalDetectRange);
         Collider2D hit = Physics2D.OverlapCapsule(transform.position, aggressiveCapsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
-        inAttackRange = Physics2D.OverlapCapsule(transform.position, attackCapsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
 
         if (hit != null)
         {
@@ -111,10 +101,6 @@ public class ElephantMovement : MonoBehaviour
     bool GetIsWallInFront()
     {
         return Physics2D.Raycast(frontRaycastOrigin.position, Vector2.up, frontWallCheckLength, groundLayer);
-    }
-    public void SetKnockedOut(bool b)
-    {
-        knockedOut = b;
     }
     void OnDrawGizmos()
     {
@@ -147,5 +133,10 @@ public class ElephantMovement : MonoBehaviour
     public float GetFacingDirection()
     {
         return facingDirection;
+    }
+
+    public bool GetIsAlive()
+    {
+        return isAlive;
     }
 }

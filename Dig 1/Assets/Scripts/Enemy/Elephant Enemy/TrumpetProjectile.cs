@@ -36,7 +36,6 @@ public class TrumpetProjectile : MonoBehaviour
         }
         projectileRB.linearVelocity = finalDirection * speed;
         Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg + rotationOffset);
-        Debug.Log(Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg+rotationOffset);
         transform.rotation = rotation;
     }
     private void OnCollisionEnter2D(Collision2D other)

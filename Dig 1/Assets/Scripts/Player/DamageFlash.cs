@@ -39,7 +39,6 @@ public class DamageFlash : MonoBehaviour
 
             yield return null;
         }
-        Debug.Log("3");
     }
 
     void SetFlashColor()

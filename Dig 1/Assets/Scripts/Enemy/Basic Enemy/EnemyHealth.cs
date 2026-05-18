@@ -21,7 +21,6 @@ public class EnemyHealth : MonoBehaviour
 
 
     DamageFlash damageFlash;
-    Animator animator;
     ParticleSystem hitParticles;
     CinemachineImpulseSource impulseSource;
     HitStop hitStop;
@@ -29,7 +28,6 @@ public class EnemyHealth : MonoBehaviour
     void Awake()
     {
         damageFlash = GetComponentInChildren<DamageFlash>();
-        animator = GetComponentInChildren<Animator>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         hitStop = GetComponent<HitStop>();
