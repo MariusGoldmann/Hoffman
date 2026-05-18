@@ -28,11 +28,8 @@ public class PickUpScript : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    [SerializeField] SpawnManager spawnManager;
-
     void Awake()
     {
-        spawnManager = FindFirstObjectByType<SpawnManager>();
         newEyeRig.transform.localScale = new Vector3(0, 0, 0);
         newEarRig.transform.localScale = new Vector3(0, 0, 0);
     }
@@ -86,7 +83,7 @@ public class PickUpScript : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerLeg") && isInteracting == true)
         {
             hasLeg = true;
-            spawnManager.legOwned = true;
+            SpawnManager.instance.legOwned = true;
 
 
             pickUpLegParticle.Play();
@@ -96,21 +93,21 @@ public class PickUpScript : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerEye") && isInteracting == true)
         {
             hasEye = true;
-            spawnManager.eyeOwned = true;
+            SpawnManager.instance.eyeOwned = true;
             pickUpEyeParticle.Play();
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("BoomerangPickUp") && isInteracting == true)
         {
             hasBoomerang = true;
-            spawnManager.boomerangOwned = true;
+            SpawnManager.instance.boomerangOwned = true;
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("PlayerEar") && isInteracting == true)
         {
             hasEar = true;
-            spawnManager.earOwned = true;
+            SpawnManager.instance.earOwned = true;
             pickUpEarParticle.Play();
             newEarRig.transform.localScale = new Vector3(1, 1, 1);
             Destroy(collision.gameObject);
@@ -121,29 +118,29 @@ public class PickUpScript : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Key") && isInteracting == true) {
 	        hasKey = true;
-	        spawnManager.keyOwned = true;
+	        SpawnManager.instance.keyOwned = true;
 	        Destroy(collision.gameObject);
         }
     }
 
     void RigSetter()
     {
-        if (spawnManager.legOwned == true)
+        if (SpawnManager.instance.legOwned == true)
         {
             hasLeg = true;
         }
 
-        if (spawnManager.eyeOwned == true)
+        if (SpawnManager.instance.eyeOwned == true)
         {
             hasEye = true;
         }
 
-        if (spawnManager.boomerangOwned == true)
+        if (SpawnManager.instance.boomerangOwned == true)
         {
             hasBoomerang = true;
         }
 
-        if (spawnManager.earOwned == true)
+        if (SpawnManager.instance.earOwned == true)
         {
             hasEar = true;
 

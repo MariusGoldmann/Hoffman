@@ -32,11 +32,10 @@ public class SpawnManager : MonoBehaviour
         {
             instance = this;
         }
-        
+        DontDestroyOnLoad(gameObject);
         spawnPosition =  transform.position;
 
         pickUpScript = FindFirstObjectByType<PickUpScript>();
-        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

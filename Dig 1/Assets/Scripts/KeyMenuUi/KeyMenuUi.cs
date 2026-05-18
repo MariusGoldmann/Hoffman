@@ -5,17 +5,11 @@ using UnityEngine.InputSystem;
 
 public class KeyMenuUi : MonoBehaviour {
 	[SerializeField] private GameObject menuImage;
-	
-
-	
-	private void Update() {
-		
-	}
 
 	public void InsertButton() {
-		if (SpawnManager.instance.keyOwned) {
-			CatsleOpener.instance.gateOpened = true;
-		}
+		if (!SpawnManager.instance.keyOwned) return;
+		CatsleOpener.instance.gateOpened = true;
+		menuImage.SetActive(false);
 	}
 	
 	public void NoButton() {

@@ -56,16 +56,16 @@ public class PlayerMovement : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider2D>();
         animator = GetComponentInChildren<Animator>();
 
-        pickUpScript = GetComponent<PickUpScript>();
-        knockbackScript = GetComponent<KnockbackScript>();
-        spawnManager = FindFirstObjectByType<SpawnManager>();
-        playerHealth = GetComponent<PlayerHealth>();
-        
+        pickUpScript       = GetComponent<PickUpScript>();
+        knockbackScript    = GetComponent<KnockbackScript>();
+        spawnManager       = FindFirstObjectByType<SpawnManager>();
+        playerHealth       = GetComponent<PlayerHealth>();
     }
 
     void Start()
     {
-        movingState = MovingStates.OneLegIdle;
+        movingState        = MovingStates.OneLegIdle;
+        transform.position = SpawnManager.instance.spawnPosition;
     }
 
     void Update()

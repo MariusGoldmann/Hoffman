@@ -11,8 +11,7 @@ public class CatsleOpener : MonoBehaviour {
 	[SerializeField] private float            interactRadius;
 	[SerializeField] public bool             isWithinInteractRadius;
 
-	[SerializeField] private Transform        raycastTransform1;
-	[SerializeField] private Transform        raycastTransform2;
+	[SerializeField] private GameObject keyMenuUi;
 	
 	[SerializeField] private CircleCollider2D interactCollider;
 	[SerializeField] private BoxCollider2D    gateCollider;
@@ -23,7 +22,6 @@ public class CatsleOpener : MonoBehaviour {
 		} else {
 			instance = this;
 		}
-		DontDestroyOnLoad(gameObject);
 		
 		interactCollider = GetComponent<CircleCollider2D>();
 		gateCollider = GetComponent<BoxCollider2D>();
@@ -31,7 +29,7 @@ public class CatsleOpener : MonoBehaviour {
 	private void Update() {
 		interactCollider.radius = interactRadius;
 		if (gateOpened) gateCollider.enabled = false;
-		if (EnteredCastleSceneTrigger()) SceneManager.LoadScene("CastleScene");
+		if (isWithinInteractRadius && Keyboard.current.eKey.wasPressedThisFrame) keyMenuUi.SetActive(true);
 	}
 
 
@@ -41,16 +39,5 @@ public class CatsleOpener : MonoBehaviour {
 
 	private void OnTriggerExit2D(Collider2D other) {
 		if (other.CompareTag("Player")) isWithinInteractRadius = false;
-	}
-
-	private bool EnteredCastleSceneTrigger() {
-		var hit = Physics2D.Linecast(raycastTransform1.position, raycastTransform2.position, 
-		                             LayerMask.GetMask("Player"));
-		return hit;
-	}
-
-	public void OnDrawGizmos() {
-		Color c = Color.red;
-		Gizmos.DrawLine(raycastTransform1.position, raycastTransform2.position);
 	}
 }
