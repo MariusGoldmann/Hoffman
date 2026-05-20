@@ -22,9 +22,6 @@ public class BossSpawn : MonoBehaviour
     void Start()
     {
 
-
-        Collider2D collider = GetComponentInParent<Collider2D>();
-
         bossSpawnStartScript = FindAnyObjectByType<BossSpawnStart>();
 
     }
@@ -36,6 +33,12 @@ public class BossSpawn : MonoBehaviour
             StartCoroutine(SpawnStart());
             Debug.Log("BossFightStart");
         }
+
+        if (bossSpawnStartScript.winFirstWave == true)
+        {
+            StartCoroutine(SecondWave());
+             Debug.Log("SecondWaveStart");
+        }
     }
 
 
@@ -44,39 +47,61 @@ public class BossSpawn : MonoBehaviour
     {
         bossSpawnStartScript.bossSpawnStart = false;
         yield return new WaitForSecondsRealtime(1);
-        RandomSpawn();
+        RatSpawn();
         yield return new WaitForSecondsRealtime(10);
 
-        RandomSpawn();
+        RatSpawn();
         yield return new WaitForSecondsRealtime(5);
-        RandomSpawn();
+        DragonSpawn();
     }
 
-    void RandomSpawn()
+    IEnumerator SecondWave()
     {
-        spawnCount = UnityEngine.Random.Range(1, 10);
+        bossSpawnStartScript.winFirstWave = false;
+        yield return new WaitForSecondsRealtime(5);
+        Debug.Log("SecondWave1");
+        RatSpawn();
+        yield return new WaitForSecondsRealtime(2);
+        DragonSpawn();
+        yield return new WaitForSecondsRealtime(10);
 
-        // this have to change if we want to add the elephant too. 
-        if (spawnCount <= 3)
-        {
-            RatSpawn();
-        }
-        else if (spawnCount >= 4 && spawnCount <= 6)
-        {
-            PufferFishSpawn();
-        }
-        else if (spawnCount >= 7)
-        {
-            DragonSpawn();
-        }
+        Debug.Log("SecondWave2");
+        RatSpawn();
+        yield return new WaitForSecondsRealtime(2);
+        RatSpawn(); 
+        yield return new WaitForSecondsRealtime(5);
+        RatSpawn();
+        yield return new WaitForSecondsRealtime(1);
+        DragonSpawn(); 
     }
+
+    //void RandomSpawn()
+    //{
+    //    spawnCount = UnityEngine.Random.Range(1, 10);
+
+    //    // this have to change if we want to add the elephant or Pufferfish too. 
+    //    if (spawnCount <= 6)
+    //    {
+    //        RatSpawn();
+    //    }
+    //    //else if (spawnCount >= 4 && spawnCount <= 6)
+    //    //{
+    //    //    PufferFishSpawn();
+    //    //}
+    //    else if (spawnCount >= 7)
+    //    {
+    //        DragonSpawn();
+    //    }
+    //}
 
 
     void RatSpawn()
     {
         Debug.Log("Rat");
 
-        Instantiate(ratPrefab, transform.position, Quaternion.identity);
+        Vector3 pos1 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
+        Instantiate(ratPrefab, pos1, Quaternion.identity);
+
         bossSpawnStartScript.enemyCountBoss++;
     }
 
@@ -84,28 +109,30 @@ public class BossSpawn : MonoBehaviour
     {
         Debug.Log("Dragon");
 
-        Instantiate(dragonPrefab, transform.position, Quaternion.identity);
+        Vector3 pos2 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
+        Instantiate(ratPrefab, pos2, Quaternion.identity);
+
         bossSpawnStartScript.enemyCountBoss++;
 
     }
 
-    void PufferFishSpawn()
-    {
-        Debug.Log("PufferFish");
+    //void PufferFishSpawn()
+    //{
+    //    Debug.Log("PufferFish");
 
-        Instantiate(pufferFishPrefab, transform.position, Quaternion.identity);
-        bossSpawnStartScript.enemyCountBoss++;
+    //    Instantiate(pufferFishPrefab, transform.position, Quaternion.identity);
+    //    bossSpawnStartScript.enemyCountBoss++;
 
-    }
+    //}
 
-    /*void ElephantSpawn()
-    {
-        Debug.Log("Elephant");
+    //*void ElephantSpawn()
+    //{
+    //    Debug.Log("Elephant");
 
-        Instantiate(elephantPrefab, transform.position, Quaternion.identity);
-            bossSpawnStartScript.enemyCountBoss++;
+    //    Instantiate(elephantPrefab, transform.position, Quaternion.identity);
+    //        bossSpawnStartScript.enemyCountBoss++;
 
-    } */
+    //} 
 
 
 
