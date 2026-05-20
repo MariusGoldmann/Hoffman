@@ -1,21 +1,22 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
 public class ElephantCombat : MonoBehaviour
 {
     [Header("General Attack Settings")]
     [SerializeField] float attackCooldown = 1f;
-    [SerializeField] Vector2 projectileOrigin;
+    [SerializeField] float anticipationTime = 0.4f;
+    [SerializeField] int collisionDamage = 5;
+    [SerializeField] Transform projectileOrigin;
 
     [Header("Trumpet Attack")]
     [SerializeField] bool trumpetAttack;
-    [SerializeField] float trumpetAnticipationTime = 1;
     [SerializeField] float projectileAmount = 3;
     [SerializeField] float timeBetweenProjectiles = 0.2f;
     [SerializeField] Vector2 trumpetDirection;
 
     [Header("Stomp Attack")]
     [SerializeField] bool stompAttack;
-    [SerializeField] float stompAnticipationTime = 1;
 
     [Header("Slash Attack")]
     [SerializeField] Transform slashOrigin;
@@ -33,41 +34,46 @@ public class ElephantCombat : MonoBehaviour
     float currentCooldown;
 
     [Header("References")]
-    [SerializeField] ObjectPooling trumpetPool;
-    [SerializeField] ObjectPooling stompPool;
     [SerializeField] ElephantMovement elephantMovement;
     [SerializeField] KnockbackScript knockbackScript;
     [SerializeField] EnemyHealth enemyHealth;
 
-    
     LayerMask playerLayer;
     Animator animator;
+    CinemachineImpulseSource impulseSource; 
+    ObjectPooling trumpetPool;
+    ObjectPooling stompPoolLeft;
+    ObjectPooling stompPoolRight;
 
     private void Start()
     {
         playerLayer = LayerMask.GetMask("Player");
         animator=GetComponentInChildren<Animator>();
+        impulseSource=GetComponent<CinemachineImpulseSource>();
+        trumpetPool = GameObject.FindGameObjectWithTag("TrumpetPool").GetComponent<ObjectPooling>();
+        stompPoolLeft = GameObject.FindGameObjectWithTag("StompPoolLeft").GetComponent<ObjectPooling>();
+        stompPoolRight = GameObject.FindGameObjectWithTag("StompPoolRight").GetComponent<ObjectPooling>();
     }
 
     private void Update()
     {
-        if (CanAttack())
+        if (CanAttack(false))
         {
             isAttacknig = true;
             currentCooldown = attackCooldown;
-            float attackPicker = Random.Range(0, 3);
+            int attackPicker = Random.Range(0, 1);
             if (attackPicker == 0) StartCoroutine(TrumpetAttack());
-            else if (attackPicker == 3) StartCoroutine(StompAttack());
+            else if (attackPicker == 1) StartCoroutine(StompAttack());
             else StartCoroutine(SlashAttack());
         }
         currentCooldown -= Time.deltaTime;
     }
-    bool CanAttack()
+    public bool CanAttack(bool checkingInAttackRange)
     {
         Vector2 attackCapsuleSize = new Vector2(attackHorizontalDetectRange, attackVerticalDetectRange);
         bool inAttackRange = Physics2D.OverlapCapsule(transform.position, attackCapsuleSize, CapsuleDirection2D.Horizontal, 0f, playerLayer);
-
-        if (elephantMovement.GetIsAlive() && currentCooldown < 0 && !knockbackScript.GetIsKnockback() && inAttackRange)
+        if (checkingInAttackRange && inAttackRange) return true;
+        else if (elephantMovement.GetIsAlive() && elephantMovement.GetIsGrounded() && currentCooldown < 0 && !knockbackScript.GetIsKnockback() && inAttackRange)
         {
             return true;
         }
@@ -75,7 +81,7 @@ public class ElephantCombat : MonoBehaviour
     }
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.beige;
+        Gizmos.color = Color.red;
 
         Vector2 size = new Vector2(attackHorizontalDetectRange, attackVerticalDetectRange);
         Vector2 center = transform.position;
@@ -92,30 +98,39 @@ public class ElephantCombat : MonoBehaviour
         Gizmos.DrawWireSphere(left, radius);
         Gizmos.DrawWireSphere(right, radius);
 
-        Gizmos.color = Color.bisque;
+        Gizmos.color = Color.red;
 
         Gizmos.DrawWireSphere(slashOrigin.position, slashRadius);
     }
    IEnumerator TrumpetAttack()
-    {
-        animator.SetTrigger("Stomp");
-        yield return new WaitForSeconds(trumpetAnticipationTime);
-        for (int i=0; i<projectileAmount; i++)
-        {
-            trumpetPool.GetObject(projectileOrigin, Quaternion.identity);
-            yield return new WaitForSeconds(timeBetweenProjectiles);
-        }
-        isAttacknig = false;
-    }
+   {
+      Debug.Log("TrumpetAttack");
+      animator.SetTrigger("Stomp");
+      yield return new WaitForSeconds(anticipationTime);
+      CameraShakeManager.instance.CameraShake(impulseSource);
+      for (int i=0; i<projectileAmount; i++)
+      {
+          GameObject projectile = trumpetPool.GetObject(projectileOrigin.position, Quaternion.identity);
+          projectile.GetComponent<TrumpetShockwave>().SetInitialDirection(new Vector2(trumpetDirection.x * elephantMovement.GetFacingDirection(), trumpetDirection.y));
+          yield return new WaitForSeconds(timeBetweenProjectiles);
+      }
+      Debug.Log("Completed ForLoop");
+      isAttacknig = false;
+   }
     IEnumerator StompAttack()
     {
+        Debug.Log("StompAttack");
         animator.SetTrigger("Stomp");
-        yield return new WaitForSeconds(stompAnticipationTime);
-        Debug.Log("Did stomp attack");
+        yield return new WaitForSeconds(anticipationTime);
+        CameraShakeManager.instance.CameraShake(impulseSource);
+        stompPoolLeft.GetObject(projectileOrigin.position, Quaternion.identity);
+        stompPoolRight.GetObject(projectileOrigin.position, Quaternion.identity);
+        Debug.Log("Completed Stomp Attack");
         isAttacknig = false;
     }
     IEnumerator SlashAttack()
     {
+        Debug.Log("SlashAttack");
         yield return new WaitForSeconds(slashAnticipationTime);
         var player = Physics2D.OverlapCircle(slashOrigin.position, slashRadius, playerLayer);
         if (player != null)
@@ -124,10 +139,14 @@ public class ElephantCombat : MonoBehaviour
             player.GetComponent<PlayerHealth>().ChangeHealth(slashDamage, hitDirection, Vector2.up, hitDirectionForce, additionalForce, player.ClosestPoint(transform.position), false);
             PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT);
         }
+        isAttacknig = false;
     }
-    public Vector2 GetInitialDirection()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        return new Vector2(trumpetDirection.x * elephantMovement.GetFacingDirection(), trumpetDirection.y);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(collisionDamage, other.transform.position - transform.position, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
+        }
     }
     public bool GetIsAttacking()
     {
