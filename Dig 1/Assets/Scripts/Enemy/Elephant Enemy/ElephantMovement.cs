@@ -13,12 +13,14 @@ public class ElephantMovement : MonoBehaviour
     [SerializeField] float frontGroundCheckLength = 0.2f;
     [SerializeField] float frontWallCheckLength = 4f; //Elepthant Heigth
     [SerializeField] Transform frontRaycastOrigin;
+    [SerializeField] Transform groundCheckOrigin;
 
     [Header("Player Detection")]
     [SerializeField] float aggressiveHorizontalDetectRange;
     [SerializeField] float aggressiveVerticalDetectRange;
 
     bool isAlive=true;
+    bool canMoveLastFrame = true;
 
     Rigidbody2D elephantRB;
     Animator animator;
@@ -36,24 +38,41 @@ public class ElephantMovement : MonoBehaviour
         playerLayer = LayerMask.GetMask("Player");
         groundLayer = LayerMask.GetMask("Ground");
     }
+    private void Update()
+    {
+        if (elephantRB.linearVelocity.x !=0 && CanMove() && GetPlayerTarget()==null) animator.SetBool("IsAggressive", false);
+        else if (elephantRB.linearVelocityX!=0 && CanMove()) animator.SetBool("IsAggressive", true);
+    }
     private void FixedUpdate()
     {
-        if (CanMove() && GetIsGrounded() && GetPlayerTarget() == null)
+        if (CanMove() && GetPlayerTarget() != null)
+        { 
+            Charge();
+            Flip();
+        }
+        else if (CanMove())
         {
             Patrol();
             Flip();
-            animator.SetBool("IsAggressive", false);
         }
-        else if (CanMove() && GetIsGrounded())
+        else if (!knockbackScript.GetIsKnockback() && elephantCombat.CanAttack(true))
         {
-            Charge();
+            elephantRB.linearVelocityX = 0;
             Flip();
-            animator.SetBool("IsAggressive", true);
         }
+        else if (knockbackScript.GetIsKnockback()) elephantRB.linearVelocityX = 0;
+        
+        if (canMoveLastFrame != CanMove())
+        {
+            Debug.Log("Is Alive" + isAlive);
+            Debug.Log("Is Knockback" + knockbackScript.GetIsKnockback());
+            Debug.Log("IsAttacking" + elephantCombat.CanAttack(true));
+        }
+        canMoveLastFrame = CanMove();
     }
     bool CanMove()
     {
-        if (isAlive && !knockbackScript.GetIsKnockback() && !elephantCombat.GetIsAttacking()) return true;
+        if (isAlive && !knockbackScript.GetIsKnockback() && !elephantCombat.CanAttack(true) && GetIsGrounded()) return true;
         return false;
     }
     void Patrol()
@@ -69,6 +88,7 @@ public class ElephantMovement : MonoBehaviour
         if (!GetIsGroundInFront() || GetIsWallInFront())
         {
             facingDirection = facingDirection * -1;
+            Debug.Log("Ground " + GetIsGroundInFront() + " Wall " + GetIsWallInFront());
         }
         if (GetPlayerTarget() != null)
         {
@@ -92,11 +112,11 @@ public class ElephantMovement : MonoBehaviour
     }
     bool GetIsGroundInFront()
     {
-        return Physics2D.Raycast(frontRaycastOrigin.position, Vector2.down, frontGroundCheckLength, groundLayer);
+        return Physics2D.BoxCast(frontRaycastOrigin.position, new Vector2(frontGroundCheckLength, frontGroundCheckLength), 0f, Vector2.down, frontGroundCheckLength, groundLayer);
     }
-    bool GetIsGrounded()
+    public bool GetIsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, groundCheckLength, groundLayer);
+        return Physics2D.BoxCast(groundCheckOrigin.position, new Vector2(groundCheckLength, groundCheckLength), 0f, Vector2.down, groundCheckLength, groundLayer);
     }
     bool GetIsWallInFront()
     {
@@ -104,7 +124,7 @@ public class ElephantMovement : MonoBehaviour
     }
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.orange;
 
         Vector2 size = new Vector2(aggressiveHorizontalDetectRange, aggressiveVerticalDetectRange);
         Vector2 center = transform.position;
@@ -121,13 +141,13 @@ public class ElephantMovement : MonoBehaviour
         Gizmos.DrawWireSphere(left, radius);
         Gizmos.DrawWireSphere(right, radius);
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, Vector2.down * groundCheckLength);
+        Gizmos.color = Color.white;
+        Gizmos.DrawCube(groundCheckOrigin.position, Vector2.down * new Vector3(groundCheckLength, groundCheckLength, groundCheckLength));
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(frontRaycastOrigin.position, Vector2.down * frontGroundCheckLength);
+        Gizmos.color = Color.beige;
+        Gizmos.DrawCube(frontRaycastOrigin.position, Vector2.down * new Vector3(groundCheckLength, groundCheckLength, groundCheckLength));
 
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.white;
         Gizmos.DrawRay(frontRaycastOrigin.position, Vector2.up * frontWallCheckLength);
     }
     public float GetFacingDirection()
