@@ -72,6 +72,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+	    if (Keyboard.current.eKey.wasPressedThisFrame) {
+		    animator.SetTrigger("StandUp");
+	    }
         switch (movingState)
         {
             case MovingStates.Idle:

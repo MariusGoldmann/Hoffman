@@ -1,10 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor;
-using Unity.Collections;
-using System;
-
 public class BossSpawn : MonoBehaviour
 {
     [SerializeField] GameObject ratPrefab;
