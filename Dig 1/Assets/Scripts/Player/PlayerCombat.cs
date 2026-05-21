@@ -6,7 +6,6 @@ public class PlayerCombat : MonoBehaviour {
 	private static readonly int Throwing = Animator.StringToHash("Throwing");
 	[Header("Basic combat settings")]
 	[SerializeField] private float attackRadius = 1.4f;
-	[SerializeField] private float recoilForce = 10f;
 	[SerializeField] private Transform attackPoint;
 	[SerializeField] private LayerMask enemyLayer;
 
