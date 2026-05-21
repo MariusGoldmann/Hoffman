@@ -97,7 +97,6 @@ public class RatEnemyMovement : MonoBehaviour
     }
     IEnumerator ChargeToAgressiveAnimation()
     {
-        Debug.Log("Coroutine Started");
         animator.SetTrigger("Charge");
         yield return new WaitForSeconds(chaseAnticipationTime);
         while (isChasing)
@@ -150,8 +149,6 @@ public class RatEnemyMovement : MonoBehaviour
     }
     void StopChasePlayer(bool dazed)
     {
-        Debug.Log("Stop Chase Player Started");
-        Debug.Log(dazed);
         StopCoroutine(chasePlayerCoroutine);
         chasePlayerCoroutine = null;
         isChasing = false;
