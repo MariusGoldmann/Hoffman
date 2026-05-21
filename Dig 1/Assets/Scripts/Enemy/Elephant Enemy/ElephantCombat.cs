@@ -7,6 +7,8 @@ public class ElephantCombat : MonoBehaviour
     [SerializeField] float attackCooldown = 1f;
     [SerializeField] float anticipationTime = 0.4f;
     [SerializeField] int collisionDamage = 5;
+    [SerializeField] float hitDirectionForce = 10f;
+    [SerializeField] float additionalForce = 5f;
     [SerializeField] Transform projectileOrigin;
 
     [Header("Trumpet Attack")]
@@ -16,14 +18,12 @@ public class ElephantCombat : MonoBehaviour
     [SerializeField] Vector2 trumpetDirection;
 
     [Header("Stomp Attack")]
-    [SerializeField] bool stompAttack;
+    [SerializeField] float stompVerticalOffset;
 
     [Header("Slash Attack")]
     [SerializeField] Transform slashOrigin;
     [SerializeField] float slashRadius;
     [SerializeField] int slashDamage;
-    [SerializeField] float hitDirectionForce = 10f;
-    [SerializeField] float additionalForce = 5f;
     [SerializeField] float slashAnticipationTime;
 
     [Header("Attack Detection")]
@@ -61,7 +61,7 @@ public class ElephantCombat : MonoBehaviour
         {
             isAttacknig = true;
             currentCooldown = attackCooldown;
-            int attackPicker = Random.Range(0, 1);
+            int attackPicker = Random.Range(1, 2);
             if (attackPicker == 0) StartCoroutine(TrumpetAttack());
             else if (attackPicker == 1) StartCoroutine(StompAttack());
             else StartCoroutine(SlashAttack());
@@ -104,7 +104,6 @@ public class ElephantCombat : MonoBehaviour
     }
    IEnumerator TrumpetAttack()
    {
-      Debug.Log("TrumpetAttack");
       animator.SetTrigger("Stomp");
       yield return new WaitForSeconds(anticipationTime);
       CameraShakeManager.instance.CameraShake(impulseSource);
@@ -119,24 +118,22 @@ public class ElephantCombat : MonoBehaviour
    }
     IEnumerator StompAttack()
     {
-        Debug.Log("StompAttack");
         animator.SetTrigger("Stomp");
         yield return new WaitForSeconds(anticipationTime);
         CameraShakeManager.instance.CameraShake(impulseSource);
-        stompPoolLeft.GetObject(projectileOrigin.position, Quaternion.identity);
-        stompPoolRight.GetObject(projectileOrigin.position, Quaternion.identity);
+        stompPoolLeft.GetObject(new Vector2(projectileOrigin.position.x, projectileOrigin.position.y + stompVerticalOffset), Quaternion.identity);
+        stompPoolRight.GetObject(new Vector2(projectileOrigin.position.x, projectileOrigin.position.y + stompVerticalOffset), Quaternion.identity);
         Debug.Log("Completed Stomp Attack");
         isAttacknig = false;
     }
     IEnumerator SlashAttack()
     {
-        Debug.Log("SlashAttack");
         yield return new WaitForSeconds(slashAnticipationTime);
         var player = Physics2D.OverlapCircle(slashOrigin.position, slashRadius, playerLayer);
         if (player != null)
         {
             Vector2 hitDirection = player.transform.position - transform.position;
-            player.GetComponent<PlayerHealth>().ChangeHealth(slashDamage, hitDirection, Vector2.up, hitDirectionForce, additionalForce, player.ClosestPoint(transform.position), false);
+            player.GetComponent<PlayerHealth>().ChangeHealth(-slashDamage, hitDirection, Vector2.up, hitDirectionForce, additionalForce, player.ClosestPoint(transform.position), false);
             PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.SLASHHIT);
         }
         isAttacknig = false;
@@ -145,7 +142,7 @@ public class ElephantCombat : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(collisionDamage, other.transform.position - transform.position, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
+            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-collisionDamage, other.transform.position - transform.position, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
         }
     }
     public bool GetIsAttacking()

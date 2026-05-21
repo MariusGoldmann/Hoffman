@@ -27,7 +27,6 @@ public class TrumpetShockwave : MonoBehaviour
     public void SetInitialDirection(Vector2 initialDirection)
     {
         direction = initialDirection;
-        Debug.Log("Initialdirection set to " + direction);
     }
     private void Update()
     {
@@ -44,13 +43,12 @@ public class TrumpetShockwave : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(damage, other.transform.position - transform.position, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
+            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage, other.transform.position - transform.position, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
             deleteCoroutine = StartCoroutine(Delete(other));
         }
         else
         {
             direction = Vector2.Reflect(direction, other.GetContact(0).normal);
-            Debug.Log(other.gameObject.name);
         }
     }
     IEnumerator Delete(Collision2D other)

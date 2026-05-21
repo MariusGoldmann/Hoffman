@@ -21,6 +21,7 @@ public class SpawnManager : MonoBehaviour
 	[SerializeField] GameObject keyPickUp;
 
     PickUpScript pickUpScript;
+    PlayerHealth playerHealth;
 
     void Awake()
     {
@@ -36,6 +37,7 @@ public class SpawnManager : MonoBehaviour
         spawnPosition =  transform.position;
 
         pickUpScript = FindFirstObjectByType<PickUpScript>();
+        playerHealth = FindFirstObjectByType<PlayerHealth>();
     }
 
     void Update()

@@ -44,7 +44,6 @@ public class PlayerHealth : MonoBehaviour
     }
     public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce, Vector3 collisionPoint, bool poison)
     {
-        Debug.Log(currentPlayerHealth);
         if (CameraShakeManager.instance != null) CameraShakeManager.instance.CameraShake(impulseSource);
         hitStop.Stop();
         //Dennis suger 2 was here :D 
@@ -56,10 +55,14 @@ public class PlayerHealth : MonoBehaviour
             hitParticles.Play();
         }
         currentPlayerHealth += amount;
+        if (currentPlayerHealth > 0) StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));
+        ChangeHealthSliderValue();
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
-        if (currentPlayerHealth>0) StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));
-        if (healthSlider!=null) healthSlider.value = currentPlayerHealth;
         if (currentPlayerHealth <= 0) StartCoroutine(Deathsequence());
+    }
+    void ChangeHealthSliderValue()
+    {   
+        if (healthSlider!=null) healthSlider.value = currentPlayerHealth;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -77,6 +80,7 @@ public class PlayerHealth : MonoBehaviour
         animator.SetTrigger("Dying");
         levelLoader.FadeOut();
         yield return new WaitForSeconds(2);
+        ChangeHealthSliderValue();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

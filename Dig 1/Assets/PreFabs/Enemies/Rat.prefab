@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8433842763178131858}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.38, y: -2.93, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -115,12 +115,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 183
   maxEnemyHealth: 119
-  timeDead: 3
-  hitDirectionForce: 10
-  additionalDirectionalForce: 5
-  playerCombat: {fileID: 0}
-  damageFlash: {fileID: 0}
-  knockbackScript: {fileID: 0}
+  knockedOut: 0
+  enemyKnockbackScript: {fileID: 0}
+  blobfishCombat: {fileID: 0}
+  ratEnemyMovement: {fileID: 0}
 --- !u!114 &294799018414150026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnockbackScript
   knockbackLength: 0.2
-  debugBool: 0
 --- !u!1001 &2774498629463284814
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -272,13 +272,9 @@ MonoBehaviour:
   currentEnemyHealth: 0
   maxEnemyHealth: 30
   knockedOut: 0
-  damageFlash: {fileID: 3929620782974902674}
   enemyKnockbackScript: {fileID: 3760515510861773110}
   blobfishCombat: {fileID: 6731903404757562638}
   ratEnemyMovement: {fileID: 0}
-  hitParticles: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
-  hitStop: {fileID: 7729287528750404790}
-  impulseSource: {fileID: 0}
 --- !u!114 &6731903404757562638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ede323f2cbe84ba88e5f1610be02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitStop
+  hitStopTime: 0.07
+  isWaiting: 0
 --- !u!1 &8121612068831819699
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,8 +459,8 @@ Transform:
   m_GameObject: {fileID: 8121612068831819699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.92, y: 1.21, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7679733024745790504}
