@@ -2374,6 +2374,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level4
       objectReference: {fileID: 0}
+    - target: {fileID: 6991702427371366080, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 119.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991702427371366080, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 222.09
+      objectReference: {fileID: 0}
     - target: {fileID: 8274295097357196256, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
       propertyPath: m_LocalPosition.y
       value: -7.7
@@ -2383,6 +2391,10 @@ PrefabInstance:
     - {fileID: 8577436451148113722, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
     - {fileID: 5406204824289682059, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
     - {fileID: 8599502458761817645, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+    - {fileID: 8748559988966678030, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+    - {fileID: 1073240073261041540, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+    - {fileID: 2462530193454298099, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
+    - {fileID: 8166728330083066221, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1326043042604249409, guid: f3001b97fcbb4fa4f81803456b501945, type: 3}
       insertIndex: 184
@@ -2668,13 +2680,25 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5729637515626658870, guid: 85865b7a90a62ee49878f1339e25d7c1, type: 3}
+      propertyPath: m_Radius
+      value: 4.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 5729637515626658870, guid: 85865b7a90a62ee49878f1339e25d7c1, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 5729637515626658870, guid: 85865b7a90a62ee49878f1339e25d7c1, type: 3}
+      propertyPath: m_Offset.y
+      value: 3.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7464326327722971645, guid: 85865b7a90a62ee49878f1339e25d7c1, type: 3}
       propertyPath: m_Name
       value: Lever and door
       objectReference: {fileID: 0}
     - target: {fileID: 8963778078636194708, guid: 85865b7a90a62ee49878f1339e25d7c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -81.74
+      value: -78.88
       objectReference: {fileID: 0}
     - target: {fileID: 8963778078636194708, guid: 85865b7a90a62ee49878f1339e25d7c1, type: 3}
       propertyPath: m_LocalPosition.y

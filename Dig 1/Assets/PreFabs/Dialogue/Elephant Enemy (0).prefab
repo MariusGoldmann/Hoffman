@@ -38,11 +38,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1057363120353025244}
+  - {fileID: 1498250264367321068}
   - {fileID: 9194385765468268716}
   - {fileID: 1787470417640029964}
-  - {fileID: 1498250264367321068}
   - {fileID: 2006568990146931169}
+  - {fileID: 2457355301800293208}
+  - {fileID: 4013618602242756739}
+  - {fileID: 1057363120353025244}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5890713763649760831
@@ -58,24 +60,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElephantCombat
   attackCooldown: 1.5
-  projectileOrigin: {x: 0, y: -4.5}
+  anticipationTime: 0.3
+  projectileOrigin: {fileID: 2457355301800293208}
   trumpetAttack: 0
-  trumpetAnticipationTime: 0.2
   projectileAmount: 3
   timeBetweenProjectiles: 0.2
-  trumpetDirection: {x: 1, y: 1}
+  trumpetDirection: {x: 1, y: 1.5}
   stompAttack: 0
-  stompAnticipationTime: 0.2
   slashOrigin: {fileID: 2006568990146931169}
-  slashRadius: 2
+  slashRadius: 2.5
   slashDamage: 0
   hitDirectionForce: 10
   additionalForce: 5
   slashAnticipationTime: 0
   attackHorizontalDetectRange: 20
   attackVerticalDetectRange: 10
-  trumpetPool: {fileID: 0}
-  stompPool: {fileID: 0}
   elephantMovement: {fileID: 4310462974679019590}
   knockbackScript: {fileID: 3713973616777110695}
   enemyHealth: {fileID: 8077266023925167110}
@@ -91,14 +90,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6caabf37d13d25847a554388aedbc3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElephantMovement
-  idleMoveSpeed: 2
-  chaseMoveSpeed: 5
+  idleMoveSpeed: 4
+  chaseMoveSpeed: 7
   facingDirection: 1
   elephantKnockbackScript: {fileID: 3713973616777110695}
-  groundCheckLength: 5.2
-  frontGroundCheckLength: 0.7
-  frontWallCheckLength: 6.7
+  groundCheckLength: 0.5
+  frontGroundCheckLength: 0.5
+  frontWallCheckLength: 7
   frontRaycastOrigin: {fileID: 1057363120353025244}
+  groundCheckOrigin: {fileID: 4013618602242756739}
   aggressiveHorizontalDetectRange: 40
   aggressiveVerticalDetectRange: 10
 --- !u!114 &8077266023925167110
@@ -246,6 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ede323f2cbe84ba88e5f1610be02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitStop
+  hitStopTime: 0.07
+  isWaiting: 0
 --- !u!50 &4106220962939792680
 Rigidbody2D:
   serializedVersion: 5
@@ -328,6 +330,37 @@ PolygonCollider2D:
       - {x: 2.5430832, y: -0.37611198}
       - {x: 2.5527105, y: 0.7678833}
   m_UseDelaunayMesh: 1
+--- !u!1 &6879656570324298279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4013618602242756739}
+  m_Layer: 7
+  m_Name: GroundCheckOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4013618602242756739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6879656570324298279}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6191971011070247154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7991159400475776989
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +386,38 @@ Transform:
   m_GameObject: {fileID: 7991159400475776989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.76, y: -1.62, z: 0}
+  m_LocalPosition: {x: 5, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6191971011070247154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8886760924731830934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2457355301800293208}
+  m_Layer: 7
+  m_Name: Projectile Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2457355301800293208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886760924731830934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -453,6 +517,14 @@ PrefabInstance:
     - target: {fileID: 3684004952963459941, guid: 8d0347a73d37f2a459457e53303213bd, type: 3}
       propertyPath: m_Name
       value: elefant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429295324307935449, guid: 8d0347a73d37f2a459457e53303213bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429295324307935449, guid: 8d0347a73d37f2a459457e53303213bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -176136505
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

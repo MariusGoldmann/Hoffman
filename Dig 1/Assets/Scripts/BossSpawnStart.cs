@@ -8,7 +8,7 @@ public class BossSpawnStart : MonoBehaviour
     [SerializeField] public int enemyCountBoss;
     public bool win;
     bool canWin;
-
+    public bool winFirstWave;
     void Start()
     {
         win = false;
@@ -31,13 +31,21 @@ public class BossSpawnStart : MonoBehaviour
 
         if (enemyCountBoss == 0 && canWin == true)
         {
+            winFirstWave = true;
+            canWin = false; 
+            Debug.Log("FirstWaveWin");
+        }
+
+        if (winFirstWave == true && canWin == true && enemyCountBoss == 0)
+        {
             win = true;
+            Debug.Log("BossFightWin");  
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && bossSpawnStart == false)
         {
             Debug.Log("ContactWithPlayer");
 
@@ -60,5 +68,9 @@ public class BossSpawnStart : MonoBehaviour
         return enemyCountBoss;
     }
 
+    public bool GetWinFirstWave()
+    {
+        return winFirstWave;
+    }
 
 }
