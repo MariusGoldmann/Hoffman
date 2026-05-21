@@ -66,10 +66,7 @@ public class RatEnemyMovement : MonoBehaviour
         {
             if (ratEnemyState.GetInCombat() && GetIsGrounded() && !ratKnockbackScript.GetIsKnockback() && !isCooldown)
             {
-                if (chasePlayerCoroutine == null)
-                {
-                    chasePlayerCoroutine = StartCoroutine(ChasePlayer());
-                }
+                if (chasePlayerCoroutine == null) chasePlayerCoroutine = StartCoroutine(ChasePlayer());
             }
             else
             {
@@ -82,38 +79,25 @@ public class RatEnemyMovement : MonoBehaviour
             ratRB.linearVelocity = Vector2.zero;
         }
     }
+    void HandleAnimations()
+    {
+        if (isChasing && chargeAnimationCoroutine == null) chargeAnimationCoroutine = StartCoroutine(ChargeToAgressiveAnimation());
+        else animator.SetBool("RatIsAggressive", false);
+        
+        if (ratKnockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
+    }
     void HandleCooldowns()
     {
         currentCooldown -= Time.deltaTime;
 
-        if (isChasing && (!GetIsGroundInFront() || GetIsWallInFront()))
-        {
-            StopChasePlayer(true);
-        }
-        if (currentCooldown < 0)
-        {
-            isCooldown = false;
-        }
-        else
-        {
-            isCooldown = true;
-        }
+        if (isChasing && (!GetIsGroundInFront() || GetIsWallInFront())) StopChasePlayer(true);
+        
+        if (currentCooldown < 0) isCooldown = false;
+        else isCooldown = true;
     }
-    void HandleAnimations()
-    {
-        if (isChasing && chargeAnimationCoroutine == null)
-        {
-            chargeAnimationCoroutine = StartCoroutine(ChargeToAgressiveAnimation());
-        }
-        else
-        {
-            animator.SetBool("RatIsAggressive", false);
-        }
-        if (ratKnockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
-    }
-
     IEnumerator ChargeToAgressiveAnimation()
     {
+        Debug.Log("Coroutine Started");
         animator.SetTrigger("Charge");
         yield return new WaitForSeconds(chaseAnticipationTime);
         while (isChasing)
@@ -123,7 +107,6 @@ public class RatEnemyMovement : MonoBehaviour
         }
         chargeAnimationCoroutine = null;
     }
-
     void IdleMovement()
     {
         if (facingRight && GetIsGrounded())
@@ -133,10 +116,7 @@ public class RatEnemyMovement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 facingRight = false;
             }
-            else
-            {
-                ratRB.linearVelocityX = idleMoveSpeed;
-            }
+            else ratRB.linearVelocityX = idleMoveSpeed;
         }
         else if (GetIsGrounded())
         {
@@ -145,10 +125,7 @@ public class RatEnemyMovement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 facingRight = true;
             }
-            else
-            {
-                ratRB.linearVelocityX = -idleMoveSpeed;
-            }
+            else ratRB.linearVelocityX = -idleMoveSpeed;
         }
     }
     IEnumerator ChasePlayer()
@@ -161,14 +138,8 @@ public class RatEnemyMovement : MonoBehaviour
 
         while (chaseTime < chaseDuration && !ratKnockbackScript.GetIsKnockback())
         {
-            if (facingRight)
-            {
-                ratRB.linearVelocity = new Vector2(chaseMoveSpeed, ratRB.linearVelocityY);
-            }
-            else
-            {
-                ratRB.linearVelocity = new Vector2(-chaseMoveSpeed, ratRB.linearVelocityY);
-            }
+            if (facingRight) ratRB.linearVelocity = new Vector2(chaseMoveSpeed, ratRB.linearVelocityY);
+            else ratRB.linearVelocity = new Vector2(-chaseMoveSpeed, ratRB.linearVelocityY);
             chaseTime += Time.fixedDeltaTime;
             yield return null;
         }
@@ -179,19 +150,14 @@ public class RatEnemyMovement : MonoBehaviour
     }
     void StopChasePlayer(bool dazed)
     {
+        Debug.Log("Stop Chase Player Started");
+        Debug.Log(dazed);
         StopCoroutine(chasePlayerCoroutine);
         chasePlayerCoroutine = null;
         isChasing = false;
-        if (dazed)
-        {
-            currentCooldown = dazedCooldown;
-        }
-        else
-        {
-            currentCooldown = attackCooldown;
-        }
+        if (dazed) currentCooldown = dazedCooldown;
+        else currentCooldown = attackCooldown;
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player") && isChasing && !enemyHealth.GetKnockedOut())

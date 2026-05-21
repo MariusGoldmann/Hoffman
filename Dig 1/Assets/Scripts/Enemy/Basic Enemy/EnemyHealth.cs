@@ -57,7 +57,7 @@ public class EnemyHealth : MonoBehaviour
             damageFlash.GetDamageFlasher();
             hitParticles.transform.position=collisionPoint;
             hitParticles.Play();
-            if (ratEnemyMovement!=null) ratEnemyMovement.TurnAround(knockbackdirection.x);
+            if (ratEnemyMovement!=null && currentEnemyHealth > 0) ratEnemyMovement.TurnAround(knockbackdirection.x);
         }
         if (currentEnemyHealth > maxEnemyHealth)
         {
