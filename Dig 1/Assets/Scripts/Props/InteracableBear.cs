@@ -23,8 +23,9 @@ public class InteracableBear : MonoBehaviour {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 			
 		var hit = Physics2D.Raycast(mousePosition, Camera.main.transform.forward,1000, clickable );
-		if (!hit.collider.CompareTag("Bear")) return;
-		bearAnimator.SetTrigger("Animation 1");
-		Debug.Log("Animation 1");
+		if (hit.collider.CompareTag("Bear")) {
+			bearAnimator.SetTrigger("Animation 1");
+			Debug.Log("Animation 1");
+		}
 	}
 }
