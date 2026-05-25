@@ -94,8 +94,8 @@ public class BossSpawn : MonoBehaviour
     {
         Debug.Log("Rat");
 
-        Vector3 pos1 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
-        Instantiate(ratPrefab, pos1, Quaternion.identity);
+       // Vector3 pos1 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
+        Instantiate(ratPrefab, transform.position, Quaternion.identity);
 
         bossSpawnStartScript.enemyCountBoss++;
     }
@@ -104,8 +104,8 @@ public class BossSpawn : MonoBehaviour
     {
         Debug.Log("Dragon");
 
-        Vector3 pos2 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
-        Instantiate(ratPrefab, pos2, Quaternion.identity);
+       // Vector3 pos2 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
+        Instantiate(ratPrefab, transform.position, Quaternion.identity);
 
         bossSpawnStartScript.enemyCountBoss++;
 
