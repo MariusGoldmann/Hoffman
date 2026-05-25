@@ -35,14 +35,10 @@ public class RatEnemyState : MonoBehaviour
     {
         if (other.CompareTag("Player")) inCombat = false;
     }
-
-
     public bool GetInCombat()
     {
         return inCombat;
     }
-
-
     public int GetPlayerDirection()
     {
         return playerDirection;

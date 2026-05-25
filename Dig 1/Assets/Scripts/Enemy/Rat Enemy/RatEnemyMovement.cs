@@ -53,7 +53,7 @@ public class RatEnemyMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         ratEnemyState = GetComponentInChildren<RatEnemyState>();
         playerHealth = FindFirstObjectByType<PlayerHealth>();
-        enemyHealth= GetComponent<EnemyHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
     void Update()
     {
@@ -66,10 +66,7 @@ public class RatEnemyMovement : MonoBehaviour
         {
             if (ratEnemyState.GetInCombat() && GetIsGrounded() && !ratKnockbackScript.GetIsKnockback() && !isCooldown)
             {
-                if (chasePlayerCoroutine == null)
-                {
-                    chasePlayerCoroutine = StartCoroutine(ChasePlayer());
-                }
+                if (chasePlayerCoroutine == null) chasePlayerCoroutine = StartCoroutine(ChasePlayer());
             }
             else
             {
@@ -82,36 +79,22 @@ public class RatEnemyMovement : MonoBehaviour
             ratRB.linearVelocity = Vector2.zero;
         }
     }
+    void HandleAnimations()
+    {
+        if (isChasing && chargeAnimationCoroutine == null) chargeAnimationCoroutine = StartCoroutine(ChargeToAgressiveAnimation());
+        else animator.SetBool("RatIsAggressive", false);
+        
+        if (ratKnockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
+    }
     void HandleCooldowns()
     {
         currentCooldown -= Time.deltaTime;
 
-        if (isChasing && (!GetIsGroundInFront() || GetIsWallInFront()))
-        {
-            StopChasePlayer(true);
-        }
-        if (currentCooldown < 0)
-        {
-            isCooldown = false;
-        }
-        else
-        {
-            isCooldown = true;
-        }
+        if (isChasing && (!GetIsGroundInFront() || GetIsWallInFront())) StopChasePlayer(true);
+        
+        if (currentCooldown < 0) isCooldown = false;
+        else isCooldown = true;
     }
-    void HandleAnimations()
-    {
-        if (isChasing && chargeAnimationCoroutine==null)
-        {
-            chargeAnimationCoroutine = StartCoroutine(ChargeToAgressiveAnimation());
-        }
-        else
-        {
-            animator.SetBool("RatIsAggressive", false);
-        }
-        if (ratKnockbackScript.GetIsKnockback()) animator.SetTrigger("RatKnockback");
-    }
-
     IEnumerator ChargeToAgressiveAnimation()
     {
         animator.SetTrigger("Charge");
@@ -123,7 +106,6 @@ public class RatEnemyMovement : MonoBehaviour
         }
         chargeAnimationCoroutine = null;
     }
-
     void IdleMovement()
     {
         if (facingRight && GetIsGrounded())
@@ -133,10 +115,7 @@ public class RatEnemyMovement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 facingRight = false;
             }
-            else
-            {
-                ratRB.linearVelocityX = idleMoveSpeed;
-            }
+            else ratRB.linearVelocityX = idleMoveSpeed;
         }
         else if (GetIsGrounded())
         {
@@ -145,30 +124,21 @@ public class RatEnemyMovement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 facingRight = true;
             }
-            else
-            {
-                ratRB.linearVelocityX = -idleMoveSpeed;
-            }
+            else ratRB.linearVelocityX = -idleMoveSpeed;
         }
     }
     IEnumerator ChasePlayer()
     {
         isChasing = true;
-        float chaseTime=0f;
+        float chaseTime = 0f;
 
         ratRB.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(chaseAnticipationTime);
 
-        while (chaseTime<chaseDuration && !ratKnockbackScript.GetIsKnockback())
+        while (chaseTime < chaseDuration && !ratKnockbackScript.GetIsKnockback())
         {
-            if (facingRight)
-            { 
-                ratRB.linearVelocity = new Vector2(chaseMoveSpeed, ratRB.linearVelocityY);
-            }
-            else
-            {
-                ratRB.linearVelocity = new Vector2(-chaseMoveSpeed, ratRB.linearVelocityY);
-            }
+            if (facingRight) ratRB.linearVelocity = new Vector2(chaseMoveSpeed, ratRB.linearVelocityY);
+            else ratRB.linearVelocity = new Vector2(-chaseMoveSpeed, ratRB.linearVelocityY);
             chaseTime += Time.fixedDeltaTime;
             yield return null;
         }
@@ -180,18 +150,11 @@ public class RatEnemyMovement : MonoBehaviour
     void StopChasePlayer(bool dazed)
     {
         StopCoroutine(chasePlayerCoroutine);
-        chasePlayerCoroutine=null;
-        isChasing=false;
-        if (dazed)
-        {
-            currentCooldown = dazedCooldown;
-        }
-        else
-        {
-            currentCooldown = attackCooldown;
-        }
+        chasePlayerCoroutine = null;
+        isChasing = false;
+        if (dazed) currentCooldown = dazedCooldown;
+        else currentCooldown = attackCooldown;
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player") && isChasing && !enemyHealth.GetKnockedOut())
@@ -212,29 +175,20 @@ public class RatEnemyMovement : MonoBehaviour
             else
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                facingRight=true;
+                facingRight = true;
             }
         }
     }
 
     public IEnumerator DeathSequence()
     {
-        float timeLeft = 4f;
-        bool permaDied = false;
         knockedOut = true;
         gameObject.layer = LayerMask.NameToLayer("Ground");
         if (animator != null) animator.SetTrigger("RatDied");
-        while (timeLeft > 0)
-        {
-            timeLeft -= Time.deltaTime;
-            if (timeLeft < 2 && !permaDied)
-            {
-                permaDied = true;
-                if (animator != null) animator.SetTrigger("PermaDied");
-            }
-            yield return null;
-        }
-        for (int i = 0; i < Random.Range(1, 3); i++)
+        yield return new WaitForSeconds(2);
+        if (animator != null) animator.SetTrigger("PermaDied");
+        yield return new WaitForSeconds(2);
+        for (int i = 0; i <= Random.Range(0, 3); i++)
         {
             Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
             hitParticles.transform.position = transform.position;

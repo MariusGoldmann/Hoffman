@@ -18,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] KnockbackScript enemyKnockbackScript;
     [SerializeField] BlobfishCombat blobfishCombat;
     [SerializeField] RatEnemyMovement ratEnemyMovement;
+    [SerializeField] ElephantMovement elephantMovement;
 
 
     DamageFlash damageFlash;
@@ -56,13 +57,13 @@ public class EnemyHealth : MonoBehaviour
             damageFlash.GetDamageFlasher();
             hitParticles.transform.position=collisionPoint;
             hitParticles.Play();
-            if (ratEnemyMovement!=null) ratEnemyMovement.TurnAround(knockbackdirection.x);
+            if (ratEnemyMovement!=null && currentEnemyHealth > 0) ratEnemyMovement.TurnAround(knockbackdirection.x);
         }
         if (currentEnemyHealth > maxEnemyHealth)
         {
             currentEnemyHealth = maxEnemyHealth;
         }
-        else if (currentEnemyHealth <= 0 && knockedOut==false)
+        if (currentEnemyHealth <= 0 && knockedOut==false)
         {
             Debug.Log("Enemy died");
             DeathSequence();
@@ -75,6 +76,7 @@ public class EnemyHealth : MonoBehaviour
         if (bossSpawnStart != null) bossSpawnStart.enemyCountBoss -= 1;
         if (blobfishCombat != null) StartCoroutine(blobfishCombat.DeathSequence());
         if (ratEnemyMovement != null) StartCoroutine(ratEnemyMovement.DeathSequence());
+        if (elephantMovement != null) StartCoroutine(elephantMovement.DeathSequence());
     }
 
     public bool GetKnockedOut()

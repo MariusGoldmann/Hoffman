@@ -61,7 +61,7 @@ public class ElephantCombat : MonoBehaviour
         {
             isAttacknig = true;
             currentCooldown = attackCooldown;
-            int attackPicker = Random.Range(1, 2);
+            int attackPicker = Random.Range(0, 2);
             if (attackPicker == 0) StartCoroutine(TrumpetAttack());
             else if (attackPicker == 1) StartCoroutine(StompAttack());
             else StartCoroutine(SlashAttack());
@@ -113,7 +113,6 @@ public class ElephantCombat : MonoBehaviour
           projectile.GetComponent<TrumpetShockwave>().SetInitialDirection(new Vector2(trumpetDirection.x * elephantMovement.GetFacingDirection(), trumpetDirection.y));
           yield return new WaitForSeconds(timeBetweenProjectiles);
       }
-      Debug.Log("Completed ForLoop");
       isAttacknig = false;
    }
     IEnumerator StompAttack()
@@ -123,7 +122,6 @@ public class ElephantCombat : MonoBehaviour
         CameraShakeManager.instance.CameraShake(impulseSource);
         stompPoolLeft.GetObject(new Vector2(projectileOrigin.position.x, projectileOrigin.position.y + stompVerticalOffset), Quaternion.identity);
         stompPoolRight.GetObject(new Vector2(projectileOrigin.position.x, projectileOrigin.position.y + stompVerticalOffset), Quaternion.identity);
-        Debug.Log("Completed Stomp Attack");
         isAttacknig = false;
     }
     IEnumerator SlashAttack()
@@ -140,10 +138,7 @@ public class ElephantCombat : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-collisionDamage, other.transform.position - transform.position, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
-        }
+        if (other.gameObject.CompareTag("Player"))  other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-collisionDamage, other.transform.position - transform.position, Vector2.up, hitDirectionForce, additionalForce, other.GetContact(0).point, false);
     }
     public bool GetIsAttacking()
     {

@@ -178,6 +178,7 @@ MonoBehaviour:
   spawnManager: {fileID: 0}
   movingPlatform: {fileID: 0}
   playerHealth: {fileID: 0}
+  platformRB: {fileID: 0}
   platformRb: {fileID: 0}
 --- !u!114 &315493221406685201
 MonoBehaviour:
@@ -205,7 +206,6 @@ MonoBehaviour:
   newEarRig: {fileID: 292627542125557896}
   newEyeRig: {fileID: 2273869489023985549}
   animator: {fileID: 3903036998953941080}
-  spawnManager: {fileID: 0}
 --- !u!114 &5082171930118937187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   hitParticles: {fileID: 1495358391759246580}
   healthPickupParticles: {fileID: 6124663129194251688}
-  poisonParticles: {fileID: 0}
+  poisonParticles: {fileID: 889002122797960929}
 --- !u!114 &8158543302636595784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,6 +959,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+--- !u!198 &889002122797960929 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 112971141644723106, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
+  m_PrefabInstance: {fileID: 992766777981824323}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7925752894950126455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6934112257474092596, guid: ec68d1d3a87de0b4fb5833e5d66079db, type: 3}
