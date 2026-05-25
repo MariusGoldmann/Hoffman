@@ -20,11 +20,11 @@ public class Dragon : MonoBehaviour {
 	[SerializeField] private int projectileSpeed;
 	[SerializeField] private int anticipationTime;
 	[SerializeField] private Transform attackPoint;
-	[SerializeField] private ObjectPooling fireProjectilePool;
 
 	[Header("Death settings")]
 	[SerializeField] private float deathTime;
 	[SerializeField] private bool isDead = false;
+	[SerializeField] GameObject hpParticlePrefab;
 
 	[Header(("Animation bool"))]
 	[SerializeField] private bool isPatrolling;
@@ -32,7 +32,6 @@ public class Dragon : MonoBehaviour {
 	[Header("Raycast/Collider settings")]
 	[SerializeField] private Transform groundCheck;
 	[SerializeField] private Transform  wallCheck;
-	[SerializeField] private GameObject player;
 	[SerializeField] private float      groundCheckDistance;
 	[SerializeField] private float      wallCheckDistance;
 
@@ -47,9 +46,11 @@ public class Dragon : MonoBehaviour {
 	private EnemyHealth     enemyHealth;
 	private Rigidbody2D     dragonRb;
 	private Animator        dragonAnimator;
+    private GameObject		player;
+    private ObjectPooling	fireProjectilePool;
 
 
-	private Coroutine rangedAttackCoroutine;
+    private Coroutine rangedAttackCoroutine;
 	private Coroutine deathCoroutine;
 
 	private void Awake() {
@@ -62,7 +63,8 @@ public class Dragon : MonoBehaviour {
 
 	private void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
-	}
+		fireProjectilePool= GameObject.FindGameObjectWithTag("FirePool").GetComponent<ObjectPooling>();
+    }
 
 	private void Update() {
 		KnockbackUpdater();
@@ -135,8 +137,12 @@ public class Dragon : MonoBehaviour {
 		Debug.Log("Dragon Dies");
 		yield return new WaitForSeconds(3);
 		dragonAnimator.SetTrigger(PermaDeath);
-		yield return new WaitForSeconds(3);
-		Destroy(gameObject);
+		yield return new WaitForSeconds(3); for (int i = 0; i <= Random.Range(0, 3); i++)
+        {
+            Instantiate(hpParticlePrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
 	}
 
 	private void Flip() {

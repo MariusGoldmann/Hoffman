@@ -113,7 +113,6 @@ public class ElephantCombat : MonoBehaviour
           projectile.GetComponent<TrumpetShockwave>().SetInitialDirection(new Vector2(trumpetDirection.x * elephantMovement.GetFacingDirection(), trumpetDirection.y));
           yield return new WaitForSeconds(timeBetweenProjectiles);
       }
-      Debug.Log("Completed ForLoop");
       isAttacknig = false;
    }
     IEnumerator StompAttack()
