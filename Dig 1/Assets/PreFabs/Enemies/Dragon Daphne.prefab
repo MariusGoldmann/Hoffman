@@ -129,13 +129,12 @@ MonoBehaviour:
   projectileSpeed: 10
   anticipationTime: 1
   attackPoint: {fileID: 5647071721312934738}
-  fireProjectilePool: {fileID: 0}
   deathTime: 1
   isDead: 0
+  hpParticlePrefab: {fileID: 6834462511129556811, guid: b1c479a279be2a748a4fc81854fa3c2b, type: 3}
   isPatrolling: 0
   groundCheck: {fileID: 5699097910251668508}
   wallCheck: {fileID: 7809354441362954185}
-  player: {fileID: 0}
   groundCheckDistance: 2
   wallCheckDistance: 3
   isKnockback: 0
@@ -157,6 +156,7 @@ MonoBehaviour:
   enemyKnockbackScript: {fileID: 8424821009620200500}
   blobfishCombat: {fileID: 0}
   ratEnemyMovement: {fileID: 0}
+  elephantMovement: {fileID: 0}
 --- !u!114 &2824844533995411475
 MonoBehaviour:
   m_ObjectHideFlags: 0
