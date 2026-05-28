@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class BlueTile : MonoBehaviour
 {
     SpawnManager spawnManager;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
     new Collider2D collider;
     Light2D spotLight;
 
@@ -22,13 +22,10 @@ public class BlueTile : MonoBehaviour
         spotLight.enabled = false;
     }
 
-    private void Update()
-    {
-        if (spawnManager.eyeOwned == true)
-        {
-            spriteRenderer.enabled = true;
-            collider.enabled = true;
-            spotLight.enabled = true;
-        }
+    private void Update() {
+	    if (!spawnManager.eyeOwned) return;
+	    spriteRenderer.enabled = true;
+	    collider.enabled       = true;
+	    spotLight.enabled      = true;
     }
 }

@@ -16,17 +16,17 @@ public class PlayerCombat : MonoBehaviour {
 	[Header("Slash settings")]
 	[SerializeField] private int slashDamage = 1;
 	[SerializeField] private float slashCooldown = 1f;
-	[SerializeField] private float slashTimer;
+	[SerializeField] private float slashTimer = 1f;
 
 	[Header("Kick settings")]
 	[SerializeField] private int kickDamage = 2;
 	[SerializeField] private float kickCooldown = 2f;
-	[SerializeField] private float kickTimer;
+	[SerializeField] private float kickTimer = 2f;
 
 	[Header("Boomerang settings")]
 	[SerializeField] private int boomerangDamage = 5;
 	[SerializeField] private float boomerangCooldown = 5f;
-	[SerializeField] private float boomerangTimer;
+	[SerializeField] private float boomerangTimer = 2f;
 	[SerializeField] private float boomerangForce;
 	[SerializeField] private float boomerangReturnForce;
 	[SerializeField] private float invulnerableTime;
@@ -182,11 +182,15 @@ public class PlayerCombat : MonoBehaviour {
 	}
 
 	private void HandleCooldowns() {
-		slashTimer -= Time.deltaTime;
+		if (SpawnManager.instance.legOwned) {
+			slashTimer -= Time.deltaTime;
 
-		kickTimer -= Time.deltaTime;
+			kickTimer -= Time.deltaTime;
+		}
 
-		boomerangTimer -= Time.deltaTime;
+		if (SpawnManager.instance.boomerangOwned) {
+			boomerangTimer -= Time.deltaTime;
+		}
 	}
 
 	public float GetSlashTimer() {
