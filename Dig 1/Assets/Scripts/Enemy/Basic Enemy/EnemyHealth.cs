@@ -40,10 +40,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-       if (ratEnemyMovement!=null && knockedOut)
-        {
-            ratEnemyMovement.SetKnockedOut(true);
-        }
+       if (ratEnemyMovement!=null && knockedOut) ratEnemyMovement.SetKnockedOut(true);
     }
 
     public void ChangeHealth(int amount, Vector2 knockbackdirection, float hitDirectionForce, float additionalForce, Vector3 collisionPoint)
