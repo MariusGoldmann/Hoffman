@@ -87,7 +87,7 @@ public class Dragon : MonoBehaviour {
 			dragonRb.linearVelocity = new Vector2(dragonRb.linearVelocity.x, dragonRb.linearVelocity.y);
 			dragonAnimator.SetBool(Idle,       true);
 			dragonAnimator.SetBool(Patrolling, false);
-			if (cooldownTimer <= 0 && !isDead) {
+			if (cooldownTimer <= 0 && !isDead && PlayerTarget()) {
 				rangedAttackCoroutine = StartCoroutine(RangedAttack());
 			}
 		}
@@ -98,17 +98,15 @@ public class Dragon : MonoBehaviour {
 		cooldownTimer = attackCooldown;
 		yield return new WaitForSeconds(anticipationTime);
 
-		if (PlayerTarget()) {
-			PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.FIREBALL);
-			dragonRb.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
-			Vector2 fireDirection = (PlayerTarget().position - attackPoint.position).normalized;
-			var   angle         = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
-
-			var  rotation     = Quaternion.Euler(0, 0, angle);
-			var  projectile   = fireProjectilePool.GetObject(attackPoint.position, rotation);
-			var projectileRb = projectile.GetComponent<Rigidbody2D>();
-			projectileRb.linearVelocity = fireDirection * projectileSpeed;
-		}
+		PlayerSoundFXManager.instance.PlaySound(PlayerSoundFXManager.SoundType.FIREBALL);
+		dragonRb.linearVelocity = new Vector2((recoilForce) * facingDirection * -1, recoilForce);
+		Vector2 fireDirection = (PlayerTarget().position - attackPoint.position).normalized;
+		
+		var   angle         = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
+		var  rotation     = Quaternion.Euler(0, 0, angle);
+		var  projectile   = fireProjectilePool.GetObject(attackPoint.position, rotation);
+		var projectileRb = projectile.GetComponent<Rigidbody2D>();
+		projectileRb.linearVelocity = fireDirection * projectileSpeed;
 
 		rangedAttackCoroutine = null;
 	}
