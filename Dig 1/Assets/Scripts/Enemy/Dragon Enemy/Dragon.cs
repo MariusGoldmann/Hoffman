@@ -192,16 +192,4 @@ public class Dragon : MonoBehaviour {
 
 		return hit.collider.gameObject.CompareTag("Player");
 	}
-
-	private void OnDrawGizmos() {
-		Gizmos.color = Color.red;
-		Gizmos.DrawLine(transform.position, player.transform.position);
-		Gizmos.DrawWireSphere(transform.position, detectionRadius);
-
-		Gizmos.color = Color.green;
-		Gizmos.DrawRay(groundCheck.position, Vector2.down * groundCheckDistance);
-
-		Gizmos.color = Color.blue;
-		Gizmos.DrawRay(wallCheck.position, Vector2.up * wallCheckDistance);
-	}
 }
