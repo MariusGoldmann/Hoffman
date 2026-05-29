@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6caabf37d13d25847a554388aedbc3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElephantMovement
-  idleMoveSpeed: 4
-  chaseMoveSpeed: 7
+  idleMoveSpeed: 5
+  chaseMoveSpeed: 8
   facingDirection: 1
   elephantKnockbackScript: {fileID: 3713973616777110695}
   groundCheckLength: 0.5
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentEnemyHealth: 0
-  maxEnemyHealth: 30
+  maxEnemyHealth: 50
   knockedOut: 0
   enemyKnockbackScript: {fileID: 3713973616777110695}
   blobfishCombat: {fileID: 0}
