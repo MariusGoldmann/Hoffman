@@ -46,7 +46,7 @@ public class Dragon : MonoBehaviour {
 	private EnemyHealth     enemyHealth;
 	private Rigidbody2D     dragonRb;
 	private Animator        dragonAnimator;
-    private GameObject		player;
+    [SerializeField] private GameObject		player;
     private ObjectPooling	fireProjectilePool;
 
 
