@@ -21,18 +21,10 @@ public class BossSpawn : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (bossSpawnStartScript.bossSpawnStart)
-        {
-            StartCoroutine(SpawnStart());
-            Debug.Log("BossFightStart");
-        }
-    }
 
 
 
-    IEnumerator SpawnStart()
+    public IEnumerator SpawnStart()
     {
         bossSpawnStartScript.canWin = false;
         yield return new WaitForSecondsRealtime(1);

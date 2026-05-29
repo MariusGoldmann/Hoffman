@@ -9,9 +9,12 @@ public class BossSpawnStart : MonoBehaviour
     [SerializeField] public int enemyCountBoss;
     public bool win;
     public bool canWin;
+
+    BossSpawn bossSpawnScript;
     void Start()
     {
         win = false;
+        bossSpawnScript=FindFirstObjectByType<BossSpawn>();
     }
     void Awake()
     {
@@ -39,7 +42,7 @@ public class BossSpawnStart : MonoBehaviour
         {
             Debug.Log("ContactWithPlayer");
 
-            bossSpawnStart = true;
+            StartCoroutine(bossSpawnScript.SpawnStart());
         }
     }
 
