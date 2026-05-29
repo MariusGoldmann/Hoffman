@@ -47,7 +47,7 @@ public class Dragon : MonoBehaviour {
 	private Rigidbody2D     dragonRb;
 	private Animator        dragonAnimator;
     [SerializeField] private GameObject		player;
-    private ObjectPooling	fireProjectilePool;
+    [SerializeField] private ObjectPooling fireProjectilePool;
 
 
     private Coroutine rangedAttackCoroutine;
