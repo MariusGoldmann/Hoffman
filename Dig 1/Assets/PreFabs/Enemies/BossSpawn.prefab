@@ -47,6 +47,7 @@ MonoBehaviour:
   ratPrefab: {fileID: 6380048116863226706, guid: 1aa0d0baea3d4ef489d490c8087d2d32, type: 3}
   dragonPrefab: {fileID: 415998798221065063, guid: 40939ac5a5389784bb8f9adf2cf7a6d2, type: 3}
   pufferFishPrefab: {fileID: 8121612068831819699, guid: ba41b76480edd0f459a765d3a0618f9c, type: 3}
+  elephantPrefab: {fileID: 5436363456454060602, guid: e645a0d9e5d8fb64ebf2aa3a6e8f1e1d, type: 3}
 --- !u!1 &6890764530294852397
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +97,7 @@ MonoBehaviour:
   bossSpawnStart: 0
   enemyCountBoss: 0
   win: 0
-  winFirstWave: 0
+  canWin: 0
 --- !u!61 &3950875844999598716
 BoxCollider2D:
   m_ObjectHideFlags: 0
