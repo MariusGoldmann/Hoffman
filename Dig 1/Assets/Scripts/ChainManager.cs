@@ -4,26 +4,20 @@ using UnityEngine.UI;
 
 public class ChainManager: MonoBehaviour
 {
-
-    SpawnManager spawnManager;
     [SerializeField] Image slashChain;
     [SerializeField] Image kickChain;
     [SerializeField] Image boomerangChain;
 
-    void Awake()
-    {
-        spawnManager = FindAnyObjectByType<SpawnManager>();
-    }
-
     void Update()
     {
-        if (spawnManager.legOwned)
+        if (SpawnManager.instance.legOwned)
         {
             slashChain.enabled = false;
             kickChain.enabled = false;
+            Debug.Log("DEnnis Surer");
         }
 
-        if (spawnManager.boomerangOwned)
+        if (SpawnManager.instance.boomerangOwned)
         {
             boomerangChain.enabled = false;
         }
