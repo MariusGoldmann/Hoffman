@@ -16,11 +16,11 @@ public class PlayerHealth : MonoBehaviour
     DamageFlash damageFlash;
     LevelLoader levelLoader;
     HitStop hitStop;
+    Slider healthSlider;
 
     [SerializeField] CinemachineImpulseSource impulseSource;
     Animator animator;
 
-    [SerializeField] Slider healthSlider;
     [SerializeField] ParticleSystem hitParticles;
     [SerializeField] ParticleSystem healthPickupParticles;
     [SerializeField] ParticleSystem poisonParticles;
@@ -39,7 +39,12 @@ public class PlayerHealth : MonoBehaviour
 
         currentPlayerHealth = maxPlayerHealth;
 
+        healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<Slider>();
         healthSlider.maxValue = maxPlayerHealth;
+        healthSlider.value = currentPlayerHealth;
+    }
+    private void Update()
+    {
         healthSlider.value = currentPlayerHealth;
     }
     public void ChangeHealth(int amount, Vector2 hitDirection, Vector2 additionalForceDireciton, float hitDirectionForce, float additionalForce, Vector3 collisionPoint, bool poison)
@@ -56,13 +61,8 @@ public class PlayerHealth : MonoBehaviour
         }
         currentPlayerHealth += amount;
         if (currentPlayerHealth > 0) StartCoroutine(knockbackScript.KnockbackAction(hitDirection, additionalForceDireciton, hitDirectionForce, additionalForce));
-        ChangeHealthSliderValue();
         Mathf.Clamp(currentPlayerHealth, float.MinValue, maxPlayerHealth);
         if (currentPlayerHealth <= 0) StartCoroutine(Deathsequence());
-    }
-    void ChangeHealthSliderValue()
-    {   
-        if (healthSlider!=null) healthSlider.value = currentPlayerHealth;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -80,7 +80,6 @@ public class PlayerHealth : MonoBehaviour
         animator.SetTrigger("Dying");
         levelLoader.FadeOut();
         yield return new WaitForSeconds(2);
-        ChangeHealthSliderValue();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -17,11 +17,12 @@ public class FireProjectile : MonoBehaviour {
 	[SerializeField] private LayerMask enemyLayer;
 	[SerializeField] private LayerMask boomerangLayer;
 
-	[SerializeField] private ObjectPooling fireProjectilePool;
+	private ObjectPooling fireProjectilePool;
 
 	void Awake() {
 		gameObject.SetActive(true);
-	}
+		fireProjectilePool= GameObject.FindGameObjectWithTag("FirePool").GetComponent<ObjectPooling>();
+    }
 
 	void OnTriggerEnter2D(Collider2D collision) {
 		var groundHit   = Physics2D.OverlapCircle(gameObject.transform.position, explosionRadius, groundLayer);
