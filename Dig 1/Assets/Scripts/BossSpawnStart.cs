@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class BossSpawnStart : MonoBehaviour
@@ -7,8 +8,7 @@ public class BossSpawnStart : MonoBehaviour
 
     [SerializeField] public int enemyCountBoss;
     public bool win;
-    bool canWin;
-    public bool winFirstWave;
+    public bool canWin;
     void Start()
     {
         win = false;
@@ -24,19 +24,9 @@ public class BossSpawnStart : MonoBehaviour
 
     void Update()
     {
-        if (enemyCountBoss >= 1)
-        {
-           canWin = true;
-        }
+       
 
-        if (enemyCountBoss == 0 && canWin == true)
-        {
-            winFirstWave = true;
-            canWin = false; 
-            Debug.Log("FirstWaveWin");
-        }
-
-        if (winFirstWave == true && canWin == true && enemyCountBoss == 0)
+        if (canWin == true && enemyCountBoss == 0)
         {
             win = true;
             Debug.Log("BossFightWin");  
@@ -68,9 +58,10 @@ public class BossSpawnStart : MonoBehaviour
         return enemyCountBoss;
     }
 
-    public bool GetWinFirstWave()
+
+    public bool GetCanWin()
     {
-        return winFirstWave;
+        return canWin;
     }
 
 }

@@ -5,7 +5,7 @@ public class BossSpawn : MonoBehaviour
     [SerializeField] GameObject ratPrefab;
     [SerializeField] GameObject dragonPrefab;
     [SerializeField] GameObject pufferFishPrefab;
-    // [SerializeField] GameObject elephantPrefab;
+    [SerializeField] GameObject elephantPrefab;
 
     int spawnCount;
 
@@ -28,46 +28,41 @@ public class BossSpawn : MonoBehaviour
             StartCoroutine(SpawnStart());
             Debug.Log("BossFightStart");
         }
-
-        if (bossSpawnStartScript.winFirstWave == true)
-        {
-            StartCoroutine(SecondWave());
-             Debug.Log("SecondWaveStart");
-        }
     }
 
 
 
     IEnumerator SpawnStart()
     {
-        bossSpawnStartScript.bossSpawnStart = false;
+        bossSpawnStartScript.canWin = false;
         yield return new WaitForSecondsRealtime(1);
         RatSpawn();
         yield return new WaitForSecondsRealtime(10);
 
         RatSpawn();
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(6);
         DragonSpawn();
+        StartCoroutine(SecondWave());
     }
 
     IEnumerator SecondWave()
     {
-        bossSpawnStartScript.winFirstWave = false;
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(7);
         Debug.Log("SecondWave1");
         RatSpawn();
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(4);
         DragonSpawn();
-        yield return new WaitForSecondsRealtime(10);
+        yield return new WaitForSecondsRealtime(12);
 
         Debug.Log("SecondWave2");
         RatSpawn();
-        yield return new WaitForSecondsRealtime(2);
-        RatSpawn(); 
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(4);
         RatSpawn();
-        yield return new WaitForSecondsRealtime(1);
-        DragonSpawn(); 
+        yield return new WaitForSecondsRealtime(8);
+        DragonSpawn();
+        yield return new WaitForSecondsRealtime(5);
+        ElephantSpawn();
+        bossSpawnStartScript.canWin = true;
     }
 
     //void RandomSpawn()
@@ -94,7 +89,7 @@ public class BossSpawn : MonoBehaviour
     {
         Debug.Log("Rat");
 
-       // Vector3 pos1 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
+        // Vector3 pos1 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
         Instantiate(ratPrefab, transform.position, Quaternion.identity);
 
         bossSpawnStartScript.enemyCountBoss++;
@@ -104,8 +99,8 @@ public class BossSpawn : MonoBehaviour
     {
         Debug.Log("Dragon");
 
-       // Vector3 pos2 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
-        Instantiate(ratPrefab, transform.position, Quaternion.identity);
+        // Vector3 pos2 = new Vector3(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(0f, 0f), 0f);
+        Instantiate(dragonPrefab, transform.position, Quaternion.identity);
 
         bossSpawnStartScript.enemyCountBoss++;
 
@@ -120,14 +115,14 @@ public class BossSpawn : MonoBehaviour
 
     //}
 
-    //*void ElephantSpawn()
-    //{
-    //    Debug.Log("Elephant");
+    void ElephantSpawn()
+    {
+        Debug.Log("Elephant");
 
-    //    Instantiate(elephantPrefab, transform.position, Quaternion.identity);
-    //        bossSpawnStartScript.enemyCountBoss++;
+        Instantiate(elephantPrefab, transform.position, Quaternion.identity);
+        bossSpawnStartScript.enemyCountBoss++;
 
-    //} 
+    }
 
 
 
