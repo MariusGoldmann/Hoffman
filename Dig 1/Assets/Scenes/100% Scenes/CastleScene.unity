@@ -462,6 +462,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4516027917345647918, guid: 47d29db2237a52348841478024541464, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2496578701318467896, guid: 38fc74ce14126d3429f98dbee05e405a, type: 3}
+    - target: {fileID: 4516027917345647918, guid: 47d29db2237a52348841478024541464, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
     - target: {fileID: 6062907491469260737, guid: 47d29db2237a52348841478024541464, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8253,6 +8261,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 1985917567}
+    - target: {fileID: 9177885677234348082, guid: ec1f5bba52634ee45bc460cf5ac22d00, type: 3}
+      propertyPath: m_TagString
+      value: FirePool
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
